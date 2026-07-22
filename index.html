@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta
+name="description"
+content="E-GERAK PTIS KBB - Electronic Movement Management System">
+
+<title>E-GERAK PTIS KBB | Command Center</title>
+
+<link
+rel="icon"
+type="image/png"
+href="assets/images/logo.png">
+
+<!-- Google Fonts -->
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<!-- Tailwind CSS -->
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+
+tailwind.config={
+
+theme:{
+
+extend:{
+
+fontFamily:{
+
+sans:["Poppins","sans-serif"]
+
+},
+
+colors:{
+
+primary:"#2563EB",
+
+secondary:"#06B6D4",
+
+dark:"#0F172A",
+
+card:"#1E293B",
+
+success:"#22C55E"
+
+},
+
+boxShadow:{
+
+glow:"0 0 30px rgba(37,99,235,.35)"
+
+},
+
+borderRadius:{
+
+'4xl':'2rem'
+
+}
+
+}
+
+}
+
+}
+
+</script>
+
+<style>
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+
+background:#0F172A;
+
+overflow-x:hidden;
+
+}
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#2563EB;
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#111827;
+
+}
+
+
+</style>
+
+</head>
+
+<body class="bg-slate-950 text-white font-sans">
+
+<!-- BACKGROUND -->
+<div class="fixed inset-0 overflow-hidden -z-10">
+
+    <div class="absolute -top-40 -left-40 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-3xl"></div>
+
+    <div class="absolute bottom-0 right-0 w-[450px] h-[450px] bg-cyan-500/20 rounded-full blur-3xl"></div>
+
+</div>
+
+<!-- CONTAINER -->
+
+<div class="w-full min-h-screen max-w-[1900px] mx-auto px-8 py-8">
+
+<!-- ================= HEADER COMMAND CENTER ================= -->
+
+<header class="relative overflow-hidden rounded-[36px] bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 border border-slate-700 shadow-2xl">
+
+    <!-- Glow -->
+
+    <div class="absolute -top-24 -right-24 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl"></div>
+
+    <div class="absolute -bottom-20 -left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
+
+    <div class="relative p-8">
+
+        <div class="flex flex-col xl:flex-row justify-between gap-8">
+
+            <!-- LEFT -->
+
+            <div class="flex items-center gap-6">
+
+                <div class="w-24 h-24 rounded-[30px] bg-gradient-to-br from-cyan-500 to-blue-700 shadow-2xl flex items-center justify-center">
+
+                    <img
+                    src="assets/images/logo.png"
+                    class="w-16 h-16">
+
+                </div>
+
+                <div>
+
+                    <span class="uppercase tracking-[6px] text-cyan-400 text-xs font-bold">
+
+                        COMMAND CENTER
+
+                    </span>
+
+                    <h1 class="text-4xl font-black mt-3 leading-tight">
+
+                        E-GERAK PTIS KBB
+
+                    </h1>
+
+                    <p class="text-slate-400 mt-3 text-lg">
+
+                        Electronic Movement Management System
+
+                    </p>
+
+                    <div class="flex gap-3 mt-6 flex-wrap">
+
+                        <span class="bg-cyan-500/10 border border-cyan-500/20 px-4 py-2 rounded-full text-cyan-300 text-sm">
+
+                            🚀 Version 2.0
+
+                        </span>
+
+                        <span class="bg-green-500/10 border border-green-500/20 px-4 py-2 rounded-full text-green-300 text-sm">
+
+                            🟢 Production Ready
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div class="flex flex-col justify-between">
+
+                <div class="grid grid-cols-2 gap-4">
+
+                    <div class="bg-slate-800/70 rounded-3xl px-6 py-5 text-center border border-slate-700">
+
+                        <div
+                        id="digitalClock"
+                        class="text-3xl font-black text-cyan-400">
+
+                            00:00:00
+
+                        </div>
+
+                        <div
+                        id="todayDate"
+                        class="text-slate-400 text-sm mt-2">
+
+                            Loading...
+
+                        </div>
+
+                    </div>
+
+                    <div class="bg-slate-800/70 rounded-3xl px-6 py-5 border border-slate-700">
+
+                        <div class="text-sm text-slate-400">
+
+                            Status Sistem
+
+                        </div>
+
+                        <div class="text-2xl font-black text-green-400 mt-2">
+
+                            ONLINE
+
+                        </div>
+
+                        <div class="mt-3 flex items-center gap-2">
+
+                            <div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+
+                            <span class="text-green-300 text-sm">
+
+                                Firebase Connected
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="flex justify-end gap-3 mt-5 flex-wrap">
+
+                    <select class="bg-slate-800 border border-slate-700 rounded-2xl px-5 py-3">
+
+                        <option>📍 Semua Zon</option>
+                        <option>Padang Serai</option>
+                        <option>Kulim</option>
+                        <option>Sungai Ular</option>
+                        <option>Bandar Baharu</option>
+                        <option>Serdang</option>
+
+                    </select>
+
+                    <button
+id="googleLoginBtn"
+type="button"
+class="w-full
+bg-white
+hover:bg-gray-50
+text-gray-800
+rounded-2xl
+py-4
+font-semibold
+shadow-xl
+border
+border-gray-200
+flex
+items-center
+justify-center
+gap-4
+transition
+duration-300">
+
+    <img
+        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+        alt="Google"
+        class="w-6 h-6">
+
+    <span id="loginText">
+
+    Teruskan dengan Google
+
+    </span>
+
+    <span
+    id="loadingSpinner"
+    class="hidden">
+
+    <i class="fas fa-spinner fa-spin"></i>
+
+    </span>
+
+</button>
+
+<div
+id="loginError"
+class="hidden
+mt-4
+rounded-2xl
+bg-red-500/10
+border
+border-red-500/20
+text-red-300
+text-center
+p-4">
+
+</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- KPI -->
+
+<section class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6 mt-8">
+
+<div class="rounded-3xl bg-gradient-to-br from-blue-600 to-blue-800 p-6 shadow-2xl">
+
+<p class="text-blue-100 text-sm">
+
+Jumlah Ahli
+
+</p>
+
+<h1 class="text-3xl font-black mt-4">
+<span id="totalMembers">0</span>
+</h1>
+
+<p class="mt-6 text-sm">
+
+👥 Semua Ahli PTIS
+
+</p>
+
+</div>
+
+<div class="rounded-3xl bg-gradient-to-br from-green-600 to-emerald-700 p-6 shadow-2xl">
+
+<p class="text-green-100 text-sm">
+
+Dalam Pejabat
+
+</p>
+
+<h1 class="text-3xl font-black mt-4">
+<span id="officeMembers">0</span>
+</h1>
+
+<p class="mt-6 text-sm">
+
+🏢 Sedang Bertugas
+
+</p>
+
+</div>
+
+<div class="rounded-3xl bg-gradient-to-br from-amber-500 to-orange-600 p-6 shadow-2xl">
+
+<p class="text-amber-100 text-sm">
+
+Keluar Bertugas
+
+</p>
+
+<h1 class="text-3xl font-black mt-4">
+<span id="activeMovement">0</span>
+</h1>
+
+<p class="mt-6 text-sm">
+
+🚗 Sedang Bergerak
+
+</p>
+
+</div>
+
+<div class="rounded-3xl bg-gradient-to-br from-red-500 to-red-700 p-6 shadow-2xl">
+
+<p class="text-red-100 text-sm">
+
+Tidak Hadir
+
+</p>
+
+<h1 class="text-3xl font-black mt-4">
+<span id="absentMembers">0</span>
+</h1>
+
+<p class="mt-6 text-sm">
+
+📅 Hari Ini
+
+</p>
+
+</div>
+
+<div class="rounded-3xl bg-gradient-to-br from-cyan-500 to-sky-700 p-6 shadow-2xl">
+
+<p class="text-cyan-100 text-sm">
+
+Tugasan
+
+</p>
+
+<h1 class="text-3xl font-black mt-4">
+<span id="totalTasks">0</span>
+</h1>
+
+<p class="mt-6 text-sm">
+
+📋 Aktif
+
+</p>
+
+</div>
+
+<div class="rounded-3xl bg-gradient-to-br from-violet-600 to-purple-700 p-6 shadow-2xl">
+
+<p class="text-violet-100 text-sm">
+
+Firebase
+
+</p>
+
+<h1 class="text-3xl font-black mt-6">
+<span id="firebaseStatus">ONLINE</span>
+</h1>
+
+<p class="mt-6 text-sm">
+
+☁️ Connected
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ================= OPERATING ZONES ================= -->
+
+<section class="mt-10">
+
+<div class="flex items-end justify-between mb-6">
+
+<div>
+
+<p class="uppercase tracking-[5px] text-cyan-400 text-sm font-semibold">
+
+OPERATING ZONES
+
+</p>
+
+<h2 class="text-3xl font-black mt-2">
+
+📍 Zon Operasi PTIS
+
+</h2>
+
+<p class="text-slate-400 mt-2">
+
+Status semasa semua zon Daerah Kulim Bandar Baharu.
+
+</p>
+
+</div>
+
+<div class="hidden lg:block">
+
+<div class="bg-green-500/10 border border-green-500/20 rounded-2xl px-5 py-3">
+
+<span class="text-green-400 font-bold">
+
+🟢 Semua Zon Online
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
+
+<!-- PADANG SERAI -->
+
+<div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[30px] border border-slate-700 p-6 hover:border-cyan-500 hover:-translate-y-2 transition duration-300 shadow-2xl">
+
+<div class="flex justify-between items-center">
+
+<div class="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center text-3xl">
+
+📍
+
+</div>
+
+<div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+
+</div>
+
+<h3 class="text-2xl font-black mt-6">
+
+Padang Serai
+
+</h3>
+
+<p class="text-slate-400 text-sm mt-1">
+
+Zon 01
+
+</p>
+
+<div class="space-y-3 mt-6">
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Ahli</span>
+
+<span class="font-bold">5</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Pejabat</span>
+
+<span class="text-green-400 font-bold">4</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Bertugas</span>
+
+<span class="text-yellow-400 font-bold">1</span>
+
+</div>
+
+</div>
+
+<div class="mt-6">
+
+<div class="w-full h-2 rounded-full bg-slate-700">
+
+<div class="w-4/5 h-2 rounded-full bg-cyan-400"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- KULIM -->
+
+<div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[30px] border border-slate-700 p-6 hover:border-cyan-500 hover:-translate-y-2 transition duration-300 shadow-2xl">
+
+<div class="flex justify-between">
+
+<div class="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center text-3xl">
+
+🏢
+
+</div>
+
+<div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+
+</div>
+
+<h3 class="text-2xl font-black mt-6">
+
+Kulim
+
+</h3>
+
+<p class="text-slate-400 text-sm">
+
+Zon 02
+
+</p>
+
+<div class="space-y-3 mt-6">
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Ahli</span>
+
+<span>4</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Pejabat</span>
+
+<span class="text-green-400">3</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Bertugas</span>
+
+<span class="text-yellow-400">1</span>
+
+</div>
+
+</div>
+
+<div class="mt-6">
+
+<div class="w-full h-2 rounded-full bg-slate-700">
+
+<div class="w-3/4 h-2 rounded-full bg-blue-400"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- SUNGAI ULAR -->
+
+<div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[30px] border border-slate-700 p-6 hover:border-cyan-500 hover:-translate-y-2 transition duration-300 shadow-2xl">
+
+<div class="flex justify-between">
+
+<div class="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center text-3xl">
+
+🌐
+
+</div>
+
+<div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+
+</div>
+
+<h3 class="text-2xl font-black mt-6">
+
+Sungai Ular
+
+</h3>
+
+<p class="text-slate-400 text-sm">
+
+Zon 03
+
+</p>
+
+<div class="space-y-3 mt-6">
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Ahli</span>
+
+<span>4</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Pejabat</span>
+
+<span class="text-green-400">4</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Bertugas</span>
+
+<span class="text-yellow-400">0</span>
+
+</div>
+
+</div>
+
+<div class="mt-6">
+
+<div class="w-full h-2 rounded-full bg-slate-700">
+
+<div class="w-full h-2 rounded-full bg-purple-400"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- BANDAR BAHARU -->
+
+<div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[30px] border border-slate-700 p-6 hover:border-cyan-500 hover:-translate-y-2 transition duration-300 shadow-2xl">
+
+<div class="flex justify-between">
+
+<div class="w-14 h-14 rounded-2xl bg-orange-500/20 flex items-center justify-center text-3xl">
+
+🚗
+
+</div>
+
+<div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+
+</div>
+
+<h3 class="text-2xl font-black mt-6">
+
+Bandar Baharu
+
+</h3>
+
+<p class="text-slate-400 text-sm">
+
+Zon 04
+
+</p>
+
+<div class="space-y-3 mt-6">
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Ahli</span>
+
+<span>5</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Pejabat</span>
+
+<span class="text-green-400">3</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Bertugas</span>
+
+<span class="text-yellow-400">2</span>
+
+</div>
+
+</div>
+
+<div class="mt-6">
+
+<div class="w-full h-2 rounded-full bg-slate-700">
+
+<div class="w-3/5 h-2 rounded-full bg-orange-400"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- SERDANG -->
+
+<div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[30px] border border-slate-700 p-6 hover:border-cyan-500 hover:-translate-y-2 transition duration-300 shadow-2xl">
+
+<div class="flex justify-between">
+
+<div class="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center text-3xl">
+
+🛡️
+
+</div>
+
+<div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+
+</div>
+
+<h3 class="text-2xl font-black mt-6">
+
+Serdang
+
+</h3>
+
+<p class="text-slate-400 text-sm">
+
+Zon 05
+
+</p>
+
+<div class="space-y-3 mt-6">
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Ahli</span>
+
+<span>4</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Pejabat</span>
+
+<span class="text-green-400">4</span>
+
+</div>
+
+<div class="flex justify-between">
+
+<span class="text-slate-400">Bertugas</span>
+
+<span class="text-yellow-400">0</span>
+
+</div>
+
+</div>
+
+<div class="mt-6">
+
+<div class="w-full h-2 rounded-full bg-slate-700">
+
+<div class="w-full h-2 rounded-full bg-emerald-400"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= OPERATION CENTER ================= -->
+
+<section class="grid grid-cols-1 2xl:grid-cols-5 gap-8 mt-10">
+
+    <!-- ================= PERGERAKAN ================= -->
+
+    <div class="2xl:col-span-3 rounded-[32px] bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 shadow-2xl overflow-hidden">
+
+        <div class="px-8 py-7 border-b border-slate-700 flex items-center justify-between">
+
+            <div>
+
+                <p class="uppercase tracking-[5px] text-cyan-400 text-sm font-semibold">
+
+                    TODAY MOVEMENT
+
+                </p>
+
+                <h2 class="text-3xl font-black mt-2">
+
+                    🚗 Pergerakan Hari Ini
+
+                </h2>
+
+            </div>
+
+            <div class="text-right">
+
+                <div class="text-3xl font-black text-cyan-400">
+
+                    04
+
+                </div>
+
+                <p class="text-slate-400">
+
+                    Tugasan Aktif
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="divide-y divide-slate-800">
+
+            <div class="px-8 py-6 flex items-center justify-between hover:bg-slate-800/60 transition">
+
+                <div class="flex gap-5 items-center">
+
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center text-2xl">
+
+                        👨‍💻
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="font-bold text-xl">
+
+                            Muhamed Fitri
+
+                        </h3>
+
+                        <p class="text-slate-400">
+
+                            SK Kuala Ketil → PPD Kulim
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <span class="bg-green-500/20 text-green-300 px-5 py-2 rounded-full font-semibold">
+
+                    Sedang Bertugas
+
+                </span>
+
+            </div>
+
+            <div class="px-8 py-6 flex items-center justify-between hover:bg-slate-800/60 transition">
+
+                <div class="flex gap-5 items-center">
+
+                    <div class="w-14 h-14 rounded-2xl bg-yellow-500/20 flex items-center justify-center text-2xl">
+
+                        🚗
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="font-bold text-xl">
+
+                            Ahmad
+
+                        </h3>
+
+                        <p class="text-slate-400">
+
+                            PKG Kulim → SK Junjong
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <span class="bg-yellow-500/20 text-yellow-300 px-5 py-2 rounded-full font-semibold">
+
+                    Dalam Perjalanan
+
+                </span>
+
+            </div>
+
+            <div class="px-8 py-6 flex items-center justify-between hover:bg-slate-800/60 transition">
+
+                <div class="flex gap-5 items-center">
+
+                    <div class="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center text-2xl">
+
+                        🏫
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="font-bold text-xl">
+
+                            Aiman
+
+                        </h3>
+
+                        <p class="text-slate-400">
+
+                            SK Tawar → PKG
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <span class="bg-blue-500/20 text-blue-300 px-5 py-2 rounded-full font-semibold">
+
+                    Selesai
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= OFFICE ================= -->
+
+    <div class="2xl:col-span-2 rounded-[32px] bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 shadow-2xl overflow-hidden">
+
+        <div class="px-8 py-7 border-b border-slate-700">
+
+            <p class="uppercase tracking-[5px] text-green-400 text-sm font-semibold">
+
+                OFFICE STATUS
+
+            </p>
+
+            <h2 class="text-3xl font-black mt-2">
+
+                🏢 Dalam Pejabat
+
+            </h2>
+
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 p-6">
+
+            <div class="bg-slate-800 rounded-2xl p-5 hover:bg-slate-700 transition">
+
+                <div class="flex justify-between">
+
+                    <span class="font-bold">
+
+                        Ali
+
+                    </span>
+
+                    <span class="text-green-400">
+
+                        ●
+
+                    </span>
+
+                </div>
+
+                <p class="text-slate-400 text-sm mt-3">
+
+                    Online
+
+                </p>
+
+            </div>
+
+            <div class="bg-slate-800 rounded-2xl p-5 hover:bg-slate-700 transition">
+
+                <div class="flex justify-between">
+
+                    <span class="font-bold">
+
+                        Hakim
+
+                    </span>
+
+                    <span class="text-green-400">
+
+                        ●
+
+                    </span>
+
+                </div>
+
+                <p class="text-slate-400 text-sm mt-3">
+
+                    Online
+
+                </p>
+
+            </div>
+
+            <div class="bg-slate-800 rounded-2xl p-5 hover:bg-slate-700 transition">
+
+                <div class="flex justify-between">
+
+                    <span class="font-bold">
+
+                        Firdaus
+
+                    </span>
+
+                    <span class="text-green-400">
+
+                        ●
+
+                    </span>
+
+                </div>
+
+                <p class="text-slate-400 text-sm mt-3">
+
+                    Online
+
+                </p>
+
+            </div>
+
+            <div class="bg-slate-800 rounded-2xl p-5 hover:bg-slate-700 transition">
+
+                <div class="flex justify-between">
+
+                    <span class="font-bold">
+
+                        Nizam
+
+                    </span>
+
+                    <span class="text-green-400">
+
+                        ●
+
+                    </span>
+
+                </div>
+
+                <p class="text-slate-400 text-sm mt-3">
+
+                    Online
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= REALTIME COMMAND CENTER ================= -->
+
+<section class="grid grid-cols-1 xl:grid-cols-3 gap-8 mt-10">
+
+    <!-- ================= LIVE ACTIVITY ================= -->
+
+    <div class="xl:col-span-2 rounded-[32px] bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 shadow-2xl overflow-hidden">
+
+        <div class="px-8 py-7 border-b border-slate-700 flex items-center justify-between">
+
+            <div>
+
+                <p class="uppercase tracking-[5px] text-cyan-400 text-sm font-semibold">
+
+                    LIVE ACTIVITY
+
+                </p>
+
+                <h2 class="text-3xl font-black mt-2">
+
+                    ⚡ Aktiviti Realtime
+
+                </h2>
+
+            </div>
+
+            <span class="px-5 py-2 rounded-full bg-red-500/20 text-red-300 font-bold animate-pulse">
+
+                ● LIVE
+
+            </span>
+
+        </div>
+
+        <div class="p-8 space-y-6">
+
+            <div class="flex gap-5">
+
+                <div class="w-14 h-14 rounded-2xl bg-green-500/20 flex items-center justify-center text-2xl">
+
+                    ✅
+
+                </div>
+
+                <div class="flex-1">
+
+                    <div class="flex justify-between">
+
+                        <h3 class="font-bold text-xl">
+
+                            Muhamed Fitri
+
+                        </h3>
+
+                        <span class="text-slate-500">
+
+                            2 saat lalu
+
+                        </span>
+
+                    </div>
+
+                    <p class="text-slate-400 mt-2">
+
+                        Berjaya log masuk ke sistem.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="flex gap-5">
+
+                <div class="w-14 h-14 rounded-2xl bg-yellow-500/20 flex items-center justify-center text-2xl">
+
+                    🚗
+
+                </div>
+
+                <div class="flex-1">
+
+                    <div class="flex justify-between">
+
+                        <h3 class="font-bold text-xl">
+
+                            Ahmad
+
+                        </h3>
+
+                        <span class="text-slate-500">
+
+                            4 minit lalu
+
+                        </span>
+
+                    </div>
+
+                    <p class="text-slate-400 mt-2">
+
+                        Memulakan tugasan ke SK Kuala Ketil.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="flex gap-5">
+
+                <div class="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center text-2xl">
+
+                    📍
+
+                </div>
+
+                <div class="flex-1">
+
+                    <div class="flex justify-between">
+
+                        <h3 class="font-bold text-xl">
+
+                            Aiman
+
+                        </h3>
+
+                        <span class="text-slate-500">
+
+                            9 minit lalu
+
+                        </span>
+
+                    </div>
+
+                    <p class="text-slate-400 mt-2">
+
+                        Check In berjaya direkodkan.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="flex gap-5">
+
+                <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center text-2xl">
+
+                    🏁
+
+                </div>
+
+                <div class="flex-1">
+
+                    <div class="flex justify-between">
+
+                        <h3 class="font-bold text-xl">
+
+                            Hafiz
+
+                        </h3>
+
+                        <span class="text-slate-500">
+
+                            15 minit lalu
+
+                        </span>
+
+                    </div>
+
+                    <p class="text-slate-400 mt-2">
+
+                        Menamatkan tugasan luar.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= COMMAND ANALYTICS ================= -->
+
+    <div class="rounded-[32px] bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 shadow-2xl overflow-hidden">
+
+        <div class="px-8 py-7 border-b border-slate-700">
+
+            <p class="uppercase tracking-[5px] text-purple-400 text-sm font-semibold">
+
+                SYSTEM ANALYTICS
+
+            </p>
+
+            <h2 class="text-3xl font-black mt-2">
+
+                📊 Statistik
+
+            </h2>
+
+        </div>
+
+        <div class="p-8 space-y-8">
+
+            <div>
+
+                <div class="flex justify-between mb-3">
+
+                    <span>Kehadiran</span>
+
+                    <strong>90%</strong>
+
+                </div>
+
+                <div class="h-3 rounded-full bg-slate-700">
+
+                    <div class="h-3 rounded-full bg-green-500 w-[90%]"></div>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <div class="flex justify-between mb-3">
+
+                    <span>Tugasan Selesai</span>
+
+                    <strong>75%</strong>
+
+                </div>
+
+                <div class="h-3 rounded-full bg-slate-700">
+
+                    <div class="h-3 rounded-full bg-cyan-500 w-3/4"></div>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <div class="flex justify-between mb-3">
+
+                    <span>GPS Aktif</span>
+
+                    <strong>100%</strong>
+
+                </div>
+
+                <div class="h-3 rounded-full bg-slate-700">
+
+                    <div class="h-3 rounded-full bg-blue-500 w-full"></div>
+
+                </div>
+
+            </div>
+
+            <div class="rounded-2xl bg-green-500/10 border border-green-500/20 p-5">
+
+                <div class="text-green-400 font-bold text-lg">
+
+                    🟢 Firebase Online
+
+                </div>
+
+                <p class="text-slate-400 mt-2 text-sm">
+
+                    Semua servis berjalan dengan normal.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= PREMIUM FOOTER ================= -->
+
+<footer class="mt-12 mb-8">
+
+    <div class="relative overflow-hidden rounded-[36px] border border-slate-700 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 shadow-2xl">
+
+        <!-- Glow -->
+
+        <div class="absolute -top-16 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
+
+        <div class="absolute -bottom-16 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
+
+        <div class="relative p-8">
+
+            <div class="grid lg:grid-cols-3 gap-8 items-center">
+
+                <!-- LEFT -->
+
+                <div>
+
+                    <div class="flex items-center gap-4">
+
+                        <img
+                        src="assets/images/logo.png"
+                        class="w-16 h-16 rounded-2xl">
+
+                        <div>
+
+                            <h3 class="text-2xl font-black">
+
+                                E-GERAK PTIS KBB
+
+                            </h3>
+
+                            <p class="text-slate-400">
+
+                                Electronic Movement Management System
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <p class="text-slate-500 mt-5 leading-7">
+
+                        Platform pemantauan pergerakan ahli Pasukan Teknikal ICT
+                        Sekolah secara masa nyata bagi menyokong pengurusan
+                        tugasan yang lebih cekap, sistematik dan berpusat.
+
+                    </p>
+
+                </div>
+
+                <!-- CENTER -->
+
+                <div class="text-center">
+
+                    <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-green-500/10 border border-green-500/20">
+
+                        <div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+
+                        <span class="font-bold text-green-300">
+
+                            Sistem Beroperasi Dengan Normal
+
+                        </span>
+
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+
+                        <div class="rounded-2xl bg-slate-800 p-4">
+
+                            <div class="text-3xl font-black text-cyan-400">
+
+                                99.9%
+
+                            </div>
+
+                            <div class="text-slate-400 text-sm mt-1">
+
+                                Uptime
+
+                            </div>
+
+                        </div>
+
+                        <div class="rounded-2xl bg-slate-800 p-4">
+
+                            <div class="text-3xl font-black text-green-400">
+
+                                V2.0
+
+                            </div>
+
+                            <div class="text-slate-400 text-sm mt-1">
+
+                                Current Version
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- RIGHT -->
+
+                <div class="lg:text-right">
+
+                    <h4 class="text-xl font-bold mb-4">
+
+                        Maklumat Sistem
+
+                    </h4>
+
+                    <div class="space-y-3 text-slate-400">
+
+                        <div>
+
+                            🏢 PTIS Daerah Kulim Bandar Baharu
+
+                        </div>
+
+                        <div>
+
+                            ☁️ Firebase Cloud Platform
+
+                        </div>
+
+                        <div>
+
+                            🌐 Realtime GPS Monitoring
+
+                        </div>
+
+                        <div>
+
+                            🔒 Secure Authentication
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="border-t border-slate-700 mt-8 pt-6 flex flex-col lg:flex-row justify-between items-center gap-4">
+
+                <div class="text-slate-500">
+
+                    © 2026 E-GERAK PTIS KBB. Hak Cipta Terpelihara.
+
+                </div>
+
+                <div class="flex items-center gap-3">
+
+                    <span class="text-slate-500">
+
+                        Dibangunkan oleh
+
+                    </span>
+
+                    <span class="font-bold text-cyan-400">
+
+                        Nazri & Rofizar
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</div>
+
+<script>
+
+function updateClock(){
+
+const now=new Date();
+
+document.getElementById("digitalClock").innerHTML=
+now.toLocaleTimeString("ms-MY");
+
+document.getElementById("todayDate").innerHTML=
+now.toLocaleDateString("ms-MY",{
+
+weekday:"long",
+
+day:"numeric",
+
+month:"long",
+
+year:"numeric"
+
+});
+
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+</script>
+
+<!-- Dashboard -->
+
+<script src="assets/js/dashboard.js"></script>
+
+<script type="module" src="assets/js/auth.js"></script>
+
+</body>
+
+</html>
