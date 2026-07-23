@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Import Ahli PTIS</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-slate-950 text-white min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-xl bg-slate-900 rounded-3xl p-8 border border-slate-700">
+
+<h1 class="text-3xl font-black mb-2">
+
+📥 IMPORT AHLI PTIS
+
+</h1>
+
+<p class="text-slate-400 mb-8">
+
+Import senarai ahli PTIS Kulim Bandar Baharu ke Firestore.
+
+</p>
+
+<div class="space-y-4">
+
+<input
+id="excelFile"
+type="file"
+accept=".xlsx,.xls"
+class="block w-full">
+
+<button
+id="importBtn"
+class="w-full bg-blue-600 hover:bg-blue-700 rounded-2xl py-4 font-bold">
+
+IMPORT KE FIRESTORE
+
+</button>
+
+</div>
+
+<pre
+id="log"
+class="mt-8 bg-black rounded-2xl p-4 h-72 overflow-auto text-green-400 text-sm"></pre>
+
+</div>
+
+<script type="module" src="assets/js/import-users.js"></script>
+
+</body>
+</html>
