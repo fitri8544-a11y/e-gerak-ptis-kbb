@@ -239,17 +239,19 @@ async function loginWithGoogle(){
 
     catch(error){
 
-        console.error(error);
+    console.error("LOGIN ERROR:", error);
 
-        stopLoading();
+    console.log("ERROR CODE:", error.code);
 
-        showError(
+    console.log("ERROR MESSAGE:", error.message);
 
-            error.message
+    alert(error.code);
 
-        );
+    stopLoading();
 
-    }
+    showError(error.message);
+
+}
 
 }
 
