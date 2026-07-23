@@ -46,6 +46,16 @@ document.getElementById("loginText");
 const loadingSpinner =
 document.getElementById("loadingSpinner");
 
+/* =========================================================
+   USER HEADER
+========================================================= */
+
+const userName =
+document.getElementById("userName");
+
+const userAvatar =
+document.getElementById("userAvatar");
+
 
 /* =========================================================
    ERROR
@@ -283,7 +293,24 @@ onAuthStateChanged(
 
     async(user)=>{
 
-        if(!user) return;
+        // Tiada pengguna login
+        if(!user){
+
+            if(
+
+                window.location.pathname.includes("menupengguna.html") ||
+
+                window.location.pathname.includes("menuadmin.html")
+
+            ){
+
+                window.location.replace("index.html");
+
+            }
+
+            return;
+
+        }
 
         console.log(
 
@@ -293,6 +320,126 @@ onAuthStateChanged(
 
         );
 
+        /* ===============================
+           UPDATE HEADER
+        ============================== */
+
+        if(userName){
+
+            userName.textContent =
+            user.displayName || "Pengguna";
+
+        }
+
+        if(userAvatar){
+
+            if(user.photoURL){
+
+                userAvatar.innerHTML = `
+
+                    <img
+                    src="${user.photoURL}"
+                    class="w-full h-full object-cover">
+
+                `;
+
+            }else{
+
+                const initials =
+
+                user.displayName
+
+                ?.split(" ")
+
+                .map(name=>name.charAt(0))
+
+                .join("")
+
+                .substring(0,2)
+
+                .toUpperCase();
+
+                userAvatar.textContent =
+                initials || "U";
+
+            }
+
+        }
+
     }
 
 );
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+const logoutButton =
+document.getElementById("logoutButton");
+
+if(logoutButton){
+
+    logoutButton.addEventListener(
+        "click",
+        async()=>{
+
+            try{
+
+                const user =
+                auth.currentUser;
+
+                // Update status offline
+                if(user){
+
+                    await setDoc(
+
+                        doc(
+                            db,
+                            "users",
+                            user.uid
+                        ),
+
+                        {
+
+                            status:"offline",
+
+                            lastLogout:
+                            serverTimestamp()
+
+                        },
+
+                        {
+                            merge:true
+                        }
+
+                    );
+
+                }
+
+                // Firebase Logout
+                await signOut(auth);
+
+                // Kembali ke halaman utama
+                window.location.replace(
+                    "index.html"
+                );
+
+            }
+
+            catch(error){
+
+                console.error(
+                    "Logout Error:",
+                    error
+                );
+
+                alert(
+                    "Log keluar gagal."
+                );
+
+            }
+
+        }
+    );
+
+}

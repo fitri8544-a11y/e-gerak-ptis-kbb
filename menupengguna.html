@@ -117,19 +117,20 @@ height:100%;
 
 body{
 
-font-family:Inter,sans-serif;
+    font-family:Inter,sans-serif;
 
-background:
-linear-gradient(
-135deg,
-var(--bg-1) 0%,
-var(--bg-2) 45%,
-var(--bg-3) 100%
-);
+    background:
+    linear-gradient(
+    135deg,
+    var(--bg-1) 0%,
+    var(--bg-2) 45%,
+    var(--bg-3) 100%
+    );
 
-color:var(--text);
+    color:var(--text);
 
-overflow:hidden;
+    overflow-x:hidden;
+    overflow-y:auto;
 
 }
 
@@ -580,148 +581,7 @@ box-shadow:
 
 <body>
 
-<div class="flex h-screen">
-
-<!-- ================================= -->
-
-<!-- SIDEBAR -->
-
-<!-- ================================= -->
-
-<aside
-class="sidebar
-hidden
-lg:flex
-flex-col">
-
-<div
-class="px-8
-pt-8
-pb-6">
-
-<div
-class="flex
-items-center
-gap-4">
-
-<div
-class="w-14
-h-14
-rounded-2xl
-bg-gradient-to-br
-from-yellow-300
-to-yellow-600
-flex
-items-center
-justify-center
-text-black
-text-2xl
-font-black">
-
-E
-
-</div>
-
-<div>
-
-<h1
-class="text-white
-font-black
-text-xl">
-
-E-GERAK
-
-</h1>
-
-<p
-class="text-gold-300
-text-xs">
-
-PTIS KBB V2
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<div
-class="px-5
-space-y-2
-mt-5">
-
-<div class="menu-item menu-active">
-
-🏠
-
-Dashboard
-
-</div>
-
-<div class="menu-item">
-
-📍
-
-Kemaskini
-Pergerakan
-
-</div>
-
-<div class="menu-item">
-
-📜
-
-Sejarah
-Pergerakan
-
-</div>
-
-<div class="menu-item">
-
-📅
-
-Google
-Calendar
-
-</div>
-
-<div class="menu-item">
-
-👤
-
-Profil
-Saya
-
-</div>
-
-<div class="menu-item">
-
-⚙️
-
-Tetapan
-
-</div>
-
-</div>
-
-<div class="mt-auto p-5">
-
-<div
-class="menu-item
-text-red-300
-hover:text-white">
-
-🚪
-
-Log Keluar
-
-</div>
-
-</div>
-
-</aside>
+<div class="min-h-screen flex flex-col">
 
 <!-- ================================= -->
 
@@ -742,82 +602,142 @@ overflow-hidden">
 <!-- ================================= -->
 
 <header
-class="h-20
+class="sticky
+top-0
+z-40
 glass
 gold-border
-flex
-items-center
-justify-between
-px-8">
+px-4
+py-5
+lg:px-6
+lg:py-5">
 
-<div>
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
 
-<h2
-class="text-3xl
-font-black
-text-white">
+    <!-- ================= LEFT ================= -->
 
-👋 Selamat Datang
+    <div>
 
-</h2>
+        <div
+        class="inline-flex
+        items-center
+        gap-2
+        text-2xl">
 
-<p
-class="text-gray-400">
+            👋
 
-Muhamed Fitri
+        </div>
 
-<span class="text-gold-400">
+        <h1
+        class="text-4xl
+        lg:text-3xl
+        font-black
+        text-white
+        leading-tight
+        mt-2">
 
-•
+            Selamat<br>Datang
 
-Pasukan Teknikal ICT Sekolah
+        </h1>
 
-</span>
+        <p
+        id="userName"
+        class="mt-4
+        text-xl
+        font-bold
+        text-white
+        leading-8">
 
-</p>
+            Loading...
 
-</div>
+        </p>
 
-<div
-class="flex
-items-center
-gap-6">
+        <p
+        class="mt-2
+        text-gold-400
+        font-semibold">
 
-<div
-class="text-right">
+            Pasukan Teknikal ICT Sekolah
 
-<p
-class="text-white
-font-bold">
+        </p>
 
-22 Julai 2026
+    </div>
 
-</p>
 
-<p
-class="text-gray-400
-text-sm">
+    <!-- ================= RIGHT ================= -->
 
-09:45 pagi
+    <div
+    class="flex
+    items-center
+    justify-between
+    lg:justify-end
+    gap-4">
 
-</p>
+        <!-- Date -->
 
-</div>
+        <div>
 
-<div
-class="w-12
-h-12
-rounded-full
-bg-gold-500
-text-black
-font-black
-flex
-items-center
-justify-center">
+            <div
+            id="todayDate"
+            class="font-bold
+            text-white">
 
-MF
+                Loading...
 
-</div>
+            </div>
+
+            <div
+            id="digitalClock"
+            class="text-gray-400">
+
+                00:00:00
+
+            </div>
+
+        </div>
+
+
+        <!-- Avatar -->
+
+        <div
+        id="userAvatar"
+        class="w-14
+        h-14
+        rounded-full
+        bg-gold-500
+        text-black
+        text-xl
+        font-black
+        flex
+        items-center
+        justify-center
+        overflow-hidden
+        shadow-lg">
+
+            --
+
+        </div>
+
+
+        <!-- Logout -->
+
+        <button
+        id="logoutButton"
+        class="px-4
+        py-3
+        rounded-2xl
+        bg-red-500/20
+        hover:bg-red-500
+        text-red-300
+        hover:text-white
+        transition
+        font-semibold">
+
+            🚪 Logout
+
+        </button>
+
+    </div>
 
 </div>
 
@@ -831,8 +751,8 @@ MF
 
 <main
 class="flex-1
-overflow-y-auto
-p-8">
+p-6
+lg:p-8">
 
 <div
 class="grid
@@ -896,37 +816,6 @@ pergerakan secara masa nyata.
 
 </p>
 
-<div
-class="mt-8
-flex
-gap-4">
-
-<button
-class="px-7
-py-3
-rounded-2xl
-bg-gold-500
-text-black
-font-bold">
-
-📍 Kemaskini Pergerakan
-
-</button>
-
-<button
-class="px-7
-py-3
-rounded-2xl
-border
-border-yellow-600
-text-yellow-300">
-
-📜 Lihat Sejarah
-
-</button>
-
-</div>
-
 </div>
 
 <!-- STATUS CARD -->
@@ -945,37 +834,53 @@ STATUS SEMASA
 
 </div>
 
-<div id="statusTitle">
+<h3
+id="currentStatus"
+class="text-2xl font-bold text-green-400">
 
 🟢 DI PEJABAT
 
-</div>
+</h3>
 
-<p
-class="mt-6
-text-gray-400">
+<p class="text-gray-400">
 
 Lokasi
 
 </p>
 
-<p id="statusLocation">
+<p
+id="currentLocation"
+class="text-white font-semibold">
 
-Pejabat Pendidikan Daerah Baling
+-
+
+</p>
+
+<p class="text-gray-400 mt-5">
+
+Aktiviti
 
 </p>
 
 <p
-class="mt-6
-text-gray-400">
+id="currentActivity"
+class="text-white font-semibold">
+
+-
+
+</p>
+
+<p class="text-gray-400 mt-5">
 
 Kemaskini
 
 </p>
 
-<p id="statusTime">
+<p
+id="currentTime"
+class="text-white font-semibold">
 
-09:45 pagi
+-
 
 </p>
 
@@ -983,277 +888,204 @@ Kemaskini
 
 </div>
 
-      <!-- ====================================================== -->
-      <!-- TIMELINE + AKTIVITI -->
-      <!-- ====================================================== -->
+<!-- ====================================================== -->
+<!-- QUICK ACCESS -->
+<!-- ====================================================== -->
 
-      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mt-6">
+<section class="mt-8">
 
-        <!-- ================= TIMELINE ================= -->
+  <!-- HEADER -->
 
-        <div class="xl:col-span-2 glass gold-border rounded-3xl p-8">
+  <div class="flex items-center justify-between mb-8">
 
-          <div class="flex items-center justify-between mb-8">
+    <div>
 
-            <h2 class="text-2xl font-black text-white">
+      <span class="inline-flex items-center px-4 py-2 rounded-full
+      bg-yellow-500/10 text-yellow-400 text-sm font-bold border border-yellow-500/20">
 
-              📍 Timeline Pergerakan Hari Ini
+        🚀 QUICK ACCESS
 
-            </h2>
+      </span>
 
-            <span class="text-yellow-400 font-semibold">
+      <h2 class="text-3xl font-black text-white mt-4">
 
-              Live Update
+        Sistem Harian PTIS
 
-            </span>
+      </h2>
 
-          </div>
+      <p class="text-gray-400 mt-2">
 
-          <div
-id="timelineContainer"
-class="space-y-8">
+        Akses pantas ke sistem yang digunakan setiap hari oleh Pasukan Teknikal ICT Sekolah.
 
-            <div class="flex gap-5">
+      </p>
 
-              <div class="flex flex-col items-center">
+    </div>
 
-                <div class="w-5 h-5 rounded-full bg-green-500"></div>
+  </div>
 
-                <div class="w-1 h-20 bg-white/10 mt-2"></div>
+  <!-- GRID -->
 
-              </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
 
-              <div>
+    <!-- ================= SCANME ================= -->
 
-                <p class="text-sm text-gray-400">
+    <a href="https://idme.moe.gov.my/login"
+       target="_blank"
+       class="group glass gold-border rounded-3xl p-8
+       transition duration-300 hover:-translate-y-2
+       hover:border-yellow-400/60">
 
-                  08:00 pagi
+      <div class="w-16 h-16 rounded-2xl
+      bg-yellow-500/10
+      flex items-center justify-center
+      text-4xl
+      transition
+      group-hover:scale-110">
 
-                </p>
-
-                <h3 class="text-white font-bold mt-1">
-
-                  Masuk Pejabat
-
-                </h3>
-
-                <p class="text-gray-500">
-
-                  Pejabat Pendidikan Daerah Baling
-
-                </p>
-
-              </div>
-
-            </div>
-
-            <div class="flex gap-5">
-
-              <div class="flex flex-col items-center">
-
-                <div class="w-5 h-5 rounded-full bg-yellow-500"></div>
-
-                <div class="w-1 h-20 bg-white/10 mt-2"></div>
-
-              </div>
-
-              <div>
-
-                <p class="text-sm text-gray-400">
-
-                  09:30 pagi
-
-                </p>
-
-                <h3 class="text-white font-bold mt-1">
-
-                  Keluar Pejabat
-
-                </h3>
-
-                <p class="text-gray-500">
-
-                  Lawatan ke PKG Kuala Ketil
-
-                </p>
-
-              </div>
-
-            </div>
-
-            <div class="flex gap-5">
-
-              <div class="flex flex-col items-center">
-
-                <div class="w-5 h-5 rounded-full bg-blue-500"></div>
-
-              </div>
-
-              <div>
-
-                <p class="text-sm text-gray-400">
-
-                  12:15 tengah hari
-
-                </p>
-
-                <h3 class="text-white font-bold mt-1">
-
-                  Kembali ke Pejabat
-
-                </h3>
-
-                <p class="text-gray-500">
-
-                  Status dikemaskini
-
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <!-- ================= AKTIVITI ================= -->
-
-        <div class="glass gold-border rounded-3xl p-8">
-
-          <h2 class="text-2xl font-black text-white mb-6">
-
-            🔔 Aktiviti Terkini
-
-          </h2>
-
-          <div class="space-y-5">
-
-            <div class="p-4 rounded-2xl bg-white/5">
-
-              <p class="text-white font-semibold">
-
-                Status dikemaskini
-
-              </p>
-
-              <p class="text-gray-500 text-sm">
-
-                5 minit yang lalu
-
-              </p>
-
-            </div>
-
-            <div class="p-4 rounded-2xl bg-white/5">
-
-              <p class="text-white font-semibold">
-
-                Google Calendar diselaraskan
-
-              </p>
-
-              <p class="text-gray-500 text-sm">
-
-                15 minit yang lalu
-
-              </p>
-
-            </div>
-
-            <div class="p-4 rounded-2xl bg-white/5">
-
-              <p class="text-white font-semibold">
-
-                Rekod berjaya disimpan
-
-              </p>
-
-              <p class="text-gray-500 text-sm">
-
-                Hari ini
-
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
+        📱
 
       </div>
 
-      <!-- ====================================================== -->
-      <!-- STATISTIK -->
-      <!-- ====================================================== -->
+      <h3 class="text-2xl font-black text-white mt-6">
 
-      <div class="grid grid-cols-2 xl:grid-cols-4 gap-6 mt-6">
+        SCANME
 
-        <div class="glass gold-border rounded-3xl p-6">
+      </h3>
 
-          <p class="text-gray-400">
+      <p class="text-gray-400 mt-3 leading-relaxed">
 
-            Keluar Pejabat
+        Sistem kehadiran.
 
-          </p>
+      </p>
 
-          <h2 class="text-5xl font-black text-yellow-400 mt-3">
+      <div class="mt-8 text-yellow-400 font-bold">
 
-            18
-
-          </h2>
-
-        </div>
-
-        <div class="glass gold-border rounded-3xl p-6">
-
-          <p class="text-gray-400">
-
-            Lawatan
-
-          </p>
-
-          <h2 class="text-5xl font-black text-cyan-400 mt-3">
-
-            12
-
-          </h2>
-
-        </div>
-
-        <div class="glass gold-border rounded-3xl p-6">
-
-          <p class="text-gray-400">
-
-            Mesyuarat
-
-          </p>
-
-          <h2 class="text-5xl font-black text-green-400 mt-3">
-
-            7
-
-          </h2>
-
-        </div>
-
-        <div class="glass gold-border rounded-3xl p-6">
-
-          <p class="text-gray-400">
-
-            Cuti
-
-          </p>
-
-          <h2 class="text-5xl font-black text-red-400 mt-3">
-
-            2
-
-          </h2>
-
-        </div>
+        ➜ Buka Sistem
 
       </div>
+
+    </a>
+
+    <!-- ================= ISD ================= -->
+
+    <a href="https://isd.moe.gov.my/ui/home?view_type=my_view"
+       target="_blank"
+       class="group glass gold-border rounded-3xl p-8
+       transition duration-300 hover:-translate-y-2
+       hover:border-cyan-400/60">
+
+      <div class="w-16 h-16 rounded-2xl
+      bg-cyan-500/10
+      flex items-center justify-center
+      text-4xl
+      transition
+      group-hover:scale-110">
+
+        🛠️
+
+      </div>
+
+      <h3 class="text-2xl font-black text-white mt-6">
+
+        ISD
+
+      </h3>
+
+      <p class="text-gray-400 mt-3 leading-relaxed">
+
+        ICT Service Desk untuk aduan dan sokongan teknikal.
+
+      </p>
+
+      <div class="mt-8 text-cyan-400 font-bold">
+
+        ➜ Buka Sistem
+
+      </div>
+
+    </a>
+
+    <!-- ================= S3PTIS ================= -->
+
+    <a href="https://s3ptiskedah.web.app/"
+       target="_blank"
+       class="group glass gold-border rounded-3xl p-8
+       transition duration-300 hover:-translate-y-2
+       hover:border-green-400/60">
+
+      <div class="w-16 h-16 rounded-2xl
+      bg-green-500/10
+      flex items-center justify-center
+      text-4xl
+      transition
+      group-hover:scale-110">
+
+        💻
+
+      </div>
+
+      <h3 class="text-2xl font-black text-white mt-6">
+
+        S3PTIS
+
+      </h3>
+
+      <p class="text-gray-400 mt-3 leading-relaxed">
+
+        Sistem Sokongan PTIS untuk pengurusan teknikal.
+
+      </p>
+
+      <div class="mt-8 text-green-400 font-bold">
+
+        ➜ Buka Sistem
+
+      </div>
+
+    </a>
+
+    <!-- ================= HRMIS ================= -->
+
+    <a href="https://hrmis2.eghrmis.gov.my/hrmisnet/common/main/login.aspx"
+       target="_blank"
+       class="group glass gold-border rounded-3xl p-8
+       transition duration-300 hover:-translate-y-2
+       hover:border-purple-400/60">
+
+      <div class="w-16 h-16 rounded-2xl
+      bg-purple-500/10
+      flex items-center justify-center
+      text-4xl
+      transition
+      group-hover:scale-110">
+
+        👤
+
+      </div>
+
+      <h3 class="text-2xl font-black text-white mt-6">
+
+        HRMIS
+
+      </h3>
+
+      <p class="text-gray-400 mt-3 leading-relaxed">
+
+        Portal rasmi HRMIS untuk urusan perkhidmatan.
+
+      </p>
+
+      <div class="mt-8 text-purple-400 font-bold">
+
+        ➜ Buka Sistem
+
+      </div>
+
+    </a>
+
+  </div>
+
+</section>
 
     </main>
 
@@ -1277,10 +1109,25 @@ class="fab">
 
 <div
 id="movementModal"
-class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-center z-50">
+class="fixed
+inset-0
+bg-black/70
+backdrop-blur-sm
+hidden
+items-center
+justify-center
+z-50
+p-4">
 
-  <div
-  class="glass gold-border rounded-3xl w-full max-w-3xl mx-6 overflow-hidden">
+    <div
+    class="glass
+    gold-border
+    rounded-3xl
+    w-full
+    max-w-3xl
+    max-h-[90vh]
+    flex
+    flex-col">
 
     <!-- HEADER -->
 
@@ -1305,7 +1152,7 @@ class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-ce
 
       <button
       id="closeModal"
-      class="w-12 h-12 rounded-xl bg-red-500/20 hover:bg-red-500 text-red-300 text-xl">
+      class="w-14 h-14 rounded-xl bg-red-500/20 hover:bg-red-500 text-red-300 text-xl">
 
         ✕
 
@@ -1315,7 +1162,12 @@ class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-ce
 
     <!-- BODY -->
 
-    <div class="p-8 space-y-6">
+    <div
+    class="flex-1
+    overflow-y-auto
+    p-6
+    lg:p-8
+    space-y-6">
 
       <!-- STATUS -->
 
@@ -1511,7 +1363,15 @@ class="sr-only peer">
     <!-- FOOTER -->
 
     <div
-    class="px-8 py-6 border-t border-white/10 flex justify-end gap-4">
+class="px-6
+lg:px-8
+py-5
+border-t
+border-white/10
+flex
+justify-end
+gap-4
+shrink-0">
 
       <button
       id="cancelMovement"
@@ -1557,13 +1417,42 @@ class="hidden fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm items-center j
 
 </div>
 
+<script>
+
+function updateClock(){
+
+    const now = new Date();
+
+    document.getElementById("digitalClock").textContent =
+    now.toLocaleTimeString("ms-MY",{
+        hour:"2-digit",
+        minute:"2-digit",
+        second:"2-digit"
+    });
+
+    document.getElementById("todayDate").textContent =
+    now.toLocaleDateString("ms-MY",{
+        weekday:"long",
+        day:"numeric",
+        month:"long",
+        year:"numeric"
+    });
+
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+</script>
+
 <script src="assets/js/dashboard.js"></script>
 
 <script
 type="module"
 src="assets/js/movement.js"></script>
 
-<script type="module" src="assets/js/history.js"></script>
+<script type="module" src="assets/js/auth.js"></script>
 
 </body>
 

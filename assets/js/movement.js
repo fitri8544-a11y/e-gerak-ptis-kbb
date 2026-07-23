@@ -15,6 +15,10 @@ import {
 } from "./firebase.js";
 
 import {
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+import {
 
     addDoc,
     collection,
@@ -25,7 +29,8 @@ import {
     limit,
     onSnapshot
 
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+} from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 const MovementManager = {
 
@@ -67,9 +72,13 @@ const MovementManager = {
 
         this.registerEvents();
 
-        auth.onAuthStateChanged?.(()=>{
+        onAuthStateChanged(auth, (user) => {
+
+            if (!user) return;
 
             this.loadCurrentStatus();
+
+            this.loadUserProfile(user);
 
         });
 
@@ -469,6 +478,8 @@ async saveMovement(){
 
 loadCurrentStatus(){
 
+    console.log("loadCurrentStatus dipanggil");
+
     const user = auth.currentUser;
 
     if(!user) return;
@@ -553,6 +564,44 @@ loadCurrentStatus(){
         }
 
     });
+
+},
+
+loadUserProfile(user){
+
+    if(!user) return;
+
+    const name =
+    user.displayName ||
+    user.email ||
+    "Pengguna";
+
+    const avatar =
+    name
+    .trim()
+    .split(" ")
+    .map(word => word.charAt(0))
+    .join("")
+    .substring(0,2)
+    .toUpperCase();
+
+    const userName =
+    document.getElementById("userName");
+
+    const userAvatar =
+    document.getElementById("userAvatar");
+
+    if(userName){
+
+        userName.textContent = name;
+
+    }
+
+    if(userAvatar){
+
+        userAvatar.textContent = avatar;
+
+    }
 
 },
 
