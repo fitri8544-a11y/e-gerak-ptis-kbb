@@ -18,11 +18,31 @@ import {
 
     getFirestore,
 
-    doc,
+    collection,
+
+    addDoc,
+
+    setDoc,
+
+    updateDoc,
+
+    deleteDoc,
 
     getDoc,
 
-    setDoc,
+    getDocs,
+
+    doc,
+
+    query,
+
+    where,
+
+    orderBy,
+
+    limit,
+
+    onSnapshot,
 
     serverTimestamp
 
@@ -171,6 +191,34 @@ export{
 
     getUserProfile,
 
-    updateLastLogin
+    updateLastLogin,
+
+    collection,
+
+    addDoc,
+
+    setDoc,
+
+    updateDoc,
+
+    deleteDoc,
+
+    getDoc,
+
+    getDocs,
+
+    doc,
+
+    query,
+
+    where,
+
+    orderBy,
+
+    limit,
+
+    onSnapshot,
+
+    serverTimestamp
 
 };

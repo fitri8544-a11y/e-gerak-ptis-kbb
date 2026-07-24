@@ -1,57 +1,95 @@
 <!DOCTYPE html>
 <html lang="ms">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>Import Ahli PTIS</title>
+<title>PTIS Staff Import</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
+<!-- SheetJS -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
 </head>
 
-<body class="bg-slate-950 text-white min-h-screen flex items-center justify-center">
+<body class="bg-slate-950 text-white min-h-screen">
 
-<div class="w-full max-w-xl bg-slate-900 rounded-3xl p-8 border border-slate-700">
+<div class="max-w-3xl mx-auto py-12 px-6">
 
-<h1 class="text-3xl font-black mb-2">
+<div class="bg-slate-900 rounded-3xl border border-slate-700 p-8">
 
-📥 IMPORT AHLI PTIS
+<h1 class="text-4xl font-black">
+
+📥 Import Staff PTIS
 
 </h1>
 
-<p class="text-slate-400 mb-8">
+<p class="text-slate-400 mt-3">
 
-Import senarai ahli PTIS Kulim Bandar Baharu ke Firestore.
+Import senarai ahli PTIS daripada Microsoft Excel ke Firestore.
 
 </p>
 
-<div class="space-y-4">
+<div class="mt-8">
 
 <input
 id="excelFile"
 type="file"
 accept=".xlsx,.xls"
-class="block w-full">
+class="block w-full text-sm text-white">
+
+</div>
 
 <button
 id="importBtn"
-class="w-full bg-blue-600 hover:bg-blue-700 rounded-2xl py-4 font-bold">
+class="mt-8 w-full rounded-2xl bg-blue-600 hover:bg-blue-700 py-4 text-xl font-bold">
 
-IMPORT KE FIRESTORE
+🚀 IMPORT KE FIRESTORE
 
 </button>
+
+<div
+id="progress"
+class="hidden mt-8">
+
+<div class="flex justify-between mb-2">
+
+<span>Progress</span>
+
+<span id="progressText">
+
+0%
+
+</span>
+
+</div>
+
+<div class="w-full h-4 bg-slate-800 rounded-full">
+
+<div
+id="progressBar"
+class="h-4 rounded-full bg-green-500"
+style="width:0%">
+
+</div>
+
+</div>
 
 </div>
 
 <pre
 id="log"
-class="mt-8 bg-black rounded-2xl p-4 h-72 overflow-auto text-green-400 text-sm"></pre>
+class="mt-8 bg-black rounded-xl p-4 h-96 overflow-auto text-green-400"></pre>
+
+</div>
 
 </div>
 
 <script type="module" src="assets/js/import-users.js"></script>
 
 </body>
+
 </html>
