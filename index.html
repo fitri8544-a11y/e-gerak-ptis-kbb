@@ -205,7 +205,7 @@ button{
 
     <div class="relative p-8">
 
-        <div class="flex flex-col xl:flex-row justify-between gap-8">
+        <div class="flex flex-col xl:flex-row items-center justify-between gap-6">
 
             <!-- LEFT -->
 
@@ -261,11 +261,11 @@ button{
 
             <!-- RIGHT -->
 
-            <div class="flex flex-col justify-between">
+            <div class="flex items-center gap-4 flex-wrap xl:flex-nowrap">
 
-                <div class="grid grid-cols-2 gap-4">
+                <div class="flex items-center gap-4">
 
-                    <div class="bg-slate-800/70 rounded-3xl px-6 py-5 text-center border border-slate-700">
+                    <div class="bg-slate-800/70 rounded-3xl px-5 py-4 text-center border border-slate-700 min-w-[210px]">
 
                         <div
                         id="digitalClock"
@@ -285,7 +285,7 @@ button{
 
                     </div>
 
-                    <div class="bg-slate-800/70 rounded-3xl px-6 py-5 border border-slate-700">
+                    <div class="bg-slate-800/70 rounded-3xl px-5 py-4 border border-slate-700 min-w-[210px]">
 
                         <div class="text-sm text-slate-400">
 
@@ -315,7 +315,7 @@ button{
 
                 </div>
 
-                <div class="flex justify-end gap-3 mt-5 flex-wrap">
+                <div class="flex items-center gap-4">
 
                     <select class="bg-slate-800 border border-slate-700 rounded-2xl px-5 py-3">
 
@@ -331,33 +331,23 @@ button{
                     <button
 id="googleLoginBtn"
 type="button"
-class="w-full
+class="w-14 h-14
 bg-white
-hover:bg-gray-50
-text-gray-800
+hover:bg-gray-100
 rounded-2xl
-py-4
-font-semibold
 shadow-xl
 border
 border-gray-200
 flex
 items-center
 justify-center
-gap-4
 transition
 duration-300">
 
     <img
-        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-        alt="Google"
-        class="w-6 h-6">
-
-    <span id="loginText">
-
-    Teruskan dengan Google
-
-    </span>
+    src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+    alt="Google"
+    class="w-7 h-7">
 
     <span
     id="loadingSpinner"
@@ -599,7 +589,7 @@ Zon 01
 
 <span class="text-slate-400">Ahli</span>
 
-<span class="font-bold">5</span>
+<span id="padangAhli" class="font-bold">0</span>
 
 </div>
 
@@ -607,7 +597,8 @@ Zon 01
 
 <span class="text-slate-400">Pejabat</span>
 
-<span class="text-green-400 font-bold">4</span>
+<span id="padangOffice"
+class="text-green-400 font-bold">0</span>
 
 </div>
 
@@ -615,7 +606,8 @@ Zon 01
 
 <span class="text-slate-400">Bertugas</span>
 
-<span class="text-yellow-400 font-bold">1</span>
+<span id="padangMovement"
+class="text-yellow-400 font-bold">0</span>
 
 </div>
 
@@ -625,285 +617,246 @@ Zon 01
 
 <div class="w-full h-2 rounded-full bg-slate-700">
 
-<div class="w-4/5 h-2 rounded-full bg-cyan-400"></div>
-
+<div
+id="padangProgress"
+class="h-2 rounded-full bg-cyan-400"
+style="width:0%">
 </div>
 
 </div>
 
 </div>
 
-<!-- KULIM -->
+</div>
+
+<!-- ================= KULIM ================= -->
 
 <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[30px] border border-slate-700 p-6 hover:border-cyan-500 hover:-translate-y-2 transition duration-300 shadow-2xl">
 
-<div class="flex justify-between">
+    <div class="flex justify-between">
 
-<div class="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center text-3xl">
+        <div class="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center text-3xl">
+            🏢
+        </div>
 
-🏢
+        <div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
 
-</div>
+    </div>
 
-<div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+    <h3 class="text-2xl font-black mt-6">
+        Kulim
+    </h3>
 
-</div>
+    <p class="text-slate-400 text-sm">
+        Zon 02
+    </p>
 
-<h3 class="text-2xl font-black mt-6">
+    <div class="space-y-3 mt-6">
 
-Kulim
+        <div class="flex justify-between">
+            <span class="text-slate-400">Ahli</span>
+            <span id="kulimAhli" class="font-bold">0</span>
+        </div>
 
-</h3>
+        <div class="flex justify-between">
+            <span class="text-slate-400">Pejabat</span>
+            <span id="kulimOffice" class="text-green-400 font-bold">0</span>
+        </div>
 
-<p class="text-slate-400 text-sm">
+        <div class="flex justify-between">
+            <span class="text-slate-400">Bertugas</span>
+            <span id="kulimMovement" class="text-yellow-400 font-bold">0</span>
+        </div>
 
-Zon 02
+    </div>
 
-</p>
+    <div class="mt-6">
 
-<div class="space-y-3 mt-6">
+        <div class="w-full h-2 rounded-full bg-slate-700">
 
-<div class="flex justify-between">
+            <div
+                id="kulimProgress"
+                class="h-2 rounded-full bg-blue-400"
+                style="width:0%">
+            </div>
 
-<span class="text-slate-400">Ahli</span>
+        </div>
 
-<span>4</span>
-
-</div>
-
-<div class="flex justify-between">
-
-<span class="text-slate-400">Pejabat</span>
-
-<span class="text-green-400">3</span>
-
-</div>
-
-<div class="flex justify-between">
-
-<span class="text-slate-400">Bertugas</span>
-
-<span class="text-yellow-400">1</span>
-
-</div>
-
-</div>
-
-<div class="mt-6">
-
-<div class="w-full h-2 rounded-full bg-slate-700">
-
-<div class="w-3/4 h-2 rounded-full bg-blue-400"></div>
+    </div>
 
 </div>
 
-</div>
 
-</div>
-
-<!-- SUNGAI ULAR -->
+<!-- ================= SUNGAI ULAR ================= -->
 
 <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[30px] border border-slate-700 p-6 hover:border-cyan-500 hover:-translate-y-2 transition duration-300 shadow-2xl">
 
-<div class="flex justify-between">
+    <div class="flex justify-between">
 
-<div class="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center text-3xl">
+        <div class="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center text-3xl">
+            🌐
+        </div>
 
-🌐
+        <div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
 
-</div>
+    </div>
 
-<div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+    <h3 class="text-2xl font-black mt-6">
+        Sungai Ular
+    </h3>
 
-</div>
+    <p class="text-slate-400 text-sm">
+        Zon 03
+    </p>
 
-<h3 class="text-2xl font-black mt-6">
+    <div class="space-y-3 mt-6">
 
-Sungai Ular
+        <div class="flex justify-between">
+            <span class="text-slate-400">Ahli</span>
+            <span id="sungaiAhli" class="font-bold">0</span>
+        </div>
 
-</h3>
+        <div class="flex justify-between">
+            <span class="text-slate-400">Pejabat</span>
+            <span id="sungaiOffice" class="text-green-400 font-bold">0</span>
+        </div>
 
-<p class="text-slate-400 text-sm">
+        <div class="flex justify-between">
+            <span class="text-slate-400">Bertugas</span>
+            <span id="sungaiMovement" class="text-yellow-400 font-bold">0</span>
+        </div>
 
-Zon 03
+    </div>
 
-</p>
+    <div class="mt-6">
 
-<div class="space-y-3 mt-6">
+        <div class="w-full h-2 rounded-full bg-slate-700">
 
-<div class="flex justify-between">
+            <div
+                id="sungaiProgress"
+                class="h-2 rounded-full bg-purple-400"
+                style="width:0%">
+            </div>
 
-<span class="text-slate-400">Ahli</span>
+        </div>
 
-<span>4</span>
-
-</div>
-
-<div class="flex justify-between">
-
-<span class="text-slate-400">Pejabat</span>
-
-<span class="text-green-400">4</span>
-
-</div>
-
-<div class="flex justify-between">
-
-<span class="text-slate-400">Bertugas</span>
-
-<span class="text-yellow-400">0</span>
-
-</div>
-
-</div>
-
-<div class="mt-6">
-
-<div class="w-full h-2 rounded-full bg-slate-700">
-
-<div class="w-full h-2 rounded-full bg-purple-400"></div>
+    </div>
 
 </div>
 
-</div>
 
-</div>
-
-<!-- BANDAR BAHARU -->
+<!-- ================= BANDAR BAHARU ================= -->
 
 <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[30px] border border-slate-700 p-6 hover:border-cyan-500 hover:-translate-y-2 transition duration-300 shadow-2xl">
 
-<div class="flex justify-between">
+    <div class="flex justify-between">
 
-<div class="w-14 h-14 rounded-2xl bg-orange-500/20 flex items-center justify-center text-3xl">
+        <div class="w-14 h-14 rounded-2xl bg-orange-500/20 flex items-center justify-center text-3xl">
+            🚗
+        </div>
 
-🚗
+        <div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
 
-</div>
+    </div>
 
-<div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+    <h3 class="text-2xl font-black mt-6">
+        Bandar Baharu
+    </h3>
 
-</div>
+    <p class="text-slate-400 text-sm">
+        Zon 04
+    </p>
 
-<h3 class="text-2xl font-black mt-6">
+    <div class="space-y-3 mt-6">
 
-Bandar Baharu
+        <div class="flex justify-between">
+            <span class="text-slate-400">Ahli</span>
+            <span id="bbAhli" class="font-bold">0</span>
+        </div>
 
-</h3>
+        <div class="flex justify-between">
+            <span class="text-slate-400">Pejabat</span>
+            <span id="bbOffice" class="text-green-400 font-bold">0</span>
+        </div>
 
-<p class="text-slate-400 text-sm">
+        <div class="flex justify-between">
+            <span class="text-slate-400">Bertugas</span>
+            <span id="bbMovement" class="text-yellow-400 font-bold">0</span>
+        </div>
 
-Zon 04
+    </div>
 
-</p>
+    <div class="mt-6">
 
-<div class="space-y-3 mt-6">
+        <div class="w-full h-2 rounded-full bg-slate-700">
 
-<div class="flex justify-between">
+            <div
+                id="bbProgress"
+                class="h-2 rounded-full bg-orange-400"
+                style="width:0%">
+            </div>
 
-<span class="text-slate-400">Ahli</span>
+        </div>
 
-<span>5</span>
-
-</div>
-
-<div class="flex justify-between">
-
-<span class="text-slate-400">Pejabat</span>
-
-<span class="text-green-400">3</span>
-
-</div>
-
-<div class="flex justify-between">
-
-<span class="text-slate-400">Bertugas</span>
-
-<span class="text-yellow-400">2</span>
-
-</div>
-
-</div>
-
-<div class="mt-6">
-
-<div class="w-full h-2 rounded-full bg-slate-700">
-
-<div class="w-3/5 h-2 rounded-full bg-orange-400"></div>
+    </div>
 
 </div>
 
-</div>
 
-</div>
-
-<!-- SERDANG -->
+<!-- ================= SERDANG ================= -->
 
 <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[30px] border border-slate-700 p-6 hover:border-cyan-500 hover:-translate-y-2 transition duration-300 shadow-2xl">
 
-<div class="flex justify-between">
+    <div class="flex justify-between">
 
-<div class="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center text-3xl">
+        <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center text-3xl">
+            🛡️
+        </div>
 
-🛡️
+        <div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
 
-</div>
+    </div>
 
-<div class="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
+    <h3 class="text-2xl font-black mt-6">
+        Serdang
+    </h3>
 
-</div>
+    <p class="text-slate-400 text-sm">
+        Zon 05
+    </p>
 
-<h3 class="text-2xl font-black mt-6">
+    <div class="space-y-3 mt-6">
 
-Serdang
+        <div class="flex justify-between">
+            <span class="text-slate-400">Ahli</span>
+            <span id="serdangAhli" class="font-bold">0</span>
+        </div>
 
-</h3>
+        <div class="flex justify-between">
+            <span class="text-slate-400">Pejabat</span>
+            <span id="serdangOffice" class="text-green-400 font-bold">0</span>
+        </div>
 
-<p class="text-slate-400 text-sm">
+        <div class="flex justify-between">
+            <span class="text-slate-400">Bertugas</span>
+            <span id="serdangMovement" class="text-yellow-400 font-bold">0</span>
+        </div>
 
-Zon 05
+    </div>
 
-</p>
+    <div class="mt-6">
 
-<div class="space-y-3 mt-6">
+        <div class="w-full h-2 rounded-full bg-slate-700">
 
-<div class="flex justify-between">
+            <div
+                id="serdangProgress"
+                class="h-2 rounded-full bg-emerald-400"
+                style="width:0%">
+            </div>
 
-<span class="text-slate-400">Ahli</span>
+        </div>
 
-<span>4</span>
-
-</div>
-
-<div class="flex justify-between">
-
-<span class="text-slate-400">Pejabat</span>
-
-<span class="text-green-400">4</span>
-
-</div>
-
-<div class="flex justify-between">
-
-<span class="text-slate-400">Bertugas</span>
-
-<span class="text-yellow-400">0</span>
-
-</div>
-
-</div>
-
-<div class="mt-6">
-
-<div class="w-full h-2 rounded-full bg-slate-700">
-
-<div class="w-full h-2 rounded-full bg-emerald-400"></div>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </div>
 
@@ -1649,7 +1602,7 @@ setInterval(updateClock,1000);
 
 <!-- Dashboard -->
 
-<script src="assets/js/dashboard.js"></script>
+<script type="module" src="assets/js/dashboard.js"></script>
 
 <script type="module" src="assets/js/auth.js"></script>
 

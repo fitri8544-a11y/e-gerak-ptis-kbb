@@ -1,9 +1,19 @@
 /* ======================================================
    E-GERAK PTIS KBB V2
-   DASHBOARD.JS
+   DASHBOARD.JS (REALTIME)
 ====================================================== */
 
-/* ================= DOM ================= */
+import { db } from "./firebase.js";
+
+import {
+
+    collection,
+    onSnapshot
+
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+/* ================= KPI ================= */
 
 const totalMembers =
 document.getElementById("totalMembers");
@@ -30,97 +40,208 @@ const todayMovementTotal =
 document.getElementById("todayMovementTotal");
 
 
-/* ================= DASHBOARD DATA ================= */
+/* ================= ZONE CARD ================= */
 
-const dashboardData = {
+const zones = {
 
-    totalMembers:0,
+    "Padang Serai":{
 
-    officeMembers:0,
+        ahli:document.getElementById("padangAhli"),
+        office:document.getElementById("padangOffice"),
+        movement:document.getElementById("padangMovement"),
+        progress:document.getElementById("padangProgress")
 
-    activeMovement:0,
+    },
 
-    absentMembers:0,
+    "Kulim":{
 
-    totalTasks:0,
+        ahli:document.getElementById("kulimAhli"),
+        office:document.getElementById("kulimOffice"),
+        movement:document.getElementById("kulimMovement"),
+        progress:document.getElementById("kulimProgress")
 
-    todayMovementTotal:0,
+    },
 
-    firebaseStatus:"ONLINE",
+    "Sungai Ular":{
 
-    systemStatus:"ONLINE"
+        ahli:document.getElementById("sungaiAhli"),
+        office:document.getElementById("sungaiOffice"),
+        movement:document.getElementById("sungaiMovement"),
+        progress:document.getElementById("sungaiProgress")
+
+    },
+
+    "Bandar Baharu":{
+
+        ahli:document.getElementById("bbAhli"),
+        office:document.getElementById("bbOffice"),
+        movement:document.getElementById("bbMovement"),
+        progress:document.getElementById("bbProgress")
+
+    },
+
+    "Serdang":{
+
+        ahli:document.getElementById("serdangAhli"),
+        office:document.getElementById("serdangOffice"),
+        movement:document.getElementById("serdangMovement"),
+        progress:document.getElementById("serdangProgress")
+
+    }
 
 };
 
 
-/* ================= UPDATE UI ================= */
+/* ================= REALTIME ================= */
 
-function updateDashboard(){
+onSnapshot(
 
-    if(totalMembers)
-    totalMembers.textContent =
-    dashboardData.totalMembers;
+    collection(db,"users"),
 
-    if(officeMembers)
-    officeMembers.textContent =
-    dashboardData.officeMembers;
+    (snapshot)=>{
 
-    if(activeMovement)
-    activeMovement.textContent =
-    dashboardData.activeMovement;
+        let total=0;
 
-    if(absentMembers)
-    absentMembers.textContent =
-    dashboardData.absentMembers;
+        let office=0;
 
-    if(totalTasks)
-    totalTasks.textContent =
-    dashboardData.totalTasks;
+        let outside=0;
 
-    if(todayMovementTotal)
-    todayMovementTotal.textContent =
-    dashboardData.todayMovementTotal;
+        let leave=0;
 
-    if(firebaseStatus)
-    firebaseStatus.textContent =
-    dashboardData.firebaseStatus;
+        let task=0;
 
-    if(systemStatus)
-    systemStatus.textContent =
-    dashboardData.systemStatus;
+        let today=0;
 
-}
+        const zoneData={};
+
+        Object.keys(zones).forEach(zone=>{
+
+            zoneData[zone]={
+
+                ahli:0,
+                office:0,
+                movement:0
+
+            };
+
+        });
 
 
-/* ================= DEMO DATA ================= */
+        snapshot.forEach(doc=>{
 
-function loadDemoData(){
+            const user=doc.data();
 
-    dashboardData.totalMembers = 22;
+            total++;
 
-    dashboardData.officeMembers = 18;
+            const status=user.currentStatus || "";
 
-    dashboardData.activeMovement = 4;
+            const zone=user.zone || "";
 
-    dashboardData.absentMembers = 0;
+            if(zoneData[zone]){
 
-    dashboardData.totalTasks = 11;
+                zoneData[zone].ahli++;
 
-    dashboardData.todayMovementTotal = 4;
+            }
 
-    dashboardData.firebaseStatus = "ONLINE";
+            switch(status){
 
-    dashboardData.systemStatus = "ONLINE";
+                case "office":
 
-    updateDashboard();
+                    office++;
 
-}
+                    if(zoneData[zone])
+                    zoneData[zone].office++;
+
+                    break;
+
+                case "outsideSchool":
+
+                case "meeting":
+
+                case "course":
+
+                case "hrmis":
+
+                    outside++;
+                    task++;
+                    today++;
+
+                    if(zoneData[zone])
+                    zoneData[zone].movement++;
+
+                    break;
+
+                case "leave":
+
+                    leave++;
+
+                    break;
+
+            }
+
+        });
 
 
-/* ================= INIT ================= */
+        /* KPI */
 
-window.addEventListener("load",()=>{
+        if(totalMembers)
+        totalMembers.textContent=total;
 
-    loadDemoData();
+        if(officeMembers)
+        officeMembers.textContent=office;
 
-});
+        if(activeMovement)
+        activeMovement.textContent=outside;
+
+        if(absentMembers)
+        absentMembers.textContent=leave;
+
+        if(totalTasks)
+        totalTasks.textContent=task;
+
+        if(todayMovementTotal)
+        todayMovementTotal.textContent=today;
+
+        if(firebaseStatus)
+        firebaseStatus.textContent="ONLINE";
+
+        if(systemStatus)
+        systemStatus.textContent="CONNECTED";
+
+
+        /* ZONE */
+
+        Object.keys(zoneData).forEach(zone=>{
+
+            const card=zones[zone];
+
+            if(!card) return;
+
+            const data=zoneData[zone];
+
+            if(card.ahli)
+            card.ahli.textContent=data.ahli;
+
+            if(card.office)
+            card.office.textContent=data.office;
+
+            if(card.movement)
+            card.movement.textContent=data.movement;
+
+            if(card.progress){
+
+                const percent=
+                data.ahli===0
+                ?0
+                :(data.office/data.ahli)*100;
+
+                card.progress.style.width=
+                percent+"%";
+
+            }
+
+        });
+
+    }
+
+);
