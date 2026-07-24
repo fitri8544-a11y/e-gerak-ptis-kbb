@@ -27,7 +27,11 @@ import {
     where,
     orderBy,
     limit,
-    onSnapshot
+    onSnapshot,
+    doc,
+    getDoc,
+    deleteDoc,
+    updateDoc
 
 } from
 "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
@@ -49,6 +53,18 @@ const MovementManager = {
     calendarToggle: null,
 
     loadingOverlay: null,
+
+    movementList: [],
+
+    currentMovementList : [],
+
+    unsubscribeCurrentMovement : null,
+
+    unsubscribeMovement:null,
+
+    currentPage:1,
+
+    rowsPerPage:10,
 
     init() {
 
@@ -72,13 +88,17 @@ const MovementManager = {
 
         this.registerEvents();
 
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
 
             if (!user) return;
 
             this.loadCurrentStatus();
 
-            this.loadUserProfile(user);
+            await this.loadUserProfile(user);
+
+            this.loadCurrentMovement();
+
+            this.loadMovementHistory();
 
         });
 
@@ -575,39 +595,471 @@ loadCurrentStatus(){
 
 },
 
-loadUserProfile(user){
+/* =====================================================
+   LOAD MOVEMENT HISTORY
+===================================================== */
+
+loadMovementHistory(){
+
+    const user =
+    auth.currentUser;
 
     if(!user) return;
 
-    const name =
-    user.displayName ||
-    user.email ||
-    "Pengguna";
+    if(this.unsubscribeMovement){
 
-    const avatar =
-    name
-    .trim()
-    .split(" ")
-    .map(word => word.charAt(0))
-    .join("")
-    .substring(0,2)
-    .toUpperCase();
-
-    const userName =
-    document.getElementById("userName");
-
-    const userAvatar =
-    document.getElementById("userAvatar");
-
-    if(userName){
-
-        userName.textContent = name;
+        this.unsubscribeMovement();
 
     }
 
-    if(userAvatar){
+    let movementQuery;
 
-        userAvatar.textContent = avatar;
+if(this.currentUserRole === "admin"){
+
+    movementQuery = query(
+
+        collection(db,"movements"),
+
+        orderBy("createdAt","desc")
+
+    );
+
+}else{
+
+    movementQuery = query(
+
+        collection(db,"movements"),
+
+        where("uid","==",user.uid),
+
+        orderBy("createdAt","desc")
+
+    );
+
+}
+
+    this.unsubscribeMovement =
+    onSnapshot(movementQuery,(snapshot)=>{
+
+        this.movementList=[];
+
+        snapshot.forEach(doc=>{
+
+            this.movementList.push({
+
+                id:doc.id,
+
+                ...doc.data()
+
+            });
+
+        });
+
+        this.renderMovementTable();
+
+    });
+
+},
+
+/* =====================================================
+   RENDER TABLE
+===================================================== */
+
+renderMovementTable(){
+
+    const tbody =
+    document.getElementById("movementTable");
+
+    if(!tbody) return;
+
+    tbody.innerHTML="";
+
+    if(this.movementList.length===0){
+
+        tbody.innerHTML=`
+
+        <tr>
+
+            <td
+            colspan="5"
+            class="text-center py-8 text-slate-400">
+
+                Tiada rekod.
+
+            </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+    const start =
+    (this.currentPage-1)
+    *
+    this.rowsPerPage;
+
+    const pageData =
+    this.movementList.slice(
+
+        start,
+
+        start+this.rowsPerPage
+
+    );
+
+    const statusMap={
+
+        office:"🟢 Di Pejabat",
+
+        outsideSchool:"🚗 Luar Bertugas",
+
+        meeting:"👥 Mesyuarat",
+
+        course:"🎓 Kursus",
+
+        leave:"🌴 Cuti",
+
+        hrmis:"📄 HRMIS"
+
+    };
+
+    pageData.forEach(item=>{
+
+        tbody.innerHTML+=`
+
+        <tr
+        class="border-b hover:bg-slate-50">
+
+            <td class="px-5 py-4">
+
+                ${item.date||"-"}
+
+            </td>
+
+            <td class="px-5 py-4">
+
+                ${item.time||"-"}
+
+            </td>
+
+            <td class="px-5 py-4">
+
+                ${statusMap[item.type]||item.type}
+
+            </td>
+
+            <td class="px-5 py-4">
+
+                ${item.location||"-"}
+
+            </td>
+
+            <td class="px-5 py-4">
+
+                ${item.activity||"-"}
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    this.renderMovementPagination();
+
+},
+
+/* =====================================================
+   PAGINATION
+===================================================== */
+
+renderMovementPagination(){
+
+    const container =
+    document.getElementById("movementPagination");
+
+    if(!container) return;
+
+    container.innerHTML="";
+
+    const totalPages =
+
+    Math.ceil(
+
+        this.movementList.length
+
+        /
+
+        this.rowsPerPage
+
+    );
+
+    if(totalPages<=1){
+
+        return;
+
+    }
+
+    for(
+
+        let i=1;
+
+        i<=totalPages;
+
+        i++
+
+    ){
+
+        const btn =
+        document.createElement("button");
+
+        btn.textContent=i;
+
+        btn.className=
+
+        i===this.currentPage
+
+        ?
+
+        "px-3 py-2 rounded-lg bg-blue-600 text-white"
+
+        :
+
+        "px-3 py-2 rounded-lg bg-slate-200 hover:bg-slate-300";
+
+        btn.onclick=()=>{
+
+            this.currentPage=i;
+
+            this.renderMovementTable();
+
+        };
+
+        container.appendChild(btn);
+
+    }
+
+},
+
+loadCurrentMovement(){
+
+    if(this.unsubscribeCurrentMovement){
+
+        this.unsubscribeCurrentMovement();
+
+    }
+
+    const movementQuery = query(
+
+        collection(db,"movements"),
+
+        orderBy("createdAt","desc")
+
+    );
+
+    this.unsubscribeCurrentMovement =
+    onSnapshot(movementQuery,(snapshot)=>{
+
+        const latestMovement = {};
+
+        snapshot.forEach(doc=>{
+
+            const data = doc.data();
+
+            if(!latestMovement[data.uid]){
+
+                latestMovement[data.uid] = data;
+
+            }
+
+        });
+
+        this.currentMovementList =
+        Object.values(latestMovement);
+
+        this.renderCurrentMovement();
+
+    });
+
+},
+
+renderCurrentMovement(){
+
+    const container =
+    document.getElementById(
+        "currentMovementList"
+    );
+
+    const total =
+    document.getElementById(
+        "currentMovementTotal"
+    );
+
+    if(!container) return;
+
+    container.innerHTML = "";
+
+    if(total){
+
+        total.textContent =
+        this.currentMovementList.length;
+
+    }
+
+    if(this.currentMovementList.length===0){
+
+        container.innerHTML=`
+
+        <div class="px-8 py-12 text-center text-slate-400">
+
+            Tiada pergerakan direkodkan.
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+    const statusColor={
+
+        "Dalam Pejabat":
+        "bg-green-500/20 text-green-300",
+
+        "Luar Bertugas":
+        "bg-yellow-500/20 text-yellow-300",
+
+        "Mesyuarat":
+        "bg-blue-500/20 text-blue-300",
+
+        "Cuti":
+        "bg-red-500/20 text-red-300"
+
+    };
+
+    this.currentMovementList.forEach(item=>{
+
+        container.innerHTML+=`
+
+        <div class="px-8 py-6 flex items-center justify-between">
+
+            <div class="flex gap-5 items-center">
+
+                <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center text-xl">
+
+                    👤
+
+                </div>
+
+                <div>
+
+                    <h3 class="font-bold text-xl">
+
+                        ${item.name||"-"}
+
+                    </h3>
+
+                    <p class="text-slate-400">
+
+                        ${item.location||"-"}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="text-right">
+
+                <span class="px-5 py-2 rounded-full font-semibold ${statusColor[item.type]||"bg-slate-700 text-white"}">
+
+                    ${item.type}
+
+                </span>
+
+                <div class="text-slate-500 text-sm mt-2">
+
+                    ${item.time||"-"}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+},
+
+async loadUserProfile(user){
+
+    if(!user) return;
+
+    try{
+
+        const userRef = doc(db,"users",user.uid);
+
+        const snap = await getDoc(userRef);
+
+        let role = "staff";
+        let name = user.displayName || user.email || "Pengguna";
+
+        if(snap.exists()){
+
+            const data = snap.data();
+
+            role = data.role || "staff";
+            name = data.nama || name;
+
+            this.currentUserRole = role;
+            this.currentUserName = name;
+            this.currentUserEmail = data.email || user.email;
+
+        }else{
+
+            this.currentUserRole = "staff";
+            this.currentUserName = name;
+            this.currentUserEmail = user.email;
+
+        }
+
+        const avatar =
+        name
+        .trim()
+        .split(" ")
+        .map(word => word.charAt(0))
+        .join("")
+        .substring(0,2)
+        .toUpperCase();
+
+        const userName =
+        document.getElementById("userName");
+
+        const userAvatar =
+        document.getElementById("userAvatar");
+
+        if(userName){
+
+            userName.textContent = name;
+
+        }
+
+        if(userAvatar){
+
+            userAvatar.textContent = avatar;
+
+        }
+
+    }catch(error){
+
+        console.error(error);
 
     }
 
@@ -626,9 +1078,7 @@ loadUserProfile(user){
         this.saveButton.disabled = true;
 
         this.saveButton.innerHTML = `
-            <span class="animate-pulse">
-                ⏳ Menyimpan...
-            </span>
+            ⏳  Menyimpan...
         `;
 
     }

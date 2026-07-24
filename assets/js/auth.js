@@ -382,7 +382,7 @@ onAuthStateChanged(
 ========================================================= */
 
 const logoutButton =
-document.getElementById("logoutButton");
+document.getElementById("logoutBtn");
 
 if(logoutButton){
 

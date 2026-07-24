@@ -18,7 +18,7 @@ content="E-GERAK PTIS KBB - Electronic Movement Management System">
 <link
 rel="icon"
 type="image/png"
-href="assets/images/logo.png">
+href="assets/images/logo-ptis.png">
 
 <!-- Google Fonts -->
 
@@ -125,6 +125,54 @@ background:#111827;
 
 }
 
+@media print{
+
+body{
+
+    background:white;
+
+}
+
+.sidebar,
+.header,
+#menuToggle{
+
+    display:none !important;
+
+}
+
+.main{
+
+    margin:0 !important;
+
+}
+
+.page{
+
+    padding:0 !important;
+
+}
+
+.content-section{
+
+    display:none !important;
+
+}
+
+#reportsSection{
+
+    display:block !important;
+
+}
+
+button{
+
+    display:none !important;
+
+}
+
+}
+
 
 </style>
 
@@ -166,7 +214,7 @@ background:#111827;
                 <div class="w-24 h-24 rounded-[30px] bg-gradient-to-br from-cyan-500 to-blue-700 shadow-2xl flex items-center justify-center">
 
                     <img
-                    src="assets/images/logo.png"
+                    src="assets/images/logo-ptis.png"
                     class="w-16 h-16">
 
                 </div>
@@ -865,151 +913,101 @@ Zon 05
 
 <section class="grid grid-cols-1 2xl:grid-cols-5 gap-8 mt-10">
 
-    <!-- ================= PERGERAKAN ================= -->
+    <!-- ================= PERGERAKAN SEMASA (REALTIME) ================= -->
 
-    <div class="2xl:col-span-3 rounded-[32px] bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 shadow-2xl overflow-hidden">
+<div class="2xl:col-span-3 rounded-[32px] bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 shadow-2xl overflow-hidden">
 
-        <div class="px-8 py-7 border-b border-slate-700 flex items-center justify-between">
+    <!-- HEADER -->
 
-            <div>
+    <div class="px-8 py-7 border-b border-slate-700 flex items-center justify-between">
 
-                <p class="uppercase tracking-[5px] text-cyan-400 text-sm font-semibold">
+        <div>
 
-                    TODAY MOVEMENT
+            <p class="uppercase tracking-[5px] text-cyan-400 text-sm font-semibold">
 
-                </p>
+                LIVE MOVEMENT
 
-                <h2 class="text-3xl font-black mt-2">
+            </p>
 
-                    🚗 Pergerakan Hari Ini
+            <h2 class="text-3xl font-black mt-2">
 
-                </h2>
+                📍 Pergerakan Semasa
 
-            </div>
+            </h2>
 
-            <div class="text-right">
+            <p class="text-slate-400 mt-2">
 
-                <div class="text-3xl font-black text-cyan-400">
+                Status terkini semua ahli PTIS secara realtime.
 
-                    04
-
-                </div>
-
-                <p class="text-slate-400">
-
-                    Tugasan Aktif
-
-                </p>
-
-            </div>
+            </p>
 
         </div>
 
-        <div class="divide-y divide-slate-800">
+        <div class="text-right">
 
-            <div class="px-8 py-6 flex items-center justify-between hover:bg-slate-800/60 transition">
+            <div
+            id="currentMovementTotal"
+            class="text-3xl font-black text-cyan-400">
 
-                <div class="flex gap-5 items-center">
-
-                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center text-2xl">
-
-                        👨‍💻
-
-                    </div>
-
-                    <div>
-
-                        <h3 class="font-bold text-xl">
-
-                            Muhamed Fitri
-
-                        </h3>
-
-                        <p class="text-slate-400">
-
-                            SK Kuala Ketil → PPD Kulim
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <span class="bg-green-500/20 text-green-300 px-5 py-2 rounded-full font-semibold">
-
-                    Sedang Bertugas
-
-                </span>
+                0
 
             </div>
 
-            <div class="px-8 py-6 flex items-center justify-between hover:bg-slate-800/60 transition">
+            <p class="text-slate-400">
 
-                <div class="flex gap-5 items-center">
+                Ahli Aktif
 
-                    <div class="w-14 h-14 rounded-2xl bg-yellow-500/20 flex items-center justify-center text-2xl">
+            </p>
 
-                        🚗
+        </div>
 
-                    </div>
+    </div>
 
-                    <div>
+    <!-- LIST -->
 
-                        <h3 class="font-bold text-xl">
+    <div
+    id="currentMovementList"
+    class="divide-y divide-slate-800">
 
-                            Ahmad
+        <!-- Loading -->
 
-                        </h3>
+        <div
+        class="px-8 py-12 text-center">
 
-                        <p class="text-slate-400">
+            <div
+            class="inline-flex
+            items-center
+            gap-3
+            text-slate-400">
 
-                            PKG Kulim → SK Junjong
+                <svg
+                class="animate-spin
+                h-6
+                w-6
+                text-cyan-400"
+                fill="none"
+                viewBox="0 0 24 24">
 
-                        </p>
+                    <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4">
+                    </circle>
 
-                    </div>
+                    <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
+                    </path>
 
-                </div>
+                </svg>
 
-                <span class="bg-yellow-500/20 text-yellow-300 px-5 py-2 rounded-full font-semibold">
+                <span>
 
-                    Dalam Perjalanan
-
-                </span>
-
-            </div>
-
-            <div class="px-8 py-6 flex items-center justify-between hover:bg-slate-800/60 transition">
-
-                <div class="flex gap-5 items-center">
-
-                    <div class="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center text-2xl">
-
-                        🏫
-
-                    </div>
-
-                    <div>
-
-                        <h3 class="font-bold text-xl">
-
-                            Aiman
-
-                        </h3>
-
-                        <p class="text-slate-400">
-
-                            SK Tawar → PKG
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <span class="bg-blue-500/20 text-blue-300 px-5 py-2 rounded-full font-semibold">
-
-                    Selesai
+                    Memuatkan data pergerakan...
 
                 </span>
 
@@ -1018,6 +1016,8 @@ Zon 05
         </div>
 
     </div>
+
+</div>
 
     <!-- ================= OFFICE ================= -->
 

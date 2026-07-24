@@ -1,193 +1,145 @@
-/* ==========================================
+/* ======================================================
    E-GERAK PTIS KBB V2
-   Navigation Manager
-========================================== */
+   NAVIGATION.JS
+====================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const menuDashboard = document.getElementById("menuDashboard");
-    const menuMovement = document.getElementById("menuMovement");
-    const menuHistory = document.getElementById("menuHistory");
-    const menuCalendar = document.getElementById("menuCalendar");
-    const menuProfile = document.getElementById("menuProfile");
-    const menuSetting = document.getElementById("menuSetting");
-    const menuLogout = document.getElementById("menuLogout");
+    /* ================= MENU ================= */
+
+    const menuButtons =
+    document.querySelectorAll(".menu button");
+
+    /* ================= SECTION ================= */
 
     const dashboardSection =
     document.getElementById("dashboardSection");
 
-    const historySection =
-    document.getElementById("historySection");
+    const staffManagementSection =
+    document.getElementById("staffManagementSection");
 
-    const calendarSection =
-    document.getElementById("calendarSection");
+    const reportsSection =
+    document.getElementById("reportsSection");
 
-    const profileSection =
-    document.getElementById("profileSection");
+    const settingsSection =
+    document.getElementById("settingsSection");
 
-    const settingSection =
-    document.getElementById("settingSection");
+    const sections = [
 
+        dashboardSection,
+        staffManagementSection,
+        reportsSection,
+        settingsSection
 
+    ];
 
-    /* ============================= */
+    /* ================= HIDE ALL ================= */
 
-    function setActive(menu){
+    function hideAllSections(){
 
-        document
-        .querySelectorAll(".menu-item")
-        .forEach(item=>{
+        sections.forEach(section=>{
 
-            item.classList.remove("menu-active");
+            if(section){
+
+                section.classList.add("hidden");
+
+            }
 
         });
 
-        menu.classList.add("menu-active");
+    }
+
+    /* ================= ACTIVE MENU ================= */
+
+    function setActive(button){
+
+        menuButtons.forEach(btn=>{
+
+            btn.classList.remove("active");
+
+        });
+
+        button.classList.add("active");
 
     }
 
+    /* ================= OPEN SECTION ================= */
 
+    function openSection(section,button){
 
-    /* ============================= */
-
-    function hideAll(){
-
-        dashboardSection.style.display="none";
-
-        historySection.style.display="none";
-
-        calendarSection.style.display="none";
-
-        profileSection.style.display="none";
-
-        settingSection.style.display="none";
-
-    }
-
-
-
-    /* ============================= */
-
-    function showDashboard(){
-
-        hideAll();
-
-        dashboardSection.style.display="block";
-
-    }
-
-    function showHistory(){
-
-        hideAll();
-
-        historySection.style.display="block";
-
-    }
-
-    function showCalendar(){
-
-        hideAll();
-
-        calendarSection.style.display="block";
-
-    }
-
-    function showProfile(){
-
-        hideAll();
-
-        profileSection.style.display="block";
-
-    }
-
-    function showSetting(){
-
-        hideAll();
-
-        settingSection.style.display="block";
-
-    }
-
-
-
-    /* ============================= */
-
-    showDashboard();
-
-
-
-    /* ============================= */
-
-    menuDashboard?.addEventListener("click",()=>{
-
-        setActive(menuDashboard);
-
-        showDashboard();
-
-    });
-
-
-
-    menuMovement?.addEventListener("click",()=>{
-
-        setActive(menuMovement);
+        /* Tutup semua modal */
 
         document
-        .getElementById("fabButton")
-        ?.click();
+        .getElementById("movementModal")
+        ?.classList.add("hidden");
+
+        document
+        .getElementById("movementModal")
+        ?.classList.remove("flex");
+
+        /* Sembunyikan semua section */
+
+        hideAllSections();
+
+        /* Paparkan section dipilih */
+
+        section?.classList.remove("hidden");
+
+        /* Active menu */
+
+        setActive(button);
+
+    }
+
+    /* ================= DASHBOARD ================= */
+
+    menuButtons[0]?.addEventListener("click",()=>{
+
+        openSection(
+            dashboardSection,
+            menuButtons[0]
+        );
 
     });
 
+    /* ================= STAFF ================= */
 
+    menuButtons[1]?.addEventListener("click",()=>{
 
-    menuHistory?.addEventListener("click",()=>{
-
-        setActive(menuHistory);
-
-        showHistory();
-
-    });
-
-
-
-    menuCalendar?.addEventListener("click",()=>{
-
-        setActive(menuCalendar);
-
-        showCalendar();
+        openSection(
+            staffManagementSection,
+            menuButtons[1]
+        );
 
     });
 
+    /* ================= REPORT ================= */
 
+menuButtons[2]?.addEventListener("click",()=>{
 
-    menuProfile?.addEventListener("click",()=>{
+    openSection(
+        reportsSection,
+        menuButtons[2]
+    );
 
-        setActive(menuProfile);
+});
 
-        showProfile();
+/* ================= SETTINGS ================= */
 
-    });
+menuButtons[3]?.addEventListener("click",()=>{
 
+    openSection(
+        settingsSection,
+        menuButtons[3]
+    );
 
+});
 
-    menuSetting?.addEventListener("click",()=>{
+    /* ================= DEFAULT ================= */
 
-        setActive(menuSetting);
-
-        showSetting();
-
-    });
-
-
-
-    menuLogout?.addEventListener("click",()=>{
-
-        if(confirm("Adakah anda pasti ingin log keluar?")){
-
-            window.location.href="index.html";
-
-        }
-
-    });
+    openSection(
+        dashboardSection,
+        menuButtons[0]
+    );
 
 });

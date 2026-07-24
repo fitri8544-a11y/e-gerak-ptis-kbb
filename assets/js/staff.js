@@ -26,6 +26,13 @@ import{
 let staffList = [];
 let unsubscribeStaff = null;
 let editingId = null;
+let loadingStaff = true;
+
+/* ================= PAGINATION ================= */
+
+let currentPage = 1;
+
+const rowsPerPage = 10;
 
 /* =========================================================
    ELEMENT
@@ -88,7 +95,7 @@ function showToast(message,type="success"){
         "staffToast";
 
         toast.className =
-        "fixed top-6 right-6 z-[9999] px-5 py-3 rounded-xl shadow-xl text-white font-semibold transition-all duration-300";
+        "fixed top-6 right-6 z-[9999] px-5 py-3 rounded-xl shadow-xl text-white font-semibold";
 
         document.body.appendChild(toast);
 
@@ -97,8 +104,6 @@ function showToast(message,type="success"){
     toast.classList.remove(
         "bg-green-600",
         "bg-red-600",
-        "opacity-0",
-        "translate-y-5"
     );
 
     toast.classList.add(
@@ -109,15 +114,6 @@ function showToast(message,type="success"){
 
     toast.textContent =
     message;
-
-    setTimeout(()=>{
-
-        toast.classList.add(
-            "opacity-0",
-            "translate-y-5"
-        );
-
-    },2500);
 
 }
 
@@ -305,6 +301,10 @@ async function saveStaff(){
 
 function loadStaff(){
 
+    loadingStaff = true;
+
+    renderLoading();
+
     if(unsubscribeStaff){
 
         unsubscribeStaff();
@@ -344,6 +344,8 @@ function loadStaff(){
                 });
 
             });
+
+            loadingStaff = false;
 
             renderStaff(
                 staffList
@@ -411,6 +413,84 @@ function updateKPI(data){
 }
 
 /* =========================================================
+   LOADING SKELETON
+========================================================= */
+
+function renderLoading(){
+
+    if(!table) return;
+
+    table.innerHTML = "";
+
+    for(let i=0;i<6;i++){
+
+        table.innerHTML += `
+
+        <tr class="border-b border-slate-200">
+
+            <td class="px-5 py-4">
+
+                <div class="h-4 w-40 rounded bg-slate-200"></div>
+
+            </td>
+
+            <td class="px-5 py-4">
+
+                <div class="h-4 w-52 rounded bg-slate-200"></div>
+
+            </td>
+
+            <td class="px-5 py-4">
+
+                <div class="h-4 w-28 rounded bg-slate-200"></div>
+
+            </td>
+
+            <td class="px-5 py-4">
+
+                <div class="h-6 w-20 rounded-full bg-slate-200"></div>
+
+            </td>
+
+            <td class="px-5 py-4">
+
+                <div class="flex justify-center gap-2">
+
+                    <div class="w-8 h-8 rounded-lg bg-slate-200"></div>
+
+                    <div class="w-8 h-8 rounded-lg bg-slate-200"></div>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    }
+
+}
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+function paginate(data){
+
+    const start =
+
+    (currentPage - 1) * rowsPerPage;
+
+    const end =
+
+    start + rowsPerPage;
+
+    return data.slice(start,end);
+
+}
+
+/* =========================================================
    RENDER TABLE
 ========================================================= */
 
@@ -419,6 +499,9 @@ function renderStaff(data){
     if(!table) return;
 
     table.innerHTML = "";
+
+    const pageData =
+    paginate(data);
 
     if(data.length===0){
 
@@ -442,11 +525,11 @@ function renderStaff(data){
 
     }
 
-    data.forEach(item=>{
+    pageData.forEach(item=>{
 
         table.innerHTML += `
 
-<tr class="border-b border-slate-200 hover:bg-slate-50 transition">
+<tr class="border-b border-slate-200">
 
     <td class="px-5 py-4 font-semibold">
 
@@ -487,7 +570,7 @@ function renderStaff(data){
     <td class="px-5 py-4 text-center">
 
         <button
-            class="editBtn text-blue-600 hover:bg-blue-100 rounded-lg p-2 transition"
+            class="editBtn text-blue-600 rounded-lg p-2"
             data-id="${item.id}">
 
             <i class="fa-solid fa-pen"></i>
@@ -495,7 +578,7 @@ function renderStaff(data){
         </button>
 
         <button
-            class="deleteBtn text-red-600 hover:bg-red-100 rounded-lg p-2 ml-2 transition"
+            class="deleteBtn text-red-600 rounded-lg p-2 ml-2"
             data-id="${item.id}">
 
             <i class="fa-solid fa-trash"></i>
@@ -509,6 +592,107 @@ function renderStaff(data){
 `;
 
     });
+
+    renderPagination(data.length);
+
+}
+
+/* =========================================================
+   PAGINATION UI
+========================================================= */
+
+function renderPagination(totalRows){
+
+    const container =
+    document.getElementById("staffPagination");
+
+    if(!container) return;
+
+    container.innerHTML = "";
+
+    const totalPages =
+    Math.ceil(totalRows / rowsPerPage);
+
+    if(totalPages <= 1){
+
+        return;
+
+    }
+
+    // Previous
+
+    const prev =
+    document.createElement("button");
+
+    prev.textContent = "←";
+
+    prev.className =
+    "px-3 py-2 rounded bg-slate-200 hover:bg-slate-300";
+
+    prev.disabled =
+    currentPage===1;
+
+    prev.onclick=()=>{
+
+        currentPage--;
+
+        renderStaff(staffList);
+
+    };
+
+    container.appendChild(prev);
+
+    // Number
+
+    for(let i=1;i<=totalPages;i++){
+
+        const btn =
+        document.createElement("button");
+
+        btn.textContent=i;
+
+        btn.className=
+
+        i===currentPage
+
+        ? "px-3 py-2 rounded bg-blue-600 text-white"
+
+        : "px-3 py-2 rounded bg-slate-200 hover:bg-slate-300";
+
+        btn.onclick=()=>{
+
+            currentPage=i;
+
+            renderStaff(staffList);
+
+        };
+
+        container.appendChild(btn);
+
+    }
+
+    // Next
+
+    const next =
+    document.createElement("button");
+
+    next.textContent="→";
+
+    next.className=
+    "px-3 py-2 rounded bg-slate-200 hover:bg-slate-300";
+
+    next.disabled=
+    currentPage===totalPages;
+
+    next.onclick=()=>{
+
+        currentPage++;
+
+        renderStaff(staffList);
+
+    };
+
+    container.appendChild(next);
 
 }
 

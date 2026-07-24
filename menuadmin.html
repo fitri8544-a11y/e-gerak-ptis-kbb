@@ -86,8 +86,6 @@ box-shadow:
 
 z-index:1000;
 
-transition:.3s;
-
 }
 
 /* LOGO */
@@ -170,39 +168,22 @@ flex:1;
 }
 
 .menu button{
-
-border:none;
-
-background:none;
-
-color:white;
-
-padding:15px 18px;
-
-border-radius:16px;
-
-font-size:15px;
-
-font-weight:600;
-
-display:flex;
-
-align-items:center;
-
-gap:15px;
-
-cursor:pointer;
-
-transition:.25s;
-
+    border:none;
+    background:none;
+    color:white;
+    padding:15px 18px;
+    border-radius:16px;
+    font-size:15px;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    cursor:pointer;
 }
 
 .menu button:hover{
-
-background:rgba(255,255,255,.12);
-
-transform:translateX(6px);
-
+    background:none;
+    transform:none;
 }
 
 .menu button.active{
@@ -242,8 +223,6 @@ color:white;
 font-weight:700;
 
 cursor:pointer;
-
-transition:.3s;
 
 }
 
@@ -392,25 +371,14 @@ gap:25px;
 }
 
 .kpi-card{
-
-background:white;
-
-border-radius:22px;
-
-padding:25px;
-
-box-shadow:
-
-0 10px 30px rgba(0,0,0,.05);
-
-transition:.3s;
-
+    background:white;
+    border-radius:22px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
 }
 
 .kpi-card:hover{
-
-transform:translateY(-6px);
-
+    transform:none;
 }
 
 .kpi-card h4{
@@ -479,6 +447,92 @@ background:#EF4444;
 
 }
 
+/* ======================================================
+   MOBILE RESPONSIVE V2
+====================================================== */
+
+.mobile-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(15,23,42,.65);
+
+    backdrop-filter:blur(3px);
+
+    z-index:900;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+}
+
+.mobile-overlay.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width:1024px){
+
+    .sidebar{
+
+        width:260px;
+
+        transform:translateX(-100%);
+
+        transition:.35s ease;
+
+    }
+
+    .sidebar.show{
+
+        transform:translateX(0);
+
+    }
+
+    .main{
+
+        margin-left:0;
+
+        width:100%;
+
+    }
+
+    .header{
+
+        padding-left:75px;
+
+    }
+
+    .page{
+
+        padding:20px;
+
+    }
+
+}
+
+/* ================= DESKTOP ================= */
+
+@media (min-width:1025px){
+
+    #menuToggle{
+
+        display:none;
+
+    }
+
+}
+
 </style>
 
 </head>
@@ -489,12 +543,14 @@ background:#EF4444;
 
 <aside class="sidebar">
 
+<div id="mobileOverlay" class="mobile-overlay"></div>
+
 <div class="logo-area">
 
 <div class="logo-circle">
 
 <img
-src="assets/img/logo.png"
+src="assets/images/logo-ptis.png"
 alt="PTIS">
 
 </div>
@@ -519,60 +575,38 @@ E-GERAK ADMIN V2
 
 <div class="menu">
 
-<button
-class="active">
+    <button class="active">
+        <i class="fa-solid fa-chart-line"></i>
+        Dashboard
+    </button>
 
-<i class="fa-solid fa-chart-line"></i>
+    <button>
+        <i class="fa-solid fa-users"></i>
+        Staff Management
+    </button>
 
-Dashboard
+    <button>
+        <i class="fa-solid fa-chart-column"></i>
+        Reports
+    </button>
 
-</button>
-
-<button>
-
-<i class="fa-solid fa-users"></i>
-
-Staff Management
-
-</button>
-
-<button>
-
-<i class="fa-solid fa-person-walking"></i>
-
-Movement
-
-</button>
-
-<button>
-
-<i class="fa-solid fa-chart-column"></i>
-
-Reports
-
-</button>
-
-<button>
-
-<i class="fa-solid fa-gear"></i>
-
-Settings
-
-</button>
+    <button>
+        <i class="fa-solid fa-gear"></i>
+        Settings
+    </button>
 
 </div>
 
 <div class="sidebar-footer">
 
-<button
-class="logout-btn"
-id="logoutBtn">
+    <button
+        id="logoutBtn"
+        class="logout-btn">
 
-<i class="fa-solid fa-right-from-bracket"></i>
+        <i class="fa-solid fa-right-from-bracket mr-2"></i>
+        Log Keluar
 
-Logout
-
-</button>
+    </button>
 
 </div>
 
@@ -631,6 +665,12 @@ src="https://ui-avatars.com/api/?name=PTIS">
 </header>
 
 <div class="page">
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section
+    id="dashboardSection"
+    class="content-section">
 
 <div class="kpi-grid">
 
@@ -730,7 +770,7 @@ Luar Pejabat
 
 <div class="bg-white rounded-2xl shadow-lg p-6">
 
-<div class="flex justify-between items-center">
+<div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-5">
 
 <div>
 
@@ -770,13 +810,125 @@ Kemaskini : -
 
 <button
 id="adminMovementBtn"
-class="px-6 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700 font-semibold">
+class="
+w-full
+lg:w-auto
+px-6
+py-3
+rounded-xl
+bg-blue-600
+text-white
+hover:bg-blue-700
+font-semibold">
 
 ➕ Kemaskini Pergerakan
 
 </button>
 
 </div>
+
+</div>
+
+</section>
+
+<!-- ================= MOVEMENT HISTORY ================= -->
+
+<section
+id="movementHistorySection"
+class="mt-8">
+
+<div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+    <!-- HEADER -->
+
+    <div class="flex items-center justify-between p-5 border-b">
+
+        <div>
+
+            <h2 class="text-xl font-bold text-slate-800">
+
+                📋 Sejarah Pergerakan
+
+            </h2>
+
+            <p class="text-sm text-slate-500">
+
+                Rekod pergerakan terkini pengguna.
+
+            </p>
+
+        </div>
+
+        <input
+        id="searchMovement"
+        type="text"
+        placeholder="Cari lokasi atau aktiviti..."
+
+        class="border rounded-xl px-4 py-2 w-72">
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="overflow-x-auto">
+
+        <table class="min-w-full">
+
+            <thead class="bg-slate-100">
+
+                <tr>
+
+                    <th class="px-5 py-4 text-left">
+                        Tarikh
+                    </th>
+
+                    <th class="px-5 py-4 text-left">
+                        Masa
+                    </th>
+
+                    <th class="px-5 py-4 text-left">
+                        Status
+                    </th>
+
+                    <th class="px-5 py-4 text-left">
+                        Lokasi
+                    </th>
+
+                    <th class="px-5 py-4 text-left">
+                        Aktiviti
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="movementTable">
+
+                <tr>
+
+                    <td
+                    colspan="5"
+                    class="text-center py-8 text-slate-400">
+
+                        Tiada rekod.
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- PAGINATION -->
+
+    <div
+    id="movementPagination"
+    class="flex justify-center gap-2 p-4 border-t">
+
+    </div>
 
 </div>
 
@@ -837,7 +989,7 @@ Realtime
 
 </thead>
 
-<tbody id="movementTable">
+<tbody id="currentMovementTable">
 
 <tr>
 
@@ -860,9 +1012,13 @@ Tiada data.
 
 </section>
 
+</section>
+
 <!-- ================= STAFF MANAGEMENT ================= -->
 
-<section class="mt-12">
+<section
+id="staffManagementSection"
+class="content-section hidden mt-12">
 
 <div class="flex flex-wrap items-center justify-between gap-4 mb-5">
 
@@ -972,165 +1128,507 @@ Belum ada data.
 
 </div>
 
+<!-- PAGINATION -->
+
+<div
+id="staffPagination"
+class="flex items-center justify-center gap-2 px-6 py-4 border-t bg-slate-50">
+
+</div>
+
 </div>
 
 </section>
 
-<!-- ================= REPORT SECTION ================= -->
+<!-- ================= REPORT CENTER ================= -->
 
-<section class="mt-12">
+<section
+id="reportsSection"
+class="content-section hidden mt-12">
 
-<h2 class="text-2xl font-bold text-slate-800 mb-5">
+    <!-- HEADER -->
 
-📊 Laporan
+    <div class="mb-8">
 
-</h2>
+        <div class="inline-flex
+        items-center
+        gap-2
+        px-4
+        py-2
+        rounded-full
+        bg-blue-100
+        text-blue-700
+        font-semibold">
 
-<div class="grid lg:grid-cols-3 gap-6">
+            📊 REPORT CENTER
 
-<div class="bg-white rounded-2xl shadow-lg p-6">
+        </div>
 
-<h3 class="font-bold text-slate-700">
+        <h2 class="text-4xl font-black text-slate-900 mt-4">
 
-Pergerakan Hari Ini
+            Laporan Pergerakan PTIS
 
-</h3>
+        </h2>
 
-<p
-id="todayMovement"
-class="text-5xl font-black mt-4 text-blue-600">
+        <p class="text-slate-500 mt-2">
 
-0
+            Statistik keseluruhan pergerakan ahli PTIS Kulim Bandar Baharu.
 
-</p>
+        </p>
 
-</div>
+    </div>
 
-<div class="bg-white rounded-2xl shadow-lg p-6">
+    <!-- KPI -->
 
-<h3 class="font-bold text-slate-700">
+    <div class="grid
+    grid-cols-1
+    md:grid-cols-2
+    xl:grid-cols-4
+    gap-6">
 
-Dalam Pejabat
+        <div class="bg-white rounded-3xl shadow-lg p-7">
 
-</h3>
+            <div class="text-4xl mb-4">📅</div>
 
-<p
-id="todayOffice"
-class="text-5xl font-black mt-4 text-green-600">
+            <p class="text-slate-500">
 
-0
+                Hari Ini
 
-</p>
+            </p>
 
-</div>
+            <h2
+            id="todayMovement"
+            class="text-5xl font-black text-blue-600 mt-2">
 
-<div class="bg-white rounded-2xl shadow-lg p-6">
+                0
 
-<h3 class="font-bold text-slate-700">
+            </h2>
 
-Luar Pejabat
+        </div>
 
-</h3>
+        <div class="bg-white rounded-3xl shadow-lg p-7">
 
-<p
-id="todayOutside"
-class="text-5xl font-black mt-4 text-red-600">
+            <div class="text-4xl mb-4">🟢</div>
 
-0
+            <p class="text-slate-500">
 
-</p>
+                Dalam Pejabat
 
-</div>
+            </p>
 
-</div>
+            <h2
+            id="todayOffice"
+            class="text-5xl font-black text-green-600 mt-2">
+
+                0
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-lg p-7">
+
+            <div class="text-4xl mb-4">🚗</div>
+
+            <p class="text-slate-500">
+
+                Luar Pejabat
+
+            </p>
+
+            <h2
+            id="todayOutside"
+            class="text-5xl font-black text-red-600 mt-2">
+
+                0
+
+            </h2>
+
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-lg p-7">
+
+            <div class="text-4xl mb-4">👥</div>
+
+            <p class="text-slate-500">
+
+                Jumlah Rekod
+
+            </p>
+
+            <h2
+            id="totalMovement"
+            class="text-5xl font-black text-indigo-600 mt-2">
+
+                0
+
+            </h2>
+
+        </div>
+
+    </div>
+
+    <!-- STATUS -->
+
+    <div class="grid
+    lg:grid-cols-2
+    gap-6
+    mt-8">
+
+        <div class="bg-white rounded-3xl shadow-lg p-7">
+
+            <h3 class="text-xl font-bold mb-6">
+
+                📍 Ringkasan Status
+
+            </h3>
+
+            <div class="space-y-4">
+
+                <div class="flex justify-between">
+
+                    <span>🟢 Dalam Pejabat</span>
+
+                    <b id="reportOffice">0</b>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>🚗 Luar Pejabat</span>
+
+                    <b id="reportOutside">0</b>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>👥 Mesyuarat</span>
+
+                    <b id="reportMeeting">0</b>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>🎓 Kursus</span>
+
+                    <b id="reportCourse">0</b>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>🌴 Cuti</span>
+
+                    <b id="reportLeave">0</b>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>📄 HRMIS</span>
+
+                    <b id="reportHrmis">0</b>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-lg p-7">
+
+            <h3 class="text-xl font-bold mb-6">
+
+                📄 Export Laporan
+
+            </h3>
+
+            <div class="grid gap-4">
+
+                <button
+                id="exportPdfBtn"
+                class="bg-red-600 text-white rounded-xl py-4 font-bold">
+
+                    📄 Export PDF
+
+                </button>
+
+                <button
+                id="exportExcelBtn"
+                class="bg-green-600 text-white rounded-xl py-4 font-bold">
+
+                    📊 Export Excel
+
+                </button>
+
+                <button
+                id="printReportBtn"
+                class="bg-blue-600 text-white rounded-xl py-4 font-bold">
+
+                    🖨 Print Report
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 <!-- ================= SETTINGS ================= -->
 
-<section class="mt-12 mb-20">
+<section
+id="settingsSection"
+class="content-section hidden mt-12">
 
-<h2 class="text-2xl font-bold text-slate-800 mb-5">
+    <!-- HEADER -->
 
-⚙️ Tetapan
+    <div class="mb-10">
 
-</h2>
+        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-slate-100 text-slate-700 font-bold">
 
-<div class="bg-white rounded-2xl shadow-lg p-8">
+            ⚙ SYSTEM SETTINGS
 
-<div class="grid md:grid-cols-2 gap-6">
+        </div>
 
-<button
-class="border rounded-xl p-5 hover:bg-slate-50 text-left">
+        <h2 class="text-4xl font-black text-slate-900 mt-5">
 
-<h3 class="font-bold">
+            Tetapan Sistem
 
-Import Staff
+        </h2>
 
-</h3>
+        <p class="text-slate-500 mt-2">
 
-<p class="text-slate-500 mt-2">
+            Pengurusan konfigurasi E-GERAK PTIS KBB Version 2.
 
-Import data ahli daripada Excel.
+        </p>
 
-</p>
+    </div>
 
-</button>
+    <!-- GRID -->
 
-<button
-class="border rounded-xl p-5 hover:bg-slate-50 text-left">
+    <div class="grid lg:grid-cols-2 gap-8">
 
-<h3 class="font-bold">
+        <!-- PROFILE -->
 
-Export Data
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-8">
 
-</h3>
+            <h3 class="text-2xl font-black mb-8">
 
-<p class="text-slate-500 mt-2">
+                👤 Akaun Saya
 
-Muat turun data Firestore ke Excel.
+            </h3>
 
-</p>
+            <div class="space-y-6">
 
-</button>
+                <div>
 
-<button
-class="border rounded-xl p-5 hover:bg-slate-50 text-left">
+                    <p class="text-slate-400 text-sm">
 
-<h3 class="font-bold">
+                        Nama
 
-Backup Database
+                    </p>
 
-</h3>
+                    <h4
+                    id="settingName"
+                    class="font-bold text-xl">
 
-<p class="text-slate-500 mt-2">
+                        -
 
-Simpan salinan data sistem.
+                    </h4>
 
-</p>
+                </div>
 
-</button>
+                <div>
 
-<button
-class="border rounded-xl p-5 hover:bg-slate-50 text-left">
+                    <p class="text-slate-400 text-sm">
 
-<h3 class="font-bold">
+                        Emel
 
-System Information
+                    </p>
 
-</h3>
+                    <h4
+                    id="settingEmail"
+                    class="font-semibold">
 
-<p class="text-slate-500 mt-2">
+                        -
 
-E-GERAK PTIS KBB Version 2.
+                    </h4>
 
-</p>
+                </div>
 
-</button>
+                <div>
 
-</div>
+                    <p class="text-slate-400 text-sm">
 
-</div>
+                        Peranan
+
+                    </p>
+
+                    <span
+                    id="settingRole"
+                    class="inline-block px-4 py-2 rounded-xl bg-blue-100 text-blue-700 font-bold">
+
+                        -
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SYSTEM -->
+
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-8">
+
+            <h3 class="text-2xl font-black mb-8">
+
+                ⚙ Tetapan Sistem
+
+            </h3>
+
+            <div class="space-y-6">
+
+                <label class="flex justify-between items-center">
+
+                    <span>
+
+                        Papar Notifikasi
+
+                    </span>
+
+                    <input
+                    id="notificationToggle"
+                    type="checkbox"
+                    checked>
+
+                </label>
+
+                <label class="flex justify-between items-center">
+
+                    <span>
+
+                        Bunyi Notifikasi
+
+                    </span>
+
+                    <input
+                    id="soundToggle"
+                    type="checkbox"
+                    checked>
+
+                </label>
+
+                <label class="flex justify-between items-center">
+
+                    <span>
+
+                        Auto Refresh
+
+                    </span>
+
+                    <input
+                    id="refreshToggle"
+                    type="checkbox"
+                    checked>
+
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- SYSTEM INFO -->
+
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-8">
+
+            <h3 class="text-2xl font-black mb-8">
+
+                ℹ Maklumat Sistem
+
+            </h3>
+
+            <div class="space-y-4">
+
+                <div class="flex justify-between">
+
+                    <span>Versi</span>
+
+                    <b>2.0</b>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>Database</span>
+
+                    <b>Cloud Firestore</b>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>Authentication</span>
+
+                    <b>Firebase Auth</b>
+
+                </div>
+
+                <div class="flex justify-between">
+
+                    <span>Status</span>
+
+                    <span class="text-green-600 font-bold">
+
+                        ● ONLINE
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- DANGER -->
+
+        <div class="bg-white rounded-3xl shadow-xl border border-red-200 p-8">
+
+            <h3 class="text-2xl font-black text-red-600 mb-8">
+
+                🚨 Zon Pentadbir
+
+            </h3>
+
+            <div class="space-y-4">
+
+                <button
+                id="clearMovementBtn"
+                class="w-full rounded-2xl py-4 bg-red-600 text-white font-bold">
+
+                    🗑 Padam Semua Rekod Pergerakan
+
+                </button>
+
+                <button
+                id="resetStatisticBtn"
+                class="w-full rounded-2xl py-4 bg-orange-500 text-white font-bold">
+
+                    🔄 Reset Statistik
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -1451,30 +1949,23 @@ Berjaya
      JAVASCRIPT
 ======================================================= -->
 
-<script type="module"
-src="assets/js/firebase.js"></script>
+<script type="module" src="assets/js/firebase.js"></script>
 
-<script type="module"
-src="assets/js/auth.js"></script>
+<script type="module" src="assets/js/auth.js"></script>
 
-<script type="module"
-src="assets/js/dashboard.js"></script>
+<script type="module" src="assets/js/dashboard.js"></script>
 
-<script type="module"
-src="assets/js/staff.js"></script>
-
-<script type="module"
-src="assets/js/movement.js"></script>
-
-<script type="module"
-src="assets/js/reports.js"></script>
-
-<script type="module"
-src="assets/js/settings.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script type="module" src="assets/js/navigation.js"></script>
 
 <script type="module" src="assets/js/staff.js"></script>
+
+<script type="module" src="assets/js/movement.js"></script>
+
+<script type="module" src="assets/js/reports.js"></script>
+
+<script type="module" src="assets/js/settings.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
 <script>
 
@@ -1484,15 +1975,54 @@ document.getElementById("menuToggle");
 const sidebar =
 document.querySelector(".sidebar");
 
-if(menuToggle){
+const overlay =
+document.getElementById("mobileOverlay");
 
-menuToggle.onclick=()=>{
+function openSidebar(){
 
-sidebar.classList.toggle("-translate-x-full");
+    sidebar.classList.add("show");
+
+    overlay.classList.add("show");
 
 }
 
+function closeSidebar(){
+
+    sidebar.classList.remove("show");
+
+    overlay.classList.remove("show");
+
 }
+
+menuToggle?.addEventListener("click",()=>{
+
+    if(sidebar.classList.contains("show")){
+
+        closeSidebar();
+
+    }else{
+
+        openSidebar();
+
+    }
+
+});
+
+overlay?.addEventListener("click",()=>{
+
+    closeSidebar();
+
+});
+
+window.addEventListener("resize",()=>{
+
+    if(window.innerWidth>1024){
+
+        closeSidebar();
+
+    }
+
+});
 
 </script>
 
@@ -1928,22 +2458,60 @@ gap-6">
 
     </div>
 
-    <!-- FOOTER -->
+    <!-- ====================================================== -->
+<!-- FOOTER -->
+<!-- ====================================================== -->
 
-    <div
-class="px-6
-lg:px-8
-py-5
+<div
+class="sticky
+bottom-0
+bg-white
 border-t
-border-white/10
+border-slate-200
+px-8
+py-5
 flex
-justify-end
-gap-4
-shrink-0">
+items-center
+justify-between">
+
+<div>
+
+<h3
+class="font-bold
+text-slate-800">
+
+E-GERAK PTIS KBB V2
+
+</h3>
+
+<p
+class="text-sm
+text-slate-500">
+
+Pastikan semua maklumat telah disemak sebelum disimpan.
+
+</p>
+
+</div>
+
+<div
+class="flex
+items-center
+gap-4">
 
       <button
       id="cancelMovement"
-      class="px-6 py-3 rounded-2xl border border-gray-500 text-gray-300">
+      class="px-6
+py-3
+rounded-2xl
+border
+border-slate-300
+bg-white
+text-slate-700
+font-semibold
+hover:bg-slate-100
+transition
+duration-300">
 
         Batal
 
@@ -1951,7 +2519,19 @@ shrink-0">
 
       <button
       id="saveMovement"
-      class="px-8 py-3 rounded-2xl bg-yellow-500 text-black font-black">
+      class="px-8
+py-3
+rounded-2xl
+bg-gradient-to-r
+from-blue-600
+to-cyan-500
+text-white
+font-bold
+shadow-lg
+hover:shadow-xl
+hover:scale-105
+transition-all
+duration-300">
 
         💾 Simpan Pergerakan
 
@@ -1967,19 +2547,79 @@ shrink-0">
 <!-- END BODY -->
 <!-- ====================================================== -->
 
+<!-- ====================================================== -->
+<!-- PREMIUM LOADING -->
+<!-- ====================================================== -->
+
 <div
 id="loadingOverlay"
-class="hidden fixed inset-0 z-[9999] bg-black/60 backdrop-blur-sm items-center justify-center">
+class="fixed
+inset-0
+hidden
+items-center
+justify-center
+bg-slate-900/60
+backdrop-blur-md
+z-[9999]">
 
-    <div class="glass rounded-3xl p-8 text-center">
+    <div
+    class="bg-white
+    rounded-[32px]
+    shadow-2xl
+    px-12
+    py-10
+    text-center
+    w-[340px]">
 
-        <div class="w-16 h-16 mx-auto border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+        <div
+        class="mx-auto
+        w-20
+        h-20
+        rounded-full
+        border-[6px]
+        border-blue-100
+        border-t-blue-600
+        animate-spin">
 
-        <p class="mt-5 text-white font-semibold">
+        </div>
 
-            Menyimpan Pergerakan...
+        <h3
+        class="mt-8
+        text-xl
+        font-bold
+        text-slate-800">
+
+            Menyimpan Pergerakan
+
+        </h3>
+
+        <p
+        class="mt-2
+        text-slate-500">
+
+            Sila tunggu sebentar...
 
         </p>
+
+        <div
+        class="mt-8
+        h-2
+        rounded-full
+        bg-slate-200
+        overflow-hidden">
+
+            <div
+            class="h-full
+            w-full
+            bg-gradient-to-r
+            from-blue-600
+            via-cyan-500
+            to-blue-600
+            animate-pulse">
+
+            </div>
+
+        </div>
 
     </div>
 
