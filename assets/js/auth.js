@@ -230,20 +230,27 @@ async function loginWithGoogle(){
         }
 
         /* ===============================
-           REDIRECT
-        ============================== */
+   REDIRECT
+============================== */
 
-        if(profile.role === "admin"){
+const role =
+(profile.role || "")
+.toLowerCase()
+.trim();
 
-            window.location.href =
-            "menuadmin.html";
+if(role === "admin"){
 
-        }else{
+    window.location.replace(
+        "menuadmin.html"
+    );
 
-            window.location.href =
-            "menupengguna.html";
+}else{
 
-        }
+    window.location.replace(
+        "menupengguna.html"
+    );
+
+}
 
     }
 

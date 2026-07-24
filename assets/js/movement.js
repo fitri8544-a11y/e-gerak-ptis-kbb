@@ -91,6 +91,14 @@ const MovementManager = {
             ()=>this.openModal()
         );
 
+        const adminMovementBtn =
+        document.getElementById("adminMovementBtn");
+
+        adminMovementBtn?.addEventListener(
+            "click",
+            ()=>this.openModal()
+        );
+
         this.closeButton?.addEventListener(
             "click",
             ()=>this.closeModal()
