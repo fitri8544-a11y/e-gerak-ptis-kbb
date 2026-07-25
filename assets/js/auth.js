@@ -16,6 +16,7 @@ import {
 import {
 
     signInWithPopup,
+    signInWithEmailAndPassword,
     onAuthStateChanged,
     signOut
 
@@ -45,6 +46,15 @@ document.getElementById("loginText");
 
 const loadingSpinner =
 document.getElementById("loadingSpinner");
+
+const emailLogin =
+document.getElementById("emailLogin");
+
+const passwordLogin =
+document.getElementById("passwordLogin");
+
+const emailLoginBtn =
+document.getElementById("emailLoginBtn");
 
 /* =========================================================
    USER HEADER
@@ -114,6 +124,137 @@ function stopLoading(){
 
 }
 
+/* =========================================================
+   SAVE USER PROFILE
+========================================================= */
+
+async function saveUserProfile(user){
+
+    let profile =
+    await getUserProfile(user.uid);
+
+    if(
+
+        !profile ||
+
+        !profile.nama ||
+
+        !profile.email
+
+    ){
+
+        await setDoc(
+
+            doc(
+                db,
+                "users",
+                user.uid
+            ),
+
+            {
+
+                uid:user.uid,
+
+                nama:user.displayName,
+
+                email:user.email,
+
+                photoURL:user.photoURL,
+
+                role:
+                profile?.role || "pengguna",
+
+                zone:
+                profile?.zone || "",
+
+                sekolah:
+                profile?.sekolah || "",
+
+                online:true,
+
+                status:"online",
+
+                createdAt:
+                profile?.createdAt || serverTimestamp(),
+
+                lastLogin:
+                serverTimestamp()
+
+            },
+
+            {
+
+                merge:true
+
+            }
+
+        );
+
+    }else{
+
+        await setDoc(
+
+            doc(
+                db,
+                "users",
+                user.uid
+            ),
+
+            {
+
+                nama:user.displayName,
+
+                email:user.email,
+
+                photoURL:user.photoURL,
+
+                online:true,
+
+                status:"online",
+
+                lastLogin:
+                serverTimestamp()
+
+            },
+
+            {
+
+                merge:true
+
+            }
+
+        );
+
+    }
+
+    profile =
+    await getUserProfile(
+        user.uid
+    );
+
+    const role =
+    (profile.role || "")
+    .toLowerCase()
+    .trim();
+
+    stopLoading();
+
+    if(role==="admin"){
+
+        window.location.replace(
+            "menuadmin.html"
+        );
+
+    }else{
+
+        window.location.replace(
+            "menupengguna.html"
+        );
+
+    }
+
+}
+
 
 /* =========================================================
    GOOGLE LOGIN
@@ -123,13 +264,7 @@ async function loginWithGoogle(){
 
     try{
 
-        if(loginError){
-
-            loginError.classList.add(
-                "hidden"
-            );
-
-        }
+        loginError?.classList.add("hidden");
 
         startLoading();
 
@@ -145,10 +280,6 @@ async function loginWithGoogle(){
         const user =
         result.user;
 
-        /* ===============================
-           HANYA AKAUN KPM
-        ============================== */
-
         if(
 
             !user.email.endsWith(
@@ -162,113 +293,84 @@ async function loginWithGoogle(){
             stopLoading();
 
             showError(
-
                 "Hanya akaun @moe.gov.my dibenarkan."
-
             );
 
             return;
 
         }
 
-        /* ===============================
-           UPDATE LOGIN
-        ============================== */
-
-        await updateLastLogin(
-            user.uid
-        );
-
-        let profile =
-        await getUserProfile(
-            user.uid
-        );
-
-        /* ===============================
-           USER BARU
-        ============================== */
-
-        if(!profile){
-
-            await setDoc(
-
-                doc(
-                    db,
-                    "users",
-                    user.uid
-                ),
-
-                {
-
-                    nama:
-                    user.displayName,
-
-                    email:
-                    user.email,
-
-                    photoURL:
-                    user.photoURL,
-
-                    role:
-                    "pengguna",
-
-                    status:
-                    "online",
-
-                    createdAt:
-                    serverTimestamp()
-
-                }
-
-            );
-
-            profile =
-            await getUserProfile(
-                user.uid
-            );
-
-        }
-
-        /* ===============================
-   REDIRECT
-============================== */
-
-const role =
-(profile.role || "")
-.toLowerCase()
-.trim();
-
-if(role === "admin"){
-
-    window.location.replace(
-        "menuadmin.html"
-    );
-
-}else{
-
-    window.location.replace(
-        "menupengguna.html"
-    );
-
-}
+        await saveUserProfile(user);
 
     }
 
     catch(error){
 
-    console.error("LOGIN ERROR:", error);
+        console.error(error);
 
-    console.log("ERROR CODE:", error.code);
+        stopLoading();
 
-    console.log("ERROR MESSAGE:", error.message);
+        showError(error.message);
 
-    alert(error.code);
-
-    stopLoading();
-
-    showError(error.message);
+    }
 
 }
+
+
+/* =========================================================
+   EMAIL LOGIN
+========================================================= */
+
+async function loginWithEmail(){
+
+    try{
+
+        loginError?.classList.add("hidden");
+
+        const email =
+        emailLogin.value.trim();
+
+        const password =
+        passwordLogin.value;
+
+        if(!email || !password){
+
+            showError(
+                "Sila masukkan email dan password."
+            );
+
+            return;
+
+        }
+
+        startLoading();
+
+        const result =
+        await signInWithEmailAndPassword(
+
+            auth,
+
+            email,
+
+            password
+
+        );
+
+        await saveUserProfile(
+            result.user
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        stopLoading();
+
+        showError(error.message);
+
+    }
 
 }
 
@@ -284,6 +386,18 @@ if(googleLoginBtn){
         "click",
 
         loginWithGoogle
+
+    );
+
+}
+
+if(emailLoginBtn){
+
+    emailLoginBtn.addEventListener(
+
+        "click",
+
+        loginWithEmail
 
     );
 
