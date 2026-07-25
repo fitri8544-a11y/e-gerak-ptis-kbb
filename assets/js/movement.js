@@ -741,15 +741,21 @@ renderMovementTable(){
 
             <td class="px-5 py-4">
 
-                ${item.time||"-"}
+    ${item.time || "-"}
 
-            </td>
+</td>
 
-            <td class="px-5 py-4">
+<td class="px-5 py-4 font-semibold">
 
-                ${statusMap[item.type]||item.type}
+    ${item.name || item.nama || this.currentUserName || "-"}
 
-            </td>
+</td>
+
+<td class="px-5 py-4">
+
+    ${statusMap[item.type] || item.type}
+
+</td>
 
             <td class="px-5 py-4">
 
@@ -781,8 +787,6 @@ renderMovementPagination(){
 
     const container =
     document.getElementById("movementPagination");
-
-    if(!container) return;
 
     container.innerHTML="";
 
@@ -870,6 +874,8 @@ loadCurrentMovement(){
 
             const data = doc.data();
 
+            console.log("Movement :", data);
+
             if(!latestMovement[data.uid]){
 
                 latestMovement[data.uid] = data;
@@ -881,6 +887,8 @@ loadCurrentMovement(){
         this.currentMovementList =
         Object.values(latestMovement);
 
+        console.log(this.currentMovementList);
+
         this.renderCurrentMovement();
 
     });
@@ -889,19 +897,19 @@ loadCurrentMovement(){
 
 renderCurrentMovement(){
 
-    const container =
-    document.getElementById(
-        "currentMovementList"
-    );
+    const tbody =
+    document.getElementById("currentMovementTable");
+
+    if(!tbody) return;
+
+    tbody.innerHTML = "";
 
     const total =
     document.getElementById(
         "currentMovementTotal"
     );
 
-    if(!container) return;
-
-    container.innerHTML = "";
+    tbody.innerHTML = "";
 
     if(total){
 
@@ -912,13 +920,18 @@ renderCurrentMovement(){
 
     if(this.currentMovementList.length===0){
 
-        container.innerHTML=`
+        tbody.innerHTML = `
 
-        <div class="px-8 py-12 text-center text-slate-400">
+        <tr>
 
-            Tiada pergerakan direkodkan.
+            <td colspan="5"
+                class="text-center py-10 text-slate-400">
 
-        </div>
+                Tiada data.
+
+            </td>
+
+        </tr>
 
         `;
 
@@ -942,59 +955,49 @@ renderCurrentMovement(){
 
     };
 
+    const statusMap = {
+
+        office: "🟢 Di Pejabat",
+
+        outsideSchool: "🚗 Luar Bertugas",
+
+        meeting: "👥 Mesyuarat",
+
+        course: "🎓 Kursus",
+
+        leave: "🌴 Cuti",
+
+        hrmis: "📄 HRMIS"
+
+    };
+
     this.currentMovementList.forEach(item=>{
 
-        container.innerHTML+=`
+    tbody.innerHTML += `
 
-        <div class="px-8 py-6 flex items-center justify-between">
+    <tr class="border-b hover:bg-slate-50">
 
-            <div class="flex gap-5 items-center">
+    <td class="px-6 py-4 font-semibold">
+        ${item.name || "-"}
+    </td>
 
-                <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center text-xl">
+    <td class="px-6 py-4">
+        ${statusMap[item.type] || item.type}
+    </td>
 
-                    👤
+    <td class="px-6 py-4">
+        ${item.location || "-"}
+    </td>
 
-                </div>
+    <td class="px-6 py-4">
+        ${item.time || "-"}
+    </td>
 
-                <div>
+</tr>
 
-                    <h3 class="font-bold text-xl">
+    `;
 
-                        ${item.name||"-"}
-
-                    </h3>
-
-                    <p class="text-slate-400">
-
-                        ${item.location||"-"}
-
-                    </p>
-
-                </div>
-
-            </div>
-
-            <div class="text-right">
-
-                <span class="px-5 py-2 rounded-full font-semibold ${statusColor[item.type]||"bg-slate-700 text-white"}">
-
-                    ${item.type}
-
-                </span>
-
-                <div class="text-slate-500 text-sm mt-2">
-
-                    ${item.time||"-"}
-
-                </div>
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
+});
 
 },
 
