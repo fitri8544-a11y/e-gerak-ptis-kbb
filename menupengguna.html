@@ -1104,296 +1104,130 @@ class="fab">
 </button>
 
 <!-- ====================================================== -->
-<!-- PREMIUM MOVEMENT MODAL -->
-<!-- ====================================================== -->
-
-<div
-id="movementModal"
-class="fixed
-inset-0
-bg-black/70
-backdrop-blur-sm
-hidden
-items-center
-justify-center
-z-50
-p-4">
-
-    <div
-    class="glass
-    gold-border
-    rounded-3xl
-    w-full
-    max-w-3xl
-    max-h-[90vh]
-    flex
-    flex-col">
-
-    <!-- HEADER -->
-
-    <div
-    class="px-8 py-6 border-b border-white/10 flex items-center justify-between">
-
-      <div>
-
-        <h2 class="text-3xl font-black text-white">
-
-          📍 Kemaskini Pergerakan
-
-        </h2>
-
-        <p class="text-gray-400 mt-2">
-
-          Kemaskini status pergerakan semasa anda.
-
-        </p>
-
-      </div>
-
-      <button
-      id="closeModal"
-      class="w-14 h-14 rounded-xl bg-red-500/20 hover:bg-red-500 text-red-300 text-xl">
-
-        ✕
-
-      </button>
-
-    </div>
-
-    <!-- BODY -->
-
-    <div
-    class="flex-1
-    overflow-y-auto
-    p-6
-    lg:p-8
-    space-y-6">
-
-      <!-- STATUS -->
-
-      <div>
-
-        <label
-        class="block text-yellow-400 font-bold mb-3">
-
-          Status Pergerakan
-
-        </label>
-
-       <select
-id="movementType"
-class="w-full rounded-2xl bg-black/40 border border-white/10 p-4 text-white">
-
-<option value="">-- Pilih Status --</option>
-
-<option value="office">🟢 Di Pejabat</option>
-
-<option value="outsideSchool">
-🚗 Luar Pejabat / Lawatan Sekolah
-</option>
-
-<option value="meeting">
-👥 Mesyuarat
-</option>
-
-<option value="course">
-🎓 Kursus / Bengkel
-</option>
-
-<option value="leave">
-🌴 Cuti
-</option>
-
-<option value="hrmis">
-📄 HRMIS (4 Jam)
-</option>
-
-</select>
-
-      </div>
-
-      <!-- DYNAMIC FORM -->
-
-      <div id="dynamicForm" class="space-y-5">
-
-        <div id="locationGroup">
-
-          <label class="block text-white mb-2">
-
-            Lokasi
-
-          </label>
-
-          <input
-id="movementLocation"
-type="text"
-class="w-full rounded-2xl bg-black/40 border border-white/10 p-4 text-white"
-placeholder="Masukkan lokasi">
-
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-
-          <div>
-
-            <label class="block text-white mb-2">
-
-              Tarikh
-
-            </label>
-
-            <input
-id="movementDate"
-type="date"
-class="w-full rounded-2xl bg-black/40 border border-white/10 p-4 text-white">
-
-          </div>
-
-          <div>
-
-            <label class="block text-white mb-2">
-
-              Masa
-
-            </label>
-
-            <input
-id="movementTime"
-type="time"
-class="w-full rounded-2xl bg-black/40 border border-white/10 p-4 text-white">
-
-          </div>
-
-        </div>
-
-        <div id="activityGroup">
-
-          <label
-id="activityLabel"
-class="block text-white mb-2">
-
-    Aktiviti
-
-</label>
-
-<input
-id="movementActivity"
-type="text"
-class="w-full rounded-2xl bg-black/40 border border-white/10 p-4 text-white"
-placeholder="Nyatakan aktiviti">
-
-        </div>
-
-        <div id="noteGroup">
-
-          <label class="block text-white mb-2">
-
-            Catatan
-
-          </label>
-
-          <textarea
-id="movementNote"
-rows="4"
-class="w-full rounded-2xl bg-black/40 border border-white/10 p-4 text-white"
-placeholder="Catatan tambahan"></textarea>
-
-        </div>
-
-      </div>
-
-      <!-- Dynamic Content -->
-
-<div
-id="dynamicContent"
-class="space-y-5">
-
-</div>
-
-      <!-- GOOGLE CALENDAR -->
-
-      <div
-      class="glass rounded-2xl p-5 flex items-center justify-between">
-
+  <!-- PREMIUM MOVEMENT MODAL -->
+  <!-- ====================================================== -->
+  <div id="movementModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-center z-50 p-2 sm:p-4">
+
+    <!-- CONTAINER MODAL (HEADER, BODY & FOOTER BERADA DI DALAM CONTAINER INI) -->
+    <div class="glass gold-border rounded-2xl sm:rounded-3xl w-full max-w-3xl mx-auto max-h-[92dvh] flex flex-col overflow-hidden shadow-2xl">
+
+      <!-- HEADER -->
+      <div class="px-4 py-3.5 sm:px-8 sm:py-6 border-b border-white/10 flex items-center justify-between shrink-0">
         <div>
-
-          <h3 class="text-white font-bold">
-
-            Google Calendar
-
-          </h3>
-
-          <p class="text-gray-400 text-sm">
-
-            Tambahkan rekod ini ke Google Calendar.
-
+          <h2 class="text-lg sm:text-3xl font-black text-white">
+            📍 Kemaskini Pergerakan
+          </h2>
+          <p class="text-gray-400 text-xs sm:text-sm mt-0.5 sm:mt-1">
+            Kemaskini status pergerakan semasa anda.
           </p>
-
         </div>
 
-        <label class="relative inline-flex items-center cursor-pointer">
+        <button id="closeModal" type="button" class="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-red-500/20 hover:bg-red-500 text-red-300 hover:text-white text-base sm:text-xl font-bold transition flex items-center justify-center shrink-0">
+          ✕
+        </button>
+      </div>
 
-          <input
-id="calendarToggle"
-type="checkbox"
-class="sr-only peer">
+      <!-- BODY (SCROLLABLE) -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-8 space-y-4 sm:space-y-6">
 
-          <div
-          class="w-14 h-8 bg-gray-600 rounded-full
-          peer peer-checked:bg-yellow-500
-          after:content-['']
-          after:absolute
-          after:top-1
-          after:left-1
-          after:bg-white
-          after:h-6
-          after:w-6
-          after:rounded-full
-          after:transition-all
-          peer-checked:after:translate-x-6">
+        <!-- STATUS -->
+        <div>
+          <label class="block text-yellow-400 font-bold text-xs sm:text-base mb-1.5 sm:mb-2">
+            Status Pergerakan
+          </label>
+          <select id="movementType" class="w-full rounded-2xl bg-black/40 border border-white/10 p-3 sm:p-4 text-xs sm:text-base text-white">
+            <option value="">-- Pilih Status --</option>
+            <option value="office">🟢 Di Pejabat</option>
+            <option value="outsideSchool">🚗 Luar Pejabat / Lawatan Sekolah</option>
+            <option value="meeting">👥 Mesyuarat</option>
+            <option value="course">🎓 Kursus / Bengkel</option>
+            <option value="leave">🌴 Cuti</option>
+            <option value="hrmis">📄 HRMIS (4 Jam)</option>
+          </select>
+        </div>
 
+        <!-- DYNAMIC FORM: LOKASI -->
+        <div id="locationGroup">
+          <label class="block text-white text-xs sm:text-base mb-1.5 sm:mb-2">
+            📍 Lokasi
+          </label>
+          <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+            <input id="movementLocation" type="text" class="w-full sm:flex-1 rounded-2xl bg-black/40 border border-white/10 p-3 sm:p-4 text-xs sm:text-sm text-white" placeholder="Tekan butang GPS untuk lokasi" readonly>
+            <button type="button" id="btnGetLocation" class="w-full sm:w-auto px-3.5 sm:px-5 rounded-2xl bg-cyan-500 hover:bg-cyan-400 text-white font-bold transition shrink-0 text-sm">
+              📡
+            </button>
           </div>
+          <div id="locationStatus" class="text-[11px] sm:text-xs text-slate-400 mt-1 sm:mt-2">
+            📍 Lokasi belum dikesan.
+          </div>
+        </div>
 
-        </label>
+        <!-- TARIKH & MASA -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
+          <div>
+            <label class="block text-white text-xs sm:text-base mb-1.5 sm:mb-2">
+              Tarikh
+            </label>
+            <input id="movementDate" type="date" class="w-full rounded-2xl bg-black/40 border border-white/10 p-3 sm:p-4 text-xs sm:text-sm text-white">
+          </div>
+          <div>
+            <label class="block text-white text-xs sm:text-base mb-1.5 sm:mb-2">
+              Masa
+            </label>
+            <input id="movementTime" type="time" class="w-full rounded-2xl bg-black/40 border border-white/10 p-3 sm:p-4 text-xs sm:text-sm text-white">
+          </div>
+        </div>
+
+        <!-- AKTIVITI -->
+        <div id="activityGroup">
+          <label id="activityLabel" class="block text-white text-xs sm:text-base mb-1.5 sm:mb-2">
+            Aktiviti
+          </label>
+          <input id="movementActivity" type="text" class="w-full rounded-2xl bg-black/40 border border-white/10 p-3 sm:p-4 text-xs sm:text-base text-white" placeholder="Nyatakan aktiviti">
+        </div>
+
+        <!-- CATATAN -->
+        <div id="noteGroup">
+          <label class="block text-white text-xs sm:text-base mb-1.5 sm:mb-2">
+            Catatan
+          </label>
+          <textarea id="movementNote" rows="3" class="w-full rounded-2xl bg-black/40 border border-white/10 p-3 sm:p-4 text-xs sm:text-base text-white" placeholder="Catatan tambahan"></textarea>
+        </div>
+
+        <!-- DYNAMIC CONTENT -->
+        <div id="dynamicContent" class="space-y-4 sm:space-y-5"></div>
+
+        <!-- GOOGLE CALENDAR TOGGLE -->
+        <div class="glass rounded-2xl p-3.5 sm:p-5 flex items-center justify-between">
+          <div>
+            <h3 class="text-white text-xs sm:text-base font-bold">
+              Google Calendar
+            </h3>
+            <p class="text-gray-400 text-[11px] sm:text-sm">
+              Tambahkan rekod ini ke Google Calendar.
+            </p>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer shrink-0">
+            <input id="calendarToggle" type="checkbox" class="sr-only peer">
+            <div class="w-11 h-6 sm:w-14 sm:h-8 bg-gray-600 rounded-full peer peer-checked:bg-yellow-500 after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:h-4 after:w-4 sm:after:h-6 sm:after:w-6 after:rounded-full after:transition-all peer-checked:after:translate-x-5 sm:peer-checked:after:translate-x-6">
+            </div>
+          </label>
+        </div>
 
       </div>
 
-    </div>
+      <!-- FOOTER (DALAM CONTAINER MODAL) -->
+      <div class="px-4 py-3 sm:px-8 sm:py-5 border-t border-white/10 flex items-center justify-end gap-2.5 sm:gap-4 shrink-0 bg-slate-900/80">
+        <button id="cancelMovement" type="button" class="px-4 py-2 sm:px-6 sm:py-3 rounded-2xl border border-gray-500 text-gray-300 hover:bg-white/5 text-xs sm:text-sm font-semibold transition">
+          Batal
+        </button>
+        <button id="saveMovement" type="button" class="px-4 py-2 sm:px-8 sm:py-3 rounded-2xl bg-yellow-500 hover:bg-yellow-400 text-black font-black text-xs sm:text-sm transition">
+          💾 Simpan Pergerakan
+        </button>
+      </div>
 
-    <!-- FOOTER -->
+    </div> <!-- END CONTAINER MODAL -->
 
-    <div
-class="px-6
-lg:px-8
-py-5
-border-t
-border-white/10
-flex
-justify-end
-gap-4
-shrink-0">
-
-      <button
-      id="cancelMovement"
-      class="px-6 py-3 rounded-2xl border border-gray-500 text-gray-300">
-
-        Batal
-
-      </button>
-
-      <button
-      id="saveMovement"
-      class="px-8 py-3 rounded-2xl bg-yellow-500 text-black font-black">
-
-        💾 Simpan Pergerakan
-
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
 
 <!-- ====================================================== -->
 <!-- END BODY -->

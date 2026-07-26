@@ -8,6 +8,13 @@
 ===================================================== */
 
 import {
+    startLiveLocation,
+    stopLiveLocation,
+    getCurrentLocation,
+    getPlaceName
+} from "./location.js";
+
+import {
 
     auth,
     db
@@ -170,6 +177,73 @@ const MovementManager = {
             ()=>this.saveMovement()
 
         );
+
+/*==========================================
+  GET CURRENT LOCATION
+==========================================*/
+
+const btnGetLocation =
+document.getElementById("btnGetLocation");
+
+btnGetLocation?.addEventListener(
+
+    "click",
+
+    async()=>{
+
+        alert("Butang GPS ditekan");
+
+        const status =
+        document.getElementById("locationStatus");
+
+        const input =
+        document.getElementById("movementLocation");
+
+        status.textContent =
+        "📡 Mengesan lokasi...";
+
+        try{
+
+            const position =
+            await getCurrentLocation();
+
+            const lat =
+            position.coords.latitude;
+
+            const lng =
+            position.coords.longitude;
+
+            status.textContent =
+            "📡 Mendapatkan nama lokasi...";
+
+            const place =
+            await getPlaceName(lat,lng);
+
+            input.value =
+            place;
+
+            status.textContent =
+        "🟢 Lokasi berjaya dikesan.";
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+            alert(
+                "Kod: " + (error.code ?? "-") +
+                "\nMesej: " + error.message
+            );
+
+            status.textContent =
+            "🔴 " + error.message;
+
+        }
+
+    }
+
+);
 
     },
 
@@ -472,49 +546,76 @@ async saveMovement(){
 
     try{
 
-        await addDoc(
+    const movementType =
+    this.movementType.value;
 
-            collection(db,"movements"),
+    await addDoc(
 
-            movementData
+        collection(db,"movements"),
 
-        );
-
-        await updateDoc(
-
-            doc(db, "users", user.uid),
-
-            {
-
-                online: true,
-
-                currentStatus: this.movementType.value,
-
-                currentLocation: this.movementLocation.value.trim(),
-
-                currentActivity: this.movementActivity.value.trim(),
-
-                lastMovement: serverTimestamp()
-
-            }
+        movementData
 
     );
 
-        this.hideLoading();
+    await updateDoc(
 
-        alert("Pergerakan berjaya disimpan.");
+        doc(db,"users",user.uid),
 
-        this.closeModal();
+        {
 
-    }catch(error){
+            online:true,
 
-        console.error(error);
+            currentStatus:movementType,
 
-        this.hideLoading();
+            currentLocation:this.movementLocation.value.trim(),
 
-        alert("Ralat semasa menyimpan data.");
+            currentActivity:this.movementActivity.value.trim(),
+
+            lastMovement:serverTimestamp()
+
+        }
+
+    );
+
+    /*==========================================
+      LIVE LOCATION
+    ==========================================*/
+
+    switch(movementType){
+
+        case "outsideSchool":
+
+        case "meeting":
+
+        case "course":
+
+            await startLiveLocation();
+
+            break;
+
+        default:
+
+            await stopLiveLocation();
+
+            break;
 
     }
+
+    this.hideLoading();
+
+    alert("Pergerakan berjaya disimpan.");
+
+    this.closeModal();
+
+}catch(error){
+
+    console.error(error);
+
+    this.hideLoading();
+
+    alert("Ralat semasa menyimpan data.");
+
+}
 
 },
 
