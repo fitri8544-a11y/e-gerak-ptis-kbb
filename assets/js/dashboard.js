@@ -16,19 +16,16 @@ import {
 /* ================= KPI ================= */
 
 const totalMembers =
-document.getElementById("totalMembers");
+document.getElementById("totalStaff");
+
+const onlineMembers =
+document.getElementById("onlineStaff");
 
 const officeMembers =
-document.getElementById("officeMembers");
+document.getElementById("officeStaff");
 
 const activeMovement =
-document.getElementById("activeMovement");
-
-const absentMembers =
-document.getElementById("absentMembers");
-
-const totalTasks =
-document.getElementById("totalTasks");
+document.getElementById("outsideStaff");
 
 const firebaseStatus =
 document.getElementById("firebaseStatus");
@@ -100,11 +97,13 @@ onSnapshot(
 
     (snapshot)=>{
 
-        let total=0;
+        let total = 0;
 
-        let office=0;
+        let online = 0;
 
-        let outside=0;
+        let office = 0;
+
+        let outside = 0;
 
         let leave=0;
 
@@ -133,7 +132,13 @@ onSnapshot(
 
             total++;
 
-            const status=user.currentStatus || "";
+            const status = user.currentStatus || "";
+
+            if(user.online){
+
+                online++;
+
+            }
 
             const zone=user.zone || "";
 
@@ -185,13 +190,16 @@ onSnapshot(
         /* KPI */
 
         if(totalMembers)
-        totalMembers.textContent=total;
+        totalMembers.textContent = total;
+
+        if(onlineMembers)
+        onlineMembers.textContent = online;
 
         if(officeMembers)
-        officeMembers.textContent=office;
+        officeMembers.textContent = office;
 
         if(activeMovement)
-        activeMovement.textContent=outside;
+        activeMovement.textContent = outside;
 
         if(absentMembers)
         absentMembers.textContent=leave;

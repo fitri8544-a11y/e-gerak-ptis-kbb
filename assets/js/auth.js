@@ -25,7 +25,7 @@ import {
 import {
 
     doc,
-    setDoc,
+    updateDoc,
     serverTimestamp
 
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
@@ -496,12 +496,14 @@ onAuthStateChanged(
 ========================================================= */
 
 const logoutButton =
-document.getElementById("logoutBtn");
+document.getElementById("logoutButton");
 
 if(logoutButton){
 
     logoutButton.addEventListener(
+
         "click",
+
         async()=>{
 
             try{
@@ -509,10 +511,9 @@ if(logoutButton){
                 const user =
                 auth.currentUser;
 
-                // Update status offline
                 if(user){
 
-                    await setDoc(
+                    await updateDoc(
 
                         doc(
                             db,
@@ -522,25 +523,26 @@ if(logoutButton){
 
                         {
 
-                            status:"offline",
+                            online: false,
 
-                            lastLogout:
-                            serverTimestamp()
+                            status: "offline",
 
-                        },
+                            currentStatus: "",
 
-                        {
-                            merge:true
+                            currentLocation: "",
+
+                            currentActivity: "",
+
+                            lastLogout: serverTimestamp()
+
                         }
 
                     );
 
                 }
 
-                // Firebase Logout
                 await signOut(auth);
 
-                // Kembali ke halaman utama
                 window.location.replace(
                     "index.html"
                 );
@@ -561,6 +563,7 @@ if(logoutButton){
             }
 
         }
+
     );
 
 }

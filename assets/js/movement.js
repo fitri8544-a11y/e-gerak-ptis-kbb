@@ -474,17 +474,31 @@ async saveMovement(){
 
         await addDoc(
 
-    collection(
+            collection(db,"movements"),
 
-        db,
+            movementData
 
-        "movements"
+        );
 
-    ),
+        await updateDoc(
 
-    movementData
+            doc(db, "users", user.uid),
 
-);
+            {
+
+                online: true,
+
+                currentStatus: this.movementType.value,
+
+                currentLocation: this.movementLocation.value.trim(),
+
+                currentActivity: this.movementActivity.value.trim(),
+
+                lastMovement: serverTimestamp()
+
+            }
+
+    );
 
         this.hideLoading();
 
