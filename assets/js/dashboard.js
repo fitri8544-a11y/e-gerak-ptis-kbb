@@ -27,6 +27,12 @@ document.getElementById("officeStaff");
 const activeMovement =
 document.getElementById("outsideStaff");
 
+const absentMembers =
+document.getElementById("absentMembers");
+
+const totalTasks =
+document.getElementById("totalTasks");
+
 const firebaseStatus =
 document.getElementById("firebaseStatus");
 
