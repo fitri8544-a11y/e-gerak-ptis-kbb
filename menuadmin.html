@@ -38,417 +38,585 @@ rel="stylesheet">
 
 <style>
 
+/* ======================================================
+   GLOBAL
+====================================================== */
+
 *{
 
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
 
 }
 
 body{
 
-background:#F1F5F9;
+    background:#F1F5F9;
 
-overflow:hidden;
+    color:#0F172A;
+
+    overflow-x:hidden;
 
 }
 
-/* ================= SIDEBAR ================= */
+/* BUTTON */
+
+button{
+
+    transition:all .25s ease;
+
+}
+
+/* ======================================================
+   SIDEBAR
+====================================================== */
 
 .sidebar{
 
-position:fixed;
+    position:fixed;
 
-top:0;
-left:0;
+    top:0;
+    left:0;
 
-width:280px;
+    width:280px;
 
-height:100vh;
+    height:100vh;
 
-background:linear-gradient(
-180deg,
-#0F172A,
-#1E3A8A
-);
+    display:flex;
 
-color:white;
+    flex-direction:column;
 
-display:flex;
+    color:#FFFFFF;
 
-flex-direction:column;
+    background:
+    linear-gradient(
+        180deg,
+        #0F172A 0%,
+        #1E3A8A 100%
+    );
 
-box-shadow:
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.25);
 
-0 15px 40px rgba(0,0,0,.25);
-
-z-index:1000;
+    z-index:1000;
 
 }
 
-/* LOGO */
+/* ======================================================
+   LOGO
+====================================================== */
 
 .logo-area{
 
-padding:30px;
+    display:flex;
 
-display:flex;
+    align-items:center;
 
-align-items:center;
+    gap:15px;
 
-gap:15px;
+    padding:30px;
 
-border-bottom:
-
-1px solid rgba(255,255,255,.08);
+    border-bottom:
+    1px solid rgba(255,255,255,.08);
 
 }
 
 .logo-circle{
 
-width:65px;
-height:65px;
+    width:65px;
 
-border-radius:20px;
+    height:65px;
 
-background:white;
+    display:flex;
 
-display:flex;
+    align-items:center;
 
-align-items:center;
+    justify-content:center;
 
-justify-content:center;
+    border-radius:20px;
 
-overflow:hidden;
+    background:#FFFFFF;
+
+    overflow:hidden;
+
+    flex-shrink:0;
 
 }
 
 .logo-circle img{
 
-width:52px;
+    width:52px;
+
+    height:auto;
 
 }
 
 .logo-title{
 
-font-size:24px;
+    font-size:24px;
 
-font-weight:800;
+    font-weight:800;
 
-line-height:1.2;
+    line-height:1.2;
+
+    color:#FFFFFF;
 
 }
 
 .logo-sub{
 
-font-size:12px;
+    margin-top:4px;
 
-opacity:.8;
+    font-size:12px;
 
-margin-top:4px;
+    color:rgba(255,255,255,.75);
+
+    line-height:1.5;
 
 }
 
-/* MENU */
+/* ======================================================
+   MENU
+====================================================== */
 
 .menu{
 
-padding:25px 18px;
+    flex:1;
 
-display:flex;
+    display:flex;
 
-flex-direction:column;
+    flex-direction:column;
 
-gap:8px;
+    gap:8px;
 
-flex:1;
+    padding:25px 18px;
 
 }
 
 .menu button{
-    border:none;
-    background:none;
-    color:white;
-    padding:15px 18px;
-    border-radius:16px;
-    font-size:15px;
-    font-weight:600;
+
+    width:100%;
+
     display:flex;
+
     align-items:center;
+
     gap:15px;
+
+    padding:15px 18px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:transparent;
+
+    color:#FFFFFF;
+
     cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    text-align:left;
+
+}
+
+.menu button i{
+
+    width:22px;
+
+    text-align:center;
+
+    font-size:16px;
+
 }
 
 .menu button:hover{
-    background:none;
-    transform:none;
+
+    background:rgba(255,255,255,.08);
+
 }
 
 .menu button.active{
 
-background:white;
+    background:#FFFFFF;
 
-color:#1E3A8A;
+    color:#1E3A8A;
+
+    box-shadow:
+    0 8px 20px rgba(255,255,255,.15);
 
 }
 
-/* FOOTER */
+/* ======================================================
+   SIDEBAR FOOTER
+====================================================== */
 
 .sidebar-footer{
 
-padding:20px;
+    padding:20px;
 
-border-top:
-
-1px solid rgba(255,255,255,.08);
+    border-top:
+    1px solid rgba(255,255,255,.08);
 
 }
 
 .logout-btn{
 
-width:100%;
+    width:100%;
 
-padding:15px;
+    padding:15px;
 
-border:none;
+    border:none;
 
-border-radius:16px;
+    border-radius:16px;
 
-background:#EF4444;
+    background:#EF4444;
 
-color:white;
+    color:#FFFFFF;
 
-font-weight:700;
+    cursor:pointer;
 
-cursor:pointer;
+    font-size:15px;
+
+    font-weight:700;
 
 }
 
 .logout-btn:hover{
 
-background:#DC2626;
+    background:#DC2626;
+
+    transform:translateY(-1px);
 
 }
 
-/* ================= CONTENT ================= */
+/* ======================================================
+   MAIN LAYOUT
+====================================================== */
 
 .main{
 
-margin-left:280px;
+    margin-left:280px;
 
-height:100vh;
+    min-height:100vh;
 
-display:flex;
+    display:flex;
 
-flex-direction:column;
+    flex-direction:column;
 
 }
 
-/* HEADER */
+/* ======================================================
+   HEADER
+====================================================== */
 
 .header{
 
-height:80px;
+    position:sticky;
 
-background:white;
+    top:0;
 
-display:flex;
+    z-index:800;
 
-align-items:center;
+    height:78px;
 
-justify-content:space-between;
+    display:flex;
 
-padding:0 35px;
+    align-items:center;
 
-box-shadow:
+    justify-content:space-between;
 
-0 5px 20px rgba(0,0,0,.05);
+    padding:0 30px;
+
+    background:rgba(255,255,255,.95);
+
+    backdrop-filter:blur(12px);
+
+    -webkit-backdrop-filter:blur(12px);
+
+    border-bottom:
+    1px solid rgba(226,232,240,.8);
+
+    box-shadow:
+    0 8px 24px rgba(15,23,42,.06);
+
+    transition:all .3s ease;
+
+}
+
+/* ======================================================
+   HEADER TITLE
+====================================================== */
+
+.header-title{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
 
 }
 
 .header-title h1{
 
-font-size:28px;
+    font-size:30px;
 
-font-weight:800;
+    font-weight:800;
 
-color:#0F172A;
+    color:#0F172A;
+
+    line-height:1.1;
+
+    letter-spacing:-0.5px;
 
 }
 
 .header-title p{
 
-color:#64748B;
+    margin-top:4px;
 
-margin-top:3px;
+    font-size:14px;
 
-font-size:14px;
+    color:#64748B;
 
 }
 
-/* USER */
+/* ======================================================
+   USER PROFILE
+====================================================== */
 
 .user-box{
 
-display:flex;
+    display:flex;
 
-align-items:center;
+    align-items:center;
 
-gap:15px;
+    gap:14px;
 
 }
 
 .user-avatar{
 
-width:50px;
-height:50px;
+    width:48px;
 
-border-radius:50%;
+    height:48px;
 
-overflow:hidden;
+    border-radius:50%;
 
-background:#CBD5E1;
+    overflow:hidden;
+
+    border:2px solid #E2E8F0;
+
+    background:#FFFFFF;
+
+    flex-shrink:0;
 
 }
 
 .user-avatar img{
 
-width:100%;
-height:100%;
+    width:100%;
 
-object-fit:cover;
+    height:100%;
+
+    object-fit:cover;
 
 }
 
 .user-info{
 
-text-align:right;
+    text-align:right;
 
 }
 
 .user-info h3{
 
-font-size:15px;
+    font-size:15px;
 
-font-weight:700;
+    font-weight:700;
+
+    color:#0F172A;
+
+    margin-bottom:2px;
 
 }
 
 .user-info p{
 
-font-size:13px;
+    font-size:13px;
 
-color:#64748B;
+    color:#64748B;
 
 }
 
-/* PAGE */
+/* ======================================================
+   PAGE
+====================================================== */
 
 .page{
 
-flex:1;
+    flex:1;
 
-overflow:auto;
+    overflow:auto;
 
-padding:35px;
+    padding:35px;
 
 }
 
-/* KPI */
+.page::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.page::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+.page::-webkit-scrollbar-thumb{
+
+    background:#CBD5E1;
+
+    border-radius:999px;
+
+}
+
+.page::-webkit-scrollbar-thumb:hover{
+
+    background:#94A3B8;
+
+}
+
+/* ======================================================
+   KPI & DASHBOARD
+====================================================== */
 
 .kpi-grid{
 
-display:grid;
+    display:grid;
 
-grid-template-columns:
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
 
-repeat(auto-fit,minmax(220px,1fr));
-
-gap:25px;
+    gap:25px;
 
 }
 
 .kpi-card{
-    background:white;
-    border-radius:22px;
+
+    background:#FFFFFF;
+
     padding:25px;
-    box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+    border-radius:22px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.05);
+
+    transition:all .25s ease;
+
 }
 
 .kpi-card:hover{
-    transform:none;
-}
 
-.kpi-card h4{
+    transform:translateY(-3px);
 
-color:#64748B;
-
-font-size:14px;
-
-margin-bottom:10px;
-
-}
-
-.kpi-card h2{
-
-font-size:40px;
-
-font-weight:800;
-
-color:#0F172A;
+    box-shadow:
+    0 18px 40px rgba(15,23,42,.08);
 
 }
 
 .kpi-icon{
 
-width:60px;
+    width:60px;
 
-height:60px;
+    height:60px;
 
-border-radius:18px;
+    display:flex;
 
-display:flex;
+    align-items:center;
 
-align-items:center;
+    justify-content:center;
 
-justify-content:center;
+    border-radius:18px;
 
-font-size:26px;
+    color:#FFFFFF;
 
-margin-bottom:18px;
+    font-size:26px;
 
-color:white;
+    margin-bottom:18px;
 
 }
 
+.kpi-card h4{
+
+    margin-bottom:10px;
+
+    color:#64748B;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.kpi-card h2{
+
+    color:#0F172A;
+
+    font-size:40px;
+
+    font-weight:800;
+
+    line-height:1;
+
+}
+
+/* ======================================================
+   COLOR
+====================================================== */
+
 .blue{
 
-background:#2563EB;
+    background:#2563EB;
 
 }
 
 .green{
 
-background:#10B981;
+    background:#10B981;
 
 }
 
 .orange{
 
-background:#F59E0B;
+    background:#F59E0B;
 
 }
 
 .red{
 
-background:#EF4444;
+    background:#EF4444;
 
 }
 
 /* ======================================================
-   MOBILE RESPONSIVE V2
+   MOBILE OVERLAY
 ====================================================== */
 
 .mobile-overlay{
@@ -457,17 +625,21 @@ background:#EF4444;
 
     inset:0;
 
-    background:rgba(15,23,42,.65);
+    background:rgba(15,23,42,.45);
 
-    backdrop-filter:blur(3px);
+    backdrop-filter:blur(2px);
 
-    z-index:900;
+    -webkit-backdrop-filter:blur(2px);
 
     opacity:0;
 
     visibility:hidden;
 
-    transition:.3s;
+    pointer-events:none;
+
+    transition:all .3s ease;
+
+    z-index:999;
 
 }
 
@@ -477,9 +649,13 @@ background:#EF4444;
 
     visibility:visible;
 
+    pointer-events:auto;
+
 }
 
-/* ================= MOBILE ================= */
+/* ======================================================
+   MOBILE RESPONSIVE
+====================================================== */
 
 @media (max-width:1024px){
 
@@ -489,7 +665,7 @@ background:#EF4444;
 
         transform:translateX(-100%);
 
-        transition:.35s ease;
+        transition:transform .35s ease;
 
     }
 
@@ -509,7 +685,49 @@ background:#EF4444;
 
     .header{
 
-        padding-left:75px;
+        height:70px;
+
+        padding:0 18px 0 78px;
+
+    }
+
+    .header-title h1{
+
+        font-size:22px;
+
+    }
+
+    .header-title p{
+
+        display:none;
+
+    }
+
+    .user-avatar{
+
+        width:40px;
+
+        height:40px;
+
+    }
+
+    .user-info h3{
+
+        font-size:13px;
+
+        max-width:120px;
+
+        white-space:nowrap;
+
+        overflow:hidden;
+
+        text-overflow:ellipsis;
+
+    }
+
+    .user-info p{
+
+        font-size:11px;
 
     }
 
@@ -521,7 +739,9 @@ background:#EF4444;
 
 }
 
-/* ================= DESKTOP ================= */
+/* ======================================================
+   DESKTOP
+====================================================== */
 
 @media (min-width:1025px){
 
@@ -533,17 +753,70 @@ background:#EF4444;
 
 }
 
+/* ======================================================
+   SMALL MOBILE
+====================================================== */
+
+@media (max-width:640px){
+
+    .header{
+
+        padding:0 15px 0 72px;
+
+    }
+
+    .page{
+
+        padding:18px;
+
+    }
+
+    .kpi-grid{
+
+        gap:18px;
+
+    }
+
+    .kpi-card{
+
+        padding:20px;
+
+    }
+
+    .kpi-card h2{
+
+        font-size:34px;
+
+    }
+
+    .kpi-icon{
+
+        width:54px;
+
+        height:54px;
+
+        font-size:22px;
+
+    }
+
+}
+
 </style>
 
 </head>
 
 <body>
 
+<!-- ================= MOBILE OVERLAY ================= -->
+
+<div
+id="mobileOverlay"
+class="mobile-overlay">
+</div>
+
 <!-- ================= SIDEBAR ================= -->
 
 <aside class="sidebar">
-
-<div id="mobileOverlay" class="mobile-overlay"></div>
 
 <div class="logo-area">
 
@@ -1644,9 +1917,16 @@ class="content-section hidden mt-12">
 
 <button
 id="menuToggle"
-class="fixed top-5 left-5 z-50 lg:hidden
-w-12 h-12 rounded-xl
-bg-blue-600 text-white
+class="fixed
+top-5
+left-5
+z-[1100]
+lg:hidden
+w-12
+h-12
+rounded-xl
+bg-blue-600
+text-white
 shadow-xl">
 
 <i class="fa-solid fa-bars"></i>
@@ -2026,6 +2306,26 @@ window.addEventListener("resize",()=>{
 
 });
 
+/* ===============================
+   AUTO CLOSE MOBILE MENU
+=============================== */
+
+document
+.querySelectorAll(".menu button")
+.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        if(window.innerWidth<=1024){
+
+            closeSidebar();
+
+        }
+
+    });
+
+});
+
 </script>
 
 <!-- ====================================================== -->
@@ -2047,7 +2347,7 @@ p-5">
     <div
     class="w-full
     max-w-5xl
-    max-h-[85vh]
+    max-h-[92vh]
     bg-white
     rounded-[32px]
     shadow-2xl
@@ -2061,7 +2361,7 @@ p-5">
 
 <div
 class="px-8
-py-7
+py-5
 bg-gradient-to-r
 from-blue-700
 via-blue-600
@@ -2089,9 +2389,9 @@ E-GERAK PTIS KBB V2
 </div>
 
 <h2
-class="text-3xl
+class="text-2xl
 font-black
-mt-4">
+mt-2">
 
 📍 Kemaskini Pergerakan
 
@@ -2132,7 +2432,7 @@ overflow-y-auto
 px-8
 py-8
 bg-slate-50
-space-y-8">
+space-y-6">
 
       <!-- STATUS -->
 
@@ -2196,7 +2496,7 @@ transition">
 
       <!-- DYNAMIC FORM -->
 
-      <div id="dynamicForm" class="space-y-5">
+      <div id="dynamicForm" class="space-y-6">
 
         <div id="locationGroup">
 
@@ -2377,8 +2677,8 @@ class="space-y-5">
 class="bg-blue-50
 border
 border-blue-200
-rounded-3xl
-p-6
+rounded-2xl
+p-4
 flex
 items-center
 justify-between
@@ -2387,15 +2687,15 @@ gap-6">
   <div class="flex items-start gap-4">
 
     <div
-    class="w-14
-    h-14
+    class="w-12
+    h-12
     rounded-2xl
     bg-blue-600
     text-white
     flex
     items-center
     justify-center
-    text-2xl
+    text-x1
     shadow-lg">
 
       📅
@@ -2405,7 +2705,7 @@ gap-6">
     <div>
 
       <h3
-      class="text-lg
+      class="text-base
       font-bold
       text-slate-800">
 
@@ -2460,86 +2760,125 @@ gap-6">
 
     </div>
 
-    <!-- ====================================================== -->
-<!-- FOOTER -->
-<!-- ====================================================== -->
+ <!-- ======================================================
+     FOOTER
+====================================================== -->
 
 <div
-class="sticky
-bottom-0
-bg-white
+class="
+mt-8
+pt-6
 border-t
-border-slate-200
-px-8
-py-5
-flex
-items-center
-justify-between">
+border-slate-200">
 
-<div>
+  <!-- INFO -->
 
-<h3
-class="font-bold
-text-slate-800">
+  <div
+  class="
+  mb-6
+  rounded-2xl
+  bg-blue-50
+  border
+  border-blue-200
+  p-5">
 
-E-GERAK PTIS KBB V2
+    <div class="flex items-start gap-3">
 
-</h3>
+      <div
+      class="
+      w-10
+      h-10
+      rounded-xl
+      bg-blue-600
+      text-white
+      flex
+      items-center
+      justify-center
+      font-bold">
 
-<p
-class="text-sm
-text-slate-500">
+        ✓
 
-Pastikan semua maklumat telah disemak sebelum disimpan.
+      </div>
 
-</p>
+      <div>
 
-</div>
+        <h3
+        class="
+        font-bold
+        text-slate-800">
 
-<div
-class="flex
-items-center
-gap-4">
+          E-GERAK PTIS KBB V2
 
-      <button
-      id="cancelMovement"
-      class="px-6
-py-3
-rounded-2xl
-border
-border-slate-300
-bg-white
-text-slate-700
-font-semibold
-hover:bg-slate-100
-transition
-duration-300">
+        </h3>
 
-        Batal
+        <p
+        class="
+        text-sm
+        text-slate-600
+        mt-1">
 
-      </button>
+          Pastikan semua maklumat telah disemak sebelum menekan butang
+          <strong>Simpan Pergerakan</strong>.
 
-      <button
-      id="saveMovement"
-      class="px-8
-py-3
-rounded-2xl
-bg-gradient-to-r
-from-blue-600
-to-cyan-500
-text-white
-font-bold
-shadow-lg
-hover:shadow-xl
-hover:scale-105
-transition-all
-duration-300">
+        </p>
 
-        💾 Simpan Pergerakan
-
-      </button>
+      </div>
 
     </div>
+
+  </div>
+
+  <!-- BUTTON -->
+
+  <div
+  class="
+  flex
+  flex-col-reverse
+  sm:flex-row
+  justify-end
+  gap-4">
+
+    <button
+    id="cancelMovement"
+    class="
+    w-full
+    sm:w-auto
+    px-6
+    py-3
+    rounded-2xl
+    border
+    border-slate-300
+    bg-white
+    text-slate-700
+    font-semibold
+    hover:bg-slate-100
+    transition">
+
+      ❌ Batal
+
+    </button>
+
+    <button
+    id="saveMovement"
+    class="
+    w-full
+    sm:w-auto
+    px-8
+    py-3
+    rounded-2xl
+    bg-gradient-to-r
+    from-blue-600
+    to-cyan-500
+    text-white
+    font-bold
+    shadow-lg
+    hover:shadow-xl
+    hover:-translate-y-0.5
+    transition-all">
+
+      💾 Simpan Pergerakan
+
+    </button>
 
   </div>
 
