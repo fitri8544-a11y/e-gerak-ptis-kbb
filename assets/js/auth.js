@@ -25,6 +25,7 @@ import {
 import {
 
     doc,
+    setDoc,
     updateDoc,
     serverTimestamp
 
