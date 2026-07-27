@@ -24,11 +24,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const settingsSection =
     document.getElementById("settingsSection");
 
+    const analyticsSection =
+    document.getElementById("analyticsSection");
+
+    const pageTitle =
+    document.querySelector(".header-title h1");
+
+    const pageSubtitle =
+    document.querySelector(".header-title p");
+
     const sections = [
 
         dashboardSection,
         staffManagementSection,
         reportsSection,
+        analyticsSection,
         settingsSection
 
     ];
@@ -89,6 +99,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setActive(button);
 
+        /* ================= HEADER ================= */
+
+if(section===dashboardSection){
+
+    pageTitle.textContent="Dashboard";
+
+    pageSubtitle.textContent=
+    "E-GERAK PTIS Kulim Bandar Baharu Version 2";
+
+}
+
+else if(section===staffManagementSection){
+
+    pageTitle.textContent=
+    "Staff Management";
+
+    pageSubtitle.textContent=
+    "Pengurusan Ahli PTIS";
+
+}
+
+else if(section===reportsSection){
+
+    pageTitle.textContent=
+    "Report Center";
+
+    pageSubtitle.textContent=
+    "Laporan Pergerakan";
+
+}
+
+else if(section===analyticsSection){
+
+    pageTitle.textContent=
+    "Analytics Dashboard";
+
+    pageSubtitle.textContent=
+    "Executive Analytics & Performance Monitoring";
+
+}
+
+else if(section===settingsSection){
+
+    pageTitle.textContent=
+    "Settings";
+
+    pageSubtitle.textContent=
+    "Konfigurasi Sistem";
+
+}
+
     }
 
     /* ================= DASHBOARD ================= */
@@ -124,9 +185,20 @@ menuButtons[2]?.addEventListener("click",()=>{
 
 });
 
-/* ================= SETTINGS ================= */
+/* ================= ANALYTICS ================= */
 
 menuButtons[3]?.addEventListener("click",()=>{
+
+    openSection(
+        analyticsSection,
+        menuButtons[3]
+    );
+
+});
+
+/* ================= SETTINGS ================= */
+
+menuButtons[4]?.addEventListener("click",()=>{
 
     openSection(
         settingsSection,

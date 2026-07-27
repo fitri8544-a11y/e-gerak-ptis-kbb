@@ -863,6 +863,14 @@ E-GERAK ADMIN V2
         Reports
     </button>
 
+    <button id="analyticsMenu">
+
+        <i class="fa-solid fa-chart-pie"></i>
+
+        Analytics Dashboard
+
+    </button>
+
     <button>
         <i class="fa-solid fa-gear"></i>
         Settings
@@ -1678,6 +1686,352 @@ class="content-section hidden mt-12">
 
 </section>
 
+<!-- ================= ANALYTICS DASHBOARD ================= -->
+
+<section
+id="analyticsSection"
+class="content-section hidden space-y-6">
+
+    <!-- ================= KPI ================= -->
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+
+        <!-- TOTAL -->
+
+        <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl p-6 text-white shadow-xl">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+
+                    <p class="text-blue-100 text-sm">
+
+                        Jumlah Rekod
+
+                    </p>
+
+                    <h2
+                    id="analyticsTotal"
+                    class="text-4xl font-black mt-2">
+
+                        0
+
+                    </h2>
+
+                </div>
+
+                <div
+                class="w-16 h-16 rounded-2xl bg-white/15
+                flex items-center justify-center">
+
+                    <i class="fa-solid fa-database text-3xl"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- OFFICE -->
+
+        <div class="bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl p-6 text-white shadow-xl">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+
+                    <p class="text-green-100 text-sm">
+
+                        Dalam Pejabat
+
+                    </p>
+
+                    <h2
+                    id="analyticsOffice"
+                    class="text-4xl font-black mt-2">
+
+                        0
+
+                    </h2>
+
+                </div>
+
+                <div
+                class="w-16 h-16 rounded-2xl bg-white/15
+                flex items-center justify-center">
+
+                    <i class="fa-solid fa-building text-3xl"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- OUTSIDE -->
+
+        <div class="bg-gradient-to-br from-orange-500 to-red-500 rounded-3xl p-6 text-white shadow-xl">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+
+                    <p class="text-orange-100 text-sm">
+
+                        Luar Pejabat
+
+                    </p>
+
+                    <h2
+                    id="analyticsOutside"
+                    class="text-4xl font-black mt-2">
+
+                        0
+
+                    </h2>
+
+                </div>
+
+                <div
+                class="w-16 h-16 rounded-2xl bg-white/15
+                flex items-center justify-center">
+
+                    <i class="fa-solid fa-car text-3xl"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TODAY -->
+
+        <div class="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-3xl p-6 text-white shadow-xl">
+
+            <div class="flex items-center justify-between">
+
+                <div>
+
+                    <p class="text-purple-100 text-sm">
+
+                        Hari Ini
+
+                    </p>
+
+                    <h2
+                    id="analyticsToday"
+                    class="text-4xl font-black mt-2">
+
+                        0
+
+                    </h2>
+
+                </div>
+
+                <div
+                class="w-16 h-16 rounded-2xl bg-white/15
+                flex items-center justify-center">
+
+                    <i class="fa-solid fa-calendar-day text-3xl"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= CHART ================= -->
+
+    <div class="grid lg:grid-cols-2 gap-5">
+
+        <!-- BAR -->
+
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
+
+            <div class="flex items-center justify-between px-6 py-5 border-b">
+
+                <div>
+
+                    <h3 class="text-xl font-bold text-slate-800">
+
+                        📊 Aktiviti Mengikut Kategori
+
+                    </h3>
+
+                    <p class="text-sm text-slate-500 mt-1">
+
+                        Ringkasan jenis pergerakan
+
+                    </p>
+
+                </div>
+
+                <div class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center">
+
+                    <i class="fa-solid fa-chart-column text-blue-600"></i>
+
+                </div>
+
+            </div>
+
+            <div
+            class="p-5"
+            style="height:340px;">
+
+                <canvas
+                id="activityChart">
+
+                </canvas>
+
+            </div>
+
+        </div>
+
+        <!-- PIE -->
+
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
+
+            <div class="flex items-center justify-between px-6 py-5 border-b">
+
+                <div>
+
+                    <h3 class="text-xl font-bold text-slate-800">
+
+                        🥧 Status Pergerakan
+
+                    </h3>
+
+                    <p class="text-sm text-slate-500 mt-1">
+
+                        Dalam & luar pejabat
+
+                    </p>
+
+                </div>
+
+                <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center">
+
+                    <i class="fa-solid fa-chart-pie text-orange-500"></i>
+
+                </div>
+
+            </div>
+
+            <div
+class="flex items-center justify-center p-6"
+style="height:300px;">
+
+    <canvas
+    id="statusChart">
+
+    </canvas>
+
+</div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= LIVE ACTIVITY ================= -->
+
+    <div class="bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
+
+        <div class="flex items-center justify-between px-6 py-5 border-b">
+
+            <div>
+
+                <h3 class="text-xl font-bold">
+
+                    🔴 Aktiviti Terkini
+
+                </h3>
+
+                <p class="text-sm text-slate-500 mt-1">
+
+                    Pergerakan masa nyata ahli PTIS
+
+                </p>
+
+            </div>
+
+            <span
+            class="px-4 py-1 rounded-full bg-green-100 text-green-700 text-sm font-bold">
+
+                LIVE
+
+            </span>
+
+        </div>
+
+        <div class="overflow-x-auto">
+
+            <table class="min-w-full">
+
+                <thead class="bg-slate-50">
+
+                    <tr>
+
+                        <th class="px-6 py-4 text-left">
+
+                            Nama
+
+                        </th>
+
+                        <th class="px-6 py-4 text-left">
+
+                            Aktiviti
+
+                        </th>
+
+                        <th class="px-6 py-4 text-left">
+
+                            Lokasi
+
+                        </th>
+
+                        <th class="px-6 py-4 text-left">
+
+                            Tarikh
+
+                        </th>
+
+                        <th class="px-6 py-4 text-left">
+
+                            Masa
+
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                id="analyticsActivity">
+
+                    <tr>
+
+                        <td
+                        colspan="5"
+                        class="py-12 text-center text-slate-400">
+
+                            Tiada aktiviti direkodkan.
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
 <!-- ================= SETTINGS ================= -->
 
 <section
@@ -2269,9 +2623,13 @@ Berjaya
 
 <script type="module" src="assets/js/reports.js"></script>
 
+<script type="module" src="assets/js/analytics.js"></script>
+
 <script type="module" src="assets/js/settings.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
 
