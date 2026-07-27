@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Laporan Pergerakan PTIS</title>
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="assets/css/report.css">
+
+</head>
+
+<body>
+
+<!-- ================= REPORT TOOLBAR ================= -->
+
+<div class="report-toolbar">
+
+    <button
+    id="backBtn"
+    class="toolbar-btn secondary">
+
+        ← Kembali ke Dashboard
+
+    </button>
+
+    <button
+    id="printBtn"
+    class="toolbar-btn primary">
+
+        🖨️ Cetak Laporan
+
+    </button>
+
+</div>
+
+<div class="report-container">
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="report-header">
+
+        <div class="logo-section">
+
+            <img
+            src="assets/images/logo-ptis.png"
+            alt="PTIS Logo"
+            class="logo">
+
+        </div>
+
+        <div class="header-content">
+
+            <h1>
+
+                LAPORAN PERGERAKAN PTIS
+
+            </h1>
+
+            <h2>
+
+                PASUKAN TEKNIKAL ICT SEKOLAH
+
+            </h2>
+
+            <h3>
+
+                KULIM BANDAR BAHARU
+
+            </h3>
+
+            <div class="print-info">
+
+                <span>
+
+                    Tarikh Cetakan :
+
+                    <strong id="printDate">
+
+                        -
+
+                    </strong>
+
+                </span>
+
+                <span>
+
+                    Masa Cetakan :
+
+                    <strong id="printTime">
+
+                        -
+
+                    </strong>
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- ================= SUMMARY ================= -->
+
+    <section class="summary-section">
+
+        <h2>
+
+            Ringkasan Pergerakan
+
+        </h2>
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+
+                <span>Jumlah Rekod</span>
+
+                <h3 id="totalRecord">0</h3>
+
+            </div>
+
+            <div class="summary-card">
+
+                <span>Dalam Pejabat</span>
+
+                <h3 id="officeTotal">0</h3>
+
+            </div>
+
+            <div class="summary-card">
+
+                <span>Luar Pejabat</span>
+
+                <h3 id="outsideTotal">0</h3>
+
+            </div>
+
+            <div class="summary-card">
+
+                <span>Mesyuarat</span>
+
+                <h3 id="meetingTotal">0</h3>
+
+            </div>
+
+            <div class="summary-card">
+
+                <span>Kursus</span>
+
+                <h3 id="courseTotal">0</h3>
+
+            </div>
+
+            <div class="summary-card">
+
+                <span>Cuti</span>
+
+                <h3 id="leaveTotal">0</h3>
+
+            </div>
+
+            <div class="summary-card">
+
+                <span>HRMIS</span>
+
+                <h3 id="hrmisTotal">0</h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================= TABLE ================= -->
+
+    <section class="table-section">
+
+        <h2>
+
+            Senarai Pergerakan PTIS
+
+        </h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Bil</th>
+
+                    <th>Nama</th>
+
+                    <th>Status</th>
+
+                    <th>Lokasi</th>
+
+                    <th>Tarikh</th>
+
+                    <th>Masa</th>
+
+                    <th>Aktiviti</th>
+
+                    <th>Catatan</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="reportTable">
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="report-footer">
+
+        <div>
+
+            Dijana oleh
+
+            <strong>
+
+                E-GERAK PTIS KBB V2
+
+            </strong>
+
+        </div>
+
+        <div id="pageNumber">
+
+            Halaman 1
+
+        </div>
+
+    </footer>
+
+</div>
+
+<script type="module"
+src="assets/js/report-page.js"></script>
+
+</body>
+
+</html>

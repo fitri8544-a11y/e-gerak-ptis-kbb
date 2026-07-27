@@ -175,7 +175,10 @@ document.getElementById("exportPdfBtn");
 
 exportPdfBtn?.addEventListener("click",()=>{
 
-    window.print();
+    window.open(
+        "report.html?mode=pdf",
+        "_blank"
+    );
 
 });
 
@@ -189,7 +192,10 @@ document.getElementById("printReportBtn");
 
 printReportBtn?.addEventListener("click",()=>{
 
-    window.print();
+    window.open(
+        "report.html?mode=print",
+        "_blank"
+    );
 
 });
 

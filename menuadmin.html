@@ -1620,33 +1620,57 @@ class="content-section hidden mt-12">
 
             </h3>
 
-            <div class="grid gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-                <button
-                id="exportPdfBtn"
-                class="bg-red-600 text-white rounded-xl py-4 font-bold">
+    <!-- EXPORT PDF -->
 
-                    📄 Export PDF
+    <button
+    id="exportPdfBtn"
+    class="flex items-center justify-center gap-3
+    bg-gradient-to-r from-red-600 to-red-700
+    hover:from-red-700 hover:to-red-800
+    text-white rounded-2xl py-4
+    font-bold shadow-lg
+    transition duration-300">
 
-                </button>
+        📄
+        <span>Export PDF</span>
 
-                <button
-                id="exportExcelBtn"
-                class="bg-green-600 text-white rounded-xl py-4 font-bold">
+    </button>
 
-                    📊 Export Excel
+    <!-- EXPORT EXCEL -->
 
-                </button>
+    <button
+    id="exportExcelBtn"
+    class="flex items-center justify-center gap-3
+    bg-gradient-to-r from-green-600 to-emerald-700
+    hover:from-green-700 hover:to-emerald-800
+    text-white rounded-2xl py-4
+    font-bold shadow-lg
+    transition duration-300">
 
-                <button
-                id="printReportBtn"
-                class="bg-blue-600 text-white rounded-xl py-4 font-bold">
+        📊
+        <span>Export Excel</span>
 
-                    🖨 Print Report
+    </button>
 
-                </button>
+    <!-- PRINT REPORT -->
 
-            </div>
+    <button
+    id="printReportBtn"
+    class="flex items-center justify-center gap-3
+    bg-gradient-to-r from-blue-600 to-indigo-700
+    hover:from-blue-700 hover:to-indigo-800
+    text-white rounded-2xl py-4
+    font-bold shadow-lg
+    transition duration-300">
+
+        🖨️
+        <span>Print Report</span>
+
+    </button>
+
+</div>
 
         </div>
 

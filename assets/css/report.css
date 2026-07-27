@@ -1,0 +1,389 @@
+/* ======================================================
+   REPORT CSS
+   E-GERAK PTIS KBB V2
+====================================================== */
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+body{
+
+    background:#ECEFF3;
+
+    color:#1E293B;
+
+    padding:30px;
+
+}
+
+/* ======================================================
+   REPORT TOOLBAR
+====================================================== */
+
+.report-toolbar{
+
+    max-width:1200px;
+
+    margin:0 auto 20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.toolbar-btn{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:12px 22px;
+
+    border-radius:12px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.toolbar-btn.primary{
+
+    background:#2563EB;
+
+    color:#FFFFFF;
+
+}
+
+.toolbar-btn.primary:hover{
+
+    background:#1D4ED8;
+
+}
+
+.toolbar-btn.secondary{
+
+    background:#475569;
+
+    color:#FFFFFF;
+
+}
+
+.toolbar-btn.secondary:hover{
+
+    background:#334155;
+
+}
+
+/* Jangan paparkan semasa cetakan */
+
+@media print{
+
+    .report-toolbar{
+
+        display:none;
+
+    }
+
+}
+
+/* ======================================================
+   REPORT CONTAINER
+====================================================== */
+
+.report-container{
+
+    max-width:1200px;
+
+    margin:auto;
+
+    background:#FFFFFF;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.08);
+
+}
+
+/* ======================================================
+   HEADER
+====================================================== */
+
+.report-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:30px;
+
+    border-bottom:3px solid #2563EB;
+
+    padding-bottom:25px;
+
+    margin-bottom:35px;
+
+}
+
+.logo{
+
+    width:90px;
+
+    height:90px;
+
+    object-fit:contain;
+
+}
+
+.header-content{
+
+    flex:1;
+
+}
+
+.header-content h1{
+
+    font-size:32px;
+
+    font-weight:800;
+
+    color:#0F172A;
+
+}
+
+.header-content h2{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    margin-top:4px;
+
+    color:#334155;
+
+}
+
+.header-content h3{
+
+    font-size:16px;
+
+    font-weight:500;
+
+    color:#64748B;
+
+    margin-top:4px;
+
+}
+
+.print-info{
+
+    margin-top:18px;
+
+    display:flex;
+
+    gap:35px;
+
+    flex-wrap:wrap;
+
+    font-size:14px;
+
+}
+
+/* ======================================================
+   SUMMARY
+====================================================== */
+
+.summary-section{
+
+    margin-bottom:35px;
+
+}
+
+.summary-section h2{
+
+    font-size:22px;
+
+    margin-bottom:18px;
+
+    color:#0F172A;
+
+}
+
+.summary-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+
+    gap:18px;
+
+}
+
+.summary-card{
+
+    background:#F8FAFC;
+
+    border:1px solid #E2E8F0;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    text-align:center;
+
+}
+
+.summary-card span{
+
+    font-size:13px;
+
+    color:#64748B;
+
+}
+
+.summary-card h3{
+
+    margin-top:10px;
+
+    font-size:32px;
+
+    color:#2563EB;
+
+}
+
+/* ======================================================
+   TABLE
+====================================================== */
+
+.table-section h2{
+
+    font-size:22px;
+
+    margin-bottom:18px;
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+thead{
+
+    background:#2563EB;
+
+    color:#FFFFFF;
+
+}
+
+th{
+
+    padding:14px;
+
+    font-size:14px;
+
+    text-align:left;
+
+}
+
+td{
+
+    padding:12px;
+
+    border-bottom:1px solid #E2E8F0;
+
+    font-size:13px;
+
+    vertical-align:top;
+
+}
+
+tbody tr:nth-child(even){
+
+    background:#F8FAFC;
+
+}
+
+tbody tr:hover{
+
+    background:#EEF6FF;
+
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+.report-footer{
+
+    margin-top:40px;
+
+    padding-top:20px;
+
+    border-top:2px solid #CBD5E1;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    font-size:13px;
+
+    color:#64748B;
+
+}
+
+/* ======================================================
+   PRINT
+====================================================== */
+
+@media print{
+
+    body{
+
+        background:#FFFFFF;
+
+        padding:0;
+
+    }
+
+    .report-container{
+
+        box-shadow:none;
+
+        border-radius:0;
+
+        padding:0;
+
+        max-width:100%;
+
+    }
+
+    @page{
+
+        size:A4 portrait;
+
+        margin:15mm;
+
+    }
+
+}
