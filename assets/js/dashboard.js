@@ -5,10 +5,15 @@
 
 import { db } from "./firebase.js";
 
+console.log("Dashboard.js Loaded");
+
 import {
 
     collection,
-    onSnapshot
+    onSnapshot,
+    query,
+    orderBy,
+    limit
 
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -93,6 +98,291 @@ const zones = {
     }
 
 };
+
+/* ================= DATA CACHE ================= */
+
+let staffList = [];
+
+let userStatus = [];
+
+let movementList = [];
+
+/* ======================================================
+   DASHBOARD ENGINE V2
+====================================================== */
+
+function normalizeZone(zone){
+
+    switch((zone || "").toUpperCase()){
+
+        case "PKG PADANG SERAI":
+            return "Padang Serai";
+
+        case "PKG KULIM":
+            return "Kulim";
+
+        case "PKG SUNGAI ULAR":
+            return "Sungai Ular";
+
+        case "PKG BANDAR BAHARU":
+            return "Bandar Baharu";
+
+        case "PKG SERDANG":
+            return "Serdang";
+
+        default:
+            return zone;
+
+    }
+
+}
+
+function refreshDashboard(){
+
+    let total = 0;
+    let online = 0;
+    let office = 0;
+    let outside = 0;
+    let leave = 0;
+    let task = 0;
+    let today = 0;
+
+    const zoneData = {};
+
+    Object.keys(zones).forEach(zone=>{
+
+        zoneData[zone]={
+
+            ahli:0,
+            office:0,
+            movement:0
+
+        };
+
+    });
+
+    /* ================= STAFF ================= */
+
+    staffList.forEach(staff=>{
+
+        console.log(
+            staff.nama,
+            staff.status,
+            staff.zone
+        );
+
+        total++;
+
+        const zone =
+        normalizeZone(staff.zone);
+
+        if(zoneData[zone]){
+
+            zoneData[zone].ahli++;
+
+        }
+
+        switch(staff.status){
+
+            case "bertugas":
+
+                outside++;
+                task++;
+                today++;
+
+                if(zoneData[zone]){
+
+                    zoneData[zone].movement++;
+
+                }
+
+                break;
+
+            case "pejabat":
+
+            case "office":
+
+                office++;
+
+                if(zoneData[zone]){
+
+                    zoneData[zone].office++;
+
+                }
+
+                break;
+
+            case "cuti":
+
+            case "leave":
+
+                leave++;
+
+                break;
+
+        }
+
+    });
+
+    /* ================= USERS ================= */
+
+    userStatus.forEach(user=>{
+
+        if(user.online){
+
+            online++;
+
+        }
+
+    });
+
+    /* ================= KPI ================= */
+
+    if(totalMembers)
+    totalMembers.textContent=total;
+
+    if(onlineMembers)
+    onlineMembers.textContent=online;
+
+    if(officeMembers)
+    officeMembers.textContent=office;
+
+    if(activeMovement)
+    activeMovement.textContent=outside;
+
+    if(absentMembers)
+    absentMembers.textContent=leave;
+
+    if(totalTasks)
+    totalTasks.textContent=task;
+
+    if(todayMovementTotal)
+    todayMovementTotal.textContent=today;
+
+    if(firebaseStatus)
+    firebaseStatus.textContent="ONLINE";
+
+    if(systemStatus)
+    systemStatus.textContent="CONNECTED";
+
+    /* ================= ZONE ================= */
+
+    Object.keys(zoneData).forEach(zone=>{
+
+        const card=zones[zone];
+
+        if(!card) return;
+
+        const data=zoneData[zone];
+
+        if(card.ahli)
+        card.ahli.textContent=data.ahli;
+
+        if(card.office)
+        card.office.textContent=data.office;
+
+        if(card.movement)
+        card.movement.textContent=data.movement;
+
+        if(card.progress){
+
+            const percent =
+            data.ahli===0
+            ?0
+            :(data.office/data.ahli)*100;
+
+            card.progress.style.width=
+            percent+"%";
+
+        }
+
+    });
+
+}
+
+/* ================= STAFF ================= */
+
+onSnapshot(
+
+    collection(db,"staff"),
+
+    snapshot=>{
+
+        staffList=[];
+
+        snapshot.forEach(doc=>{
+
+            staffList.push({
+
+                id:doc.id,
+
+                ...doc.data()
+
+            });
+
+        });
+
+        refreshDashboard();
+
+    }
+
+);
+
+/* ================= USERS ================= */
+
+onSnapshot(
+
+    collection(db,"users"),
+
+    snapshot=>{
+
+        userStatus=[];
+
+        snapshot.forEach(doc=>{
+
+            userStatus.push({
+
+                id:doc.id,
+
+                ...doc.data()
+
+            });
+
+        });
+
+        refreshDashboard();
+
+    }
+
+);
+
+/* ================= MOVEMENTS ================= */
+
+onSnapshot(
+
+    collection(db,"movements"),
+
+    snapshot=>{
+
+        movementList=[];
+
+        snapshot.forEach(doc=>{
+
+            movementList.push({
+
+                id:doc.id,
+
+                ...doc.data()
+
+            });
+
+        });
+
+        refreshDashboard();
+
+    }
+
+);
 
 
 /* ================= REALTIME ================= */

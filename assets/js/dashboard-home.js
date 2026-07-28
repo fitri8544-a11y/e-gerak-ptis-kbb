@@ -76,6 +76,8 @@ let movementList=[];
 
 let topMovementData=[];
 
+let companionLookup = {};
+
 
 /*======================================================
  ELEMENTS
@@ -470,19 +472,44 @@ function renderMovement(list){
 
             <td class="px-6 py-5">
 
-                <div class="font-bold text-white">
+    <div class="font-bold text-white">
 
-                    ${item.nama}
+        ${item.nama}
 
-                </div>
+    </div>
 
-                <div class="text-xs text-slate-500 mt-1">
+    <div class="text-xs text-slate-500 mt-1">
 
-                    ${item.role || "-"}
+        ${item.role || "-"}
 
-                </div>
+    </div>
 
-            </td>
+    ${
+        companionLookup[item.uid]
+        ?`
+        <div class="mt-2
+        inline-flex
+        items-center
+        gap-2
+        px-3
+        py-1
+        rounded-full
+        bg-cyan-500/10
+        border
+        border-cyan-500/20
+        text-cyan-300
+        text-xs
+        font-semibold">
+
+            👥 Bersama:
+            ${companionLookup[item.uid].leaderName}
+
+        </div>
+        `
+        :""
+    }
+
+</td>
 
             <td class="px-6 py-5">
 
@@ -621,9 +648,31 @@ onSnapshot(movementsRef,(snapshot)=>{
 
     const ranking={};
 
+    companionLookup = {};
+
     snapshot.forEach(doc=>{
 
         const data=doc.data();
+
+        if(Array.isArray(data.companions)){
+
+            data.companions.forEach(companion=>{
+
+                companionLookup[companion.uid]={
+
+                leaderName:data.name || "PTIS",
+
+                leaderUid:data.uid || "",
+
+                activity:data.activity || "",
+
+                location:data.location || ""
+
+            };
+
+        });
+
+}
 
         const nama=
         data.name ||
@@ -789,104 +838,75 @@ onSnapshot(staffRef,(snapshot)=>{
 
 
 /*======================================================
- LOAD KPI REALTIME
+ LOAD KPI REALTIME (STAFF + USERS)
 ======================================================*/
 
-onSnapshot(usersRef,(snapshot)=>{
+let staffCache = [];
+let usersCache = [];
 
-    dashboardData.officeMembers=0;
-    dashboardData.activeMovement=0;
-    dashboardData.absentMembers=0;
-    dashboardData.totalTasks=0;
+function refreshRealtimeDashboard(){
 
-    movementList=[];
+    dashboardData.officeMembers = 0;
+    dashboardData.activeMovement = 0;
+    dashboardData.absentMembers = 0;
+    dashboardData.totalTasks = 0;
+
+    movementList = [];
 
     Object.keys(zoneData).forEach(zone=>{
 
-    zoneData[zone].office=0;
-    zoneData[zone].movement=0;
+        zoneData[zone].office = 0;
+        zoneData[zone].movement = 0;
 
-});
+    });
 
-snapshot.forEach(doc=>{
+    staffCache.forEach(staff=>{
 
-    const user=
-    doc.data();
+        const zone = getZoneKey(staff.zone);
 
-    const status=
-    user.currentStatus || "";
-
-    const zone =
-    getZoneKey(
-    user.zone
-    );
-
-        switch(status){
+        switch((staff.status || "").toLowerCase()){
 
             case "office":
+            case "pejabat":
 
-    dashboardData.officeMembers++;
+                dashboardData.officeMembers++;
 
-    if(zone && zoneData[zone]){
+                if(zone && zoneData[zone]){
 
-        zoneData[zone].office++;
+                    zoneData[zone].office++;
 
-    }
+                }
 
-    break;
+                break;
 
-            case "outsideSchool":
+            case "bertugas":
 
-case "meeting":
+                dashboardData.activeMovement++;
+                dashboardData.totalTasks++;
 
-case "course":
+                movementList.push({
 
-case "hrmis":
+                    uid: staff.uid || "",
+                    nama: staff.nama || "PTIS",
+                    role: staff.role || "",
+                    status: staff.currentStatus || "outsideSchool",
+                    zone: zone,
+                    lokasi: staff.currentLocation || "",
+                    aktiviti: staff.currentActivity || "",
+                    time: staff.updatedAt || null
 
-    dashboardData.activeMovement++;
+                });
 
-    dashboardData.totalTasks++;
+                if(zone && zoneData[zone]){
 
-    movementList.push({
+                    zoneData[zone].movement++;
 
-    uid:
-    doc.id,
+                }
 
-    nama:
-    user.nama || "PTIS",
-
-    role:
-    user.role || "",
-
-    status:
-    status,
-
-    zone:
-    zone,
-
-    online:
-    user.online || false,
-
-    lokasi:
-    user.currentLocation || "",
-
-    aktiviti:
-    user.currentActivity || "",
-
-    time:
-    user.lastLogin || null
-
-});
-
-    if(zoneData[zone]){
-
-        zoneData[zone].movement++;
-
-    }
-
-    break;
+                break;
 
             case "leave":
+            case "cuti":
 
                 dashboardData.absentMembers++;
 
@@ -901,5 +921,45 @@ case "hrmis":
     updateZones();
 
     renderMovement(movementList);
+
+}
+
+onSnapshot(staffRef,(snapshot)=>{
+
+    staffCache=[];
+
+    snapshot.forEach(doc=>{
+
+        staffCache.push({
+
+            uid:doc.id,
+
+            ...doc.data()
+
+        });
+
+    });
+
+    refreshRealtimeDashboard();
+
+});
+
+onSnapshot(usersRef,(snapshot)=>{
+
+    usersCache=[];
+
+    snapshot.forEach(doc=>{
+
+        usersCache.push({
+
+            uid:doc.id,
+
+            ...doc.data()
+
+        });
+
+    });
+
+    refreshRealtimeDashboard();
 
 });
