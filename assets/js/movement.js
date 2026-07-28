@@ -37,6 +37,8 @@ import {
     onSnapshot,
     doc,
     getDoc,
+    getDocs,
+    writeBatch,
     deleteDoc,
     updateDoc
 
@@ -60,6 +62,20 @@ const MovementManager = {
     calendarToggle: null,
 
     loadingOverlay: null,
+
+    /* ======================================================
+   COMPANION SELECT
+====================================================== */
+
+    companionSearch: null,
+
+    companionList: null,
+
+    selectedCompanionsContainer: null,
+
+    selectedCompanions: [],
+
+    allUsers: [],
 
     movementList: [],
 
@@ -90,10 +106,18 @@ const MovementManager = {
         this.movementNote = document.getElementById("movementNote");
         this.calendarToggle = document.getElementById("calendarToggle");
 
+        this.companionSearch = document.getElementById("companionSearch");
+
+        this.companionList = document.getElementById("companionList");
+
+        this.selectedCompanionsContainer = document.getElementById("selectedCompanions");
+
         this.loadingOverlay =
         document.getElementById("loadingOverlay");
 
         this.registerEvents();
+
+        this.loadCompanionUsers();
 
         onAuthStateChanged(auth, async (user) => {
 
@@ -223,7 +247,7 @@ btnGetLocation?.addEventListener(
             place;
 
             status.textContent =
-        "🟢 Lokasi berjaya dikesan.";
+            "🟢 Lokasi berjaya dikesan.";
 
         }
 
@@ -245,7 +269,230 @@ btnGetLocation?.addEventListener(
 
 );
 
-    },
+
+/*==========================================
+  COMPANION SEARCH
+==========================================*/
+
+this.companionSearch?.addEventListener(
+
+    "input",
+
+    ()=>this.searchCompanions()
+
+);
+
+},
+
+    /* ======================================================
+   LOAD PTIS USERS
+====================================================== */
+
+async loadCompanionUsers(){
+
+    try{
+
+        const snapshot =
+        await getDocs(
+            collection(db,"staff")
+        );
+
+        this.allUsers = [];
+
+        snapshot.forEach(doc=>{
+
+            const data = doc.data();
+
+            this.allUsers.push({
+
+                uid: doc.id,
+
+                email: data.email || "",
+
+                role: data.role || "",
+
+                zone: data.zone || "",
+
+                status: data.status || "",
+
+                name: data.nama || "Pengguna"
+
+            });
+
+        });
+
+    }catch(error){
+
+        console.error(
+            "Load companion users:",
+            error
+        );
+
+    }
+
+},
+
+/* ======================================================
+   SEARCH COMPANION
+====================================================== */
+
+searchCompanions(){
+
+    if(!this.companionSearch) return;
+
+    const keyword =
+    this.companionSearch.value
+    .trim()
+    .toLowerCase();
+
+    if(keyword===""){
+
+        this.companionList.innerHTML="";
+
+        this.companionList.classList.add("hidden");
+
+        return;
+
+    }
+
+    const result =
+
+    this.allUsers.filter(user=>{
+
+        return user.name
+        .toLowerCase()
+        .includes(keyword);
+
+    });
+
+    this.renderCompanionList(result);
+
+},
+
+/* ======================================================
+   RENDER COMPANION LIST
+====================================================== */
+
+renderCompanionList(users){
+
+    if(!this.companionList) return;
+
+    this.companionList.innerHTML="";
+
+    if(users.length===0){
+
+        this.companionList.classList.add("hidden");
+
+        return;
+
+    }
+
+    this.companionList.classList.remove("hidden");
+
+    users.forEach(user=>{
+
+        const item =
+        document.createElement("div");
+
+        item.className =
+        "px-4 py-3 cursor-pointer hover:bg-white/10 border-b border-white/10 transition";
+
+        item.innerHTML = `
+
+            👤 ${user.name}
+
+        `;
+
+        item.onclick = ()=>{
+
+            const exists =
+
+            this.selectedCompanions.find(
+
+                companion=>companion.uid===user.uid
+
+            );
+
+            if(exists){
+
+                return;
+
+            }
+
+            this.selectedCompanions.push(user);
+
+            this.renderSelectedCompanions();
+
+            this.companionSearch.value="";
+
+            this.companionList.innerHTML="";
+
+            this.companionList.classList.add("hidden");
+
+        };
+
+        this.companionList.appendChild(item);
+
+    });
+
+},
+
+/* ======================================================
+   RENDER SELECTED COMPANIONS
+====================================================== */
+
+renderSelectedCompanions(){
+
+    if(!this.selectedCompanionsContainer) return;
+
+    this.selectedCompanionsContainer.innerHTML="";
+
+    this.selectedCompanions.forEach(user=>{
+
+        const badge =
+        document.createElement("div");
+
+        badge.className =
+
+        "flex items-center gap-2 px-3 py-2 rounded-full bg-yellow-500/20 border border-yellow-500/30 text-yellow-300 text-sm";
+
+        badge.innerHTML = `
+
+            👤 ${user.name}
+
+            <button
+            type="button"
+            class="font-bold">
+
+                ✕
+
+            </button>
+
+        `;
+
+        badge.querySelector("button").onclick = ()=>{
+
+            this.selectedCompanions =
+
+            this.selectedCompanions.filter(
+
+                item=>item.uid!==user.uid
+
+            );
+
+            this.renderSelectedCompanions();
+
+        };
+
+        this.selectedCompanionsContainer.appendChild(
+
+            badge
+
+        );
+
+    });
+
+},
 
     openModal(){
 
@@ -282,6 +529,24 @@ btnGetLocation?.addEventListener(
         this.movementNote.value="";
 
         this.calendarToggle.checked=false;
+
+        this.selectedCompanions = [];
+
+        this.renderSelectedCompanions();
+
+        if(this.companionSearch){
+
+            this.companionSearch.value="";
+
+        }
+
+        if(this.companionList){
+
+            this.companionList.innerHTML="";
+
+            this.companionList.classList.add("hidden");
+
+        }
 
         this.setCurrentDateTime();
 
@@ -518,6 +783,22 @@ async saveMovement(){
 
         name:user.displayName || "",
 
+        companions:
+
+        this.selectedCompanions.map(user=>({
+
+            uid:user.uid,
+
+            name:user.name,
+
+            email:user.email,
+
+            role:user.role,
+
+            zone:user.zone
+
+        })),
+
         type:this.movementType.value,
 
         location:this.movementLocation.value.trim(),
@@ -556,6 +837,43 @@ async saveMovement(){
         movementData
 
     );
+
+    /*==========================================
+  UPDATE STAFF STATUS
+==========================================*/
+
+const batch =
+writeBatch(db);
+
+this.selectedCompanions.forEach(companion=>{
+
+    batch.update(
+
+        doc(db,"staff",companion.uid),
+
+        {
+
+            status:"bertugas",
+
+            currentStatus:
+            movementType,
+
+            currentLocation:
+            this.movementLocation.value.trim(),
+
+            currentActivity:
+            this.movementActivity.value.trim(),
+
+            updatedAt:
+            serverTimestamp()
+
+        }
+
+    );
+
+});
+
+await batch.commit();
 
     await updateDoc(
 
