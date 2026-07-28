@@ -5,6 +5,8 @@
 
 import { db } from "./firebase.js";
 
+console.log("Dashboard Version 28 Jul");
+
 import {
     collection,
     query,
@@ -864,55 +866,56 @@ function refreshRealtimeDashboard(){
 
         const zone = getZoneKey(staff.zone);
 
-        switch((staff.status || "").toLowerCase()){
+        switch((staff.currentStatus || "").toLowerCase()){
 
-            case "office":
-            case "pejabat":
+    case "office":
 
-                dashboardData.officeMembers++;
+        dashboardData.officeMembers++;
 
-                if(zone && zoneData[zone]){
+        if(zone && zoneData[zone]){
 
-                    zoneData[zone].office++;
-
-                }
-
-                break;
-
-            case "bertugas":
-
-                dashboardData.activeMovement++;
-                dashboardData.totalTasks++;
-
-                movementList.push({
-
-                    uid: staff.uid || "",
-                    nama: staff.nama || "PTIS",
-                    role: staff.role || "",
-                    status: staff.currentStatus || "outsideSchool",
-                    zone: zone,
-                    lokasi: staff.currentLocation || "",
-                    aktiviti: staff.currentActivity || "",
-                    time: staff.updatedAt || null
-
-                });
-
-                if(zone && zoneData[zone]){
-
-                    zoneData[zone].movement++;
-
-                }
-
-                break;
-
-            case "leave":
-            case "cuti":
-
-                dashboardData.absentMembers++;
-
-                break;
+            zoneData[zone].office++;
 
         }
+
+        break;
+
+    case "outsideschool":
+    case "meeting":
+    case "course":
+    case "hrmis":
+
+        dashboardData.activeMovement++;
+        dashboardData.totalTasks++;
+
+        movementList.push({
+
+            uid: staff.uid || "",
+            nama: staff.nama || "PTIS",
+            role: staff.role || "",
+            status: staff.currentStatus || "",
+            zone: zone,
+            lokasi: staff.currentLocation || "",
+            aktiviti: staff.currentActivity || "",
+            time: staff.updatedAt || null
+
+        });
+
+        if(zone && zoneData[zone]){
+
+            zoneData[zone].movement++;
+
+        }
+
+        break;
+
+    case "leave":
+
+        dashboardData.absentMembers++;
+
+        break;
+
+}
 
     });
 

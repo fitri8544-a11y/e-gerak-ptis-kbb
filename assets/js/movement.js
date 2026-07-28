@@ -838,12 +838,56 @@ async saveMovement(){
 
     );
 
-    /*==========================================
+/*==========================================
   UPDATE STAFF STATUS
 ==========================================*/
 
-const batch =
-writeBatch(db);
+const batch = writeBatch(db);
+
+/* Status mengikut jenis pergerakan */
+
+let staffStatus = "bertugas";
+
+if(movementType === "office"){
+
+    staffStatus = "office";
+
+}else if(movementType === "leave"){
+
+    staffStatus = "leave";
+
+}
+
+/* ===============================
+   UPDATE KETUA
+================================ */
+
+batch.update(
+
+    doc(db,"staff",user.uid),
+
+    {
+
+        status: staffStatus,
+
+        currentStatus: movementType,
+
+        currentLocation:
+        this.movementLocation.value.trim(),
+
+        currentActivity:
+        this.movementActivity.value.trim(),
+
+        updatedAt:
+        serverTimestamp()
+
+    }
+
+);
+
+/* ===============================
+   UPDATE RAKAN
+================================ */
 
 this.selectedCompanions.forEach(companion=>{
 
@@ -853,10 +897,9 @@ this.selectedCompanions.forEach(companion=>{
 
         {
 
-            status:"bertugas",
+            status: staffStatus,
 
-            currentStatus:
-            movementType,
+            currentStatus: movementType,
 
             currentLocation:
             this.movementLocation.value.trim(),
@@ -874,26 +917,6 @@ this.selectedCompanions.forEach(companion=>{
 });
 
 await batch.commit();
-
-    await updateDoc(
-
-        doc(db,"users",user.uid),
-
-        {
-
-            online:true,
-
-            currentStatus:movementType,
-
-            currentLocation:this.movementLocation.value.trim(),
-
-            currentActivity:this.movementActivity.value.trim(),
-
-            lastMovement:serverTimestamp()
-
-        }
-
-    );
 
     /*==========================================
       LIVE LOCATION
