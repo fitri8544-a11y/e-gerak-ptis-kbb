@@ -20,6 +20,7 @@ import {
 
     collection,
     getDocs,
+    getDoc,
     deleteDoc,
     doc
 
@@ -48,25 +49,33 @@ document.getElementById("refreshToggle");
    LOAD USER
 ====================================================== */
 
-onAuthStateChanged(auth,async(user)=>{
+onAuthStateChanged(auth, async(user)=>{
 
     if(!user) return;
 
     settingEmail.textContent =
     user.email;
 
+    settingName.textContent =
+    user.displayName || "Administrator";
+
+    settingRole.textContent =
+    "Administrator";
+
     try{
 
-        const snap =
-        await getDoc(
+        const userRef = doc(
 
-            doc(
-                db,
-                "users",
-                user.uid
-            )
+            db,
+
+            "users",
+
+            user.uid
 
         );
+
+        const snap =
+        await getDoc(userRef);
 
         if(snap.exists()){
 
@@ -74,16 +83,36 @@ onAuthStateChanged(auth,async(user)=>{
             snap.data();
 
             settingName.textContent =
-            data.nama || "-";
+
+                data.nama ||
+
+                data.name ||
+
+                user.displayName ||
+
+                "Administrator";
 
             settingRole.textContent =
-            data.role || "staff";
+
+                data.role ||
+
+                data.peranan ||
+
+                "Administrator";
 
         }
 
-    }catch(error){
+    }
 
-        console.error(error);
+    catch(error){
+
+        console.error(
+
+            "Load User Error:",
+
+            error
+
+        );
 
     }
 

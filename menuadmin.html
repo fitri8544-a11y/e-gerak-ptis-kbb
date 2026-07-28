@@ -2036,25 +2036,25 @@ style="height:300px;">
 
 <section
 id="settingsSection"
-class="content-section hidden mt-12">
+class="content-section hidden space-y-6">
 
-    <!-- HEADER -->
+    <!-- ================= HEADER ================= -->
 
-    <div class="mb-10">
+    <div>
 
-        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-slate-100 text-slate-700 font-bold">
-
-            ⚙ SYSTEM SETTINGS
-
-        </div>
-
-        <h2 class="text-4xl font-black text-slate-900 mt-5">
+        <h2
+        class="text-4xl
+        font-black
+        text-slate-900
+        mt-4">
 
             Tetapan Sistem
 
         </h2>
 
-        <p class="text-slate-500 mt-2">
+        <p
+        class="text-slate-500
+        mt-2">
 
             Pengurusan konfigurasi E-GERAK PTIS KBB Version 2.
 
@@ -2062,73 +2062,135 @@ class="content-section hidden mt-12">
 
     </div>
 
-    <!-- GRID -->
+    <!-- ================= GRID ================= -->
 
-    <div class="grid lg:grid-cols-2 gap-8">
+    <div class="grid xl:grid-cols-2 gap-6">
 
-        <!-- PROFILE -->
+        <!-- ================= AKAUN ================= -->
 
-        <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-8">
+        <div
+        class="bg-white
+        rounded-3xl
+        shadow-lg
+        border
+        border-slate-200
+        overflow-hidden">
 
-            <h3 class="text-2xl font-black mb-8">
+            <div
+            class="flex
+            items-center
+            gap-4
+            p-6
+            border-b">
 
-                👤 Akaun Saya
+                <div
+                class="w-16
+                h-16
+                rounded-2xl
+                bg-gradient-to-br
+                from-blue-500
+                to-indigo-600
+                text-white
+                flex
+                items-center
+                justify-center
+                text-3xl">
 
-            </h3>
+                    <i class="fa-solid fa-user"></i>
 
-            <div class="space-y-6">
+                </div>
 
                 <div>
 
-                    <p class="text-slate-400 text-sm">
+                    <h3
+                    class="text-2xl
+                    font-black">
+
+                        Akaun Saya
+
+                    </h3>
+
+                    <p
+                    class="text-slate-500">
+
+                        Maklumat pengguna semasa
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="p-6 space-y-6">
+
+                <div>
+
+                    <label class="text-sm text-slate-400">
 
                         Nama
 
-                    </p>
+                    </label>
 
-                    <h4
+                    <div
                     id="settingName"
-                    class="font-bold text-xl">
+                    class="mt-2
+                    text-xl
+                    font-bold
+                    text-slate-800">
 
-                        -
+                        Memuatkan...
 
-                    </h4>
+                    </div>
 
                 </div>
 
                 <div>
 
-                    <p class="text-slate-400 text-sm">
+                    <label class="text-sm text-slate-400">
 
                         Emel
 
-                    </p>
+                    </label>
 
-                    <h4
+                    <div
                     id="settingEmail"
-                    class="font-semibold">
+                    class="mt-2
+                    font-semibold
+                    text-slate-700">
 
-                        -
+                        Memuatkan...
 
-                    </h4>
+                    </div>
 
                 </div>
 
                 <div>
 
-                    <p class="text-slate-400 text-sm">
+                    <label class="text-sm text-slate-400">
 
                         Peranan
 
-                    </p>
+                    </label>
 
-                    <span
-                    id="settingRole"
-                    class="inline-block px-4 py-2 rounded-xl bg-blue-100 text-blue-700 font-bold">
+                    <div class="mt-3">
 
-                        -
+                        <span
+                        id="settingRole"
+                        class="inline-flex
+                        items-center
+                        gap-2
+                        px-4
+                        py-2
+                        rounded-full
+                        bg-blue-100
+                        text-blue-700
+                        font-bold">
 
-                    </span>
+                            Memuatkan...
+
+                        </span>
+
+                    </div>
 
                 </div>
 
@@ -2136,11 +2198,20 @@ class="content-section hidden mt-12">
 
         </div>
 
-        <!-- SYSTEM -->
+        <!-- ================= TETAPAN ================= -->
 
-        <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-8">
+        <div
+        class="bg-white
+        rounded-3xl
+        shadow-lg
+        border
+        border-slate-200
+        p-6">
 
-            <h3 class="text-2xl font-black mb-8">
+            <h3
+            class="text-2xl
+            font-black
+            mb-8">
 
                 ⚙ Tetapan Sistem
 
@@ -2150,11 +2221,7 @@ class="content-section hidden mt-12">
 
                 <label class="flex justify-between items-center">
 
-                    <span>
-
-                        Papar Notifikasi
-
-                    </span>
+                    <span>Papar Notifikasi</span>
 
                     <input
                     id="notificationToggle"
@@ -2165,11 +2232,7 @@ class="content-section hidden mt-12">
 
                 <label class="flex justify-between items-center">
 
-                    <span>
-
-                        Bunyi Notifikasi
-
-                    </span>
+                    <span>Bunyi Notifikasi</span>
 
                     <input
                     id="soundToggle"
@@ -2180,11 +2243,7 @@ class="content-section hidden mt-12">
 
                 <label class="flex justify-between items-center">
 
-                    <span>
-
-                        Auto Refresh
-
-                    </span>
+                    <span>Auto Refresh</span>
 
                     <input
                     id="refreshToggle"
@@ -2197,23 +2256,32 @@ class="content-section hidden mt-12">
 
         </div>
 
-        <!-- SYSTEM INFO -->
+        <!-- ================= MAKLUMAT SISTEM ================= -->
 
-        <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-8">
+        <div
+        class="bg-white
+        rounded-3xl
+        shadow-lg
+        border
+        border-slate-200
+        p-6">
 
-            <h3 class="text-2xl font-black mb-8">
+            <h3
+            class="text-2xl
+            font-black
+            mb-8">
 
                 ℹ Maklumat Sistem
 
             </h3>
 
-            <div class="space-y-4">
+            <div class="space-y-5">
 
                 <div class="flex justify-between">
 
                     <span>Versi</span>
 
-                    <b>2.0</b>
+                    <strong>2.0</strong>
 
                 </div>
 
@@ -2221,7 +2289,7 @@ class="content-section hidden mt-12">
 
                     <span>Database</span>
 
-                    <b>Cloud Firestore</b>
+                    <strong>Cloud Firestore</strong>
 
                 </div>
 
@@ -2229,15 +2297,17 @@ class="content-section hidden mt-12">
 
                     <span>Authentication</span>
 
-                    <b>Firebase Auth</b>
+                    <strong>Firebase Authentication</strong>
 
                 </div>
 
                 <div class="flex justify-between">
 
-                    <span>Status</span>
+                    <span>Status Sistem</span>
 
-                    <span class="text-green-600 font-bold">
+                    <span
+                    class="text-green-600
+                    font-bold">
 
                         ● ONLINE
 
@@ -2249,11 +2319,21 @@ class="content-section hidden mt-12">
 
         </div>
 
-        <!-- DANGER -->
+        <!-- ================= ADMIN ================= -->
 
-        <div class="bg-white rounded-3xl shadow-xl border border-red-200 p-8">
+        <div
+        class="bg-white
+        rounded-3xl
+        shadow-lg
+        border
+        border-red-200
+        p-6">
 
-            <h3 class="text-2xl font-black text-red-600 mb-8">
+            <h3
+            class="text-2xl
+            font-black
+            text-red-600
+            mb-8">
 
                 🚨 Zon Pentadbir
 
@@ -2263,7 +2343,14 @@ class="content-section hidden mt-12">
 
                 <button
                 id="clearMovementBtn"
-                class="w-full rounded-2xl py-4 bg-red-600 text-white font-bold">
+                class="w-full
+                rounded-2xl
+                py-4
+                bg-red-600
+                hover:bg-red-700
+                text-white
+                font-bold
+                transition">
 
                     🗑 Padam Semua Rekod Pergerakan
 
@@ -2271,7 +2358,14 @@ class="content-section hidden mt-12">
 
                 <button
                 id="resetStatisticBtn"
-                class="w-full rounded-2xl py-4 bg-orange-500 text-white font-bold">
+                class="w-full
+                rounded-2xl
+                py-4
+                bg-orange-500
+                hover:bg-orange-600
+                text-white
+                font-bold
+                transition">
 
                     🔄 Reset Statistik
 

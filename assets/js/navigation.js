@@ -63,15 +63,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function setActive(button){
 
-        menuButtons.forEach(btn=>{
+        document
+        .querySelectorAll(".menu button")
+        .forEach(btn=>{
 
             btn.classList.remove("active");
 
-        });
+    });
+
+    if(button){
 
         button.classList.add("active");
 
     }
+
+}
 
     /* ================= OPEN SECTION ================= */
 
@@ -202,7 +208,7 @@ menuButtons[4]?.addEventListener("click",()=>{
 
     openSection(
         settingsSection,
-        menuButtons[3]
+        menuButtons[4]
     );
 
 });
