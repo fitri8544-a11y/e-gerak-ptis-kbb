@@ -45,6 +45,32 @@ import {
 } from
 "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+/* =====================================================
+   GET STAFF DOCUMENT BY EMAIL
+===================================================== */
+
+async function getStaffDocByEmail(email){
+
+    const q = query(
+
+        collection(db,"staff"),
+
+        where("email","==",email)
+
+    );
+
+    const snapshot = await getDocs(q);
+
+    if(snapshot.empty){
+
+        return null;
+
+    }
+
+    return snapshot.docs[0];
+
+}
+
 const MovementManager = {
 
     modal: null,
@@ -618,7 +644,11 @@ renderSelectedCompanions(){
 
         case "office":
 
-            // Tiada perubahan
+            activityLabel.textContent =
+            "Ringkasan Tugasan";
+
+            this.movementActivity.placeholder =
+            "Contoh : Selesai penyelenggaraan dan kembali ke pejabat.";
 
         break;
 
@@ -846,54 +876,26 @@ const batch = writeBatch(db);
 
 /* Status mengikut jenis pergerakan */
 
-let staffStatus = "bertugas";
+/* ==========================================
+   STATUS KEAHLIAN PTIS
+========================================== */
 
-if(movementType === "office"){
-
-    staffStatus = "office";
-
-}else if(movementType === "leave"){
-
-    staffStatus = "leave";
-
-}
+const staffStatus = "aktif";
 
 /* ===============================
    UPDATE KETUA
 ================================ */
 
-batch.update(
-
-    doc(db,"staff",user.uid),
-
-    {
-
-        status: staffStatus,
-
-        currentStatus: movementType,
-
-        currentLocation:
-        this.movementLocation.value.trim(),
-
-        currentActivity:
-        this.movementActivity.value.trim(),
-
-        updatedAt:
-        serverTimestamp()
-
-    }
-
+const myStaffDoc =
+await getStaffDocByEmail(
+    user.email
 );
 
-/* ===============================
-   UPDATE RAKAN
-================================ */
-
-this.selectedCompanions.forEach(companion=>{
+if(myStaffDoc){
 
     batch.update(
 
-        doc(db,"staff",companion.uid),
+        myStaffDoc.ref,
 
         {
 
@@ -914,7 +916,47 @@ this.selectedCompanions.forEach(companion=>{
 
     );
 
-});
+}
+
+/* ===============================
+   UPDATE RAKAN
+================================ */
+
+for(const companion of this.selectedCompanions){
+
+    const companionStaffDoc =
+    await getStaffDocByEmail(
+        companion.email
+    );
+
+    if(companionStaffDoc){
+
+        batch.update(
+
+            companionStaffDoc.ref,
+
+            {
+
+                status: staffStatus,
+
+                currentStatus: movementType,
+
+                currentLocation:
+                this.movementLocation.value.trim(),
+
+                currentActivity:
+                this.movementActivity.value.trim(),
+
+                updatedAt:
+                serverTimestamp()
+
+            }
+
+        );
+
+    }
+
+}
 
 await batch.commit();
 
