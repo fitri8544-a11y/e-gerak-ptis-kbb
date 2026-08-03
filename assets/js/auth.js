@@ -27,7 +27,11 @@ import {
     doc,
     setDoc,
     updateDoc,
-    serverTimestamp
+    serverTimestamp,
+    collection,
+    query,
+    where,
+    getDocs
 
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
@@ -126,6 +130,56 @@ function stopLoading(){
 }
 
 /* =========================================================
+   UPDATE STAFF PHOTO
+========================================================= */
+
+async function updateStaffPhoto(user){
+
+    try{
+
+        const q = query(
+
+            collection(db,"staff"),
+
+            where("email","==",user.email)
+
+        );
+
+        const snapshot = await getDocs(q);
+
+        if(snapshot.empty) return;
+
+        const staffDoc = snapshot.docs[0];
+
+        await updateDoc(
+
+            doc(db,"staff",staffDoc.id),
+
+            {
+
+                photoURL:user.photoURL || ""
+
+            }
+
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+
+            "Update Staff Photo Error:",
+
+            error
+
+        );
+
+    }
+
+}
+
+/* =========================================================
    SAVE USER PROFILE
 ========================================================= */
 
@@ -134,27 +188,8 @@ async function saveUserProfile(user){
     let profile =
     await getUserProfile(user.uid);
 
-    /* ==========================================
-   UPDATE STAFF PHOTO
-========================================== */
+    await updateStaffPhoto(user);
 
-await setDoc(
-
-    doc(db,"staff",user.uid),
-
-    {
-
-        photoURL: user.photoURL
-
-    },
-
-    {
-
-        merge:true
-
-    }
-
-);
 
     if(
 
