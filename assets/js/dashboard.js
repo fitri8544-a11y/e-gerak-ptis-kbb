@@ -107,6 +107,13 @@ let userStatus = [];
 
 let movementList = [];
 
+/* ================= COORDINATOR ================= */
+
+const coordinatorEmail =
+"muhammadkhalid@moe.gov.my";
+
+let coordinatorData = null;
+
 /* ======================================================
    DASHBOARD ENGINE V2
 ====================================================== */
@@ -300,6 +307,165 @@ function refreshDashboard(){
 
 }
 
+/*======================================================
+  RENDER COORDINATOR
+======================================================*/
+
+function renderCoordinator(){
+
+    if(!coordinatorData){
+
+        return;
+
+    }
+
+    document.getElementById(
+        "coordinatorName"
+    ).textContent =
+    coordinatorData.nama || "-";
+
+    document.getElementById(
+        "coordinatorRole"
+    ).textContent =
+    coordinatorData.role || "-";
+
+    document.getElementById(
+        "coordinatorLocation"
+    ).textContent =
+    coordinatorData.currentLocation || "-";
+
+    document.getElementById(
+        "coordinatorActivity"
+    ).textContent =
+    coordinatorData.currentActivity || "-";
+
+    const badge =
+    document.getElementById(
+        "coordinatorBadge"
+    );
+
+    const status =
+    coordinatorData.currentStatus || "office";
+
+    badge.className =
+    "px-5 py-3 rounded-full font-bold";
+
+    switch(status){
+
+        case "office":
+
+            badge.classList.add(
+
+                "bg-green-500/20",
+
+                "text-green-300"
+
+            );
+
+            badge.textContent =
+            "🟢 Dalam Pejabat";
+
+            break;
+
+        case "outsideSchool":
+
+            badge.classList.add(
+
+                "bg-yellow-500/20",
+
+                "text-yellow-300"
+
+            );
+
+            badge.textContent =
+            "🚗 Keluar Bertugas";
+
+            break;
+
+        case "meeting":
+
+            badge.classList.add(
+
+                "bg-blue-500/20",
+
+                "text-blue-300"
+
+            );
+
+            badge.textContent =
+            "👥 Mesyuarat";
+
+            break;
+
+        case "course":
+
+            badge.classList.add(
+
+                "bg-purple-500/20",
+
+                "text-purple-300"
+
+            );
+
+            badge.textContent =
+            "🎓 Berkursus";
+
+            break;
+
+        case "leave":
+
+            badge.classList.add(
+
+                "bg-red-500/20",
+
+                "text-red-300"
+
+            );
+
+            badge.textContent =
+            "🌴 Cuti";
+
+            break;
+
+        case "hrmis":
+
+            badge.classList.add(
+
+                "bg-cyan-500/20",
+
+                "text-cyan-300"
+
+            );
+
+            badge.textContent =
+            "📄 HRMIS";
+
+            break;
+
+    }
+
+    if(
+
+        coordinatorData.updatedAt?.toDate
+
+    ){
+
+        document.getElementById(
+
+            "coordinatorTime"
+
+        ).textContent =
+
+        coordinatorData.updatedAt
+
+        .toDate()
+
+        .toLocaleString("ms-MY");
+
+    }
+
+}
+
 /* ================= STAFF ================= */
 
 onSnapshot(
@@ -308,21 +474,39 @@ onSnapshot(
 
     snapshot=>{
 
-        staffList=[];
+        staffList = [];
+
+        coordinatorData = null;
 
         snapshot.forEach(doc=>{
 
-            staffList.push({
+            const data = {
 
-                id:doc.id,
+                id: doc.id,
 
                 ...doc.data()
 
-            });
+            };
+
+            staffList.push(data);
+
+            if(
+
+                (data.email || "").toLowerCase() ===
+
+                coordinatorEmail.toLowerCase()
+
+            ){
+
+                coordinatorData = data;
+
+            }
 
         });
 
         refreshDashboard();
+
+        renderCoordinator();
 
     }
 

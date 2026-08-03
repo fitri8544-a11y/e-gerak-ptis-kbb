@@ -925,6 +925,184 @@ function refreshRealtimeDashboard(){
 
     renderMovement(movementList);
 
+    updateCoordinatorCard();
+
+}
+
+/*======================================================
+  PENYELARAS PTIS DAERAH
+======================================================*/
+
+function updateCoordinatorCard(){
+
+    const coordinator =
+
+    staffCache.find(staff=>
+
+        (staff.role || "")
+        .toUpperCase()
+        .includes("PENYELARAS")
+
+    );
+
+    if(!coordinator) return;
+
+    /* ===============================
+       PHOTO
+    ============================== */
+
+    const coordinatorPhoto =
+    document.getElementById("coordinatorPhoto");
+
+    if(coordinatorPhoto){
+
+        coordinatorPhoto.src =
+        coordinator.photoURL ||
+        "assets/images/default-avatar.png";
+
+    }
+
+    /* ===============================
+       NAME
+    ============================== */
+
+    document.getElementById("coordinatorName").textContent =
+    coordinator.nama || "-";
+
+    document.getElementById("coordinatorRole").textContent =
+    coordinator.role || "-";
+
+    document.getElementById("coordinatorLocation").textContent =
+    coordinator.currentLocation || "-";
+
+    document.getElementById("coordinatorActivity").textContent =
+    coordinator.currentActivity || "-";
+
+    /* ===============================
+       UPDATED TIME
+    ============================== */
+
+    const updatedTime =
+    coordinator.updatedAt
+    ? coordinator.updatedAt.toDate()
+    : null;
+
+    document.getElementById("coordinatorTime").textContent =
+
+    updatedTime
+
+    ?
+
+    updatedTime.toLocaleDateString(
+        "ms-MY",
+        {
+            day:"numeric",
+            month:"long",
+            year:"numeric"
+        }
+    )
+
+    +
+
+    " • "
+
+    +
+
+    updatedTime.toLocaleTimeString(
+        "ms-MY",
+        {
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    )
+
+    :
+
+    "-";
+
+    /* ===============================
+       STATUS BADGE
+    ============================== */
+
+    const badge =
+    document.getElementById("coordinatorBadge");
+
+    const status =
+    (coordinator.currentStatus || "")
+    .toLowerCase();
+
+    switch(status){
+
+        case "office":
+
+            badge.className =
+            "px-5 py-3 rounded-full bg-green-500/20 text-green-300 font-bold";
+
+            badge.innerHTML =
+            "🟢 Dalam Pejabat";
+
+        break;
+
+        case "outsideschool":
+
+            badge.className =
+            "px-5 py-3 rounded-full bg-yellow-500/20 text-yellow-300 font-bold";
+
+            badge.innerHTML =
+            "🚗 Luar Bertugas";
+
+        break;
+
+        case "meeting":
+
+            badge.className =
+            "px-5 py-3 rounded-full bg-blue-500/20 text-blue-300 font-bold";
+
+            badge.innerHTML =
+            "👥 Mesyuarat";
+
+        break;
+
+        case "course":
+
+            badge.className =
+            "px-5 py-3 rounded-full bg-purple-500/20 text-purple-300 font-bold";
+
+            badge.innerHTML =
+            "🎓 Berkursus";
+
+        break;
+
+        case "hrmis":
+
+            badge.className =
+            "px-5 py-3 rounded-full bg-cyan-500/20 text-cyan-300 font-bold";
+
+            badge.innerHTML =
+            "📄 HRMIS";
+
+        break;
+
+        case "leave":
+
+            badge.className =
+            "px-5 py-3 rounded-full bg-red-500/20 text-red-300 font-bold";
+
+            badge.innerHTML =
+            "🌴 Cuti";
+
+        break;
+
+        default:
+
+            badge.className =
+            "px-5 py-3 rounded-full bg-slate-500/20 text-slate-300 font-bold";
+
+            badge.innerHTML =
+            "⚪ Tidak Diketahui";
+
+    }
+
 }
 
 onSnapshot(staffRef,(snapshot)=>{

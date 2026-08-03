@@ -134,6 +134,28 @@ async function saveUserProfile(user){
     let profile =
     await getUserProfile(user.uid);
 
+    /* ==========================================
+   UPDATE STAFF PHOTO
+========================================== */
+
+await setDoc(
+
+    doc(db,"staff",user.uid),
+
+    {
+
+        photoURL: user.photoURL
+
+    },
+
+    {
+
+        merge:true
+
+    }
+
+);
+
     if(
 
         !profile ||
