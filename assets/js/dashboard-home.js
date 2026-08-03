@@ -45,31 +45,36 @@ const zoneData={
     "Padang Serai":{
         ahli:0,
         office:0,
-        movement:0
+        movement:0,
+        absent:0
     },
 
     "Kulim":{
         ahli:0,
         office:0,
-        movement:0
+        movement:0,
+        absent:0
     },
 
     "Sungai Ular":{
         ahli:0,
         office:0,
-        movement:0
+        movement:0,
+        absent:0
     },
 
     "Bandar Baharu":{
         ahli:0,
         office:0,
-        movement:0
+        movement:0,
+        absent:0
     },
 
     "Serdang":{
         ahli:0,
         office:0,
-        movement:0
+        movement:0,
+        absent:0
     }
 
 };
@@ -133,6 +138,9 @@ const zones={
         movement:
         document.getElementById("padangMovement"),
 
+        absent:
+        document.getElementById("padangAbsent"),
+
         progress:
         document.getElementById("padangProgress")
 
@@ -148,6 +156,9 @@ const zones={
 
         movement:
         document.getElementById("kulimMovement"),
+
+        absent:
+        document.getElementById("kulimAbsent"),
 
         progress:
         document.getElementById("kulimProgress")
@@ -165,6 +176,9 @@ const zones={
         movement:
         document.getElementById("sungaiMovement"),
 
+        absent:
+        document.getElementById("sungaiAbsent"),
+
         progress:
         document.getElementById("sungaiProgress")
 
@@ -181,6 +195,9 @@ const zones={
         movement:
         document.getElementById("bbMovement"),
 
+        absent:
+        document.getElementById("bbAbsent"),
+
         progress:
         document.getElementById("bbProgress")
 
@@ -196,6 +213,9 @@ const zones={
 
         movement:
         document.getElementById("serdangMovement"),
+
+        absent:
+        document.getElementById("serdangAbsent"),
 
         progress:
         document.getElementById("serdangProgress")
@@ -251,6 +271,9 @@ function updateZones(){
 
         card.movement.textContent=
         data.movement;
+
+        card.absent.textContent =
+        data.absent;
 
         const percent=
 
@@ -859,6 +882,7 @@ function refreshRealtimeDashboard(){
 
         zoneData[zone].office = 0;
         zoneData[zone].movement = 0;
+        zoneData[zone].absent = 0;
 
     });
 
@@ -912,6 +936,12 @@ function refreshRealtimeDashboard(){
     case "leave":
 
         dashboardData.absentMembers++;
+
+        if(zone && zoneData[zone]){
+
+            zoneData[zone].absent++;
+
+        }
 
         break;
 
