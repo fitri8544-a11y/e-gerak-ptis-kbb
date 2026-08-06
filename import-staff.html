@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Import Ahli PTIS</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/js/all.min.js"></script>
+
+<style>
+
+body{
+
+font-family:'Inter',sans-serif;
+background:#F8FAFC;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="max-w-6xl mx-auto py-10 px-6">
+
+<!-- HEADER -->
+
+<div class="mb-8">
+
+<h1 class="text-4xl font-black text-slate-900">
+
+📥 Import Ahli PTIS
+
+</h1>
+
+<p class="text-slate-500 mt-2">
+
+Import data Ahli PTIS daripada fail Excel.
+
+</p>
+
+</div>
+
+<!-- UPLOAD CARD -->
+
+<div class="bg-white rounded-3xl shadow p-8 border">
+
+<h2 class="font-bold text-xl mb-6">
+
+📂 Pilih Fail Excel
+
+</h2>
+
+<input
+
+id="excelFile"
+
+type="file"
+
+accept=".xlsx,.xls"
+
+class="hidden"
+
+/>
+
+<button
+
+onclick="document.getElementById('excelFile').click()"
+
+class="px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white rounded-xl font-bold">
+
+<i class="fa-solid fa-file-excel mr-2"></i>
+
+Pilih Fail Excel
+
+</button>
+
+<p
+id="selectedFile"
+class="mt-4 text-slate-500">
+
+Tiada fail dipilih.
+
+</p>
+
+</div>
+
+<!-- PREVIEW -->
+
+<div class="bg-white rounded-3xl shadow p-8 border mt-8">
+
+<div class="flex items-center justify-between mb-6">
+
+<h2 class="text-xl font-bold">
+
+📊 Preview Data
+
+</h2>
+
+<div
+id="totalRecord"
+
+class="px-4 py-2 rounded-full bg-slate-100 font-bold">
+
+0 Rekod
+
+</div>
+
+</div>
+
+<div
+id="previewTable"
+
+class="overflow-auto">
+
+<p class="text-slate-400">
+
+Tiada data dipaparkan.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- IMPORT -->
+
+<div class="mt-8 flex justify-end">
+
+<button
+
+id="importBtn"
+
+disabled
+
+class="px-8 py-3 rounded-xl bg-slate-300 text-white font-bold cursor-not-allowed">
+
+IMPORT KE FIRESTORE
+
+</button>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+<script type="module"
+src="assets/js/import-staff.js"></script>
+
+</body>
+
+</html>

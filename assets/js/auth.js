@@ -130,10 +130,10 @@ function stopLoading(){
 }
 
 /* =========================================================
-   UPDATE STAFF PHOTO
+   SYNC STAFF PROFILE
 ========================================================= */
 
-async function updateStaffPhoto(user){
+async function syncStaffProfile(user){
 
     try{
 
@@ -147,7 +147,11 @@ async function updateStaffPhoto(user){
 
         const snapshot = await getDocs(q);
 
-        if(snapshot.empty) return;
+        if(snapshot.empty){
+
+            return;
+
+        }
 
         const staffDoc = snapshot.docs[0];
 
@@ -157,9 +161,29 @@ async function updateStaffPhoto(user){
 
             {
 
-                photoURL:user.photoURL || ""
+                photoURL:
+
+                user.photoURL || "",
+
+                currentStatus:
+
+                "office",
+
+                lastLogin:
+
+                serverTimestamp(),
+
+                updatedAt:
+
+                serverTimestamp()
 
             }
+
+        );
+
+        console.log(
+
+            "✅ Staff Profile Sync"
 
         );
 
@@ -169,7 +193,7 @@ async function updateStaffPhoto(user){
 
         console.error(
 
-            "Update Staff Photo Error:",
+            "Sync Staff Error:",
 
             error
 
@@ -188,7 +212,7 @@ async function saveUserProfile(user){
     let profile =
     await getUserProfile(user.uid);
 
-    await updateStaffPhoto(user);
+    await syncStaffProfile(user);
 
 
     if(
@@ -571,6 +595,10 @@ if(logoutButton){
 
                 if(user){
 
+                    /* ===============================
+                       UPDATE USERS
+                    =============================== */
+
                     await updateDoc(
 
                         doc(
@@ -597,6 +625,58 @@ if(logoutButton){
 
                     );
 
+                    /* ===============================
+                       UPDATE STAFF
+                    =============================== */
+
+                    const staffQuery =
+                    query(
+
+                        collection(
+                            db,
+                            "staff"
+                        ),
+
+                        where(
+                            "email",
+                            "==",
+                            user.email
+                        )
+
+                    );
+
+                    const staffSnapshot =
+                    await getDocs(
+                        staffQuery
+                    );
+
+                    if(!staffSnapshot.empty){
+
+                        const staffDoc =
+                        staffSnapshot.docs[0];
+
+                        await updateDoc(
+
+                            doc(
+                                db,
+                                "staff",
+                                staffDoc.id
+                            ),
+
+                            {
+
+                                currentStatus:
+                                "offline",
+
+                                updatedAt:
+                                serverTimestamp()
+
+                            }
+
+                        );
+
+                    }
+
                 }
 
                 await signOut(auth);
@@ -610,12 +690,17 @@ if(logoutButton){
             catch(error){
 
                 console.error(
+
                     "Logout Error:",
+
                     error
+
                 );
 
                 alert(
+
                     "Log keluar gagal."
+
                 );
 
             }

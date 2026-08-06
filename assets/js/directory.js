@@ -750,6 +750,67 @@ function buildZoneData(){
 }
 
 /*======================================================
+ STATUS BADGE
+======================================================*/
+
+function getStatusBadge(status){
+
+    switch((status || "").toLowerCase()){
+
+        case "online":
+
+            return `
+            <span class="inline-flex items-center px-4 py-2 rounded-full bg-green-100 text-green-700 font-semibold">
+            🟢 Online
+            </span>`;
+
+        case "office":
+
+            return `
+            <span class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-semibold">
+            🏢 Di Pejabat
+            </span>`;
+
+        case "meeting":
+
+            return `
+            <span class="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-700 font-semibold">
+            🔵 Mesyuarat
+            </span>`;
+
+        case "course":
+
+            return `
+            <span class="inline-flex items-center px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 font-semibold">
+            🟡 Kursus
+            </span>`;
+
+        case "onsite":
+
+            return `
+            <span class="inline-flex items-center px-4 py-2 rounded-full bg-purple-100 text-purple-700 font-semibold">
+            🟣 Bertugas Luar
+            </span>`;
+
+        case "leave":
+
+            return `
+            <span class="inline-flex items-center px-4 py-2 rounded-full bg-red-100 text-red-700 font-semibold">
+            🔴 Cuti
+            </span>`;
+
+        default:
+
+            return `
+            <span class="inline-flex items-center px-4 py-2 rounded-full bg-slate-100 text-slate-700 font-semibold">
+            ⚫ Offline
+            </span>`;
+
+    }
+
+}
+
+/*======================================================
  CREATE STAFF CARD
 ======================================================*/
 
@@ -760,6 +821,68 @@ function createStaffCard(staff){
     staff.photoURL ||
 
     "assets/images/default-avatar.png";
+
+    const sekolahSeliaan =
+
+    Array.isArray(staff.sekolahSeliaan)
+
+    ? staff.sekolahSeliaan
+
+    : [];
+
+    const jumlahSekolah =
+
+    sekolahSeliaan.length;
+
+    const sekolahHTML =
+
+    jumlahSekolah
+
+    ?
+
+    `
+
+<details class="mt-3 text-left">
+
+<summary class="cursor-pointer text-sky-600 text-xs font-semibold hover:text-sky-700">
+
+📚 Lihat Senarai Sekolah (${jumlahSekolah})
+
+</summary>
+
+<div class="mt-3 max-h-48 overflow-y-auto rounded-xl border border-slate-200 bg-slate-50 p-3">
+
+<ul class="space-y-1 text-xs text-slate-600">
+
+${sekolahSeliaan.map(sekolah=>`
+
+<li>
+
+• ${sekolah}
+
+</li>
+
+`).join("")}
+
+</ul>
+
+</div>
+
+</details>
+
+`
+
+    :
+
+    `
+
+<div class="mt-3 text-xs text-slate-400">
+
+Tiada Sekolah Seliaan
+
+</div>
+
+`;
 
     return `
 
@@ -827,33 +950,31 @@ text-slate-500">
 
 mt-2
 
-text-xs
-
-text-slate-500">
-
-🏫 ${staff.sekolah || "-"}
-
-</div>
-
-<div class="
-
-mt-5
-
 inline-flex
 
-px-4
+px-3
 
-py-2
+py-1
 
 rounded-full
 
-bg-green-100
+bg-sky-100
 
-text-green-700
+text-sky-700
 
-font-semibold">
+text-xs
 
-${staff.currentStatus || "-"}
+font-bold">
+
+🏫 ${jumlahSekolah} Sekolah Seliaan
+
+</div>
+
+${sekolahHTML}
+
+<div class="mt-5">
+
+${getStatusBadge(staff.currentStatus)}
 
 </div>
 
