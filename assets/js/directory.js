@@ -1523,3 +1523,29 @@ onSnapshot(
     }
 
 );
+
+/* ======================================================
+   DIRECTORY SHORTCUT
+====================================================== */
+
+const directoryCard =
+document.getElementById(
+    "directoryCard"
+);
+
+if(directoryCard){
+
+    directoryCard.addEventListener(
+
+        "click",
+
+        ()=>{
+
+            window.location.href =
+            "directory.html";
+
+        }
+
+    );
+
+}
