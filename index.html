@@ -420,173 +420,253 @@ p-4">
 
 </header>
 
-<!-- KPI -->
+<!-- ================= KPI DASHBOARD ================= -->
 
-<section class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6 mt-8">
-
-<div class="rounded-3xl bg-gradient-to-br from-blue-600 to-blue-800 p-6 shadow-2xl">
-
-<p class="text-blue-100 text-sm">
-
-Jumlah Ahli
-
-</p>
-
-<h1 class="text-3xl font-black mt-4">
-<span id="totalMembers">0</span>
-</h1>
-
-<p class="mt-6 text-sm">
-
-👥 Semua Ahli PTIS
-
-</p>
-
-</div>
-
-<div class="rounded-3xl bg-gradient-to-br from-green-600 to-emerald-700 p-6 shadow-2xl">
-
-<p class="text-green-100 text-sm">
-
-Dalam Pejabat
-
-</p>
-
-<h1 class="text-3xl font-black mt-4">
-<span id="officeMembers">0</span>
-</h1>
-
-<p class="mt-6 text-sm">
-
-🏢 Sedang Bertugas
-
-</p>
-
-</div>
-
-<div class="rounded-3xl bg-gradient-to-br from-amber-500 to-orange-600 p-6 shadow-2xl">
-
-<p class="text-amber-100 text-sm">
-
-Keluar Bertugas
-
-</p>
-
-<h1 class="text-3xl font-black mt-4">
-<span id="activeMovement">0</span>
-</h1>
-
-<p class="mt-6 text-sm">
-
-🚗 Sedang Bergerak
-
-</p>
-
-</div>
-
-<div class="rounded-3xl bg-gradient-to-br from-red-500 to-red-700 p-6 shadow-2xl">
-
-<p class="text-red-100 text-sm">
-
-Tidak Hadir
-
-</p>
-
-<h1 class="text-3xl font-black mt-4">
-<span id="absentMembers">0</span>
-</h1>
-
-<p class="mt-6 text-sm">
-
-📅 Hari Ini
-
-</p>
-
-</div>
-
-<div class="rounded-3xl bg-gradient-to-br from-cyan-500 to-sky-700 p-6 shadow-2xl">
-
-<p class="text-cyan-100 text-sm">
-
-Tugasan
-
-</p>
-
-<h1 class="text-3xl font-black mt-4">
-<span id="totalTasks">0</span>
-</h1>
-
-<p class="mt-6 text-sm">
-
-📋 Aktif
-
-</p>
-
-</div>
-
-<!-- ================= PTIS DIRECTORY ================= -->
-
-<div
-id="directoryCard"
+<section
 class="
 
-rounded-3xl
+mt-8
 
-bg-gradient-to-br
+flex
 
-from-cyan-600
-
-to-blue-700
-
-p-6
-
-shadow-2xl
-
-cursor-pointer
-
-transition-all
-
-duration-300
-
-hover:scale-[1.03]
-
-hover:shadow-cyan-500/40
+justify-center
 
 ">
 
-<div class="flex justify-between items-start">
+<div
+class="
 
-    <div>
+grid
 
-        <p class="text-cyan-100 text-sm">
+grid-cols-1
 
-            PTIS Directory
+sm:grid-cols-2
+
+lg:grid-cols-3
+
+2xl:grid-cols-5
+
+gap-6
+
+w-full
+
+">
+
+    <!-- ================= PTIS DIRECTORY ================= -->
+
+    <div
+    id="directoryCard"
+    class="
+
+    rounded-3xl
+
+    bg-gradient-to-br
+
+    from-blue-600
+
+    to-blue-800
+
+    p-6
+
+    shadow-2xl
+
+    cursor-pointer
+
+    transition-all
+
+    duration-300
+
+    hover:scale-[1.03]
+
+    hover:shadow-blue-500/40
+
+    ">
+
+        <div class="flex justify-between items-start">
+
+            <div>
+
+                <p class="text-blue-100 text-sm">
+
+                    PTIS Directory
+
+                </p>
+
+                <h1 class="text-4xl font-black mt-4">
+
+                    <span id="totalMembers">0</span>
+
+                </h1>
+
+                <p class="mt-6 text-sm">
+
+                    👥 Semua Ahli PTIS →
+
+                </p>
+
+            </div>
+
+            <i class="fa-solid fa-address-book text-5xl text-blue-200"></i>
+
+        </div>
+
+    </div>
+
+    <!-- ================= DALAM PEJABAT ================= -->
+
+    <div
+    class="
+
+    rounded-3xl
+
+    bg-gradient-to-br
+
+    from-green-600
+
+    to-emerald-700
+
+    p-6
+
+    shadow-2xl
+
+    ">
+
+        <p class="text-green-100 text-sm">
+
+            Dalam Pejabat
 
         </p>
 
-        <h1
-        class="text-3xl font-black mt-6"
-        id="directoryTotal">
+        <h1 class="text-4xl font-black mt-4">
 
-            30
+            <span id="officeMembers">0</span>
 
         </h1>
 
-        <p class="mt-6 text-sm flex items-center gap-2">
+        <p class="mt-6 text-sm">
 
-            👥 Buka Direktori Ahli →
+            🏢 Sedang Bertugas
 
         </p>
 
     </div>
 
-    <div class="text-5xl opacity-80">
+    <!-- ================= KELUAR BERTUGAS ================= -->
 
-        📂
+    <div
+    class="
+
+    rounded-3xl
+
+    bg-gradient-to-br
+
+    from-amber-500
+
+    to-orange-600
+
+    p-6
+
+    shadow-2xl
+
+    ">
+
+        <p class="text-amber-100 text-sm">
+
+            Keluar Bertugas
+
+        </p>
+
+        <h1 class="text-4xl font-black mt-4">
+
+            <span id="activeMovement">0</span>
+
+        </h1>
+
+        <p class="mt-6 text-sm">
+
+            🚗 Sedang Bergerak
+
+        </p>
 
     </div>
 
-</div>
+    <!-- ================= TIDAK HADIR ================= -->
+
+    <div
+    class="
+
+    rounded-3xl
+
+    bg-gradient-to-br
+
+    from-red-500
+
+    to-red-700
+
+    p-6
+
+    shadow-2xl
+
+    ">
+
+        <p class="text-red-100 text-sm">
+
+            Tidak Hadir
+
+        </p>
+
+        <h1 class="text-4xl font-black mt-4">
+
+            <span id="absentMembers">0</span>
+
+        </h1>
+
+        <p class="mt-6 text-sm">
+
+            📅 Hari Ini
+
+        </p>
+
+    </div>
+
+    <!-- ================= TUGASAN ================= -->
+
+    <div
+    class="
+
+    rounded-3xl
+
+    bg-gradient-to-br
+
+    from-cyan-500
+
+    to-sky-700
+
+    p-6
+
+    shadow-2xl
+
+    ">
+
+        <p class="text-cyan-100 text-sm">
+
+            Tugasan
+
+        </p>
+
+        <h1 class="text-4xl font-black mt-4">
+
+            <span id="totalTasks">0</span>
+
+        </h1>
+
+        <p class="mt-6 text-sm">
+
+            📋 Tugasan Aktif
+
+        </p>
+
+    </div>
 
 </div>
 

@@ -1174,3 +1174,31 @@ onSnapshot(usersRef,(snapshot)=>{
     refreshRealtimeDashboard();
 
 });
+
+/*======================================================
+  DIRECTORY SHORTCUT
+======================================================*/
+
+const directoryCard =
+document.getElementById("directoryCard");
+
+if(directoryCard){
+
+    console.log("✅ Directory Card Loaded");
+
+    directoryCard.addEventListener(
+
+        "click",
+
+        ()=>{
+
+            console.log("📂 Open Directory");
+
+            window.location.href =
+            "directory.html";
+
+        }
+
+    );
+
+}
