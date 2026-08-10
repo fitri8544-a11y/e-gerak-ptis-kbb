@@ -402,87 +402,132 @@ function updateHeaderStats(){
 
 }
 
-/*======================================================
- UPDATE ZONE SIDEBAR
-======================================================*/
+/*======================================================*
+* UPDATE ZONE SIDEBAR
+*======================================================*/
 
 function updateZoneSidebar(){
 
-    const zoneCount={
+    const zoneCount = {
 
-        "Padang Serai":0,
-        "Kulim":0,
-        "Sungai Ular":0,
-        "Bandar Baharu":0,
-        "Serdang":0
+        "Padang Serai": 0,
+        "Kulim": 0,
+        "Sungai Ular": 0,
+        "Bandar Baharu": 0,
+        "Serdang": 0
 
     };
 
-    staffData.forEach(staff=>{
 
     /* ======================================
-       Penyelaras dipaparkan berasingan
-       Tidak dikira dalam jumlah zon
+       KIRA JUMLAH STAFF SETIAP ZON
     ====================================== */
 
-    if(
-        (staff.role || "")
-        .toUpperCase()
-        .includes("PENYELARAS")
-    ){
-        return;
-    }
+    staffData.forEach(staff => {
 
-    const zone =
-    (staff.zone || "")
-    .toUpperCase();
+        /* ======================================
+           Penyelaras dipaparkan berasingan
+           Tidak dikira dalam jumlah zon
+        ====================================== */
 
-    if(zone.includes("PADANG")){
+        if(
+            (staff.role || "")
+            .toUpperCase()
+            .includes("PENYELARAS")
+        ){
+            return;
+        }
 
-        zoneCount["Padang Serai"]++;
 
-    }
+        const zone =
+        (staff.zone || "")
+        .toUpperCase();
 
-    else if(zone.includes("KULIM")){
 
-        zoneCount["Kulim"]++;
+        if(zone.includes("PADANG")){
 
-    }
+            zoneCount["Padang Serai"]++;
 
-    else if(zone.includes("SUNGAI")){
+        }
 
-        zoneCount["Sungai Ular"]++;
+        else if(zone.includes("KULIM")){
 
-    }
+            zoneCount["Kulim"]++;
 
-    else if(zone.includes("BANDAR")){
+        }
 
-        zoneCount["Bandar Baharu"]++;
+        else if(zone.includes("SUNGAI")){
 
-    }
+            zoneCount["Sungai Ular"]++;
 
-    else if(zone.includes("SERDANG")){
+        }
 
-        zoneCount["Serdang"]++;
+        else if(zone.includes("BANDAR")){
 
-    }
+            zoneCount["Bandar Baharu"]++;
 
-});
+        }
 
-    document.getElementById("navCountPadangSerai").textContent =
-    zoneCount["Padang Serai"];
+        else if(zone.includes("SERDANG")){
 
-    document.getElementById("navCountKulim").textContent =
-    zoneCount["Kulim"];
+            zoneCount["Serdang"]++;
 
-    document.getElementById("navCountSungaiUlar").textContent =
-    zoneCount["Sungai Ular"];
+        }
 
-    document.getElementById("navCountBandarBaharu").textContent =
-    zoneCount["Bandar Baharu"];
+    });
 
-    document.getElementById("navCountSerdang").textContent =
-    zoneCount["Serdang"];
+
+    /* ======================================
+       UPDATE SIDEBAR COUNTER
+       Hanya update jika element wujud
+    ====================================== */
+
+    const zoneElements = {
+
+        navCountPadangSerai:
+            zoneCount["Padang Serai"],
+
+        navCountKulim:
+            zoneCount["Kulim"],
+
+        navCountSungaiUlar:
+            zoneCount["Sungai Ular"],
+
+        navCountBandarBaharu:
+            zoneCount["Bandar Baharu"],
+
+        navCountSerdang:
+            zoneCount["Serdang"]
+
+    };
+
+
+    Object.entries(zoneElements)
+    .forEach(([id, count]) => {
+
+        const element =
+        document.getElementById(id);
+
+        if(element){
+
+            element.textContent = count;
+
+        }
+        else{
+
+            console.warn(
+                `⚠️ Sidebar counter tidak ditemui: ${id}`
+            );
+
+        }
+
+    });
+
+
+    console.log(
+        "✅ Zone Sidebar Updated:",
+        zoneCount
+    );
 
 }
 
@@ -1215,6 +1260,90 @@ function setActiveSidebar(button){
 
 }
 
+/*======================================================*
+* MOBILE DIRECTORY SIDEBAR
+*======================================================*/
+
+function initMobileDirectorySidebar(){
+
+    const menuBtn =
+        document.getElementById("mobileMenuBtn");
+
+    const sidebar =
+        document.getElementById("sidebarNav");
+
+
+    if(!menuBtn || !sidebar){
+
+        console.warn(
+            "⚠️ Mobile Directory Sidebar belum tersedia"
+        );
+
+        return;
+    }
+
+
+    /* ==========================
+       TOGGLE MENU
+    ========================== */
+
+    menuBtn.onclick = (event)=>{
+
+        event.stopPropagation();
+
+        sidebar.classList.toggle("hidden");
+
+        console.log(
+            "📱 Directory Sidebar:",
+            sidebar.classList.contains("hidden")
+                ? "CLOSED"
+                : "OPEN"
+        );
+
+    };
+
+
+    /* ==========================
+       CLICK DALAM SIDEBAR
+       JANGAN TUTUP AUTOMATIK
+    ========================== */
+
+    sidebar.onclick = (event)=>{
+
+        event.stopPropagation();
+
+    };
+
+
+    /* ==========================
+       CLICK LUAR SIDEBAR
+    ========================== */
+
+    document.addEventListener(
+        "click",
+        (event)=>{
+
+            if(
+                window.innerWidth < 1024 &&
+                !sidebar.classList.contains("hidden") &&
+                !sidebar.contains(event.target) &&
+                !menuBtn.contains(event.target)
+            ){
+
+                sidebar.classList.add("hidden");
+
+            }
+
+        }
+    );
+
+
+    console.log(
+        "✅ Mobile Directory Sidebar Ready"
+    );
+
+}
+
 function initSidebarNavigation(){
 
     /* ==========================
@@ -1471,11 +1600,17 @@ function syncSidebar(){
  LOAD STAFF
 ======================================================*/
 
+console.log("🔥 LOAD STAFF CODE REACHED");
+console.log("🔥 staffRef =", staffRef);
+
 onSnapshot(
 
     staffRef,
 
     (snapshot)=>{
+
+        console.log("🔥 STAFF SNAPSHOT RECEIVED");
+        console.log("🔥 Snapshot size:", snapshot.size);
 
         staffData=[];
 
@@ -1488,6 +1623,8 @@ onSnapshot(
                 ...doc.data()
 
             });
+
+            window.staffData = staffData;
 
         });
 
@@ -1512,11 +1649,11 @@ onSnapshot(
 
         );
 
-        console.log(zones);
-
         renderDirectory();
 
         initSidebarNavigation();
+
+        initMobileDirectorySidebar();
 
         initSearch();
 

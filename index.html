@@ -173,6 +173,62 @@ button{
 
 }
 
+/* ======================================================
+   PTIS AI FLOATING ASSISTANT
+====================================================== */
+
+@keyframes ptisAIFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+}
+
+
+@keyframes ptisAIBubble {
+
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-3px);
+    }
+
+}
+
+
+.ai-assistant-float {
+    animation: ptisAIFloat 3s ease-in-out infinite;
+}
+
+
+.ai-help-bubble {
+    animation: ptisAIBubble 3s ease-in-out infinite;
+}
+
+
+.ai-robot-icon {
+    filter:
+        drop-shadow(
+            0 8px 8px rgba(15, 23, 42, 0.18)
+        );
+}
+
+
+.ai-assistant-float:hover {
+    animation-play-state: paused;
+}
+
+
+.ai-assistant-float:hover .ai-help-bubble {
+    animation-play-state: paused;
+}
 
 </style>
 
@@ -1947,7 +2003,253 @@ setInterval(updateClock,1000);
 
 <script type="module" src="assets/js/dashboard-home.js"></script>
 
+<script type="module" src="assets/js/directory.js"></script>
+
+<script type="module" src="assets/js/ai-ui.js"></script>
+
+<script type="module" src="assets/js/ai-engine.js"></script>
+
 <script type="module" src="assets/js/auth.js"></script>
+
+<!-- ================= PTIS AI FLOATING ASSISTANT ================= -->
+
+<button
+    id="aiButton"
+    class="
+        ai-assistant-float
+        fixed
+        bottom-8
+        right-8
+        z-50
+        flex
+        items-center
+        gap-3
+        bg-transparent
+        border-0
+        outline-none
+        cursor-pointer
+        group
+    "
+    title="Buka PTIS AI Assistant"
+>
+
+    <!-- MESSAGE BUBBLE -->
+    <div
+        class="
+            ai-help-bubble
+            bg-white
+            border
+            border-slate-200
+            rounded-2xl
+            px-4
+            py-2.5
+            shadow-lg
+            text-left
+            transition-all
+            duration-300
+            group-hover:scale-105
+        "
+    >
+
+        <div
+            class="
+                text-[11px]
+                font-semibold
+                text-slate-400
+                leading-tight
+            "
+        >
+            PTIS AI Assistant
+        </div>
+
+        <div
+            class="
+                text-sm
+                font-bold
+                text-slate-800
+                whitespace-nowrap
+            "
+        >
+            Perlukan bantuan?
+        </div>
+
+        <div
+            class="
+                text-xs
+                font-semibold
+                text-cyan-600
+            "
+        >
+            Klik saya
+        </div>
+
+    </div>
+
+
+    <!-- ROBOT -->
+    <div
+        class="
+            ai-robot-icon
+            text-5xl
+            select-none
+            transition-transform
+            duration-300
+            group-hover:scale-110
+        "
+    >
+        🤖
+    </div>
+
+</button>
+
+
+<div
+id="aiWindow"
+class="
+hidden
+fixed
+bottom-28
+right-8
+w-[420px]
+max-w-[95vw]
+bg-white
+rounded-3xl
+shadow-2xl
+border
+border-slate-200
+overflow-hidden
+z-50
+">
+
+    <!-- Header -->
+
+    <div class="bg-gradient-to-r from-cyan-600 to-blue-700 p-5 text-white">
+
+        <div class="flex items-center justify-between">
+
+            <div>
+
+                <h2 class="font-black text-xl">
+
+                    🤖 PTIS AI Assistant
+
+                </h2>
+
+                <p class="text-cyan-100 text-sm">
+
+                    Enterprise Command Assistant
+
+                </p>
+
+            </div>
+
+            <button
+            id="closeAI"
+            class="text-2xl">
+
+                ×
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Chat -->
+
+    <div
+    id="aiMessages"
+    class="h-[420px] overflow-y-auto p-5 bg-slate-50">
+
+        <div class="bg-white rounded-2xl p-4 shadow border border-slate-200">
+
+            👋 Hai.
+
+            <br><br>
+
+            Saya PTIS AI Assistant.
+
+            <br><br>
+
+            Saya boleh membantu menjawab pertanyaan seperti:
+
+            <br><br>
+
+            • Khalid bertugas di mana?
+
+            <br>
+
+            • Siapa di pejabat?
+
+            <br>
+
+            • Siapa menjaga SK Kulim?
+
+            <br>
+
+            • Berapa ahli bertugas?
+
+        </div>
+
+    </div>
+
+    <!-- Input -->
+
+    <div class="p-4 border-t">
+
+        <div class="flex gap-3">
+
+            <input
+
+            id="aiInput"
+
+            type="text"
+
+            placeholder="Taip pertanyaan..."
+
+            class="
+
+            flex-1
+
+            rounded-xl
+
+            border
+
+            border-slate-300
+
+            px-4
+
+            py-3
+
+            outline-none
+
+            focus:border-cyan-500">
+
+            <button
+
+            id="sendAI"
+
+            class="
+
+            px-5
+
+            rounded-xl
+
+            bg-cyan-600
+
+            text-white
+
+            font-bold">
+
+                Hantar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 
