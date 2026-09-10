@@ -9,6 +9,33 @@
 name="viewport"
 content="width=device-width, initial-scale=1.0">
 
+<!-- =========================================
+     PWA - eGerak PTIS KBB
+========================================= -->
+
+<link rel="manifest" href="/manifest.json">
+
+<meta name="theme-color" content="#16a34a">
+
+<!-- iPhone / iPad -->
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="/assets/images/apple-touch-icon.png"
+>
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="default"
+>
+
+<meta
+  name="apple-mobile-web-app-title"
+  content="eGerak KBB"
+>
+
 <meta
 name="description"
 content="E-GERAK PTIS KBB - Electronic Movement Management System">
@@ -2250,6 +2277,35 @@ z-50
     </div>
 
 </div>
+
+<!-- =========================================
+     PWA SERVICE WORKER
+========================================= -->
+
+<script>
+  if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", () => {
+
+      navigator.serviceWorker
+        .register("/service-worker.js")
+        .then((registration) => {
+          console.log(
+            "eGerak PWA Service Worker registered:",
+            registration.scope
+          );
+        })
+        .catch((error) => {
+          console.error(
+            "eGerak PWA Service Worker registration failed:",
+            error
+          );
+        });
+
+    });
+
+  }
+</script>
 
 </body>
 
