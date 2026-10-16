@@ -71,6 +71,9 @@ document.getElementById("userName");
 const userAvatar =
 document.getElementById("userAvatar");
 
+const userPhoto =
+document.getElementById("userPhoto");
+
 
 /* =========================================================
    ERROR
@@ -532,6 +535,24 @@ onAuthStateChanged(
             userName.textContent =
             user.displayName || "Pengguna";
 
+        }
+
+        if (userPhoto) {
+            const displayName = user.displayName || "PTIS";
+
+            const fallback =
+                "https://ui-avatars.com/api/?name=" +
+                encodeURIComponent(displayName) +
+                "&background=2563EB&color=ffffff";
+
+            userPhoto.alt = "Gambar profil " + displayName;
+
+            userPhoto.onerror = () => {
+                userPhoto.onerror = null;
+                userPhoto.src = fallback;
+            };
+
+            userPhoto.src = user.photoURL || fallback;
         }
 
         if(userAvatar){
