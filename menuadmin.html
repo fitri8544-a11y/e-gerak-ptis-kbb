@@ -953,6 +953,95 @@ src="https://ui-avatars.com/api/?name=PTIS">
     id="dashboardSection"
     class="content-section">
 
+<!-- PENGURUSAN MAKLUMAN -->
+<div class="mb-6 rounded-2xl bg-white p-6 shadow-sm">
+  <div class="flex flex-wrap items-center justify-between gap-4">
+    <div>
+      <h2 class="text-xl font-bold">📢 Makluman Terkini</h2>
+      <p class="mt-1 text-sm text-slate-500">
+        Makluman aktif dipaparkan pada halaman utama.
+      </p>
+    </div>
+
+    <button
+      id="addAnnouncementBtn"
+      type="button"
+      disabled
+      class="rounded-xl bg-blue-600 px-5 py-3 font-semibold
+             text-white disabled:opacity-50">
+      ＋ Tambah Makluman
+    </button>
+  </div>
+
+  <form id="announcementForm" hidden class="mt-5 space-y-4">
+    <div>
+      <label for="announcementTitle" class="block font-semibold">
+        Tajuk
+      </label>
+      <input
+        id="announcementTitle"
+        required
+        maxlength="150"
+        class="mt-2 w-full rounded-xl border border-slate-300 p-3">
+    </div>
+
+    <div>
+      <label for="announcementBody" class="block font-semibold">
+        Kandungan
+      </label>
+      <textarea
+        id="announcementBody"
+        required
+        maxlength="3000"
+        rows="4"
+        class="mt-2 w-full rounded-xl border border-slate-300 p-3"
+      ></textarea>
+    </div>
+
+    <label class="flex items-center gap-2">
+      <input id="announcementActive" type="checkbox" checked>
+      Paparkan pada halaman utama
+    </label>
+
+    <div class="flex gap-3">
+      <button
+        id="saveAnnouncementBtn"
+        type="submit"
+        class="rounded-xl bg-green-600 px-5 py-3
+               font-semibold text-white disabled:opacity-50">
+        Simpan Makluman
+      </button>
+
+      <button
+        id="cancelAnnouncementBtn"
+        type="button"
+        class="rounded-xl border px-5 py-3">
+        Batal
+      </button>
+    </div>
+  </form>
+
+  <p
+    id="announcementAdminStatus"
+    role="status"
+    class="mt-3 text-sm text-slate-600">
+    Menyemak akses admin...
+  </p>
+
+  <div class="mt-6 border-t border-slate-200 pt-5">
+    <h3 class="font-bold text-slate-800">
+      Senarai Makluman
+    </h3>
+
+    <div
+      id="adminAnnouncementList"
+      class="mt-4 space-y-3"
+      aria-live="polite">
+      Menunggu semakan akses admin...
+    </div>
+  </div>
+</div>
+
 <div class="kpi-grid">
 
 <div class="kpi-card">
@@ -3441,6 +3530,8 @@ z-[9999]">
     </div>
 
 </div>
+
+<script type="module" src="assets/js/makluman.js"></script>
 
 </body>
 

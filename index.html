@@ -482,6 +482,47 @@ p-4">
 
 </header>
 
+<!-- ================= MAKLUMAN TERKINI ================= -->
+<section
+  class="mt-8 rounded-3xl bg-white border border-slate-200 shadow-xl overflow-hidden"
+  aria-labelledby="maklumanTitle">
+
+  <div class="px-6 py-5 border-b border-slate-100">
+    <h2
+      id="maklumanTitle"
+      class="text-xl sm:text-2xl font-bold text-slate-900">
+      📢 Makluman Terkini
+      (<span id="announcementCount">0</span>)
+      &amp; (<span id="birthdayCount">0</span> Hari Lahir)
+    </h2>
+
+    <p class="mt-1 text-sm text-slate-500">
+      Makluman semasa dan sambutan hari lahir warga PTIS Kulim Bandar Baharu.
+    </p>
+  </div>
+
+  <!-- MAKLUMAN UMUM -->
+  <div
+    id="generalAnnouncements"
+    class="px-6 pt-6 space-y-4"
+    aria-live="polite">
+    <p class="text-sm text-slate-500">
+      Memuatkan makluman...
+    </p>
+  </div>
+
+  <!-- HARI LAHIR -->
+  <div
+    id="birthdayAnnouncements"
+    class="p-6 space-y-4"
+    aria-live="polite">
+    <p class="text-sm text-slate-500">
+      Maklumat hari lahir belum tersedia.
+    </p>
+  </div>
+
+</section>
+
 <!-- ================= KPI DASHBOARD ================= -->
 
 <section
@@ -2306,6 +2347,8 @@ z-50
 
   }
 </script>
+
+<script type="module" src="assets/js/makluman.js"></script>
 
 </body>
 

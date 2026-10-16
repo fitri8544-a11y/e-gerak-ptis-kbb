@@ -957,6 +957,8 @@ function refreshRealtimeDashboard(){
 
     updateCoordinatorCard();
 
+    renderBirthdayAnnouncements();
+
 }
 
 /*======================================================
@@ -1202,3 +1204,150 @@ if(directoryCard){
     );
 
 }
+
+/* ======================================================
+   MAKLUMAN HARI LAHIR
+====================================================== */
+
+function renderBirthdayAnnouncements() {
+  const container = document.getElementById(
+    "birthdayAnnouncements"
+  );
+
+  if (!container) return;
+
+  // Sentiasa gunakan tarikh Malaysia.
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Kuala_Lumpur",
+    day: "numeric",
+    month: "numeric"
+  }).formatToParts(new Date());
+
+  const todayDay = Number(
+    parts.find(part => part.type === "day").value
+  );
+
+  const todayMonth = Number(
+    parts.find(part => part.type === "month").value
+  );
+
+  const birthdays = staffCache
+    .filter(staff =>
+      Number(staff.birthDay) === todayDay &&
+      Number(staff.birthMonth) === todayMonth
+    )
+    .sort((a, b) =>
+      String(a.nama || "").localeCompare(
+        String(b.nama || ""),
+        "ms"
+      )
+    );
+
+  const birthdayCount = document.getElementById("birthdayCount");
+
+  if (birthdayCount) {
+    birthdayCount.textContent = birthdays.length;
+  }
+
+  container.replaceChildren();
+
+  if (!birthdays.length) {
+    const message = document.createElement("p");
+    message.className = "text-sm text-slate-500";
+    message.textContent =
+      "Tiada sambutan hari lahir pada hari ini.";
+    container.append(message);
+    return;
+  }
+
+  birthdays.forEach(staff => {
+    const nama = String(staff.nama || "Warga PTIS");
+
+    const card = document.createElement("article");
+    card.className =
+      "rounded-2xl border border-amber-200 " +
+      "bg-amber-50 p-5 flex flex-col sm:flex-row " +
+      "sm:items-center sm:justify-between gap-4";
+
+    const info = document.createElement("div");
+
+    const label = document.createElement("p");
+    label.className =
+      "text-xs font-bold uppercase tracking-wider " +
+      "text-amber-700";
+    label.textContent = "🎂 Selamat Hari Lahir";
+
+    const name = document.createElement("h3");
+    name.className =
+      "mt-2 text-lg font-bold text-slate-900 break-words";
+    name.textContent = nama;
+
+    const role = document.createElement("p");
+    role.className = "mt-1 text-sm text-slate-600";
+    role.textContent = String(staff.role || "Ahli PTIS");
+
+    const wish = document.createElement("p");
+    wish.className =
+      "mt-3 text-sm leading-relaxed text-slate-600";
+    wish.textContent =
+      "Semoga dikurniakan kesihatan yang baik, " +
+      "dimurahkan rezeki dan dipermudahkan segala urusan.";
+
+    info.append(label, name, role, wish);
+    card.append(info);
+
+    // Terima nombor tempatan atau format antarabangsa.
+    let phone = String(staff.phone || staff.telefon || "")
+      .trim()
+      .replace(/[\s()+-]/g, "");
+
+    if (phone.startsWith("00")) {
+      phone = phone.slice(2);
+    }
+
+    if (phone.startsWith("0")) {
+      phone = "60" + phone.slice(1);
+    }
+
+    if (/^[1-9]\d{7,14}$/.test(phone)) {
+      const message =
+        `Selamat Hari Lahir, ${nama}! 🎂🎉\n\n` +
+        "Semoga dikurniakan kesihatan yang baik, " +
+        "dimurahkan rezeki, diberkati usia dan " +
+        "dipermudahkan segala urusan.\n\n" +
+        "Semoga terus cemerlang dalam perkhidmatan " +
+        "dan berbahagia bersama keluarga.";
+
+      const link = document.createElement("a");
+      link.href =
+        `https://wa.me/${phone}?text=` +
+        encodeURIComponent(message);
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.className =
+        "inline-flex items-center justify-center " +
+        "rounded-xl bg-green-600 hover:bg-green-700 " +
+        "px-5 py-3 text-sm font-semibold text-white " +
+        "transition shrink-0";
+      link.textContent = "💬 Ucapan";
+      link.setAttribute(
+        "aria-label",
+        `Ucap selamat hari lahir kepada ${nama} melalui WhatsApp`
+      );
+
+      card.append(link);
+    }
+
+    container.append(card);
+  });
+}
+
+// Semak pertukaran hari ketika halaman masih terbuka.
+setInterval(renderBirthdayAnnouncements, 60000);
+
+// Semak semula apabila pengguna kembali ke halaman.
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) {
+    renderBirthdayAnnouncements();
+  }
+});
