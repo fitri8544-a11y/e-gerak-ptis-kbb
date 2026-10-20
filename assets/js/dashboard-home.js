@@ -1269,7 +1269,61 @@ function renderBirthdayAnnouncements() {
       "bg-amber-50 p-5 flex flex-col sm:flex-row " +
       "sm:items-center sm:justify-between gap-4";
 
+    const profile = document.createElement("div");
+    profile.className = "flex items-start gap-4 min-w-0 flex-1";
+
+    const avatar = document.createElement("div");
+    avatar.className =
+    "w-16 h-16 sm:w-20 sm:h-20 shrink-0 rounded-full " +
+    "bg-amber-100 border-2 border-amber-200 overflow-hidden " +
+    "flex items-center justify-center font-bold text-amber-800";
+
+    const initials = nama.trim().split(/\s+/)
+    .slice(0, 2)
+    .map(word => Array.from(word)[0] || "")
+    .join("")
+    .toUpperCase();
+
+    avatar.textContent = initials || "PT";
+
+    const email = String(staff.email || "").trim().toLowerCase();
+
+    const matchingUsers = email
+    ? usersCache.filter(user =>
+        String(user.email || "").trim().toLowerCase() === email
+        )
+    : [];
+
+    const photoCandidates = [
+    staff.photoURL,
+    matchingUsers.length === 1 ? matchingUsers[0].photoURL : ""
+    ].filter(value => typeof value === "string" && value.trim());
+
+    const photoURL = photoCandidates.find(value => {
+    try {
+        return new URL(value).protocol === "https:";
+    } catch {
+        return false;
+    }
+    });
+
+    if (photoURL) {
+    const photo = document.createElement("img");
+    photo.className = "w-full h-full object-cover";
+    photo.alt = "Gambar profil " + nama;
+    photo.referrerPolicy = "no-referrer";
+
+    photo.onerror = () => {
+        avatar.replaceChildren();
+        avatar.textContent = initials || "PT";
+    };
+
+    photo.src = photoURL.trim();
+    avatar.replaceChildren(photo);
+    }
+
     const info = document.createElement("div");
+    info.className = "min-w-0 flex-1";
 
     const label = document.createElement("p");
     label.className =
@@ -1284,7 +1338,15 @@ function renderBirthdayAnnouncements() {
 
     const role = document.createElement("p");
     role.className = "mt-1 text-sm text-slate-600";
-    role.textContent = String(staff.role || "Ahli PTIS");
+    const jawatan = String(staff.role || "Ahli PTIS").trim();
+    const rawZone = String(staff.zone || "").trim();
+    const zon = getZoneKey(rawZone);
+
+    role.textContent = zon
+    ? `${jawatan} • Zon ${zon}`
+    : rawZone
+        ? `${jawatan} • ${rawZone}`
+        : jawatan;
 
     const wish = document.createElement("p");
     wish.className =
@@ -1294,7 +1356,8 @@ function renderBirthdayAnnouncements() {
       "dimurahkan rezeki dan dipermudahkan segala urusan.";
 
     info.append(label, name, role, wish);
-    card.append(info);
+    profile.append(avatar, info);
+    card.append(profile);
 
     // Terima nombor tempatan atau format antarabangsa.
     let phone = String(staff.phone || staff.telefon || "")
