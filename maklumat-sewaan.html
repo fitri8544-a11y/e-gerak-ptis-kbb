@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Maklumat Sewaan | eGerak PTIS KBB</title>
+
+  <link rel="icon" type="image/png" href="assets/images/logo-ptis.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, sans-serif;
+      color: #f8fafc;
+      background: #071427;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top right, #12394a 0, transparent 45%),
+        linear-gradient(135deg, #071427, #0b1d38);
+    }
+
+    button, input, select { font: inherit; }
+
+    a { color: inherit; }
+
+    [hidden] { display: none !important; }
+
+    .container {
+      width: min(1200px, 100%);
+      margin: auto;
+      padding: 28px 20px 48px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+    }
+
+    .brand img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+
+    .back {
+      display: inline-block;
+      text-decoration: none;
+      border: 1px solid #ffffff26;
+      border-radius: 12px;
+      padding: 12px 16px;
+      background: #ffffff08;
+    }
+
+    .back:hover { background: #ffffff14; }
+
+    .hero, .toolbar, .card {
+      background: #12203acc;
+      border: 1px solid #ffffff14;
+      border-radius: 24px;
+    }
+
+    .hero {
+      padding: 30px;
+      border-color: #eab30830;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      color: #fbbf24;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: clamp(26px, 5vw, 38px);
+      margin: 12px 0;
+    }
+
+    .muted {
+      color: #aab9cf;
+      line-height: 1.7;
+    }
+
+    .hero p { margin-bottom: 0; }
+
+    .toolbar {
+      padding: 20px;
+      margin-bottom: 20px;
+      display: grid;
+      grid-template-columns: 1fr 240px;
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      color: #cbd5e1;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid #ffffff26;
+      color: #f8fafc;
+      background: #071427;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid #fbbf24;
+      outline-offset: 2px;
+    }
+
+    .results {
+      color: #aab9cf;
+      margin: 0 0 18px;
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: #fbbf2414;
+      color: #fbbf24;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .badge.phase {
+      background: #38bdf814;
+      color: #7dd3fc;
+    }
+
+    .card h2 {
+      font-size: 21px;
+      line-height: 1.4;
+      margin: 0 0 10px;
+    }
+
+    .project {
+      margin: 0 0 20px;
+      color: #aab9cf;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    dl {
+      margin: auto 0 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    dl div {
+      padding-top: 14px;
+      border-top: 1px solid #ffffff12;
+    }
+
+    dt {
+      font-size: 12px;
+      font-weight: 700;
+      color: #94a3b8;
+      margin-bottom: 7px;
+    }
+
+    dd {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .note {
+      margin: 18px 0 0;
+      padding: 12px;
+      background: #fbbf240d;
+      border-radius: 10px;
+      color: #fde68a;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .empty {
+      padding: 35px;
+      text-align: center;
+      color: #aab9cf;
+    }
+
+    .source {
+      margin-top: 24px;
+      color: #94a3b8;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .loading {
+      padding: 80px 20px;
+      text-align: center;
+      color: #cbd5e1;
+    }
+
+    @media (max-width: 700px) {
+      .grid, .toolbar { grid-template-columns: 1fr; }
+      .hero, .card { padding: 22px; }
+      .container { padding: 20px 16px 36px; }
+    }
+  </style>
+</head>
+
+<body>
+  <p id="authStatus" class="loading" role="status">
+    Menyemak log masuk...
+  </p>
+
+  <div id="pageContent" class="container" hidden>
+    <header class="topbar">
+      <div class="brand">
+        <img src="assets/images/logo-ptis.png" alt="Logo PTIS">
+        <span>eGerak PTIS KBB</span>
+      </div>
+
+      <a class="back" href="menupengguna.html">
+        ← Kembali ke Dashboard
+      </a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <span class="eyebrow">RUJUKAN PROJEK ICT</span>
+
+        <h1>🏢 Maklumat Syarikat Sewaan</h1>
+
+        <p class="muted">
+          Rujukan syarikat, fasa projek serta tempoh projek dan
+          sewaan peralatan ICT.
+        </p>
+      </section>
+
+      <section class="toolbar" aria-label="Carian dan tapisan">
+        <div>
+          <label for="searchInput">Cari maklumat</label>
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Nama syarikat atau projek..."
+            autocomplete="off">
+        </div>
+
+        <div>
+          <label for="categoryFilter">Kategori projek</label>
+          <select id="categoryFilter">
+            <option value="">Semua Kategori</option>
+            <option value="PdT">PdT</option>
+            <option value="PdP">PdP</option>
+            <option value="Peranti Guru">Peranti Guru</option>
+          </select>
+        </div>
+      </section>
+
+      <p id="resultCount" class="results" aria-live="polite"></p>
+
+      <section
+        id="rentalList"
+        class="grid"
+        aria-label="Senarai projek sewaan">
+      </section>
+
+      <p id="emptyMessage" class="empty" hidden>
+        Tiada maklumat sepadan dengan carian.
+      </p>
+
+      <p class="source">
+        Sumber: Fail DATA PROJEK SEWAAN yang dibekalkan.
+        Tempoh dan tarikh dikekalkan mengikut sumber asal.
+        Sebarang percanggahan perlu disahkan dengan dokumen kontrak.
+      </p>
+    </main>
+  </div>
+
+  <script type="module">
+    import { auth } from "./assets/js/firebase.js";
+
+    import {
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+    const rentalData = [
+      {
+        company: "Night Electronic Sdn. Bhd.",
+        category: "PdT",
+        phase: "1",
+        project:
+          "Perkhidmatan Sewaan Peralatan ICT PdT Sekolah Secara Sewa Guna (Lease-to-use)",
+        projectPeriod:
+          "64 Bulan\n3 Mei 2021 – 2 Sept 2026",
+        rentalPeriod:
+          "60 Bulan\n3 Sept 2021 – 2 Sept 2026"
+      },
+      {
+        company: "Setia Makmur Gemilang Sdn. Bhd.",
+        category: "PdP",
+        phase: "1",
+        project:
+          "Perkhidmatan Sewaan Peralatan ICT PdP Sekolah Secara Sewa Guna (Lease-to-use)",
+        projectPeriod:
+          "65 Bulan\n15 Dis 2021 – 14 Mei 2027",
+        rentalPeriod:
+          "60 Bulan\n15 Apr 2021 – 14 Apr 2027"
+      },
+      {
+        company: "SNS Network Sdn. Bhd.",
+        category: "PdP",
+        phase: "2",
+        project:
+          "Perkhidmatan Sewaan Peralatan ICT PdP Sekolah Secara Sewa Guna (Lease-to-use)",
+        projectPeriod:
+          "65 Bulan\n20 Dis 2022 – 19 Mei 2028",
+        rentalPeriod:
+          "60 Bulan\n20 Apr 2023 – 19 Apr 2028"
+      },
+      {
+        company: "Prodata Sdn. Bhd.",
+        category: "Peranti Guru",
+        phase: "1",
+        project:
+          "Perkhidmatan Sewaan Peralatan ICT Mesra Alam untuk Guru Secara Sewa Guna (Lease-to-own)",
+        projectPeriod:
+          "15 Sept 2023 – 14 Dis 2028",
+        rentalPeriod:
+          "15 Dis 2023 – 14 Dis 2028"
+      },
+      {
+        company: "Privasia Sdn. Bhd.",
+        category: "PdP",
+        phase: "3",
+        project:
+          "Perkhidmatan Sewaan Peralatan ICT PdP Sekolah Secara Sewa Guna (Lease-to-use)",
+        projectPeriod:
+          "65 Bulan\n26 Okt 2023 – 25 Mac 2029",
+        rentalPeriod:
+          "65 Bulan\n26 Okt 2023 – 25 Mac 2029"
+      },
+      {
+        company: "Ariz Digital Sdn. Bhd.",
+        category: "PdT",
+        phase: "2",
+        project:
+          "Perkhidmatan Sewaan Peralatan ICT PdT Sekolah Secara Sewa Guna (Lease-to-own)",
+        projectPeriod:
+          "64 Bulan\n1 Jan 2025 – 30 April 2030",
+        rentalPeriod:
+          "60 Bulan\n1 Mei 2025 – 30 April 2030"
+      },
+      {
+        company: "Tridimas Sdn. Bhd.",
+        category: "Peranti Guru",
+        phase: "2",
+        project:
+          "Perkhidmatan Sewaan Peralatan ICT Mesra Alam untuk Guru Secara Sewa Guna (Lease-to-own)",
+        projectPeriod:
+          "65 Bulan\n1 Mei 2026 – 30 April 2031",
+        rentalPeriod:
+          "60 Bulan\n1 Mei 2026 – 30 April 2031"
+      },
+      {
+        company: "Mitracorp Resources Sdn. Bhd.",
+        category: "PdP",
+        phase: "4",
+        project:
+          "Perkhidmatan Sewaan Peralatan ICT PdP Sekolah Secara Sewa Guna (Lease-to-own)",
+        projectPeriod:
+          "65 Bulan\n1 Mei 2026 – 31 Mei 2031",
+        rentalPeriod:
+          "65 Bulan\n1 Jan 2026 – 31 Mei 2031"
+      },
+      {
+        company: "XOF (M) Sdn. Bhd.",
+        category: "PdT",
+        phase: "1",
+        project:
+          "Perkhidmatan Sewaan Peralatan ICT PdT Sekolah Secara Sewa Guna (Lease-to-use)",
+        projectPeriod:
+          "66 Bulan\n1 Ogos 2026 – 31 Jan 2032",
+        rentalPeriod:
+          "60 Bulan\n1 Jan 2027 – 31 Dis 2031",
+        note:
+          "Penggantian syarikat Night Electronic Sdn. Bhd. bagi projek PdT."
+      }
+    ];
+
+    const searchInput = document.getElementById("searchInput");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const rentalList = document.getElementById("rentalList");
+    const resultCount = document.getElementById("resultCount");
+    const emptyMessage = document.getElementById("emptyMessage");
+
+    function makeElement(tag, className, text) {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      element.textContent = text;
+      return element;
+    }
+
+    function createCard(item) {
+      const card = document.createElement("article");
+      card.className = "card";
+
+      const badges = document.createElement("div");
+      badges.className = "badges";
+
+      badges.append(
+        makeElement("span", "badge", item.category),
+        makeElement("span", "badge phase", `Fasa ${item.phase}`)
+      );
+
+      card.append(
+        badges,
+        makeElement("h2", "", item.company),
+        makeElement("p", "project", item.project)
+      );
+
+      const details = document.createElement("dl");
+
+      [
+        ["Tempoh Projek", item.projectPeriod],
+        ["Tempoh Sewaan", item.rentalPeriod]
+      ].forEach(([label, value]) => {
+        const row = document.createElement("div");
+
+        row.append(
+          makeElement("dt", "", label),
+          makeElement("dd", "", value)
+        );
+
+        details.append(row);
+      });
+
+      card.append(details);
+
+      if (item.note) {
+        card.append(makeElement("p", "note", item.note));
+      }
+
+      return card;
+    }
+
+    function renderRentals() {
+      const keyword = searchInput.value.trim().toLocaleLowerCase("ms-MY");
+      const category = categoryFilter.value;
+
+      const filtered = rentalData.filter(item => {
+        const text = [
+          item.company,
+          item.project,
+          item.category,
+          `Fasa ${item.phase}`,
+          item.note || ""
+        ].join(" ").toLocaleLowerCase("ms-MY");
+
+        return (
+          (!category || item.category === category) &&
+          text.includes(keyword)
+        );
+      });
+
+      rentalList.replaceChildren(...filtered.map(createCard));
+
+      resultCount.textContent =
+        `Memaparkan ${filtered.length} daripada ${rentalData.length} rekod projek sewaan.`;
+
+      emptyMessage.hidden = filtered.length > 0;
+    }
+
+    searchInput.addEventListener("input", renderRentals);
+    categoryFilter.addEventListener("change", renderRentals);
+
+    onAuthStateChanged(auth, user => {
+      if (!user) {
+        window.location.replace("index.html");
+        return;
+      }
+
+      renderRentals();
+      document.getElementById("authStatus").hidden = true;
+      document.getElementById("pageContent").hidden = false;
+    }, error => {
+      console.error("Semakan log masuk gagal:", error);
+      document.getElementById("pageContent").hidden = true;
+      document.getElementById("authStatus").hidden = false;
+      document.getElementById("authStatus").textContent =
+        "Semakan log masuk gagal. Sila muat semula halaman.";
+    });
+  </script>
+</body>
+</html>
