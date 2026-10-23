@@ -806,6 +806,34 @@ button{
 
 }
 
+/* PAUTAN MAKLUMAT SEWAAN */
+
+.menu .rental-menu-link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 18px;
+    border-radius: 16px;
+    color: #FFFFFF;
+    background: transparent;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .25s ease;
+}
+
+.menu .rental-menu-link i {
+    width: 22px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.menu .rental-menu-link:hover,
+.menu .rental-menu-link:focus-visible {
+    background: rgba(255,255,255,.08);
+}
+
 </style>
 
 </head>
@@ -880,6 +908,15 @@ E-GERAK ADMIN V2
         <i class="fa-solid fa-gear"></i>
         Settings
     </button>
+
+    <a
+        href="maklumat-sewaan.html?from=admin"
+        class="rental-menu-link">
+
+        <i class="fa-solid fa-building"></i>
+        Maklumat Sewaan
+
+    </a>
 
 </div>
 

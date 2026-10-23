@@ -265,7 +265,7 @@
         <span>eGerak PTIS KBB</span>
       </div>
 
-      <a class="back" href="menupengguna.html">
+      <a id="backToDashboard" class="back" href="menupengguna.html">
         ← Kembali ke Dashboard
       </a>
     </header>
@@ -433,6 +433,13 @@
           "Penggantian syarikat Night Electronic Sdn. Bhd. bagi projek PdT."
       }
     ];
+
+    // Tentukan dashboard asal.
+    const fromAdmin =
+      new URLSearchParams(window.location.search).get("from") === "admin";
+
+    document.getElementById("backToDashboard").href =
+      fromAdmin ? "menuadmin.html" : "menupengguna.html";
 
     const searchInput = document.getElementById("searchInput");
     const categoryFilter = document.getElementById("categoryFilter");
