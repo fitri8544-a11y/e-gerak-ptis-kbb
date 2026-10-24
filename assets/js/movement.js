@@ -1552,11 +1552,7 @@ async loadUserProfile(user){
 
         }
 
-        if(userAvatar){
-
-            userAvatar.textContent = avatar;
-
-        }
+        
 
     }catch(error){
 

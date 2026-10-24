@@ -537,57 +537,86 @@ onAuthStateChanged(
 
         }
 
-        if (userPhoto) {
-            const displayName = user.displayName || "PTIS";
+                // Dapatkan gambar daripada sesi dan akaun Google.
+        let profilePhoto =
+            user.photoURL ||
+            user.providerData?.find(
+                provider => provider.providerId === "google.com"
+            )?.photoURL ||
+            "";
 
+        // Gunakan gambar tersimpan jika sesi tiada gambar.
+        if (!profilePhoto) {
+            try {
+                const savedProfile = await getUserProfile(user.uid);
+                profilePhoto = savedProfile?.photoURL || "";
+            } catch (error) {
+                console.warn("Gambar profil tersimpan tidak dapat dibaca:", error);
+            }
+        }
+
+        const displayName = user.displayName || "Pengguna";
+
+        const initials = displayName
+            .trim()
+            .split(/\s+/)
+            .slice(0, 2)
+            .map(name => name.charAt(0))
+            .join("")
+            .toUpperCase() || "U";
+
+        function setProfileImage(image, onFailure) {
+            image.alt = "Gambar profil " + displayName;
+            image.referrerPolicy = "no-referrer";
+            image.style.width = "100%";
+            image.style.height = "100%";
+            image.style.objectFit = "cover";
+            image.style.borderRadius = "50%";
+
+            image.onerror = () => {
+                image.onerror = null;
+                onFailure();
+            };
+
+            image.src = profilePhoto;
+        }
+
+        // Gambar pada dashboard admin.
+        if (userPhoto) {
             const fallback =
                 "https://ui-avatars.com/api/?name=" +
                 encodeURIComponent(displayName) +
                 "&background=2563EB&color=ffffff";
 
-            userPhoto.alt = "Gambar profil " + displayName;
-
-            userPhoto.onerror = () => {
-                userPhoto.onerror = null;
+            if (profilePhoto) {
+                setProfileImage(userPhoto, () => {
+                    userPhoto.src = fallback;
+                });
+            } else {
                 userPhoto.src = fallback;
-            };
-
-            userPhoto.src = user.photoURL || fallback;
+            }
         }
 
-        if(userAvatar){
+        // Gambar pada dashboard pengguna.
+        if (userAvatar) {
+            if (profilePhoto) {
+                if (userAvatar.tagName === "IMG") {
+                    setProfileImage(userAvatar, () => {
+                        userAvatar.alt = initials;
+                    });
+                } else {
+                    const image = document.createElement("img");
 
-            if(user.photoURL){
+                    userAvatar.style.overflow = "hidden";
+                    userAvatar.replaceChildren(image);
 
-                userAvatar.innerHTML = `
-
-                    <img
-                    src="${user.photoURL}"
-                    class="w-full h-full object-cover">
-
-                `;
-
-            }else{
-
-                const initials =
-
-                user.displayName
-
-                ?.split(" ")
-
-                .map(name=>name.charAt(0))
-
-                .join("")
-
-                .substring(0,2)
-
-                .toUpperCase();
-
-                userAvatar.textContent =
-                initials || "U";
-
+                    setProfileImage(image, () => {
+                        userAvatar.textContent = initials;
+                    });
+                }
+            } else {
+                userAvatar.textContent = initials;
             }
-
         }
 
     }
