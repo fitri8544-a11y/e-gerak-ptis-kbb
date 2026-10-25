@@ -1374,7 +1374,7 @@ function renderBirthdayAnnouncements() {
 
     if (/^[1-9]\d{7,14}$/.test(phone)) {
       const message =
-        `Selamat Hari Lahir, ${nama}! 🎂🎉\n\n` +
+        `Selamat Hari Lahir, ${nama}!\n\n` +
         "Semoga dikurniakan kesihatan yang baik, " +
         "dimurahkan rezeki, diberkati usia dan " +
         "dipermudahkan segala urusan.\n\n" +
