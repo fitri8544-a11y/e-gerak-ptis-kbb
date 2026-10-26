@@ -40,7 +40,7 @@ content="width=device-width, initial-scale=1.0">
 name="description"
 content="E-GERAK PTIS KBB - Electronic Movement Management System">
 
-<title>E-GERAK PTIS KBB | Command Center</title>
+<title>eGerak PTIS KBB | Portal PTIS Kulim Bandar Baharu</title>
 
 <link
 rel="icon"
@@ -257,6 +257,263 @@ button{
     animation-play-state: paused;
 }
 
+/* ======================================================
+   KEMASAN PORTAL RASMI
+====================================================== */
+
+body {
+  background: #f4f6f9;
+  color: #172b43;
+}
+
+.official-header {
+  overflow: hidden;
+  border: 1px solid #dce3eb;
+  border-top: 5px solid #b58a35;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 4px 18px rgba(21, 48, 79, .05);
+}
+
+.official-header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 28px 32px;
+}
+
+.official-brand {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+
+.official-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  flex-shrink: 0;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  background: #f8fafc;
+}
+
+.official-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.official-eyebrow {
+  margin: 0 0 7px;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.official-brand h1 {
+  margin: 0;
+  color: #15304f;
+  font-size: clamp(25px, 3vw, 36px);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.official-district {
+  margin: 7px 0 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.official-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+.official-clock {
+  text-align: right;
+}
+
+.official-clock #todayDate {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.official-clock #digitalClock {
+  margin-top: 5px;
+  color: #15304f;
+  font-size: 23px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.official-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 12px 18px;
+  border: 1px solid #dce3eb;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #15304f;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+
+.official-login:hover {
+  background: #f1f5f9;
+}
+
+.official-login:focus-visible {
+  outline: 3px solid #b58a35;
+  outline-offset: 3px;
+}
+
+.official-login:disabled {
+  cursor: wait;
+  opacity: .65;
+}
+
+.official-header-description {
+  padding: 14px 32px;
+  border-top: 1px solid #e8edf3;
+  background: #f8fafc;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.official-notice-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.official-panel {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #dce3eb;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 3px 14px rgba(21, 48, 79, .04);
+}
+
+.official-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #edf1f5;
+}
+
+.official-section-label {
+  margin: 0 0 6px;
+  color: #8a692a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.official-panel-heading h2 {
+  margin: 0;
+  color: #15304f;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.official-panel-content {
+  padding: 22px 24px;
+}
+
+/* Kad ucapan disusun menegak dalam panel yang lebih kecil. */
+#birthdayAnnouncements article {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+#birthdayAnnouncements article > a {
+  align-self: flex-start;
+}
+
+@media (max-width: 1000px) {
+  .official-header-main {
+    flex-wrap: wrap;
+  }
+
+  .official-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .official-clock {
+    text-align: left;
+  }
+
+  .official-notice-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .official-header-main {
+    padding: 22px 18px;
+    gap: 22px;
+  }
+
+  .official-brand {
+    gap: 14px;
+  }
+
+  .official-logo {
+    width: 66px;
+    height: 66px;
+    padding: 7px;
+  }
+
+  .official-eyebrow {
+    font-size: 9px;
+    letter-spacing: .7px;
+  }
+
+  .official-district {
+    font-size: 12px;
+  }
+
+  .official-actions {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .official-clock #digitalClock {
+    font-size: 20px;
+  }
+
+  .official-header-description {
+    padding: 12px 18px;
+    font-size: 12px;
+  }
+
+  .official-panel-heading,
+  .official-panel-content {
+    padding: 18px;
+  }
+}
+
 </style>
 
 </head>
@@ -279,249 +536,126 @@ button{
 
 <div class="w-full min-h-screen px-6 lg:px-8 py-8">
 
-<!-- ================= HEADER COMMAND CENTER ================= -->
+<!-- ================= HEADER RASMI ================= -->
+<header class="official-header">
+  <div class="official-header-main">
 
-<header class="relative overflow-hidden rounded-[36px] rounded-3xl
-bg-white
-border
-border-slate-200
-shadow-xl">
+    <div class="official-brand">
+      <div class="official-logo">
+        <img
+          src="assets/images/logo-ptis.png"
+          alt="Logo PTIS KBB">
+      </div>
 
-    <!-- Glow -->
+      <div>
+        <p class="official-eyebrow">
+          PASUKAN TEKNIKAL ICT SEKOLAH
+        </p>
 
-    <div class="absolute -top-24 -right-24 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl"></div>
+        <h1>eGerak PTIS KBB</h1>
 
-    <div class="absolute -bottom-20 -left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
-
-    <div class="relative p-8">
-
-        <div class="
-flex
-flex-col
-xl:flex-row
-items-center
-xl:items-start
-justify-between
-gap-8">
-
-            <!-- LEFT -->
-
-            <div class="
-flex
-flex-col
-sm:flex-row
-items-center
-sm:items-center
-text-center
-sm:text-left
-gap-5">
-
-                <div class="
-w-20 h-20
-sm:w-24 sm:h-24
-rounded-[24px]
-bg-gradient-to-br
-from-cyan-500
-to-blue-700
-shadow-2xl
-flex
-items-center
-justify-center
-flex-shrink-0">
-
-    <img
-    src="assets/images/logo-ptis.png"
-    class="
-    w-12 h-12
-    sm:w-16 sm:h-16
-    object-contain">
-
-</div>
-
-                <div>
-
-                    <span class="uppercase tracking-[6px] text-cyan-400 text-xs font-bold">
-
-                        COMMAND CENTER
-
-                    </span>
-
-                    <h1 class="
-text-3xl
-sm:text-4xl
-lg:text-5xl
-font-black
-mt-3
-leading-tight">
-
-                        E-GERAK PTIS KBB
-
-                    </h1>
-
-                    <p class="
-text-slate-500
-mt-3
-text-base
-sm:text-lg">
-
-                        Electronic Movement Management System
-
-                    </p>
-
-                    <div class="flex gap-3 mt-6 flex-wrap">
-
-                        <span class="bg-cyan-500/10 border border-cyan-500/20 px-4 py-2 rounded-full text-cyan-300 text-sm">
-
-                            🚀 Version 2.0
-
-                        </span>
-
-                        <span class="bg-green-500/10 border border-green-500/20 px-4 py-2 rounded-full text-green-300 text-sm">
-
-                            🟢 Firebase Connected
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- RIGHT -->
-
-            <div class="
-flex
-flex-col
-lg:flex-row
-items-center
-gap-4
-w-full
-xl:w-auto">
-
-                <div class="flex items-center gap-4">
-
-                    <div class="bg-slate-50 border border-slate-200/70 rounded-3xl px-5 py-4 text-center border border-slate-700 w-full sm:min-w-[210px]">
-
-                        <div
-                        id="digitalClock"
-                        class="text-3xl font-black text-cyan-400">
-
-                            00:00:00
-
-                        </div>
-
-                        <div
-                        id="todayDate"
-                        class="text-slate-500 text-sm mt-2">
-
-                            Loading...
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="flex items-center gap-4">
-
-                    
-
-                    <button
-id="googleLoginBtn"
-type="button"
-class="w-12 h-12
-bg-white
-hover:bg-gray-100
-rounded-2xl
-shadow-xl
-border
-border-gray-200
-flex
-items-center
-justify-center
-transition
-duration-300">
-
-    <img
-    src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-    alt="Google"
-    class="w-7 h-7">
-
-    <span
-    id="loadingSpinner"
-    class="hidden">
-
-    <i class="fas fa-spinner fa-spin"></i>
-
-    </span>
-
-</button>
-
-<div
-id="loginError"
-class="hidden
-mt-4
-rounded-2xl
-bg-red-500/10
-border
-border-red-500/20
-text-red-300
-text-center
-p-4">
-
-</div>
-
-                </div>
-
-            </div>
-
-        </div>
-
+        <p class="official-district">
+          Kulim Bandar Baharu
+        </p>
+      </div>
     </div>
 
+    <div class="official-actions">
+      <div class="official-clock">
+        <div id="todayDate">Memuatkan tarikh...</div>
+        <div id="digitalClock">00:00:00</div>
+      </div>
+
+      <button
+        id="googleLoginBtn"
+        type="button"
+        class="official-login">
+
+        <img
+          src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+          alt=""
+          width="20"
+          height="20">
+
+        <span id="loginText">Log Masuk</span>
+
+        <span id="loadingSpinner" class="hidden" aria-hidden="true">
+          …
+        </span>
+      </button>
+    </div>
+
+  </div>
+
+  <div class="official-header-description">
+    Sistem Pengurusan Pergerakan dan Rujukan Data PTIS
+  </div>
+
+  <div
+    id="loginError"
+    class="hidden mx-6 mb-5 rounded-xl border border-red-200
+           bg-red-50 p-4 text-sm text-red-700"
+    role="alert">
+  </div>
 </header>
 
-<!-- ================= MAKLUMAN TERKINI ================= -->
-<section
-  class="mt-8 rounded-3xl bg-white border border-slate-200 shadow-xl overflow-hidden"
-  aria-labelledby="maklumanTitle">
+<!-- ================= MAKLUMAN DAN HARI LAHIR ================= -->
+<div class="official-notice-grid">
 
-  <div class="px-6 py-5 border-b border-slate-100">
-    <h2
-      id="maklumanTitle"
-      class="text-xl sm:text-2xl font-bold text-slate-900">
-      📢 Makluman Terkini
-      (<span id="announcementCount">0</span>)
-      &amp; (<span id="birthdayCount">0</span> Hari Lahir)
-    </h2>
+  <section
+    class="official-panel"
+    aria-labelledby="maklumanTitle">
 
-    <p class="mt-1 text-sm text-slate-500">
-      Makluman semasa dan sambutan hari lahir warga PTIS Kulim Bandar Baharu.
-    </p>
-  </div>
+    <div class="official-panel-heading">
+      <div>
+        <p class="official-section-label">HEBAHAN PASUKAN</p>
 
-  <!-- MAKLUMAN UMUM -->
-  <div
-    id="generalAnnouncements"
-    class="px-6 pt-6 space-y-4"
-    aria-live="polite">
-    <p class="text-sm text-slate-500">
-      Memuatkan makluman...
-    </p>
-  </div>
+        <h2 id="maklumanTitle">Makluman Terkini</h2>
+      </div>
 
-  <!-- HARI LAHIR -->
-  <div
-    id="birthdayAnnouncements"
-    class="p-6 space-y-4"
-    aria-live="polite">
-    <p class="text-sm text-slate-500">
-      Maklumat hari lahir belum tersedia.
-    </p>
-  </div>
+      <!-- Dikekalkan untuk skrip kiraan sedia ada. -->
+      <span id="announcementCount" hidden>0</span>
+    </div>
 
-</section>
+    <div
+      id="generalAnnouncements"
+      class="official-panel-content space-y-4"
+      aria-live="polite">
+
+      <p class="text-sm text-slate-500">
+        Memuatkan makluman...
+      </p>
+    </div>
+
+  </section>
+
+  <section
+    class="official-panel"
+    aria-labelledby="birthdayTitle">
+
+    <div class="official-panel-heading">
+      <div>
+        <p class="official-section-label">WARGA PTIS KBB</p>
+
+        <h2 id="birthdayTitle">Sambutan Hari Lahir</h2>
+      </div>
+
+      <span id="birthdayCount" hidden>0</span>
+    </div>
+
+    <div
+      id="birthdayAnnouncements"
+      class="official-panel-content space-y-4"
+      aria-live="polite">
+
+      <p class="text-sm text-slate-500">
+        Memuatkan maklumat hari lahir...
+      </p>
+    </div>
+
+  </section>
+
+</div>
 
 <!-- ================= KPI DASHBOARD ================= -->
 
