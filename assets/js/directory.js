@@ -955,17 +955,35 @@ border-4
 
 border-sky-500">
 
-<h3 class="
+<div class="mt-4 flex flex-wrap items-center justify-center gap-2">
 
-mt-4
+    <h3 class="text-lg font-black text-slate-900">
+        ${staff.nama || "-"}
+    </h3>
 
-text-lg
+    ${
+        String(staff.role || "")
+            .toUpperCase()
+            .includes("KETUA ZON")
+            ? `
+                <span class="
+                    inline-flex
+                    items-center
+                    rounded-md
+                    bg-amber-600
+                    px-2
+                    py-1
+                    text-xs
+                    font-bold
+                    text-white
+                ">
+                    ⭐ Ketua Zon
+                </span>
+              `
+            : ""
+    }
 
-font-black
-
-text-slate-900">
-
-${staff.nama || "-"}
+</div>
 
 </h3>
 
@@ -975,7 +993,10 @@ text-sm
 
 text-slate-500">
 
-${staff.role || "-"}
+${
+    String(staff.role || "-")
+        .replace(/KETUA ZON\s*\/\s*/i, "")
+}
 
 </p>
 
