@@ -3,6 +3,11 @@
 
 <head>
 
+<!-- Font Awesome: ikon dashboard -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <meta charset="UTF-8">
 
 <meta
@@ -690,220 +695,132 @@ w-full
 ">
 
     <!-- ================= PTIS DIRECTORY ================= -->
-
-    <div
+<div
     id="directoryCard"
     class="
+        rounded-2xl
+        border border-slate-200
+        bg-white
+        p-6
+        shadow-sm
+        cursor-pointer
+        transition-all duration-300
+        hover:-translate-y-1
+        hover:shadow-md
+    "
+>
+    <div class="flex items-start justify-between gap-4">
+        <div>
+            <p class="text-sm font-semibold text-slate-600">
+                Jumlah Ahli
+            </p>
 
-    rounded-3xl
-
-    bg-gradient-to-br
-
-    from-blue-600
-
-    to-blue-800
-
-    p-6
-
-    shadow-2xl
-
-    cursor-pointer
-
-    transition-all
-
-    duration-300
-
-    hover:scale-[1.03]
-
-    hover:shadow-blue-500/40
-
-    ">
-
-        <div class="flex justify-between items-start">
-
-            <div>
-
-                <p class="text-blue-100 text-sm">
-
-                    PTIS Directory
-
-                </p>
-
-                <h1 class="text-4xl font-black mt-4">
-
-                    <span id="totalMembers">0</span>
-
-                </h1>
-
-                <p class="mt-6 text-sm">
-
-                    👥 Semua Ahli PTIS →
-
-                </p>
-
-            </div>
-
-            <i class="fa-solid fa-address-book text-5xl text-blue-200"></i>
-
+            <p class="mt-3 text-4xl font-black text-blue-700">
+                <span id="totalMembers">0</span>
+            </p>
         </div>
 
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
+            <i class="fa-solid fa-address-book text-xl" aria-hidden="true"></i>
+        </div>
     </div>
 
-    <!-- ================= DALAM PEJABAT ================= -->
+    <p class="mt-6 text-sm font-medium text-blue-700">
+        Lihat direktori ahli →
+    </p>
+</div>
 
-    <div
-    class="
+<!-- ================= DALAM PEJABAT ================= -->
+<div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div class="flex items-start justify-between gap-4">
+        <div>
+            <p class="text-sm font-semibold text-slate-600">
+                Dalam Pejabat
+            </p>
 
-    rounded-3xl
+            <p class="mt-3 text-4xl font-black text-emerald-700">
+                <span id="officeMembers">0</span>
+            </p>
+        </div>
 
-    bg-gradient-to-br
-
-    from-green-600
-
-    to-emerald-700
-
-    p-6
-
-    shadow-2xl
-
-    ">
-
-        <p class="text-green-100 text-sm">
-
-            Dalam Pejabat
-
-        </p>
-
-        <h1 class="text-4xl font-black mt-4">
-
-            <span id="officeMembers">0</span>
-
-        </h1>
-
-        <p class="mt-6 text-sm">
-
-            🏢 Sedang Bertugas
-
-        </p>
-
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
+            <i class="fa-solid fa-building text-xl" aria-hidden="true"></i>
+        </div>
     </div>
 
-    <!-- ================= KELUAR BERTUGAS ================= -->
+    <p class="mt-6 text-sm text-slate-500">
+        Sedang bertugas di pejabat
+    </p>
+</div>
 
-    <div
-    class="
+<!-- ================= KELUAR BERTUGAS ================= -->
+<div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div class="flex items-start justify-between gap-4">
+        <div>
+            <p class="text-sm font-semibold text-slate-600">
+                Keluar Bertugas
+            </p>
 
-    rounded-3xl
+            <p class="mt-3 text-4xl font-black text-amber-700">
+                <span id="activeMovement">0</span>
+            </p>
+        </div>
 
-    bg-gradient-to-br
-
-    from-amber-500
-
-    to-orange-600
-
-    p-6
-
-    shadow-2xl
-
-    ">
-
-        <p class="text-amber-100 text-sm">
-
-            Keluar Bertugas
-
-        </p>
-
-        <h1 class="text-4xl font-black mt-4">
-
-            <span id="activeMovement">0</span>
-
-        </h1>
-
-        <p class="mt-6 text-sm">
-
-            🚗 Sedang Bergerak
-
-        </p>
-
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 text-amber-700">
+            <i class="fa-solid fa-car text-xl" aria-hidden="true"></i>
+        </div>
     </div>
 
-    <!-- ================= TIDAK HADIR ================= -->
+    <p class="mt-6 text-sm text-slate-500">
+        Sedang bergerak
+    </p>
+</div>
 
-    <div
-    class="
+<!-- ================= TIDAK HADIR ================= -->
+<div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div class="flex items-start justify-between gap-4">
+        <div>
+            <p class="text-sm font-semibold text-slate-600">
+                Tidak Hadir
+            </p>
 
-    rounded-3xl
+            <p class="mt-3 text-4xl font-black text-red-700">
+                <span id="absentMembers">0</span>
+            </p>
+        </div>
 
-    bg-gradient-to-br
-
-    from-red-500
-
-    to-red-700
-
-    p-6
-
-    shadow-2xl
-
-    ">
-
-        <p class="text-red-100 text-sm">
-
-            Tidak Hadir
-
-        </p>
-
-        <h1 class="text-4xl font-black mt-4">
-
-            <span id="absentMembers">0</span>
-
-        </h1>
-
-        <p class="mt-6 text-sm">
-
-            📅 Hari Ini
-
-        </p>
-
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-red-50 text-red-700">
+            <i class="fa-solid fa-calendar-xmark text-xl" aria-hidden="true"></i>
+        </div>
     </div>
 
-    <!-- ================= TUGASAN ================= -->
+    <p class="mt-6 text-sm text-slate-500">
+        Rekod hari ini
+    </p>
+</div>
 
-    <div
-    class="
+<!-- ================= TUGASAN ================= -->
+<div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div class="flex items-start justify-between gap-4">
+        <div>
+            <p class="text-sm font-semibold text-slate-600">
+                Tugasan
+            </p>
 
-    rounded-3xl
+            <p class="mt-3 text-4xl font-black text-cyan-700">
+                <span id="totalTasks">0</span>
+            </p>
+        </div>
 
-    bg-gradient-to-br
-
-    from-cyan-500
-
-    to-sky-700
-
-    p-6
-
-    shadow-2xl
-
-    ">
-
-        <p class="text-cyan-100 text-sm">
-
-            Tugasan
-
-        </p>
-
-        <h1 class="text-4xl font-black mt-4">
-
-            <span id="totalTasks">0</span>
-
-        </h1>
-
-        <p class="mt-6 text-sm">
-
-            📋 Tugasan Aktif
-
-        </p>
-
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-50 text-cyan-700">
+            <i class="fa-solid fa-clipboard-list text-xl" aria-hidden="true"></i>
+        </div>
     </div>
+
+    <p class="mt-6 text-sm text-slate-500">
+        Tugasan aktif
+    </p>
+</div>
 
 </div>
 
