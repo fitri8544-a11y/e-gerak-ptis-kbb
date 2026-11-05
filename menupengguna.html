@@ -9,7 +9,8 @@
 name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>E-GERAK PTIS KBB V2</title>
+<title>Portal Pengguna | eGerak PTIS KBB</title>
+<link rel="icon" type="image/png" href="assets/images/logo-ptis.png">
 
 <link
 href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
@@ -575,6 +576,49 @@ box-shadow:
 
 }
 
+
+/* Paparan pengguna eGerak */
+.portal-shell{width:min(100% - 40px,1240px);margin-inline:auto}
+.portal-header{background:#0f1c30;border-bottom:1px solid #25344c}
+.portal-top,.portal-brand,.portal-account{display:flex;align-items:center;gap:14px}
+.portal-top{min-height:76px;justify-content:space-between;flex-wrap:wrap;padding-block:12px}
+.portal-brand img{object-fit:contain}
+.portal-brand strong,.portal-brand span{display:block}
+.portal-brand span,.portal-clock,.portal-copy{color:#adbed4}
+.portal-brand span,.portal-clock{font-size:13px}
+.portal-avatar{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;overflow:hidden;background:#f4c85b;color:#102037;font-weight:800}
+.portal-logout{padding:9px 13px;border:1px solid #66424e;border-radius:10px;color:#fecaca;background:#332032;font-weight:650}
+.portal-main{padding-block:30px 120px}
+.portal-overview{display:grid;grid-template-columns:1.6fr 1fr;gap:18px}
+.portal-hero,.portal-status,.portal-link{border:1px solid #283a53;border-radius:20px;background:#111f35;color:#f8fafc;min-width:0}
+.portal-hero,.portal-status{padding:clamp(18px,3vw,30px)}
+.portal-hero{background:linear-gradient(120deg,#172940,#112035);border-top:2px solid #e1b453}
+.portal-kicker{font-size:11px;font-weight:800;letter-spacing:.13em;color:#ffd166}
+.portal-hero h1{font-size:clamp(29px,5vw,48px);font-weight:800;line-height:1.12;margin:12px 0}
+.portal-name{font-size:clamp(15px,2vw,20px);font-weight:700;overflow-wrap:anywhere}
+.portal-copy{margin-top:8px;line-height:1.65}
+.portal-status h3{margin:8px 0 10px}
+.portal-status dl div{display:grid;grid-template-columns:80px minmax(0,1fr);gap:10px;padding:7px 0;border-top:1px solid #283a53;font-size:14px}
+.portal-status dt{color:#adbed4}.portal-status dd{overflow-wrap:anywhere}
+.portal-directory{margin-top:30px}
+.portal-directory h2{font-size:clamp(23px,4vw,31px);font-weight:800;margin-top:5px}
+.portal-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.portal-link{display:flex;flex-direction:column;padding:18px;text-decoration:none;transition:border-color .2s,background .2s}
+.portal-link:hover{border-color:#e1b453;background:#162741}
+.portal-link-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.portal-num{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:#253550;color:#ffd166;font-size:12px;font-weight:800}
+.portal-tag{color:#adbed4;font-size:11px;font-weight:650}
+.portal-link h3{font-size:17px;font-weight:750;margin:10px 0 4px}
+.portal-link p{color:#adbed4;font-size:13px;line-height:1.55;margin-bottom:12px}
+.portal-action{color:#ffd166;font-size:13px;font-weight:700;margin-top:auto}
+.portal-link:focus-visible,.portal-logout:focus-visible,.portal-fab:focus-visible{outline:3px solid #ffd166;outline-offset:3px}
+.fab.portal-fab{z-index:39;display:flex;align-items:center;gap:8px;width:auto;height:auto;min-height:46px;padding:10px 16px;right:20px;bottom:calc(20px + env(safe-area-inset-bottom));font-size:14px;background:#ffd166;color:#142238}
+.portal-fab span{font-size:20px;line-height:1}
+.fab.portal-fab:hover{transform:none;background:#ffe09a}
+@media(max-width:900px){.portal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.portal-overview{grid-template-columns:1fr}}
+@media(max-width:460px){.portal-shell{width:calc(100% - 28px)}.portal-grid{grid-template-columns:1fr}.portal-account{width:100%;justify-content:space-between;gap:8px}.portal-main{padding-top:18px}}
+
 </style>
 
 </head>
@@ -601,564 +645,82 @@ overflow-hidden">
 
 <!-- ================================= -->
 
-<header
-class="sticky
-top-0
-z-40
-glass
-gold-border
-px-4
-py-5
-lg:px-6
-lg:py-5">
-
-<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
-
-    <!-- ================= LEFT ================= -->
-
-    <div>
-
-        <div
-        class="inline-flex
-        items-center
-        gap-2
-        text-2xl">
-
-            👋
-
-        </div>
-
-        <h1
-        class="text-4xl
-        lg:text-3xl
-        font-black
-        text-white
-        leading-tight
-        mt-2">
-
-            Selamat<br>Datang
-
-        </h1>
-
-        <p
-        id="userName"
-        class="mt-4
-        text-xl
-        font-bold
-        text-white
-        leading-8">
-
-            Loading...
-
-        </p>
-
-        <p
-        class="mt-2
-        text-gold-400
-        font-semibold">
-
-            Pasukan Teknikal ICT Sekolah
-
-        </p>
-
+<header class="portal-header">
+  <div class="portal-shell portal-top">
+    <div class="portal-brand">
+      <img src="assets/images/logo-ptis.png" alt="" width="44" height="44">
+      <div><strong>eGerak PTIS KBB</strong><span>Portal Pengguna</span></div>
     </div>
-
-
-    <!-- ================= RIGHT ================= -->
-
-    <div
-    class="flex
-    items-center
-    justify-between
-    lg:justify-end
-    gap-4">
-
-        <!-- Date -->
-
-        <div>
-
-            <div
-            id="todayDate"
-            class="font-bold
-            text-white">
-
-                Loading...
-
-            </div>
-
-            <div
-            id="digitalClock"
-            class="text-gray-400">
-
-                00:00:00
-
-            </div>
-
-        </div>
-
-
-        <!-- Avatar -->
-
-        <div
-        id="userAvatar"
-        class="w-14
-        h-14
-        rounded-full
-        bg-gold-500
-        text-black
-        text-xl
-        font-black
-        flex
-        items-center
-        justify-center
-        overflow-hidden
-        shadow-lg">
-
-            --
-
-        </div>
-
-
-        <!-- Logout -->
-
-        <button
-        id="logoutButton"
-        class="px-4
-        py-3
-        rounded-2xl
-        bg-red-500/20
-        hover:bg-red-500
-        text-red-300
-        hover:text-white
-        transition
-        font-semibold">
-
-            🚪 Logout
-
-        </button>
-
+    <div class="portal-account">
+      <div class="portal-clock"><p id="todayDate">Memuatkan tarikh…</p><p id="digitalClock">00:00:00</p></div>
+      <div id="userAvatar" class="portal-avatar">--</div>
+      <button id="logoutButton" type="button" class="portal-logout">Log keluar</button>
     </div>
-
-</div>
-
+  </div>
 </header>
 
-<!-- ================================= -->
-
-<!-- CONTENT -->
-
-<!-- ================================= -->
-
-<main
-class="flex-1
-p-6
-lg:p-8">
-
-<div
-class="grid
-grid-cols-1
-xl:grid-cols-3
-gap-6">
-
-<!-- ========================= -->
-
-<!-- WELCOME CARD -->
-
-<!-- ========================= -->
-
-<div
-class="xl:col-span-2
-glass
-gold-border
-rounded-3xl
-p-8">
-
-<div
-class="inline-flex
-px-4
-py-2
-rounded-full
-bg-yellow-500/10
-text-yellow-300
-font-semibold
-mb-5">
-
-SISTEM PENGURUSAN PERGERAKAN
-
-</div>
-
-<h1
-class="text-5xl
-font-black
-text-white
-leading-tight">
-
-E-GERAK
-
-<span
-class="text-gold-400">
-
-PTIS KBB
-
-</span>
-
-</h1>
-
-<p
-class="mt-6
-text-gray-400
-leading-8">
-
-Sistem pengurusan pergerakan Pasukan Teknikal ICT
-Sekolah Daerah Baling yang dibangunkan untuk
-memudahkan pegawai mengemaskini status
-pergerakan secara masa nyata.
-
-</p>
-
-</div>
-
-<!-- STATUS CARD -->
-
-<div
-class="glass
-gold-border
-rounded-3xl
-p-6">
-
-<div
-class="text-yellow-400
-font-bold">
-
-STATUS SEMASA
-
-</div>
-
-<h3
-id="currentStatus"
-class="text-2xl font-bold text-green-400">
-
-🟢 DI PEJABAT
-
-</h3>
-
-<p class="text-gray-400">
-
-Lokasi
-
-</p>
-
-<p
-id="currentLocation"
-class="text-white font-semibold">
-
--
-
-</p>
-
-<p class="text-gray-400 mt-5">
-
-Aktiviti
-
-</p>
-
-<p
-id="currentActivity"
-class="text-white font-semibold">
-
--
-
-</p>
-
-<p class="text-gray-400 mt-5">
-
-Kemaskini
-
-</p>
-
-<p
-id="currentTime"
-class="text-white font-semibold">
-
--
-
-</p>
-
-</div>
-
-</div>
-
-<!-- ====================================================== -->
-<!-- QUICK ACCESS -->
-<!-- ====================================================== -->
-
-<section class="mt-8">
-
-  <!-- HEADER -->
-
-  <div class="flex items-center justify-between mb-8">
-
-    <div>
-
-      <span class="inline-flex items-center px-4 py-2 rounded-full
-      bg-yellow-500/10 text-yellow-400 text-sm font-bold border border-yellow-500/20">
-
-        🚀 QUICK ACCESS
-
-      </span>
-
-      <h2 class="text-3xl font-black text-white mt-4">
-
-        Sistem Harian PTIS
-
-      </h2>
-
-      <p class="text-gray-400 mt-2">
-
-        Akses pantas ke sistem yang digunakan setiap hari oleh Pasukan Teknikal ICT Sekolah.
-
-      </p>
-
+<main class="portal-shell portal-main">
+  <section class="portal-overview" aria-label="Ringkasan pengguna">
+    <div class="portal-hero">
+      <p class="portal-kicker">SISTEM PENGURUSAN PERGERAKAN</p>
+      <h1>Selamat datang</h1>
+      <p id="userName" class="portal-name">Memuatkan profil…</p>
+      <p class="portal-copy">Pasukan Teknikal ICT Sekolah · Urus pergerakan dan capai sistem harian PTIS.</p>
     </div>
-
-  </div>
-
-  <!-- GRID -->
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
-
-    <!-- ================= SCANME ================= -->
-
-    <a href="https://idme.moe.gov.my/login"
-       target="_blank"
-       class="group glass gold-border rounded-3xl p-8
-       transition duration-300 hover:-translate-y-2
-       hover:border-yellow-400/60">
-
-      <div class="w-16 h-16 rounded-2xl
-      bg-yellow-500/10
-      flex items-center justify-center
-      text-4xl
-      transition
-      group-hover:scale-110">
-
-        📱
-
-      </div>
-
-      <h3 class="text-2xl font-black text-white mt-6">
-
-        SCANME
-
-      </h3>
-
-      <p class="text-gray-400 mt-3 leading-relaxed">
-
-        Sistem kehadiran.
-
-      </p>
-
-      <div class="mt-8 text-yellow-400 font-bold">
-
-        ➜ Buka Sistem
-
-      </div>
-
-    </a>
-
-    <!-- ================= ISD ================= -->
-
-    <a href="https://isd.moe.gov.my/ui/home?view_type=my_view"
-       target="_blank"
-       class="group glass gold-border rounded-3xl p-8
-       transition duration-300 hover:-translate-y-2
-       hover:border-cyan-400/60">
-
-      <div class="w-16 h-16 rounded-2xl
-      bg-cyan-500/10
-      flex items-center justify-center
-      text-4xl
-      transition
-      group-hover:scale-110">
-
-        🛠️
-
-      </div>
-
-      <h3 class="text-2xl font-black text-white mt-6">
-
-        ISD
-
-      </h3>
-
-      <p class="text-gray-400 mt-3 leading-relaxed">
-
-        ICT Service Desk untuk aduan dan sokongan teknikal.
-
-      </p>
-
-      <div class="mt-8 text-cyan-400 font-bold">
-
-        ➜ Buka Sistem
-
-      </div>
-
-    </a>
-
-    <!-- ================= S3PTIS ================= -->
-
-    <a href="https://s3ptiskedah.web.app/"
-       target="_blank"
-       class="group glass gold-border rounded-3xl p-8
-       transition duration-300 hover:-translate-y-2
-       hover:border-green-400/60">
-
-      <div class="w-16 h-16 rounded-2xl
-      bg-green-500/10
-      flex items-center justify-center
-      text-4xl
-      transition
-      group-hover:scale-110">
-
-        💻
-
-      </div>
-
-      <h3 class="text-2xl font-black text-white mt-6">
-
-        S3PTIS
-
-      </h3>
-
-      <p class="text-gray-400 mt-3 leading-relaxed">
-
-        Sistem Sokongan PTIS untuk pengurusan teknikal.
-
-      </p>
-
-      <div class="mt-8 text-green-400 font-bold">
-
-        ➜ Buka Sistem
-
-      </div>
-
-    </a>
-
-    <!-- ================= HRMIS ================= -->
-
-    <a href="https://hrmis2.eghrmis.gov.my/hrmisnet/common/main/login.aspx"
-       target="_blank"
-       class="group glass gold-border rounded-3xl p-8
-       transition duration-300 hover:-translate-y-2
-       hover:border-purple-400/60">
-
-      <div class="w-16 h-16 rounded-2xl
-      bg-purple-500/10
-      flex items-center justify-center
-      text-4xl
-      transition
-      group-hover:scale-110">
-
-        👤
-
-      </div>
-
-      <h3 class="text-2xl font-black text-white mt-6">
-
-        HRMIS
-
-      </h3>
-
-      <p class="text-gray-400 mt-3 leading-relaxed">
-
-        Portal rasmi HRMIS untuk urusan perkhidmatan.
-
-      </p>
-
-      <div class="mt-8 text-purple-400 font-bold">
-
-        ➜ Buka Sistem
-
-      </div>
-
-    </a>
-
-    <!-- MAKLUMAT SYARIKAT SEWAAN -->
-    <a
-      href="maklumat-sewaan.html"
-      class="group glass gold-border rounded-3xl p-8 transition duration-300
-            hover:-translate-y-2 hover:border-orange-400/60">
-
-      <div class="w-16 h-16 rounded-2xl bg-orange-500/10
-                  text-orange-400 flex items-center justify-center text-3xl">
-        🏢
-      </div>
-
-      <h3 class="text-2xl font-black text-white mt-6">
-        Maklumat Sewaan
-      </h3>
-
-      <p class="text-gray-400 mt-3">
-        Rujukan syarikat, fasa projek dan tempoh sewaan peralatan ICT.
-      </p>
-
-      <div class="mt-8 text-orange-400 font-bold">
-        ➜ Lihat Maklumat
-      </div>
-    </a>
-
-    <!-- TIPS ICT -->
-    <a href="tips-ict.html"
-      class="group glass gold-border rounded-3xl p-8 transition duration-300 hover:-translate-y-2 hover:border-yellow-400/60">
-      <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-yellow-500/10 text-3xl" aria-hidden="true">💡</div>
-      <h3 class="mt-6 text-2xl font-black text-white">Tips ICT</h3>
-      <p class="mt-3 text-gray-400">Infografik dan panduan ringkas untuk tugasan ICT.</p>
-      <div class="mt-8 font-bold text-yellow-400">➜ Lihat Galeri</div>
-    </a>
-
-    <!-- ADMIN PASSWORD -->
-    <a
-      href="admin-password.html"
-      class="group glass gold-border rounded-3xl p-8 transition duration-300
-            hover:-translate-y-2 hover:border-rose-400/60">
-
-      <div class="w-16 h-16 rounded-2xl bg-rose-500/10
-                  text-rose-400 flex items-center justify-center text-3xl">
-        🔐
-      </div>
-
-      <h3 class="text-2xl font-black text-white mt-6">
-        Admin Password
-      </h3>
-
-      <p class="text-gray-400 mt-3">
-        Rujukan akaun dan kata laluan peralatan ICT untuk tugasan PM/CM.
-      </p>
-
-      <div class="mt-8 text-rose-400 font-bold">
-        ➜ Lihat Maklumat
-      </div>
-    </a>
-
-  </div>
-
-</section>
-
-    </main>
-
+    <section class="portal-status" aria-labelledby="portal-status-title">
+      <h2 id="portal-status-title" class="portal-kicker">STATUS PERGERAKAN</h2>
+      <h3 id="currentStatus" class="text-2xl font-bold text-green-400">🟢 DI PEJABAT</h3>
+      <dl>
+        <div><dt>Lokasi</dt><dd id="currentLocation">-</dd></div>
+        <div><dt>Aktiviti</dt><dd id="currentActivity">-</dd></div>
+        <div><dt>Kemas kini</dt><dd id="currentTime">-</dd></div>
+      </dl>
+    </section>
+  </section>
+  <section class="portal-directory" aria-labelledby="portal-directory-title">
+    <p class="portal-kicker">AKSES PANTAS</p>
+    <h2 id="portal-directory-title">Sistem Harian PTIS</h2>
+    <p class="portal-copy">Akses sistem kerja dan bahan rujukan di satu tempat.</p>
+    <div class="portal-grid">
+        <a class="portal-link" href="https://idme.moe.gov.my/login" target="_blank" rel="noopener noreferrer">
+          <div class="portal-link-top"><span class="portal-num" aria-hidden="true">01</span><span class="portal-tag">Kehadiran</span></div>
+          <h3>SCANME</h3><p>Sistem rekod kehadiran.</p><span class="portal-action">Buka sistem ↗</span>
+        </a>
+        <a class="portal-link" href="https://isd.moe.gov.my/ui/home?view_type=my_view" target="_blank" rel="noopener noreferrer">
+          <div class="portal-link-top"><span class="portal-num" aria-hidden="true">02</span><span class="portal-tag">Sokongan</span></div>
+          <h3>ISD</h3><p>Hantar aduan ICT dan dapatkan sokongan teknikal.</p><span class="portal-action">Buka sistem ↗</span>
+        </a>
+        <a class="portal-link" href="https://s3ptiskedah.web.app/" target="_blank" rel="noopener noreferrer">
+          <div class="portal-link-top"><span class="portal-num" aria-hidden="true">03</span><span class="portal-tag">Sokongan</span></div>
+          <h3>S3PTIS</h3><p>Akses sistem sokongan untuk pengurusan teknikal PTIS.</p><span class="portal-action">Buka sistem ↗</span>
+        </a>
+        <a class="portal-link" href="https://hrmis2.eghrmis.gov.my/hrmisnet/common/main/login.aspx" target="_blank" rel="noopener noreferrer">
+          <div class="portal-link-top"><span class="portal-num" aria-hidden="true">04</span><span class="portal-tag">Perkhidmatan</span></div>
+          <h3>HRMIS</h3><p>Portal urusan perkhidmatan dan sumber manusia.</p><span class="portal-action">Buka sistem ↗</span>
+        </a>
+        <a class="portal-link" href="maklumat-sewaan.html">
+          <div class="portal-link-top"><span class="portal-num" aria-hidden="true">05</span><span class="portal-tag">Rujukan</span></div>
+          <h3>Maklumat Sewaan</h3><p>Semak syarikat, fasa projek dan baki tempoh sewaan peralatan ICT.</p><span class="portal-action">Lihat maklumat →</span>
+        </a>
+        <a class="portal-link" href="tips-ict.html">
+          <div class="portal-link-top"><span class="portal-num" aria-hidden="true">06</span><span class="portal-tag">Rujukan</span></div>
+          <h3>Tips ICT</h3><p>Lihat infografik dan panduan ringkas untuk tugasan ICT.</p><span class="portal-action">Lihat galeri →</span>
+        </a>
+        <a class="portal-link" href="admin-password.html">
+          <div class="portal-link-top"><span class="portal-num" aria-hidden="true">07</span><span class="portal-tag">Akses peralatan</span></div>
+          <h3>Admin Password</h3><p>Rujukan akaun dan kata laluan peralatan ICT untuk tugasan PM/CM.</p><span class="portal-action">Lihat maklumat →</span>
+        </a>
+    </div>
+  </section>
+</main>
+</div>
 </div>
 
 <!-- ====================================================== -->
 <!-- FLOATING ACTION BUTTON -->
 <!-- ====================================================== -->
 
-<button
-id="fabButton"
-class="fab">
-
-+
-
-</button>
+<button id="fabButton" type="button" class="fab portal-fab"><span aria-hidden="true">+</span> Kemas kini pergerakan</button>
 
 <!-- ====================================================== -->
   <!-- PREMIUM MOVEMENT MODAL -->
