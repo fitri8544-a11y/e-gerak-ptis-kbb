@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tips ICT | eGerak PTIS KBB</title>
+  <link rel="icon" type="image/png" href="assets/images/logo-ptis.png">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --surface: #112035;
+      --line: #26364a;
+      --muted: #b6c7dd;
+      --gold: #ffd166;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at top right, #123645, transparent 70%), #0a1628;
+      color: #f7f9fc;
+      font: 16px/1.55 system-ui, sans-serif;
+    }
+
+    main {
+      width: min(1160px, calc(100% - 32px));
+      margin: auto;
+      padding: 27px 0 48px;
+    }
+
+    .topbar, .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .topbar {
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .brand { font-weight: 750; }
+    .brand img { width: 44px; height: 44px; object-fit: contain; }
+
+    .back, .button {
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 12px;
+      padding: 9px 14px;
+    }
+
+    .back {
+      color: inherit;
+      border: 1px solid #3c5264;
+      background: #ffffff06;
+    }
+
+    .back:hover { background: #ffffff12; }
+
+    header {
+      background: var(--surface);
+      border: 1px solid #51442c;
+      border-radius: 24px;
+      padding: clamp(20px, 3vw, 30px);
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .07em;
+    }
+
+    h1 {
+      margin: 10px 0 12px;
+      font-size: clamp(30px, 5vw, 40px);
+      line-height: 1.15;
+    }
+
+    p { color: var(--muted); }
+    header p { margin: 0; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    article {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: clamp(16px, 2.5vw, 24px);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+    }
+
+    h2 { font-size: 20px; margin: 14px 0 5px; }
+    article p { margin: 0 0 18px; }
+
+    .preview {
+      display: block;
+      background: #0a1628;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .preview img {
+      display: block;
+      width: 100%;
+      height: clamp(210px, 32vw, 320px);
+      object-fit: contain;
+    }
+
+    .button {
+      align-self: flex-start;
+      margin-top: auto;
+      border: 1px solid #76603a;
+      background: #302a21;
+      color: var(--gold);
+      font-weight: 650;
+    }
+
+    .button:hover { background: #433621; }
+    a:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+    .sr {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+
+    @media (max-width: 640px) {
+      .grid { grid-template-columns: 1fr; }
+      .topbar { margin-bottom: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <nav class="topbar" aria-label="Navigasi halaman">
+      <span class="brand">
+        <img src="assets/images/logo-ptis.png" alt="" width="44" height="44">
+        eGerak PTIS KBB
+      </span>
+      <a class="back" href="menupengguna.html">← Kembali ke Dashboard</a>
+    </nav>
+
+    <header>
+      <span class="eyebrow">RUJUKAN ICT</span>
+      <h1>💡 Tips ICT</h1>
+      <p>Galeri infografik dan panduan ringkas untuk pengguna eGerak PTIS KBB.</p>
+    </header>
+
+    <section class="grid" aria-label="Galeri infografik">
+      <article>
+        <a class="preview" href="assets/images/tips/test-ram.png" target="_blank" rel="noopener">
+          <img src="assets/images/tips/test-ram.png" alt="Infografik: Cara Test RAM pada Windows 11/10" loading="lazy">
+        </a>
+        <h2>Cara Test RAM pada Windows 11/10</h2>
+        <p>Simpan kerja sebelum memulakan ujian yang memerlukan komputer dimulakan semula.</p>
+        <a class="button" href="assets/images/tips/test-ram.png" target="_blank" rel="noopener">
+          Lihat panduan ↗<span class="sr">: Cara Test RAM pada Windows 11/10 (tab baharu)</span>
+        </a>
+      </article>
+
+      <article>
+        <a class="preview" href="assets/images/tips/system-restore.png" target="_blank" rel="noopener">
+          <img src="assets/images/tips/system-restore.png" alt="Infografik: Panduan System Restore Windows 11" loading="lazy">
+        </a>
+        <h2>Panduan System Restore Windows 11</h2>
+        <p>Kenali cara menggunakan titik pemulihan sistem.</p>
+        <a class="button" href="assets/images/tips/system-restore.png" target="_blank" rel="noopener">
+          Lihat panduan ↗<span class="sr">: Panduan System Restore Windows 11 (tab baharu)</span>
+        </a>
+      </article>
+
+      <article>
+        <a class="preview" href="assets/images/tips/ram-ddr4-ddr5.png" target="_blank" rel="noopener">
+          <img src="assets/images/tips/ram-ddr4-ddr5.png" alt="Infografik: Perbandingan RAM DDR4 dan DDR5" loading="lazy">
+        </a>
+        <h2>Perbandingan RAM DDR4 dan DDR5</h2>
+        <p>Semak perbezaan dan keserasian sebelum memilih RAM.</p>
+        <a class="button" href="assets/images/tips/ram-ddr4-ddr5.png" target="_blank" rel="noopener">
+          Lihat panduan ↗<span class="sr">: Perbandingan RAM DDR4 dan DDR5 (tab baharu)</span>
+        </a>
+      </article>
+
+      <article>
+        <a class="preview" href="assets/images/tips/perkongsian-fail.png" target="_blank" rel="noopener">
+          <img src="assets/images/tips/perkongsian-fail.png" alt="Infografik: Perkongsian Fail Windows 10 dan 11" loading="lazy">
+        </a>
+        <h2>Perkongsian Fail Windows 10 dan 11</h2>
+        <p>Rujukan ringkas untuk berkongsi fail pada rangkaian.</p>
+        <a class="button" href="assets/images/tips/perkongsian-fail.png" target="_blank" rel="noopener">
+          Lihat panduan ↗<span class="sr">: Perkongsian Fail Windows 10 dan 11 (tab baharu)</span>
+        </a>
+      </article>
+
+      <article>
+        <a class="preview" href="assets/images/tips/aktivasi-windows-office.png" target="_blank" rel="noopener">
+          <img src="assets/images/tips/aktivasi-windows-office.png" alt="Infografik: Panduan Aktivasi Windows &amp; Office melalui PowerShell" loading="lazy">
+        </a>
+        <h2>Panduan Aktivasi Windows &amp; Office melalui PowerShell</h2>
+        <p>Lesen sah diperlukan. MAS ialah skrip pihak ketiga, bukan skrip rasmi Microsoft. Gunakan saluran aktivasi Microsoft atau pentadbir ICT yang dibenarkan.</p>
+        <a class="button" href="assets/images/tips/aktivasi-windows-office.png" target="_blank" rel="noopener">
+          Lihat panduan ↗<span class="sr">: Panduan Aktivasi Windows &amp; Office melalui PowerShell (tab baharu)</span>
+        </a>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
