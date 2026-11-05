@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Maklumat Sewaan | eGerak PTIS KBB</title>
 
   <link rel="icon" type="image/png" href="assets/images/logo-ptis.png">
@@ -22,6 +21,7 @@
     }
 
     * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
 
     body {
       margin: 0;
@@ -32,10 +32,7 @@
     }
 
     button, input, select { font: inherit; }
-
     a { color: inherit; }
-
-    [hidden] { display: none !important; }
 
     .container {
       width: min(1200px, 100%);
@@ -216,6 +213,21 @@
       white-space: pre-line;
     }
 
+    .countdown {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 3px 10px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .countdown[data-tone="active"] { color: #86efac; background: #143128; }
+    .countdown[data-tone="soon"] { color: #fde68a; background: #352b17; }
+    .countdown[data-tone="expired"] { color: #fecaca; background: #3c2229; }
+    .countdown[data-tone="unknown"] { color: #cbd5e1; }
+
     .note {
       margin: 18px 0 0;
       padding: 12px;
@@ -273,9 +285,7 @@
     <main>
       <section class="hero">
         <span class="eyebrow">RUJUKAN PROJEK ICT</span>
-
         <h1>🏢 Maklumat Syarikat Sewaan</h1>
-
         <p class="muted">
           Rujukan syarikat, fasa projek serta tempoh projek dan
           sewaan peralatan ICT.
@@ -325,7 +335,6 @@
 
   <script type="module">
     import { auth } from "./assets/js/firebase.js";
-
     import {
       onAuthStateChanged
     } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
@@ -335,106 +344,77 @@
         company: "Night Electronic Sdn. Bhd.",
         category: "PdT",
         phase: "1",
-        project:
-          "Perkhidmatan Sewaan Peralatan ICT PdT Sekolah Secara Sewa Guna (Lease-to-use)",
-        projectPeriod:
-          "64 Bulan\n3 Mei 2021 – 2 Sept 2026",
-        rentalPeriod:
-          "60 Bulan\n3 Sept 2021 – 2 Sept 2026"
+        project: "Perkhidmatan Sewaan Peralatan ICT PdT Sekolah Secara Sewa Guna (Lease-to-use)",
+        projectPeriod: "64 Bulan\n3 Mei 2021 – 2 Sept 2026",
+        rentalPeriod: "60 Bulan\n3 Sept 2021 – 2 Sept 2026"
       },
       {
         company: "Setia Makmur Gemilang Sdn. Bhd.",
         category: "PdP",
         phase: "1",
-        project:
-          "Perkhidmatan Sewaan Peralatan ICT PdP Sekolah Secara Sewa Guna (Lease-to-use)",
-        projectPeriod:
-          "65 Bulan\n15 Dis 2021 – 14 Mei 2027",
-        rentalPeriod:
-          "60 Bulan\n15 Apr 2021 – 14 Apr 2027"
+        project: "Perkhidmatan Sewaan Peralatan ICT PdP Sekolah Secara Sewa Guna (Lease-to-use)",
+        projectPeriod: "65 Bulan\n15 Dis 2021 – 14 Mei 2027",
+        rentalPeriod: "60 Bulan\n15 Apr 2021 – 14 Apr 2027"
       },
       {
         company: "SNS Network Sdn. Bhd.",
         category: "PdP",
         phase: "2",
-        project:
-          "Perkhidmatan Sewaan Peralatan ICT PdP Sekolah Secara Sewa Guna (Lease-to-use)",
-        projectPeriod:
-          "65 Bulan\n20 Dis 2022 – 19 Mei 2028",
-        rentalPeriod:
-          "60 Bulan\n20 Apr 2023 – 19 Apr 2028"
+        project: "Perkhidmatan Sewaan Peralatan ICT PdP Sekolah Secara Sewa Guna (Lease-to-use)",
+        projectPeriod: "65 Bulan\n20 Dis 2022 – 19 Mei 2028",
+        rentalPeriod: "60 Bulan\n20 Apr 2023 – 19 Apr 2028"
       },
       {
         company: "Prodata Sdn. Bhd.",
         category: "Peranti Guru",
         phase: "1",
-        project:
-          "Perkhidmatan Sewaan Peralatan ICT Mesra Alam untuk Guru Secara Sewa Guna (Lease-to-own)",
-        projectPeriod:
-          "15 Sept 2023 – 14 Dis 2028",
-        rentalPeriod:
-          "15 Dis 2023 – 14 Dis 2028"
+        project: "Perkhidmatan Sewaan Peralatan ICT Mesra Alam untuk Guru Secara Sewa Guna (Lease-to-own)",
+        projectPeriod: "15 Sept 2023 – 14 Dis 2028",
+        rentalPeriod: "15 Dis 2023 – 14 Dis 2028"
       },
       {
         company: "Privasia Sdn. Bhd.",
         category: "PdP",
         phase: "3",
-        project:
-          "Perkhidmatan Sewaan Peralatan ICT PdP Sekolah Secara Sewa Guna (Lease-to-use)",
-        projectPeriod:
-          "65 Bulan\n26 Okt 2023 – 25 Mac 2029",
-        rentalPeriod:
-          "65 Bulan\n26 Okt 2023 – 25 Mac 2029"
+        project: "Perkhidmatan Sewaan Peralatan ICT PdP Sekolah Secara Sewa Guna (Lease-to-use)",
+        projectPeriod: "65 Bulan\n26 Okt 2023 – 25 Mac 2029",
+        rentalPeriod: "65 Bulan\n26 Okt 2023 – 25 Mac 2029"
       },
       {
         company: "Ariz Digital Sdn. Bhd.",
         category: "PdT",
         phase: "2",
-        project:
-          "Perkhidmatan Sewaan Peralatan ICT PdT Sekolah Secara Sewa Guna (Lease-to-own)",
-        projectPeriod:
-          "64 Bulan\n1 Jan 2025 – 30 April 2030",
-        rentalPeriod:
-          "60 Bulan\n1 Mei 2025 – 30 April 2030"
+        project: "Perkhidmatan Sewaan Peralatan ICT PdT Sekolah Secara Sewa Guna (Lease-to-own)",
+        projectPeriod: "64 Bulan\n1 Jan 2025 – 30 April 2030",
+        rentalPeriod: "60 Bulan\n1 Mei 2025 – 30 April 2030"
       },
       {
         company: "Tridimas Sdn. Bhd.",
         category: "Peranti Guru",
         phase: "2",
-        project:
-          "Perkhidmatan Sewaan Peralatan ICT Mesra Alam untuk Guru Secara Sewa Guna (Lease-to-own)",
-        projectPeriod:
-          "65 Bulan\n1 Mei 2026 – 30 April 2031",
-        rentalPeriod:
-          "60 Bulan\n1 Mei 2026 – 30 April 2031"
+        project: "Perkhidmatan Sewaan Peralatan ICT Mesra Alam untuk Guru Secara Sewa Guna (Lease-to-own)",
+        projectPeriod: "65 Bulan\n1 Mei 2026 – 30 April 2031",
+        rentalPeriod: "60 Bulan\n1 Mei 2026 – 30 April 2031"
       },
       {
         company: "Mitracorp Resources Sdn. Bhd.",
         category: "PdP",
         phase: "4",
-        project:
-          "Perkhidmatan Sewaan Peralatan ICT PdP Sekolah Secara Sewa Guna (Lease-to-own)",
-        projectPeriod:
-          "65 Bulan\n1 Mei 2026 – 31 Mei 2031",
-        rentalPeriod:
-          "65 Bulan\n1 Jan 2026 – 31 Mei 2031"
+        project: "Perkhidmatan Sewaan Peralatan ICT PdP Sekolah Secara Sewa Guna (Lease-to-own)",
+        projectPeriod: "65 Bulan\n1 Mei 2026 – 31 Mei 2031",
+        rentalPeriod: "65 Bulan\n1 Jan 2026 – 31 Mei 2031"
       },
       {
         company: "XOF (M) Sdn. Bhd.",
         category: "PdT",
         phase: "1",
-        project:
-          "Perkhidmatan Sewaan Peralatan ICT PdT Sekolah Secara Sewa Guna (Lease-to-use)",
-        projectPeriod:
-          "66 Bulan\n1 Ogos 2026 – 31 Jan 2032",
-        rentalPeriod:
-          "60 Bulan\n1 Jan 2027 – 31 Dis 2031",
-        note:
-          "Penggantian syarikat Night Electronic Sdn. Bhd. bagi projek PdT."
+        project: "Perkhidmatan Sewaan Peralatan ICT PdT Sekolah Secara Sewa Guna (Lease-to-use)",
+        projectPeriod: "66 Bulan\n1 Ogos 2026 – 31 Jan 2032",
+        rentalPeriod: "60 Bulan\n1 Jan 2027 – 31 Dis 2031",
+        note: "Penggantian syarikat Night Electronic Sdn. Bhd. bagi projek PdT."
       }
     ];
 
-    // Tentukan dashboard asal.
     const fromAdmin =
       new URLSearchParams(window.location.search).get("from") === "admin";
 
@@ -447,11 +427,64 @@
     const resultCount = document.getElementById("resultCount");
     const emptyMessage = document.getElementById("emptyMessage");
 
+    const msPerDay = 86400000;
+    const malaysiaDate = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Kuala_Lumpur",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    });
+
+    const months = [
+      "jan januari", "feb februari", "mac mar march", "apr april",
+      "mei may", "jun june", "jul julai july", "ogos ogo aug august",
+      "sep sept september", "okt oktober oct october", "nov november",
+      "dis disember dec december"
+    ].map(month => month.split(" "));
+
     function makeElement(tag, className, text) {
       const element = document.createElement(tag);
       if (className) element.className = className;
       element.textContent = text;
       return element;
+    }
+
+    function endOfPeriod(period) {
+      const match = /[-–—]\s*(\d{1,2})\s+([a-z]+)\.?\s+(\d{4})\s*$/i.exec(period || "");
+      if (!match) return null;
+
+      const day = Number(match[1]);
+      const month = months.findIndex(names => names.includes(match[2].toLowerCase()));
+      const year = Number(match[3]);
+      if (month < 0) return null;
+
+      const end = new Date(Date.UTC(year, month, day));
+      return end.getUTCFullYear() === year &&
+        end.getUTCMonth() === month &&
+        end.getUTCDate() === day ? end.getTime() : null;
+    }
+
+    function malaysiaToday(now = new Date()) {
+      const [day, month, year] = malaysiaDate.format(now).split("/").map(Number);
+      return Date.UTC(year, month - 1, day);
+    }
+
+    function updateCountdowns() {
+      const today = malaysiaToday();
+
+      rentalList.querySelectorAll(".countdown").forEach(badge => {
+        const end = badge.dataset.end;
+        const days = end ? (Number(end) - today) / msPerDay : null;
+
+        const [tone, label] =
+          days === null ? ["unknown", "Tarikh tamat tidak tersedia"] :
+          days < 0 ? ["expired", "Tamat tempoh"] :
+          days === 0 ? ["soon", "Tamat hari ini"] :
+          [days <= 30 ? "soon" : "active", `${days.toLocaleString("ms-MY")} hari lagi`];
+
+        badge.dataset.tone = tone;
+        badge.textContent = label;
+      });
     }
 
     function createCard(item) {
@@ -460,7 +493,6 @@
 
       const badges = document.createElement("div");
       badges.className = "badges";
-
       badges.append(
         makeElement("span", "badge", item.category),
         makeElement("span", "badge phase", `Fasa ${item.phase}`)
@@ -479,12 +511,12 @@
         ["Tempoh Sewaan", item.rentalPeriod]
       ].forEach(([label, value]) => {
         const row = document.createElement("div");
+        const date = makeElement("dd", "", value);
+        const badge = makeElement("span", "countdown", "");
 
-        row.append(
-          makeElement("dt", "", label),
-          makeElement("dd", "", value)
-        );
-
+        badge.dataset.end = endOfPeriod(value) ?? "";
+        date.append(document.createElement("br"), badge);
+        row.append(makeElement("dt", "", label), date);
         details.append(row);
       });
 
@@ -510,13 +542,11 @@
           item.note || ""
         ].join(" ").toLocaleLowerCase("ms-MY");
 
-        return (
-          (!category || item.category === category) &&
-          text.includes(keyword)
-        );
+        return (!category || item.category === category) && text.includes(keyword);
       });
 
       rentalList.replaceChildren(...filtered.map(createCard));
+      updateCountdowns();
 
       resultCount.textContent =
         `Memaparkan ${filtered.length} daripada ${rentalData.length} rekod projek sewaan.`;
@@ -526,6 +556,8 @@
 
     searchInput.addEventListener("input", renderRentals);
     categoryFilter.addEventListener("change", renderRentals);
+    window.setInterval(updateCountdowns, 60000);
+    window.addEventListener("pageshow", updateCountdowns);
 
     onAuthStateChanged(auth, user => {
       if (!user) {
