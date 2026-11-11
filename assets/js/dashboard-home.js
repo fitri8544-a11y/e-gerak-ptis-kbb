@@ -294,24 +294,45 @@ function updateZones(){
 FORMAT TIME
 ======================================================*/
 
-function formatTime(timestamp){
+function formatTime(timestamp) {
 
-    if(!timestamp) return "-";
+    if (!timestamp) return "-";
 
-    try{
+    try {
 
         const date = timestamp.toDate();
 
-        return date.toLocaleTimeString(
-            "ms-MY",
-            {
-                hour:"2-digit",
-                minute:"2-digit",
-                hour12:false
-            }
-        );
+        if (Number.isNaN(date.getTime())) return "-";
 
-    }catch(error){
+        const tarikh = date.toLocaleDateString("ms-MY", {
+            timeZone: "Asia/Kuala_Lumpur",
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        });
+
+        const hari = date.toLocaleDateString("ms-MY", {
+            timeZone: "Asia/Kuala_Lumpur",
+            weekday: "long"
+        });
+
+        const masa = date.toLocaleTimeString("ms-MY", {
+            timeZone: "Asia/Kuala_Lumpur",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false
+        });
+
+        return `
+            <div style="font-weight:700;color:#334155;">
+                ${tarikh}
+            </div>
+            <div style="margin-top:4px;font-size:12px;color:#64748b;">
+                ${hari} • ${masa}
+            </div>
+        `;
+
+    } catch (error) {
 
         return "-";
 
@@ -409,8 +430,8 @@ function renderMovement(list){
                     Aktiviti
                 </th>
 
-                <th class="px-6 py-4 text-left font-semibold text-slate-300">
-                    Masa
+                <th class="px-6 py-4 text-left font-semibold text-slate-300 whitespace-nowrap">
+                    Tarikh / Masa
                 </th>
 
             </tr>
