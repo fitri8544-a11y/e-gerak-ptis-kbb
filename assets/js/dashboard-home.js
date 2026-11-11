@@ -619,137 +619,160 @@ ${badgeClass}">
 
 }
 
-/*======================================================
-TOP MOVEMENT
-======================================================*/
+function renderTopMovement(data) {
+    if (!topMovementList) return;
 
-function renderTopMovement(data){
-
-    if(!topMovementList) return;
-
-    topMovementList.innerHTML="";
-
-    if(data.length===0){
-
-        topMovementList.innerHTML=`
-
-        <div class="text-slate-500">
-
-            Tiada rekod.
-
-        </div>
-
-        `;
-
-        return;
-
-    }
-
-    const medal=["🥇","🥈","🥉"];
-
-    data.slice(0,3).forEach((item,index)=>{
-
-        topMovementList.innerHTML+=`
-
-        <div class="flex items-center justify-between">
-
-            <div>
-
-                <div class="font-bold">
-
-                    ${medal[index]} ${item.nama}
-
-                </div>
-
-            </div>
-
-            <div
-class="px-3
-py-1
-rounded-full
-bg-cyan-500/10
-border
-border-cyan-500/20
-text-cyan-300
-text-sm
-font-bold">
-
-    ${item.total} Tugasan
-
-</div>
-
-        </div>
-
-        `;
-
-    });
-
-}
-
-/*======================================================
-LOAD TOP MOVEMENT
-======================================================*/
-
-onSnapshot(movementsRef,(snapshot)=>{
-
-    const ranking={};
-
-    companionLookup = {};
-
-    snapshot.forEach(doc=>{
-
-        const data=doc.data();
-
-        if(Array.isArray(data.companions)){
-
-            data.companions.forEach(companion=>{
-
-                companionLookup[companion.uid]={
-
-                leaderName:data.name || "PTIS",
-
-                leaderUid:data.uid || "",
-
-                activity:data.activity || "",
-
-                location:data.location || ""
-
-            };
-
-        });
-
-}
-
-        const nama=
-        data.name ||
-        data.email ||
-        "Pengguna";
-
-        if(!ranking[nama]){
-
-            ranking[nama]=0;
-
-        }
-
-        ranking[nama]++;
-
-    });
-
-    topMovementData=
-    Object.entries(ranking)
-    .map(item=>({
-
-        nama:item[0],
-
-        total:item[1]
-
-    }))
-    .sort((a,b)=>b.total-a.total);
-
-    renderTopMovement(
-        topMovementData
+    // Kekalkan senarai yang sedang dibuka apabila Firestore dikemas kini.
+    const opened = new Set(
+        Array.from(
+            topMovementList.querySelectorAll("details[open]"),
+            details => details.dataset.memberKey
+        )
     );
 
+    topMovementList.replaceChildren();
+
+    if (!data.length) {
+        const empty = document.createElement("p");
+        empty.className = "text-slate-500";
+        empty.textContent = "Tiada rekod.";
+        topMovementList.append(empty);
+        return;
+    }
+
+    const medals = ["🥇", "🥈", "🥉"];
+
+    function makeElement(tag, className, text) {
+        const element = document.createElement(tag);
+        element.className = className;
+        element.textContent = text;
+        return element;
+    }
+
+    data.slice(0, 3).forEach((member, index) => {
+        const details = document.createElement("details");
+        details.dataset.memberKey = member.key;
+        details.open = opened.has(member.key);
+
+        const summary = document.createElement("summary");
+        summary.className =
+            "flex cursor-pointer list-none flex-wrap items-center " +
+            "justify-between gap-2 rounded-lg px-2 py-2 hover:bg-slate-50";
+
+        const name = makeElement(
+            "span",
+            "font-bold text-slate-900",
+            `${medals[index]} ${member.nama}`
+        );
+
+        const count = makeElement(
+            "span",
+            "shrink-0 rounded-full border border-cyan-200 bg-cyan-50 " +
+            "px-3 py-1 text-sm font-bold text-cyan-800",
+            `${member.total} Rekod ▾`
+        );
+
+        summary.append(name, count);
+
+        const taskList = document.createElement("ul");
+        taskList.className =
+            "mx-2 mb-3 mt-1 divide-y divide-slate-200 rounded-xl " +
+            "border border-slate-200 bg-slate-50";
+
+        member.tasks.forEach(task => {
+            const row = document.createElement("li");
+            row.className = "px-4 py-3";
+
+            const date = /^\d{4}-\d{2}-\d{2}$/.test(task.date)
+                ? task.date.split("-").reverse().join("/")
+                : task.date;
+
+            const dateAndTime = [date, task.time].filter(Boolean).join(" • ");
+
+            row.append(
+                makeElement(
+                    "p",
+                    "break-words font-semibold text-slate-900",
+                    task.activity || task.type || "Tugasan"
+                ),
+                makeElement(
+                    "p",
+                    "mt-1 break-words text-sm text-slate-700",
+                    task.location || "Lokasi tidak dinyatakan"
+                ),
+                makeElement(
+                    "p",
+                    "mt-1 text-xs text-slate-600",
+                    dateAndTime || "Tarikh dan masa tidak direkodkan"
+                )
+            );
+
+            taskList.append(row);
+        });
+
+        details.append(summary, taskList);
+        topMovementList.append(details);
+    });
+}
+
+/*======================================================
+ LOAD TOP MOVEMENT
+======================================================*/
+
+onSnapshot(movementsRef, snapshot => {
+    const ranking = new Map();
+    companionLookup = {};
+
+    snapshot.forEach(doc => {
+        const data = doc.data();
+
+        if (Array.isArray(data.companions)) {
+            data.companions.forEach(companion => {
+                companionLookup[companion.uid] = {
+                    leaderName: data.name || "PTIS",
+                    leaderUid: data.uid || "",
+                    activity: data.activity || "",
+                    location: data.location || ""
+                };
+            });
+        }
+
+        const key = data.uid
+            ? `uid:${data.uid}`
+            : data.email
+                ? `email:${String(data.email).trim().toLowerCase()}`
+                : `record:${doc.id}`;
+
+        if (!ranking.has(key)) {
+            ranking.set(key, {
+                key,
+                nama: data.name || data.email || "Pengguna",
+                total: 0,
+                tasks: []
+            });
+        }
+
+        const member = ranking.get(key);
+        member.tasks.push({
+            activity: String(data.activity || "").trim(),
+            type: String(data.type || "").trim(),
+            location: String(data.location || "").trim(),
+            date: String(data.date || "").trim(),
+            time: String(data.time || "").trim()
+        });
+        member.total = member.tasks.length;
+    });
+
+    topMovementData = Array.from(ranking.values())
+        .sort((a, b) => b.total - a.total);
+
+    topMovementData.forEach(member => {
+        member.tasks.sort((a, b) =>
+            `${b.date} ${b.time}`.localeCompare(`${a.date} ${a.time}`)
+        );
+    });
+
+    renderTopMovement(topMovementData);
 });
 
 /*======================================================
