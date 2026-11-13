@@ -646,7 +646,7 @@ function renderTopMovement(data) {
         return element;
     }
 
-    data.slice(0, 3).forEach((member, index) => {
+    data.slice(0, 5).forEach((member, index) => {
         const details = document.createElement("details");
         details.dataset.memberKey = member.key;
         details.open = opened.has(member.key);
@@ -659,7 +659,7 @@ function renderTopMovement(data) {
         const name = makeElement(
             "span",
             "font-bold text-slate-900",
-            `${medals[index]} ${member.nama}`
+            `${medals[index] ?? `${index + 1}.`} ${member.nama}`
         );
 
         const count = makeElement(
