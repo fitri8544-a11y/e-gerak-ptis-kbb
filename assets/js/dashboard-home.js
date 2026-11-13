@@ -388,21 +388,18 @@ function renderMovement(list){
 
     }
 
-    const priority={
+    function getMovementTime(item) {
+    const milliseconds = item.time?.toMillis?.();
+    return Number.isFinite(milliseconds) ? milliseconds : -Infinity;
+    }
 
-        outsideSchool:1,
-        meeting:2,
-        course:3,
-        hrmis:4,
-        leave:5,
-        office:6
+    list.sort((a, b) => {
+        const timeA = getMovementTime(a);
+        const timeB = getMovementTime(b);
 
-    };
-
-    list.sort((a,b)=>
-        (priority[a.status]||99)-
-        (priority[b.status]||99)
-    );
+        if (timeA === timeB) return 0;
+        return timeA > timeB ? -1 : 1;
+    });
 
     let html=`
 
