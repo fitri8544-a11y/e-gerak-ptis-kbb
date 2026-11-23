@@ -996,6 +996,8 @@ function refreshRealtimeDashboard(){
 
     renderMovement(movementList);
 
+    renderStatusDetails();
+
     updateCoordinatorCard();
 
     renderBirthdayAnnouncements();
@@ -1455,3 +1457,117 @@ document.addEventListener("visibilitychange", () => {
     renderBirthdayAnnouncements();
   }
 });
+
+/* ======================================================
+   MAKLUMAT KAD STATUS
+   Menggunakan staffCache yang sama dengan kiraan KPI.
+====================================================== */
+let selectedStatusCard = null;
+let statusCardTrigger = null;
+let previousBodyOverflow = "";
+const statusDialog = document.getElementById("statusDetailsDialog");
+const statusSearch = document.getElementById("statusDetailsSearch");
+
+function renderStatusDetails() {
+    if (!statusDialog?.open || !selectedStatusCard) return;
+
+    const activeStatuses = ["outsideschool", "meeting", "course", "hrmis"];
+    const labels = {
+        office: "Dalam Pejabat", outsideschool: "Keluar Bertugas",
+        meeting: "Mesyuarat", course: "Kursus", hrmis: "HRMIS", leave: "Cuti"
+    };
+    const titles = {
+        office: "Ahli Dalam Pejabat",
+        movement: "Ahli Keluar Bertugas",
+        leave: "Ahli Tidak Hadir / Cuti",
+        tasks: "Tugasan Semasa"
+    };
+    const search = (statusSearch.value || "").trim().toLocaleLowerCase("ms-MY");
+    const members = staffCache.filter(staff => {
+        const status = (staff.currentStatus || "").toLowerCase();
+        if (selectedStatusCard === "office") return status === "office";
+        if (selectedStatusCard === "leave") return status === "leave";
+        return activeStatuses.includes(status);
+    });
+    const filtered = members.filter(staff =>
+        [staff.nama, staff.zone, staff.currentLocation, staff.currentActivity]
+            .join(" ").toLocaleLowerCase("ms-MY").includes(search)
+    ).sort((a, b) =>
+        String(a.nama || "").localeCompare(String(b.nama || ""), "ms")
+    );
+
+    document.getElementById("statusDetailsTitle").textContent = titles[selectedStatusCard];
+    document.getElementById("statusDetailsCount").textContent =
+        "Memaparkan " + filtered.length + " daripada " + members.length +
+        (selectedStatusCard === "tasks" ? " tugasan semasa." : " ahli.");
+    const list = document.getElementById("statusDetailsList");
+    list.replaceChildren();
+
+    function addText(parent, tag, value, className = "") {
+        const el = document.createElement(tag);
+        el.className = className;
+        el.textContent = value;
+        parent.append(el);
+    }
+
+    if (!filtered.length) {
+        addText(list, "p", search ? "Tiada hasil carian." : "Tiada rekod untuk kategori ini.");
+        return;
+    }
+    filtered.forEach(staff => {
+        const item = document.createElement("article");
+        item.className = "status-detail-item";
+        addText(item, "h3", staff.nama || "Ahli PTIS");
+        addText(item, "p", [staff.role, staff.zone].filter(Boolean).join(" • ") || "—");
+        const status = (staff.currentStatus || "").toLowerCase();
+        addText(item, "span", labels[status] || "Tidak diketahui", "status-detail-badge");
+        addText(item, "p", "Lokasi: " + (staff.currentLocation || "Tidak dinyatakan"));
+        addText(item, "p", "Aktiviti: " + (staff.currentActivity || "Tidak dinyatakan"));
+        // Paparkan jenis cuti hanya jika tersedia pada rekod staff.
+        if (status === "leave" && staff.leaveType) {
+            addText(item, "p", "Jenis cuti: " + staff.leaveType);
+        }
+        let updated = "Tidak direkodkan";
+        try {
+            const date = staff.updatedAt?.toDate?.();
+            if (date && Number.isFinite(date.getTime())) {
+                updated = new Intl.DateTimeFormat("ms-MY", {
+                    timeZone: "Asia/Kuala_Lumpur", day: "2-digit",
+                    month: "short", year: "numeric", hour: "2-digit",
+                    minute: "2-digit", hour12: false
+                }).format(date);
+            }
+        } catch {}
+        addText(item, "p", "Kemas kini terakhir: " + updated);
+        list.append(item);
+    });
+}
+
+if (statusDialog && statusSearch) {
+    document.querySelectorAll("[data-status-card]").forEach(card => {
+        const open = () => {
+            selectedStatusCard = card.dataset.statusCard;
+            statusCardTrigger = card;
+            statusSearch.value = "";
+            previousBodyOverflow = document.body.style.overflow;
+            statusDialog.showModal();
+            document.body.style.overflow = "hidden";
+            renderStatusDetails();
+            statusSearch.focus();
+        };
+        card.addEventListener("click", open);
+        card.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                open();
+            }
+        });
+    });
+    statusSearch.addEventListener("input", renderStatusDetails);
+    document.getElementById("statusDetailsClose").addEventListener("click", () => statusDialog.close());
+    statusDialog.addEventListener("close", () => {
+        document.body.style.overflow = previousBodyOverflow;
+        selectedStatusCard = null;
+        statusCardTrigger?.focus();
+    });
+}
