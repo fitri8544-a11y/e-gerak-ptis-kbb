@@ -79,6 +79,23 @@ const MovementManager = {
     cancelButton: null,
     saveButton: null,
 
+    movementOptions: [
+        ["office", "🏢 Di Pejabat", "office"],
+        ["returnOffice", "🏢 Kembali ke Pejabat (Selesai Tugasan)", "office"],
+        ["outsideOther", "🚗 Luar Pejabat / Lain-lain", "outsideSchool"],
+        ["outsideSchool", "🏫 Lawatan Sekolah", "outsideSchool"],
+        ["meeting", "👥 Mesyuarat", "meeting"],
+        ["course", "🎓 Kursus / Bengkel", "course"],
+        ["annualLeave", "🌴 Cuti Rehat", "leave", "Cuti Rehat (CR)"],
+        ["sickLeave", "🏥 Cuti Sakit", "leave", "Cuti Sakit (MC)"],
+        ["groupLeave", "🌴 Cuti Kelompok", "leave", "Cuti Kelompok"],
+        ["hrmis", "📄 HRMIS (4 Jam)", "hrmis"]
+    ],
+
+    getMovementOption() {
+        return this.movementOptions.find(([value]) => value === this.movementType?.value);
+    },
+
     movementType: null,
     movementLocation: null,
     movementDate: null,
@@ -125,6 +142,13 @@ const MovementManager = {
         this.saveButton = document.getElementById("saveMovement");
 
         this.movementType = document.getElementById("movementType");
+        if (this.movementType) {
+            this.movementType.replaceChildren(
+                new Option("-- Pilih Status --", ""),
+                ...this.movementOptions.map(([value, label]) => new Option(label, value))
+            );
+        }
+
         this.movementLocation = document.getElementById("movementLocation");
         this.movementDate = document.getElementById("movementDate");
         this.movementTime = document.getElementById("movementTime");
@@ -643,6 +667,10 @@ renderSelectedCompanions(){
     switch(this.movementType.value){
 
         case "office":
+            this.movementActivity.placeholder = "Contoh: Tugasan di pejabat";
+            break;
+
+        case "returnOffice":
 
             activityLabel.textContent =
             "Ringkasan Tugasan";
@@ -651,6 +679,11 @@ renderSelectedCompanions(){
             "Contoh : Selesai penyelenggaraan dan kembali ke pejabat.";
 
         break;
+
+        case "outsideOther":
+            activityLabel.textContent = "Aktiviti / Tujuan";
+            this.movementActivity.placeholder = "Contoh: Urusan rasmi di luar pejabat";
+            break;
 
         case "outsideSchool":
 
@@ -682,45 +715,13 @@ renderSelectedCompanions(){
 
         break;
 
-        case "leave":
-
+        case "annualLeave":
+        case "sickLeave":
+        case "groupLeave":
             locationGroup?.classList.add("hidden");
-
             activityGroup?.classList.add("hidden");
-
             noteGroup?.classList.add("hidden");
-
-            container.innerHTML = `
-
-                <div>
-
-                    <label class="block text-white mb-2">
-
-                        Jenis Cuti
-
-                    </label>
-
-                    <select
-                    id="leaveType"
-                    class="w-full rounded-2xl p-4">
-
-                        <option value="">Pilih Jenis Cuti</option>
-
-                        <option>Cuti Rehat (CR)</option>
-
-                        <option>Cuti Sakit (MC)</option>
-
-                        <option>Cuti Tanpa Rekod (CTR)</option>
-
-                        <option>Cuti Tanpa Gaji</option>
-
-                    </select>
-
-                </div>
-
-            `;
-
-        break;
+            break;
 
         case "hrmis":
 
@@ -737,58 +738,25 @@ renderSelectedCompanions(){
 },
 
 validateForm(){
-
-    if(!this.movementType.value){
-
+    const option = this.getMovementOption();
+    if (!option) {
         alert("Sila pilih Status Pergerakan.");
-
         return false;
-
     }
 
-    if(
-        this.movementType.value !== "leave"
-        &&
-        !this.movementLocation.value.trim()
-    ){
+    if (option[2] === "leave") return true;
 
+    if (!this.movementLocation.value.trim()) {
         alert("Sila masukkan Lokasi.");
-
         return false;
-
     }
 
-    if(
-        this.movementType.value !== "leave"
-        &&
-        !this.movementActivity.value.trim()
-    ){
-
+    if (!this.movementActivity.value.trim()) {
         alert("Sila masukkan Aktiviti.");
-
         return false;
-
-    }
-
-    if(
-        this.movementType.value==="leave"
-    ){
-
-        const leaveType =
-        document.getElementById("leaveType");
-
-        if(!leaveType?.value){
-
-            alert("Sila pilih Jenis Cuti.");
-
-            return false;
-
-        }
-
     }
 
     return true;
-
 },
 
 async saveMovement(){
@@ -805,6 +773,8 @@ async saveMovement(){
 
     }
 
+    const [statusOption, , movementType, leaveType = ""] = this.getMovementOption();
+    const isLeave = movementType === "leave";
     const movementData={
 
         uid:user.uid,
@@ -829,22 +799,22 @@ async saveMovement(){
 
         })),
 
-        type:this.movementType.value,
+        type:movementType,
+        statusOption,
 
-        location:this.movementLocation.value.trim(),
+        location:isLeave ? "" : this.movementLocation.value.trim(),
 
         date:this.movementDate.value,
 
         time:this.movementTime.value,
 
-        activity:this.movementActivity.value.trim(),
+        activity:isLeave ? "" : this.movementActivity.value.trim(),
 
-        note:this.movementNote.value.trim(),
+        note:isLeave ? "" : this.movementNote.value.trim(),
 
         calendar:this.calendarToggle.checked,
 
-        leaveType:
-        document.getElementById("leaveType")?.value || "",
+        leaveType,
 
         status:"AKTIF",
 
@@ -857,8 +827,7 @@ async saveMovement(){
 
     try{
 
-    const movementType =
-    this.movementType.value;
+
 
     await addDoc(
 
