@@ -1,3589 +1,7335 @@
 <!DOCTYPE html>
+
 <html lang="ms">
+
+
 
 <head>
 
+
+
 <meta charset="UTF-8">
 
+
+
 <meta
+
 name="viewport"
+
 content="width=device-width, initial-scale=1.0">
+
+
 
 <title>E-GERAK PTIS KBB V2 | Admin</title>
 
+
+
 <link
+
   rel="icon"
+
   type="image/png"
+
   href="/assets/images/logo-ptis.png?v=2">
+
+
 
 <!-- Tailwind -->
 
+
+
 <script src="https://cdn.tailwindcss.com"></script>
+
+
 
 <!-- Font Awesome -->
 
+
+
 <link
+
 rel="stylesheet"
+
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
 
 <!-- Google Font -->
 
+
+
 <link
+
 rel="preconnect"
+
 href="https://fonts.googleapis.com">
 
-<link
-rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
+
 
 <link
+
+rel="preconnect"
+
+href="https://fonts.gstatic.com"
+
+crossorigin>
+
+
+
+<link
+
 href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+
 rel="stylesheet">
+
+
 
 <style>
 
+
+
 /* ======================================================
+
    GLOBAL
+
 ====================================================== */
+
+
 
 *{
 
+
+
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
+
+
 
     font-family:'Poppins',sans-serif;
 
+
+
 }
+
+
 
 html{
 
+
+
     scroll-behavior:smooth;
 
+
+
 }
+
+
 
 body{
 
+
+
     background:#F1F5F9;
 
+
+
     color:#0F172A;
+
+
 
     overflow-x:hidden;
 
+
+
 }
+
+
 
 /* BUTTON */
 
+
+
 button{
+
+
 
     transition:all .25s ease;
 
+
+
 }
 
+
+
 /* ======================================================
+
    SIDEBAR
+
 ====================================================== */
+
+
 
 .sidebar{
 
+
+
     position:fixed;
 
+
+
     top:0;
+
     left:0;
+
+
 
     width:280px;
 
+
+
     height:100vh;
+
+
 
     display:flex;
 
+
+
     flex-direction:column;
+
+
 
     color:#FFFFFF;
 
+
+
     background:
+
     linear-gradient(
+
         180deg,
+
         #0F172A 0%,
+
         #1E3A8A 100%
+
     );
 
+
+
     box-shadow:
+
     0 15px 40px rgba(0,0,0,.25);
+
+
 
     z-index:1000;
 
+
+
 }
 
+
+
 /* ======================================================
+
    LOGO
+
 ====================================================== */
+
+
 
 .logo-area{
 
+
+
     display:flex;
+
+
 
     align-items:center;
 
+
+
     gap:15px;
+
+
 
     padding:30px;
 
+
+
     border-bottom:
+
     1px solid rgba(255,255,255,.08);
 
+
+
 }
+
+
 
 .logo-circle{
 
+
+
     width:65px;
+
+
 
     height:65px;
 
+
+
     display:flex;
+
+
 
     align-items:center;
 
+
+
     justify-content:center;
+
+
 
     border-radius:20px;
 
+
+
     background:#FFFFFF;
+
+
 
     overflow:hidden;
 
+
+
     flex-shrink:0;
 
+
+
 }
+
+
 
 .logo-circle img{
 
+
+
     width:52px;
+
+
 
     height:auto;
 
+
+
 }
+
+
 
 .logo-title{
 
+
+
     font-size:24px;
 
+
+
     font-weight:800;
+
+
 
     line-height:1.2;
 
+
+
     color:#FFFFFF;
 
+
+
 }
+
+
 
 .logo-sub{
 
+
+
     margin-top:4px;
+
+
 
     font-size:12px;
 
+
+
     color:rgba(255,255,255,.75);
+
+
 
     line-height:1.5;
 
+
+
 }
 
+
+
 /* ======================================================
+
    MENU
+
 ====================================================== */
+
+
 
 .menu{
 
+
+
     flex:1;
+
+
 
     display:flex;
 
+
+
     flex-direction:column;
+
+
 
     gap:8px;
 
+
+
     padding:25px 18px;
 
+
+
 }
+
+
 
 .menu button{
 
+
+
     width:100%;
+
+
 
     display:flex;
 
+
+
     align-items:center;
+
+
 
     gap:15px;
 
+
+
     padding:15px 18px;
+
+
 
     border:none;
 
+
+
     border-radius:16px;
+
+
 
     background:transparent;
 
+
+
     color:#FFFFFF;
+
+
 
     cursor:pointer;
 
+
+
     font-size:15px;
 
+
+
     font-weight:600;
+
+
 
     text-align:left;
 
+
+
 }
+
+
 
 .menu button i{
 
+
+
     width:22px;
+
+
 
     text-align:center;
 
+
+
     font-size:16px;
 
+
+
 }
+
+
 
 .menu button:hover{
 
+
+
     background:rgba(255,255,255,.08);
 
+
+
 }
+
+
 
 .menu button.active{
 
+
+
     background:#FFFFFF;
+
+
 
     color:#1E3A8A;
 
+
+
     box-shadow:
+
     0 8px 20px rgba(255,255,255,.15);
+
+
 
 }
 
+
+
 /* ======================================================
+
    SIDEBAR FOOTER
+
 ====================================================== */
+
+
 
 .sidebar-footer{
 
+
+
     padding:20px;
 
+
+
     border-top:
+
     1px solid rgba(255,255,255,.08);
 
+
+
 }
+
+
 
 .logout-btn{
 
+
+
     width:100%;
+
+
 
     padding:15px;
 
+
+
     border:none;
+
+
 
     border-radius:16px;
 
+
+
     background:#EF4444;
 
+
+
     color:#FFFFFF;
+
+
 
     cursor:pointer;
 
+
+
     font-size:15px;
+
+
 
     font-weight:700;
 
+
+
 }
+
+
 
 .logout-btn:hover{
 
+
+
     background:#DC2626;
+
+
 
     transform:translateY(-1px);
 
+
+
 }
 
+
+
 /* ======================================================
+
    MAIN LAYOUT
+
 ====================================================== */
+
+
 
 .main{
 
+
+
     margin-left:280px;
+
+
 
     min-height:100vh;
 
+
+
     display:flex;
+
+
 
     flex-direction:column;
 
+
+
 }
 
+
+
 /* ======================================================
+
    HEADER
+
 ====================================================== */
+
+
 
 .header{
 
+
+
     position:sticky;
+
+
 
     top:0;
 
+
+
     z-index:800;
+
+
 
     height:78px;
 
+
+
     display:flex;
 
+
+
     align-items:center;
+
+
 
     justify-content:space-between;
 
+
+
     padding:0 30px;
+
+
 
     background:rgba(255,255,255,.95);
 
+
+
     backdrop-filter:blur(12px);
+
+
 
     -webkit-backdrop-filter:blur(12px);
 
+
+
     border-bottom:
+
     1px solid rgba(226,232,240,.8);
 
+
+
     box-shadow:
+
     0 8px 24px rgba(15,23,42,.06);
+
+
 
     transition:all .3s ease;
 
+
+
 }
 
+
+
 /* ======================================================
+
    HEADER TITLE
+
 ====================================================== */
+
+
 
 .header-title{
 
+
+
     display:flex;
+
+
 
     flex-direction:column;
 
+
+
     justify-content:center;
 
+
+
 }
+
+
 
 .header-title h1{
 
+
+
     font-size:30px;
+
+
 
     font-weight:800;
 
+
+
     color:#0F172A;
+
+
 
     line-height:1.1;
 
+
+
     letter-spacing:-0.5px;
 
+
+
 }
+
+
 
 .header-title p{
 
+
+
     margin-top:4px;
+
+
 
     font-size:14px;
 
+
+
     color:#64748B;
+
+
 
 }
 
+
+
 /* ======================================================
+
    USER PROFILE
+
 ====================================================== */
+
+
 
 .user-box{
 
+
+
     display:flex;
 
+
+
     align-items:center;
+
+
 
     gap:14px;
 
+
+
 }
+
+
 
 .user-avatar{
 
+
+
     width:48px;
+
+
 
     height:48px;
 
+
+
     border-radius:50%;
+
+
 
     overflow:hidden;
 
+
+
     border:2px solid #E2E8F0;
 
+
+
     background:#FFFFFF;
+
+
 
     flex-shrink:0;
 
+
+
 }
+
+
 
 .user-avatar img{
 
+
+
     width:100%;
+
+
 
     height:100%;
 
+
+
     object-fit:cover;
 
+
+
 }
+
+
 
 .user-info{
 
+
+
     text-align:right;
 
+
+
 }
+
+
 
 .user-info h3{
 
+
+
     font-size:15px;
+
+
 
     font-weight:700;
 
+
+
     color:#0F172A;
+
+
 
     margin-bottom:2px;
 
+
+
 }
+
+
 
 .user-info p{
 
+
+
     font-size:13px;
+
+
 
     color:#64748B;
 
+
+
 }
 
+
+
 /* ======================================================
+
    PAGE
+
 ====================================================== */
+
+
 
 .page{
 
+
+
     flex:1;
+
+
 
     overflow:auto;
 
+
+
     padding:35px;
 
+
+
 }
+
+
 
 .page::-webkit-scrollbar{
 
+
+
     width:8px;
 
+
+
 }
+
+
 
 .page::-webkit-scrollbar-track{
 
+
+
     background:transparent;
 
+
+
 }
+
+
 
 .page::-webkit-scrollbar-thumb{
 
+
+
     background:#CBD5E1;
+
+
 
     border-radius:999px;
 
+
+
 }
+
+
 
 .page::-webkit-scrollbar-thumb:hover{
 
+
+
     background:#94A3B8;
+
+
 
 }
 
+
+
 /* ======================================================
+
    KPI & DASHBOARD
+
 ====================================================== */
+
+
 
 .kpi-grid{
 
+
+
     display:grid;
 
+
+
     grid-template-columns:
+
     repeat(auto-fit,minmax(220px,1fr));
+
+
 
     gap:25px;
 
+
+
 }
+
+
 
 .kpi-card{
 
+
+
     background:#FFFFFF;
+
+
 
     padding:25px;
 
+
+
     border-radius:22px;
 
+
+
     box-shadow:
+
     0 10px 30px rgba(0,0,0,.05);
+
+
 
     transition:all .25s ease;
 
+
+
 }
+
+
 
 .kpi-card:hover{
 
+
+
     transform:translateY(-3px);
 
+
+
     box-shadow:
+
     0 18px 40px rgba(15,23,42,.08);
 
+
+
 }
+
+
 
 .kpi-icon{
 
+
+
     width:60px;
+
+
 
     height:60px;
 
+
+
     display:flex;
+
+
 
     align-items:center;
 
+
+
     justify-content:center;
+
+
 
     border-radius:18px;
 
+
+
     color:#FFFFFF;
+
+
 
     font-size:26px;
 
+
+
     margin-bottom:18px;
 
+
+
 }
+
+
 
 .kpi-card h4{
 
+
+
     margin-bottom:10px;
+
+
 
     color:#64748B;
 
+
+
     font-size:14px;
+
+
 
     font-weight:600;
 
+
+
 }
+
+
 
 .kpi-card h2{
 
+
+
     color:#0F172A;
+
+
 
     font-size:40px;
 
+
+
     font-weight:800;
+
+
 
     line-height:1;
 
+
+
 }
 
+
+
 /* ======================================================
+
    COLOR
+
 ====================================================== */
+
+
 
 .blue{
 
+
+
     background:#2563EB;
 
+
+
 }
+
+
 
 .green{
 
+
+
     background:#10B981;
 
+
+
 }
+
+
 
 .orange{
 
+
+
     background:#F59E0B;
 
+
+
 }
+
+
 
 .red{
 
+
+
     background:#EF4444;
+
+
 
 }
 
+
+
 /* ======================================================
+
    MOBILE OVERLAY
+
 ====================================================== */
+
+
 
 .mobile-overlay{
 
+
+
     position:fixed;
+
+
 
     inset:0;
 
+
+
     background:rgba(15,23,42,.45);
+
+
 
     backdrop-filter:blur(2px);
 
+
+
     -webkit-backdrop-filter:blur(2px);
+
+
 
     opacity:0;
 
+
+
     visibility:hidden;
+
+
 
     pointer-events:none;
 
+
+
     transition:all .3s ease;
+
+
 
     z-index:999;
 
+
+
 }
+
+
 
 .mobile-overlay.show{
 
+
+
     opacity:1;
+
+
 
     visibility:visible;
 
+
+
     pointer-events:auto;
+
+
 
 }
 
+
+
 /* ======================================================
+
    MOBILE RESPONSIVE
+
 ====================================================== */
+
+
 
 @media (max-width:1024px){
 
+
+
     .sidebar{
+
+
 
         width:260px;
 
+
+
         transform:translateX(-100%);
+
+
 
         transition:transform .35s ease;
 
+
+
     }
+
+
 
     .sidebar.show{
 
+
+
         transform:translateX(0);
 
+
+
     }
+
+
 
     .main{
 
+
+
         margin-left:0;
+
+
 
         width:100%;
 
+
+
     }
 
+
+
     .header{
+
+
 
         height:70px;
 
+
+
         padding:0 18px 0 78px;
 
+
+
     }
+
+
 
     .header-title h1{
 
+
+
         font-size:22px;
 
+
+
     }
+
+
 
     .header-title p{
 
+
+
         display:none;
 
+
+
     }
+
+
 
     .user-avatar{
 
+
+
         width:40px;
+
+
 
         height:40px;
 
+
+
     }
+
+
 
     .user-info h3{
 
+
+
         font-size:13px;
+
+
 
         max-width:120px;
 
+
+
         white-space:nowrap;
+
+
 
         overflow:hidden;
 
+
+
         text-overflow:ellipsis;
 
+
+
     }
+
+
 
     .user-info p{
 
+
+
         font-size:11px;
 
+
+
     }
+
+
 
     .page{
 
+
+
         padding:20px;
+
+
 
     }
 
+
+
 }
 
+
+
 /* ======================================================
+
    DESKTOP
+
 ====================================================== */
+
+
 
 @media (min-width:1025px){
 
+
+
     #menuToggle{
+
+
 
         display:none;
 
+
+
     }
+
+
 
 }
 
+
+
 /* ======================================================
+
    SMALL MOBILE
+
 ====================================================== */
+
+
 
 @media (max-width:640px){
 
+
+
     .header{
+
+
 
         padding:0 15px 0 72px;
 
+
+
     }
+
+
 
     .page{
 
+
+
         padding:18px;
 
+
+
     }
+
+
 
     .kpi-grid{
 
+
+
         gap:18px;
 
+
+
     }
+
+
 
     .kpi-card{
 
+
+
         padding:20px;
 
+
+
     }
+
+
 
     .kpi-card h2{
 
+
+
         font-size:34px;
 
+
+
     }
+
+
 
     .kpi-icon{
 
+
+
         width:54px;
+
+
 
         height:54px;
 
+
+
         font-size:22px;
+
+
 
     }
 
+
+
 }
+
+
 
 /* PAUTAN MAKLUMAT SEWAAN */
 
+
+
 .menu .rental-menu-link {
+
     width: 100%;
+
     display: flex;
+
     align-items: center;
+
     gap: 15px;
+
     padding: 15px 18px;
+
     border-radius: 16px;
+
     color: #FFFFFF;
+
     background: transparent;
+
     font-size: 15px;
+
     font-weight: 600;
+
     text-decoration: none;
+
     transition: background .25s ease;
+
 }
+
+
 
 .menu .rental-menu-link i {
+
     width: 22px;
+
     text-align: center;
+
     font-size: 16px;
+
 }
 
+
+
 .menu .rental-menu-link:hover,
+
 .menu .rental-menu-link:focus-visible {
+
     background: rgba(255,255,255,.08);
+
 }
+
+
 
 </style>
 
+
+
+<style>
+
+</style>
+
+
+
+<style>
+#feedbackAdminOpen[hidden],#feedbackAdminOverlay[hidden]{display:none!important}
+#feedbackAdminOpen{display:block;width:100%;text-align:left;margin-bottom:10px;padding:12px 16px;border-radius:12px;background:#ffffff20;color:white;cursor:pointer;font-weight:600}
+#feedbackAdminOpen:hover{background:#ffffff35}
+#feedbackAdminOverlay{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;padding:16px;background:#020617b8}
+#feedbackAdminDialog{width:min(720px,100%);max-height:85vh;overflow:auto;border-radius:16px;background:white;color:#0f172a;padding:24px}
+#feedbackAdminClose{float:right;border:1px solid #cbd5e1;border-radius:8px;padding:6px 12px;cursor:pointer}
+</style>
 </head>
+
+
 
 <body>
 
+
+
 <!-- ================= MOBILE OVERLAY ================= -->
 
+
+
 <div
+
 id="mobileOverlay"
+
 class="mobile-overlay">
+
 </div>
+
+
 
 <!-- ================= SIDEBAR ================= -->
 
+
+
 <aside class="sidebar">
+
+
 
 <div class="logo-area">
 
+
+
 <div class="logo-circle">
 
+
+
 <img
+
 src="assets/images/logo-ptis.png"
+
 alt="PTIS">
+
+
 
 </div>
 
+
+
 <div>
+
+
 
 <div class="logo-title">
 
+
+
 PTIS KBB
 
+
+
 </div>
+
+
 
 <div class="logo-sub">
 
+
+
 E-GERAK ADMIN V2
 
-</div>
+
 
 </div>
 
+
+
 </div>
+
+
+
+</div>
+
+
 
 <div class="menu">
 
+
+
     <button class="active">
+
         <i class="fa-solid fa-chart-line"></i>
+
         Dashboard
+
     </button>
 
+
+
     <button>
+
         <i class="fa-solid fa-users"></i>
+
         Staff Management
+
     </button>
 
+
+
     <button>
+
         <i class="fa-solid fa-chart-column"></i>
+
         Reports
+
     </button>
+
+
 
     <button id="analyticsMenu">
 
+
+
         <i class="fa-solid fa-chart-pie"></i>
+
+
 
         Analytics Dashboard
 
+
+
     </button>
+
+
 
     <button>
+
         <i class="fa-solid fa-gear"></i>
+
         Settings
+
     </button>
 
+
+
     <a
+
         href="maklumat-sewaan.html?from=admin"
+
         class="rental-menu-link">
 
+
+
         <i class="fa-solid fa-building"></i>
+
         Maklumat Sewaan
 
+
+
     </a>
+
+
 
     <a
+
     href="admin-password.html?from=admin"
+
     class="rental-menu-link">
 
+
+
     <i class="fa-solid fa-key"></i>
+
     Admin Password
 
+
+
     </a>
+
+
 
 </div>
 
+
+
+
+
 <div class="sidebar-footer">
+<button type="button" id="feedbackAdminOpen" hidden aria-haspopup="dialog" aria-controls="feedbackAdminDialog">Maklum Balas</button>
+
+
+
 
     <button
+
         id="logoutButton"
+
         class="logout-btn">
 
+
+
         <i class="fa-solid fa-right-from-bracket mr-2"></i>
+
         Log Keluar
+
+
 
     </button>
 
+
+
 </div>
+
+
 
 </aside>
 
+
+
 <!-- ================= MAIN ================= -->
+
+
 
 <div class="main">
 
+
+
 <header class="header">
+
+
 
 <div class="header-title">
 
+
+
 <h1>
+
+
 
 Dashboard
 
+
+
 </h1>
+
+
 
 <p>
 
+
+
 E-GERAK PTIS Kulim Bandar Baharu Version 2
+
+
 
 </p>
 
+
+
 </div>
+
+
 
 <div class="user-box">
 
+
+
 <div class="user-info">
+
+
 
 <h3 id="userName">
 
+
+
 Loading...
+
+
 
 </h3>
 
+
+
 <p id="userRole">
+
+
 
 Administrator
 
+
+
 </p>
 
+
+
 </div>
+
+
 
 <div class="user-avatar">
 
+
+
 <img
+
 id="userPhoto"
+
 src="https://ui-avatars.com/api/?name=PTIS">
 
-</div>
+
 
 </div>
+
+
+
+</div>
+
+
 
 </header>
 
+
+
 <div class="page">
+
+
 
     <!-- ================= DASHBOARD ================= -->
 
+
+
     <section
+
     id="dashboardSection"
+
     class="content-section">
 
+
+
 <!-- PENGURUSAN MAKLUMAN -->
+
 <div class="mb-6 rounded-2xl bg-white p-6 shadow-sm">
+
   <div class="flex flex-wrap items-center justify-between gap-4">
+
     <div>
+
       <h2 class="text-xl font-bold">📢 Makluman Terkini</h2>
+
       <p class="mt-1 text-sm text-slate-500">
+
         Makluman aktif dipaparkan pada halaman utama.
+
       </p>
+
     </div>
+
+
 
     <button
+
       id="addAnnouncementBtn"
+
       type="button"
+
       disabled
+
       class="rounded-xl bg-blue-600 px-5 py-3 font-semibold
+
              text-white disabled:opacity-50">
+
       ＋ Tambah Makluman
+
     </button>
+
   </div>
+
+
 
   <form id="announcementForm" hidden class="mt-5 space-y-4">
-    <div>
-      <label for="announcementTitle" class="block font-semibold">
-        Tajuk
-      </label>
-      <input
-        id="announcementTitle"
-        required
-        maxlength="150"
-        class="mt-2 w-full rounded-xl border border-slate-300 p-3">
-    </div>
 
     <div>
-      <label for="announcementBody" class="block font-semibold">
-        Kandungan
+
+      <label for="announcementTitle" class="block font-semibold">
+
+        Tajuk
+
       </label>
-      <textarea
-        id="announcementBody"
+
+      <input
+
+        id="announcementTitle"
+
         required
-        maxlength="3000"
-        rows="4"
-        class="mt-2 w-full rounded-xl border border-slate-300 p-3"
-      ></textarea>
+
+        maxlength="150"
+
+        class="mt-2 w-full rounded-xl border border-slate-300 p-3">
+
     </div>
+
+
+
+    <div>
+
+      <label for="announcementBody" class="block font-semibold">
+
+        Kandungan
+
+      </label>
+
+      <textarea
+
+        id="announcementBody"
+
+        required
+
+        maxlength="3000"
+
+        rows="4"
+
+        class="mt-2 w-full rounded-xl border border-slate-300 p-3"
+
+      ></textarea>
+
+    </div>
+
+
 
     <label class="flex items-center gap-2">
+
       <input id="announcementActive" type="checkbox" checked>
+
       Paparkan pada halaman utama
+
     </label>
 
+
+
     <div class="flex gap-3">
-      <button
-        id="saveAnnouncementBtn"
-        type="submit"
-        class="rounded-xl bg-green-600 px-5 py-3
-               font-semibold text-white disabled:opacity-50">
-        Simpan Makluman
-      </button>
 
       <button
-        id="cancelAnnouncementBtn"
-        type="button"
-        class="rounded-xl border px-5 py-3">
-        Batal
+
+        id="saveAnnouncementBtn"
+
+        type="submit"
+
+        class="rounded-xl bg-green-600 px-5 py-3
+
+               font-semibold text-white disabled:opacity-50">
+
+        Simpan Makluman
+
       </button>
+
+
+
+      <button
+
+        id="cancelAnnouncementBtn"
+
+        type="button"
+
+        class="rounded-xl border px-5 py-3">
+
+        Batal
+
+      </button>
+
     </div>
+
   </form>
 
+
+
   <p
+
     id="announcementAdminStatus"
+
     role="status"
+
     class="mt-3 text-sm text-slate-600">
+
     Menyemak akses admin...
+
   </p>
 
+
+
   <div class="mt-6 border-t border-slate-200 pt-5">
+
     <h3 class="font-bold text-slate-800">
+
       Senarai Makluman
+
     </h3>
 
+
+
     <div
+
       id="adminAnnouncementList"
+
       class="mt-4 space-y-3"
+
       aria-live="polite">
+
       Menunggu semakan akses admin...
+
     </div>
+
   </div>
+
 </div>
+
+
 
 <div class="kpi-grid">
 
+
+
 <div class="kpi-card">
+
+
 
 <div class="kpi-icon blue">
 
+
+
 <i class="fa-solid fa-users"></i>
+
+
 
 </div>
 
+
+
 <h4>
+
+
 
 Jumlah Staff
 
+
+
 </h4>
+
+
 
 <h2 id="totalStaff">
 
+
+
 0
+
+
 
 </h2>
 
+
+
 </div>
 
+
+
 <div class="kpi-card">
+
+
 
 <div class="kpi-icon green">
 
+
+
 <i class="fa-solid fa-user-check"></i>
+
+
 
 </div>
 
+
+
 <h4>
+
+
 
 Online
 
+
+
 </h4>
+
+
 
 <h2 id="onlineStaff">
 
+
+
 0
+
+
 
 </h2>
 
+
+
 </div>
 
+
+
 <div class="kpi-card">
+
+
 
 <div class="kpi-icon orange">
 
+
+
 <i class="fa-solid fa-building"></i>
+
+
 
 </div>
 
+
+
 <h4>
+
+
 
 Dalam Pejabat
 
+
+
 </h4>
+
+
 
 <h2 id="officeStaff">
 
+
+
 0
+
+
 
 </h2>
 
+
+
 </div>
+
+
 
 <div class="kpi-card">
 
+
+
 <div class="kpi-icon red">
+
+
 
 <i class="fa-solid fa-car"></i>
 
+
+
 </div>
+
+
 
 <h4>
 
+
+
 Luar Pejabat
+
+
 
 </h4>
 
+
+
 <h2 id="outsideStaff">
+
+
 
 0
 
+
+
 </h2>
 
-</div>
+
 
 </div>
+
+
+
+</div>
+
+
 
 <!-- ================= STATUS SAYA ================= -->
 
+
+
 <section class="mt-8">
+
+
 
 <div class="bg-white rounded-2xl shadow-lg p-6">
 
+
+
 <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-5">
+
+
 
 <div>
 
+
+
 <h2
+
 id="currentStatus"
+
 class="text-2xl font-bold text-green-600">
+
+
 
 🟢 Di Pejabat
 
+
+
 </h2>
 
+
+
 <p
+
 id="currentLocation"
+
 class="text-slate-600 mt-2">
+
+
 
 Lokasi : -
 
+
+
 </p>
 
+
+
 <p
+
 id="currentActivity"
+
 class="text-slate-600">
+
+
 
 Aktiviti : -
 
+
+
 </p>
 
+
+
 <p
+
 id="currentTime"
+
 class="text-slate-500 text-sm">
+
+
 
 Kemaskini : -
 
+
+
 </p>
+
+
 
 </div>
 
+
+
 <button
+
 id="adminMovementBtn"
+
 class="
+
 w-full
+
 lg:w-auto
+
 px-6
+
 py-3
+
 rounded-xl
+
 bg-blue-600
+
 text-white
+
 hover:bg-blue-700
+
 font-semibold">
+
+
 
 ➕ Kemaskini Pergerakan
 
+
+
 </button>
 
-</div>
+
 
 </div>
+
+
+
+</div>
+
+
 
 </section>
+
+
 
 <!-- ================= MOVEMENT HISTORY ================= -->
 
+
+
 <section
+
 id="movementHistorySection"
+
 class="mt-8">
+
+
 
 <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
 
+
+
     <!-- HEADER -->
+
+
 
     <div class="flex items-center justify-between p-5 border-b">
 
+
+
         <div>
+
+
 
             <h2 class="text-xl font-bold text-slate-800">
 
+
+
                 📋 Sejarah Pergerakan
 
+
+
             </h2>
+
+
 
             <p class="text-sm text-slate-500">
 
+
+
                 Rekod pergerakan terkini pengguna.
+
+
 
             </p>
 
+
+
         </div>
 
+
+
         <input
+
         id="searchMovement"
+
         type="text"
+
         placeholder="Cari lokasi atau aktiviti..."
+
+
 
         class="border rounded-xl px-4 py-2 w-72">
 
+
+
     </div>
+
+
 
     <!-- TABLE -->
 
+
+
     <div class="overflow-x-auto">
+
+
 
         <table class="min-w-full">
 
+
+
             <thead class="bg-slate-100">
+
+
 
                 <tr>
 
+
+
                     <th class="px-5 py-4 text-left">
+
                         Tarikh
+
                     </th>
 
+
+
                     <th class="px-5 py-4 text-left">
+
                         Masa
+
                     </th>
 
+
+
                     <th class="px-5 py-4 text-left">
+
                         Nama
+
                     </th>
 
+
+
                     <th class="px-5 py-4 text-left">
+
                         Status
+
                     </th>
 
+
+
                     <th class="px-5 py-4 text-left">
+
                         Lokasi
+
                     </th>
 
+
+
                     <th class="px-5 py-4 text-left">
+
                         Aktiviti
+
                     </th>
+
+
 
                 </tr>
+
+
 
             </thead>
 
+
+
             <tbody id="movementTable">
+
+
 
                 <tr>
 
+
+
                     <td
+
                     colspan="6"
+
                     class="text-center py-8 text-slate-400">
+
+
 
                         Tiada rekod.
 
+
+
                     </td>
+
+
 
                 </tr>
 
+
+
             </tbody>
+
+
 
         </table>
 
+
+
     </div>
+
+
 
     <!-- PAGINATION -->
 
+
+
     <div
+
     id="movementPagination"
+
     class="flex justify-center gap-2 p-4 border-t">
+
+
 
     </div>
 
+
+
 </div>
 
+
+
 </section>
+
+
 
 <!-- ================= LIVE MOVEMENT ================= -->
 
+
+
 <section class="mt-10">
+
+
 
 <div class="flex items-center justify-between mb-5">
 
+
+
 <div>
 
+
+
 <h2 class="text-2xl font-bold text-slate-800">
+
+
 
 📍 Pergerakan Semasa
 
+
+
 </h2>
 
+
+
 <p class="text-slate-500">
+
+
 
 Status pergerakan ahli PTIS secara masa nyata.
 
+
+
 </p>
+
+
 
 </div>
 
+
+
 <span
+
 class="px-4 py-2 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
+
+
 
 Realtime
 
+
+
 </span>
+
+
 
 </div>
 
+
+
 <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+
 
 <div class="overflow-x-auto">
 
+
+
 <table class="min-w-full">
+
+
 
 <thead class="bg-slate-100">
 
+
+
 <tr>
+
+
 
 <th class="px-6 py-4 text-left">Nama</th>
 
+
+
 <th class="px-6 py-4 text-left">Status</th>
+
+
 
 <th class="px-6 py-4 text-left">Lokasi</th>
 
+
+
 <th class="px-6 py-4 text-left">Masa</th>
+
+
 
 </tr>
 
+
+
 </thead>
+
+
 
 <tbody id="currentMovementTable">
 
+
+
 <tr>
 
+
+
 <td colspan="5"
+
 class="text-center py-10 text-slate-400">
+
+
 
 Tiada data.
 
+
+
 </td>
+
+
 
 </tr>
 
+
+
 </tbody>
+
+
 
 </table>
 
-</div>
+
 
 </div>
 
-</section>
+
+
+</div>
+
+
 
 </section>
+
+
+
+</section>
+
+
 
 <!-- ================= STAFF MANAGEMENT ================= -->
 
+
+
 <section
+
 id="staffManagementSection"
+
 class="content-section hidden mt-12">
+
+
 
 <div class="flex flex-wrap items-center justify-between gap-4 mb-5">
 
+
+
 <div>
+
+
 
 <h2 class="text-2xl font-bold text-slate-800">
 
+
+
 👥 Staff Management
 
+
+
 </h2>
+
+
 
 <p class="text-slate-500">
 
+
+
 Pengurusan ahli PTIS Kulim Bandar Baharu.
+
+
 
 </p>
 
+
+
 </div>
+
+
 
 <div class="flex gap-3">
 
+
+
 <button
+
 id="importExcelBtn"
+
 class="px-5 py-3 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700">
+
+
 
 <i class="fa-solid fa-file-import mr-2"></i>
 
+
+
 Import Excel
+
+
 
 </button>
 
+
+
 <button
+
 id="addStaffBtn"
+
 class="px-5 py-3 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700">
+
+
 
 <i class="fa-solid fa-user-plus mr-2"></i>
 
+
+
 Tambah Staff
+
+
 
 </button>
 
-</div>
+
 
 </div>
+
+
+
+</div>
+
+
 
 <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
 
+
+
 <div class="p-5 border-b">
 
+
+
 <input
+
 id="searchStaff"
+
 type="text"
+
 placeholder="Cari nama atau email..."
+
+
 
 class="w-full border rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500">
 
+
+
 </div>
+
+
 
 <div class="overflow-x-auto">
 
+
+
 <table class="min-w-full">
+
+
 
 <thead class="bg-slate-100">
 
+
+
 <tr>
 
+
+
 <th class="px-5 py-4 text-left">
+
 Nama
+
 </th>
 
+
+
 <th class="px-5 py-4 text-left">
+
 Email
+
 </th>
 
+
+
 <th class="px-5 py-4 text-left">
+
 Zone
+
 </th>
 
+
+
 <th class="px-5 py-4 text-left">
+
 Role
+
 </th>
+
+
 
 <th class="px-5 py-4 text-center">
+
 Tindakan
+
 </th>
 
+
+
 </tr>
+
+
 
 </thead>
 
+
+
 <tbody id="staffTable">
+
+
 
 <tr>
 
+
+
 <td colspan="6"
+
 class="text-center py-10 text-slate-400">
+
+
 
 Belum ada data.
 
+
+
 </td>
+
+
 
 </tr>
 
+
+
 </tbody>
+
+
 
 </table>
 
+
+
 </div>
+
+
 
 <!-- PAGINATION -->
 
+
+
 <div
+
 id="staffPagination"
+
 class="flex items-center justify-center gap-2 px-6 py-4 border-t bg-slate-50">
 
-</div>
+
 
 </div>
+
+
+
+</div>
+
+
 
 </section>
+
+
 
 <!-- ================= REPORT CENTER ================= -->
 
+
+
 <section
+
 id="reportsSection"
+
 class="content-section hidden mt-12">
+
+
 
     <!-- HEADER -->
 
+
+
     <div class="mb-8">
 
+
+
         <div class="inline-flex
+
         items-center
+
         gap-2
+
         px-4
+
         py-2
+
         rounded-full
+
         bg-blue-100
+
         text-blue-700
+
         font-semibold">
+
+
 
             📊 REPORT CENTER
 
+
+
         </div>
+
+
 
         <h2 class="text-4xl font-black text-slate-900 mt-4">
 
+
+
             Laporan Pergerakan PTIS
 
+
+
         </h2>
+
+
 
         <p class="text-slate-500 mt-2">
 
+
+
             Statistik keseluruhan pergerakan ahli PTIS Kulim Bandar Baharu.
+
+
 
         </p>
 
+
+
     </div>
+
+
 
     <!-- KPI -->
 
+
+
     <div class="grid
+
     grid-cols-1
+
     md:grid-cols-2
+
     xl:grid-cols-4
+
     gap-6">
 
+
+
         <div class="bg-white rounded-3xl shadow-lg p-7">
+
+
 
             <div class="text-4xl mb-4">📅</div>
 
+
+
             <p class="text-slate-500">
+
+
 
                 Hari Ini
 
+
+
             </p>
 
+
+
             <h2
+
             id="todayMovement"
+
             class="text-5xl font-black text-blue-600 mt-2">
+
+
 
                 0
 
+
+
             </h2>
+
+
 
         </div>
 
+
+
         <div class="bg-white rounded-3xl shadow-lg p-7">
+
+
 
             <div class="text-4xl mb-4">🟢</div>
 
+
+
             <p class="text-slate-500">
+
+
 
                 Dalam Pejabat
 
+
+
             </p>
 
+
+
             <h2
+
             id="todayOffice"
+
             class="text-5xl font-black text-green-600 mt-2">
+
+
 
                 0
 
+
+
             </h2>
+
+
 
         </div>
 
+
+
         <div class="bg-white rounded-3xl shadow-lg p-7">
+
+
 
             <div class="text-4xl mb-4">🚗</div>
 
+
+
             <p class="text-slate-500">
+
+
 
                 Luar Pejabat
 
+
+
             </p>
 
+
+
             <h2
+
             id="todayOutside"
+
             class="text-5xl font-black text-red-600 mt-2">
+
+
 
                 0
 
+
+
             </h2>
+
+
 
         </div>
 
+
+
         <div class="bg-white rounded-3xl shadow-lg p-7">
+
+
 
             <div class="text-4xl mb-4">👥</div>
 
+
+
             <p class="text-slate-500">
+
+
 
                 Jumlah Rekod
 
+
+
             </p>
 
+
+
             <h2
+
             id="totalMovement"
+
             class="text-5xl font-black text-indigo-600 mt-2">
+
+
 
                 0
 
+
+
             </h2>
+
+
 
         </div>
 
+
+
     </div>
+
+
 
     <!-- STATUS -->
 
+
+
     <div class="grid
+
     lg:grid-cols-2
+
     gap-6
+
     mt-8">
+
+
 
         <div class="bg-white rounded-3xl shadow-lg p-7">
 
+
+
             <h3 class="text-xl font-bold mb-6">
+
+
 
                 📍 Ringkasan Status
 
+
+
             </h3>
+
+
 
             <div class="space-y-4">
 
+
+
                 <div class="flex justify-between">
+
+
 
                     <span>🟢 Dalam Pejabat</span>
 
+
+
                     <b id="reportOffice">0</b>
+
+
 
                 </div>
 
+
+
                 <div class="flex justify-between">
+
+
 
                     <span>🚗 Luar Pejabat</span>
 
+
+
                     <b id="reportOutside">0</b>
+
+
 
                 </div>
 
+
+
                 <div class="flex justify-between">
+
+
 
                     <span>👥 Mesyuarat</span>
 
+
+
                     <b id="reportMeeting">0</b>
+
+
 
                 </div>
 
+
+
                 <div class="flex justify-between">
+
+
 
                     <span>🎓 Kursus</span>
 
+
+
                     <b id="reportCourse">0</b>
+
+
 
                 </div>
 
+
+
                 <div class="flex justify-between">
+
+
 
                     <span>🌴 Cuti</span>
 
+
+
                     <b id="reportLeave">0</b>
+
+
 
                 </div>
 
+
+
                 <div class="flex justify-between">
+
+
 
                     <span>📄 HRMIS</span>
 
+
+
                     <b id="reportHrmis">0</b>
+
+
 
                 </div>
 
+
+
             </div>
 
+
+
         </div>
+
+
 
         <div class="bg-white rounded-3xl shadow-lg p-7">
 
+
+
             <h3 class="text-xl font-bold mb-6">
+
+
 
                 📄 Export Laporan
 
+
+
             </h3>
+
+
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
+
+
     <!-- EXPORT PDF -->
 
+
+
     <button
+
     id="exportPdfBtn"
+
     class="flex items-center justify-center gap-3
+
     bg-gradient-to-r from-red-600 to-red-700
+
     hover:from-red-700 hover:to-red-800
+
     text-white rounded-2xl py-4
+
     font-bold shadow-lg
+
     transition duration-300">
 
+
+
         📄
+
         <span>Export PDF</span>
 
+
+
     </button>
+
+
 
     <!-- EXPORT EXCEL -->
 
+
+
     <button
+
     id="exportExcelBtn"
+
     class="flex items-center justify-center gap-3
+
     bg-gradient-to-r from-green-600 to-emerald-700
+
     hover:from-green-700 hover:to-emerald-800
+
     text-white rounded-2xl py-4
+
     font-bold shadow-lg
+
     transition duration-300">
 
+
+
         📊
+
         <span>Export Excel</span>
 
+
+
     </button>
+
+
 
     <!-- PRINT REPORT -->
 
+
+
     <button
+
     id="printReportBtn"
+
     class="flex items-center justify-center gap-3
+
     bg-gradient-to-r from-blue-600 to-indigo-700
+
     hover:from-blue-700 hover:to-indigo-800
+
     text-white rounded-2xl py-4
+
     font-bold shadow-lg
+
     transition duration-300">
 
+
+
         🖨️
+
         <span>Print Report</span>
+
+
 
     </button>
 
+
+
 </div>
+
+
 
         </div>
 
+
+
     </div>
 
+
+
 </section>
+
+
 
 <!-- ================= ANALYTICS DASHBOARD ================= -->
 
+
+
 <section
+
 id="analyticsSection"
+
 class="content-section hidden space-y-6">
+
+
 
     <!-- ================= KPI ================= -->
 
+
+
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+
+
 
         <!-- TOTAL -->
 
+
+
         <div class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl p-6 text-white shadow-xl">
+
+
 
             <div class="flex items-center justify-between">
 
+
+
                 <div>
+
+
 
                     <p class="text-blue-100 text-sm">
 
+
+
                         Jumlah Rekod
+
+
 
                     </p>
 
+
+
                     <h2
+
                     id="analyticsTotal"
+
                     class="text-4xl font-black mt-2">
+
+
 
                         0
 
+
+
                     </h2>
+
+
 
                 </div>
 
+
+
                 <div
+
                 class="w-16 h-16 rounded-2xl bg-white/15
+
                 flex items-center justify-center">
+
+
 
                     <i class="fa-solid fa-database text-3xl"></i>
 
+
+
                 </div>
+
+
 
             </div>
 
+
+
         </div>
+
+
 
         <!-- OFFICE -->
 
+
+
         <div class="bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl p-6 text-white shadow-xl">
+
+
 
             <div class="flex items-center justify-between">
 
+
+
                 <div>
+
+
 
                     <p class="text-green-100 text-sm">
 
+
+
                         Dalam Pejabat
+
+
 
                     </p>
 
+
+
                     <h2
+
                     id="analyticsOffice"
+
                     class="text-4xl font-black mt-2">
+
+
 
                         0
 
+
+
                     </h2>
+
+
 
                 </div>
 
+
+
                 <div
+
                 class="w-16 h-16 rounded-2xl bg-white/15
+
                 flex items-center justify-center">
+
+
 
                     <i class="fa-solid fa-building text-3xl"></i>
 
+
+
                 </div>
+
+
 
             </div>
 
+
+
         </div>
+
+
 
         <!-- OUTSIDE -->
 
+
+
         <div class="bg-gradient-to-br from-orange-500 to-red-500 rounded-3xl p-6 text-white shadow-xl">
+
+
 
             <div class="flex items-center justify-between">
 
+
+
                 <div>
+
+
 
                     <p class="text-orange-100 text-sm">
 
+
+
                         Luar Pejabat
+
+
 
                     </p>
 
+
+
                     <h2
+
                     id="analyticsOutside"
+
                     class="text-4xl font-black mt-2">
+
+
 
                         0
 
+
+
                     </h2>
+
+
 
                 </div>
 
+
+
                 <div
+
                 class="w-16 h-16 rounded-2xl bg-white/15
+
                 flex items-center justify-center">
+
+
 
                     <i class="fa-solid fa-car text-3xl"></i>
 
+
+
                 </div>
+
+
 
             </div>
 
+
+
         </div>
+
+
 
         <!-- TODAY -->
 
+
+
         <div class="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-3xl p-6 text-white shadow-xl">
+
+
 
             <div class="flex items-center justify-between">
 
+
+
                 <div>
+
+
 
                     <p class="text-purple-100 text-sm">
 
+
+
                         Hari Ini
+
+
 
                     </p>
 
+
+
                     <h2
+
                     id="analyticsToday"
+
                     class="text-4xl font-black mt-2">
+
+
 
                         0
 
+
+
                     </h2>
+
+
 
                 </div>
 
+
+
                 <div
+
                 class="w-16 h-16 rounded-2xl bg-white/15
+
                 flex items-center justify-center">
+
+
 
                     <i class="fa-solid fa-calendar-day text-3xl"></i>
 
+
+
                 </div>
+
+
 
             </div>
 
+
+
         </div>
 
+
+
     </div>
+
+
 
     <!-- ================= CHART ================= -->
 
+
+
     <div class="grid lg:grid-cols-2 gap-5">
+
+
 
         <!-- BAR -->
 
+
+
         <div class="bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
+
+
 
             <div class="flex items-center justify-between px-6 py-5 border-b">
 
+
+
                 <div>
 
+
+
                     <h3 class="text-xl font-bold text-slate-800">
+
+
 
                         📊 Aktiviti Mengikut Kategori
 
+
+
                     </h3>
 
+
+
                     <p class="text-sm text-slate-500 mt-1">
+
+
 
                         Ringkasan jenis pergerakan
 
+
+
                     </p>
 
+
+
                 </div>
+
+
 
                 <div class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center">
 
+
+
                     <i class="fa-solid fa-chart-column text-blue-600"></i>
+
+
 
                 </div>
 
+
+
             </div>
 
+
+
             <div
+
             class="p-5"
+
             style="height:340px;">
 
+
+
                 <canvas
+
                 id="activityChart">
+
+
 
                 </canvas>
 
+
+
             </div>
 
+
+
         </div>
+
+
 
         <!-- PIE -->
 
+
+
         <div class="bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
+
+
 
             <div class="flex items-center justify-between px-6 py-5 border-b">
 
+
+
                 <div>
+
+
 
                     <h3 class="text-xl font-bold text-slate-800">
 
+
+
                         🥧 Status Pergerakan
 
+
+
                     </h3>
+
+
 
                     <p class="text-sm text-slate-500 mt-1">
 
+
+
                         Dalam & luar pejabat
+
+
 
                     </p>
 
+
+
                 </div>
+
+
 
                 <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center">
 
+
+
                     <i class="fa-solid fa-chart-pie text-orange-500"></i>
+
+
 
                 </div>
 
+
+
             </div>
 
+
+
             <div
+
 class="flex items-center justify-center p-6"
+
 style="height:300px;">
 
+
+
     <canvas
+
     id="statusChart">
+
+
 
     </canvas>
 
+
+
 </div>
+
+
 
         </div>
 
+
+
     </div>
+
+
 
     <!-- ================= LIVE ACTIVITY ================= -->
 
+
+
     <div class="bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
+
+
 
         <div class="flex items-center justify-between px-6 py-5 border-b">
 
+
+
             <div>
+
+
 
                 <h3 class="text-xl font-bold">
 
+
+
                     🔴 Aktiviti Terkini
+
+
 
                 </h3>
 
+
+
                 <p class="text-sm text-slate-500 mt-1">
+
+
 
                     Pergerakan masa nyata ahli PTIS
 
+
+
                 </p>
+
+
 
             </div>
 
+
+
             <span
+
             class="px-4 py-1 rounded-full bg-green-100 text-green-700 text-sm font-bold">
+
+
 
                 LIVE
 
+
+
             </span>
 
+
+
         </div>
+
+
 
         <div class="overflow-x-auto">
 
+
+
             <table class="min-w-full">
+
+
 
                 <thead class="bg-slate-50">
 
+
+
                     <tr>
 
+
+
                         <th class="px-6 py-4 text-left">
+
+
 
                             Nama
 
+
+
                         </th>
 
+
+
                         <th class="px-6 py-4 text-left">
+
+
 
                             Aktiviti
 
+
+
                         </th>
 
+
+
                         <th class="px-6 py-4 text-left">
+
+
 
                             Lokasi
 
+
+
                         </th>
 
+
+
                         <th class="px-6 py-4 text-left">
+
+
 
                             Tarikh
 
+
+
                         </th>
+
+
 
                         <th class="px-6 py-4 text-left">
 
+
+
                             Masa
+
+
 
                         </th>
 
+
+
                     </tr>
+
+
 
                 </thead>
 
+
+
                 <tbody
+
                 id="analyticsActivity">
+
+
 
                     <tr>
 
+
+
                         <td
+
                         colspan="5"
+
                         class="py-12 text-center text-slate-400">
+
+
 
                             Tiada aktiviti direkodkan.
 
+
+
                         </td>
+
+
 
                     </tr>
 
+
+
                 </tbody>
+
+
 
             </table>
 
+
+
         </div>
+
+
 
     </div>
 
+
+
 </section>
+
+
 
 <!-- ================= SETTINGS ================= -->
 
+
+
 <section
+
 id="settingsSection"
+
 class="content-section hidden space-y-6">
+
+
 
     <!-- ================= HEADER ================= -->
 
+
+
     <div>
 
+
+
         <h2
+
         class="text-4xl
+
         font-black
+
         text-slate-900
+
         mt-4">
+
+
 
             Tetapan Sistem
 
+
+
         </h2>
 
+
+
         <p
+
         class="text-slate-500
+
         mt-2">
+
+
 
             Pengurusan konfigurasi E-GERAK PTIS KBB Version 2.
 
+
+
         </p>
 
+
+
     </div>
+
+
 
     <!-- ================= GRID ================= -->
 
+
+
     <div class="grid xl:grid-cols-2 gap-6">
+
+
 
         <!-- ================= AKAUN ================= -->
 
+
+
         <div
+
         class="bg-white
+
         rounded-3xl
+
         shadow-lg
+
         border
+
         border-slate-200
+
         overflow-hidden">
 
+
+
             <div
+
             class="flex
+
             items-center
+
             gap-4
+
             p-6
+
             border-b">
 
+
+
                 <div
+
                 class="w-16
+
                 h-16
+
                 rounded-2xl
+
                 bg-gradient-to-br
+
                 from-blue-500
+
                 to-indigo-600
+
                 text-white
+
                 flex
+
                 items-center
+
                 justify-center
+
                 text-3xl">
+
+
 
                     <i class="fa-solid fa-user"></i>
 
+
+
                 </div>
+
+
 
                 <div>
 
+
+
                     <h3
+
                     class="text-2xl
+
                     font-black">
+
+
 
                         Akaun Saya
 
+
+
                     </h3>
 
+
+
                     <p
+
                     class="text-slate-500">
+
+
 
                         Maklumat pengguna semasa
 
+
+
                     </p>
+
+
 
                 </div>
 
+
+
             </div>
+
+
 
             <div class="p-6 space-y-6">
 
+
+
                 <div>
 
+
+
                     <label class="text-sm text-slate-400">
+
+
 
                         Nama
 
+
+
                     </label>
 
+
+
                     <div
+
                     id="settingName"
+
                     class="mt-2
+
                     text-xl
+
                     font-bold
+
                     text-slate-800">
+
+
 
                         Memuatkan...
 
+
+
                     </div>
+
+
 
                 </div>
 
+
+
                 <div>
 
+
+
                     <label class="text-sm text-slate-400">
+
+
 
                         Emel
 
+
+
                     </label>
 
+
+
                     <div
+
                     id="settingEmail"
+
                     class="mt-2
+
                     font-semibold
+
                     text-slate-700">
+
+
 
                         Memuatkan...
 
+
+
                     </div>
+
+
 
                 </div>
 
+
+
                 <div>
+
+
 
                     <label class="text-sm text-slate-400">
 
+
+
                         Peranan
 
+
+
                     </label>
+
+
 
                     <div class="mt-3">
 
+
+
                         <span
+
                         id="settingRole"
+
                         class="inline-flex
+
                         items-center
+
                         gap-2
+
                         px-4
+
                         py-2
+
                         rounded-full
+
                         bg-blue-100
+
                         text-blue-700
+
                         font-bold">
+
+
 
                             Memuatkan...
 
+
+
                         </span>
+
+
 
                     </div>
 
+
+
                 </div>
+
+
 
             </div>
 
+
+
         </div>
+
+
 
         <!-- ================= TETAPAN ================= -->
 
+
+
         <div
+
         class="bg-white
+
         rounded-3xl
+
         shadow-lg
+
         border
+
         border-slate-200
+
         p-6">
 
+
+
             <h3
+
             class="text-2xl
+
             font-black
+
             mb-8">
+
+
 
                 ⚙ Tetapan Sistem
 
+
+
             </h3>
+
+
 
             <div class="space-y-6">
 
+
+
                 <label class="flex justify-between items-center">
+
+
 
                     <span>Papar Notifikasi</span>
 
+
+
                     <input
+
                     id="notificationToggle"
+
                     type="checkbox"
+
                     checked>
+
+
 
                 </label>
 
+
+
                 <label class="flex justify-between items-center">
+
+
 
                     <span>Bunyi Notifikasi</span>
 
+
+
                     <input
+
                     id="soundToggle"
+
                     type="checkbox"
+
                     checked>
 
+
+
                 </label>
+
+
 
                 <label class="flex justify-between items-center">
 
+
+
                     <span>Auto Refresh</span>
 
+
+
                     <input
+
                     id="refreshToggle"
+
                     type="checkbox"
+
                     checked>
+
+
 
                 </label>
 
+
+
             </div>
 
+
+
         </div>
+
+
 
         <!-- ================= MAKLUMAT SISTEM ================= -->
 
+
+
         <div
+
         class="bg-white
+
         rounded-3xl
+
         shadow-lg
+
         border
+
         border-slate-200
+
         p-6">
 
+
+
             <h3
+
             class="text-2xl
+
             font-black
+
             mb-8">
+
+
 
                 ℹ Maklumat Sistem
 
+
+
             </h3>
+
+
 
             <div class="space-y-5">
 
+
+
                 <div class="flex justify-between">
+
+
 
                     <span>Versi</span>
 
+
+
                     <strong>2.0</strong>
+
+
 
                 </div>
 
+
+
                 <div class="flex justify-between">
+
+
 
                     <span>Database</span>
 
+
+
                     <strong>Cloud Firestore</strong>
+
+
 
                 </div>
 
+
+
                 <div class="flex justify-between">
+
+
 
                     <span>Authentication</span>
 
+
+
                     <strong>Firebase Authentication</strong>
 
+
+
                 </div>
+
+
 
                 <div class="flex justify-between">
 
+
+
                     <span>Status Sistem</span>
 
+
+
                     <span
+
                     class="text-green-600
+
                     font-bold">
+
+
 
                         ● ONLINE
 
+
+
                     </span>
+
+
 
                 </div>
 
+
+
             </div>
 
+
+
         </div>
+
+
 
         <!-- ================= ADMIN ================= -->
 
+
+
         <div
+
         class="bg-white
+
         rounded-3xl
+
         shadow-lg
+
         border
+
         border-red-200
+
         p-6">
 
+
+
             <h3
+
             class="text-2xl
+
             font-black
+
             text-red-600
+
             mb-8">
+
+
 
                 🚨 Zon Pentadbir
 
+
+
             </h3>
+
+
 
             <div class="space-y-4">
 
+
+
                 <button
+
                 id="clearMovementBtn"
+
                 class="w-full
+
                 rounded-2xl
+
                 py-4
+
                 bg-red-600
+
                 hover:bg-red-700
+
                 text-white
+
                 font-bold
+
                 transition">
+
+
 
                     🗑 Padam Semua Rekod Pergerakan
 
+
+
                 </button>
 
+
+
                 <button
+
                 id="resetStatisticBtn"
+
                 class="w-full
+
                 rounded-2xl
+
                 py-4
+
                 bg-orange-500
+
                 hover:bg-orange-600
+
                 text-white
+
                 font-bold
+
                 transition">
+
+
 
                     🔄 Reset Statistik
 
+
+
                 </button>
+
+
 
             </div>
 
+
+
         </div>
 
+
+
     </div>
+
+
 
 </section>
 
-</div>
+
 
 </div>
+
+
+
+</div>
+
+
 
 <!-- =======================================================
+
      MOBILE MENU BUTTON
+
 ======================================================= -->
 
+
+
 <button
+
 id="menuToggle"
+
 class="fixed
+
 top-5
+
 left-5
+
 z-[1100]
+
 lg:hidden
+
 w-12
+
 h-12
+
 rounded-xl
+
 bg-blue-600
+
 text-white
+
 shadow-xl">
+
+
 
 <i class="fa-solid fa-bars"></i>
 
+
+
 </button>
 
+
+
 <!-- =======================================================
+
      ADD STAFF MODAL
+
 ======================================================= -->
 
+
+
 <div
+
 id="staffModal"
+
 class="fixed inset-0 bg-black/50 hidden items-center justify-center z-[999] p-5">
 
+
+
     <div
+
     class="bg-white rounded-3xl w-full max-w-2xl shadow-2xl">
 
+
+
         <!-- HEADER -->
+
         <div class="p-6 border-b">
+
+
 
             <h2 class="text-2xl font-bold">
 
+
+
                 ➕ Tambah Staff
+
+
 
             </h2>
 
+
+
         </div>
 
+
+
         <!-- BODY -->
+
         <div class="p-6 space-y-5">
 
+
+
             <!-- Nama -->
+
             <div>
 
+
+
                 <label class="font-semibold">
+
+
 
                     Nama
 
+
+
                 </label>
 
+
+
                 <input
+
                 id="staffNama"
+
                 type="text"
+
                 class="mt-2 w-full border rounded-xl p-3">
+
+
 
             </div>
 
+
+
             <!-- Email -->
+
             <div>
 
+
+
                 <label class="font-semibold">
+
+
 
                     Email
 
+
+
                 </label>
 
+
+
                 <input
+
                 id="staffEmail"
+
                 type="email"
+
                 class="mt-2 w-full border rounded-xl p-3">
+
+
 
             </div>
 
+
+
             <!-- Zone -->
+
             <div>
+
+
 
                 <label class="font-semibold">
 
+
+
                     Zone
+
+
 
                 </label>
 
+
+
                 <input
+
                 id="staffZone"
+
                 type="text"
+
                 class="mt-2 w-full border rounded-xl p-3">
+
+
 
             </div>
 
+
+
             <!-- Role & Status -->
+
             <div class="grid md:grid-cols-2 gap-5">
+
+
 
                 <div>
 
+
+
                     <label class="font-semibold">
+
+
 
                         Role
 
+
+
                     </label>
 
+
+
                     <select
+
                     id="staffRole"
+
                     class="mt-2 w-full border rounded-xl p-3">
+
+
 
                         <option value="user">
 
+
+
                             User
 
+
+
                         </option>
+
+
 
                         <option value="admin">
 
+
+
                             Administrator
+
+
 
                         </option>
 
+
+
                     </select>
 
+
+
                 </div>
+
+
 
                 <div>
 
+
+
                     <label class="font-semibold">
+
+
 
                         Status
 
+
+
                     </label>
 
+
+
                     <select
+
                     id="staffStatus"
+
                     class="mt-2 w-full border rounded-xl p-3">
+
+
 
                         <option value="aktif">
 
+
+
                             aktif
 
+
+
                         </option>
+
+
 
                         <option value="tidak aktif">
 
+
+
                             tidak aktif
+
+
 
                         </option>
 
+
+
                     </select>
+
+
 
                 </div>
 
+
+
             </div>
+
+
 
         </div>
 
+
+
         <!-- FOOTER -->
+
         <div
+
         class="flex justify-end gap-3 p-6 border-t">
 
+
+
             <button
+
             id="closeStaffModal"
+
             class="px-6 py-3 rounded-xl bg-gray-200 hover:bg-gray-300 transition">
+
+
 
                 Tutup
 
+
+
             </button>
 
+
+
             <button
+
             id="saveStaffBtn"
+
             class="px-6 py-3 rounded-xl bg-green-600 text-white hover:bg-green-700 transition">
+
+
 
                 Simpan
 
+
+
             </button>
+
+
 
         </div>
 
+
+
     </div>
+
+
 
 </div>
 
+
+
 <!-- =======================================================
+
      IMPORT MODAL
+
 ======================================================= -->
 
-<div
-id="importModal"
-class="fixed inset-0 bg-black/50
-hidden items-center justify-center
-z-[999] p-5">
+
 
 <div
+
+id="importModal"
+
+class="fixed inset-0 bg-black/50
+
+hidden items-center justify-center
+
+z-[999] p-5">
+
+
+
+<div
+
 class="bg-white rounded-3xl
+
 max-w-xl w-full">
+
+
 
 <div class="p-6 border-b">
 
+
+
 <h2 class="text-2xl font-bold">
+
+
 
 📥 Import Excel
 
+
+
 </h2>
 
+
+
 </div>
+
+
 
 <div class="p-6">
 
+
+
 <input
+
+
 
 id="excelFile"
 
+
+
 type="file"
+
+
 
 accept=".xlsx,.xls"
 
+
+
 class="w-full">
+
+
 
 </div>
 
+
+
 <div
+
 class="flex justify-end gap-3
+
 p-6 border-t">
 
+
+
 <button
+
 id="closeImportModal"
+
 class="px-6 py-3 rounded-xl bg-gray-200">
+
+
 
 Batal
 
+
+
 </button>
 
+
+
 <button
+
 id="startImport"
+
 class="px-6 py-3 rounded-xl
+
 bg-blue-600 text-white">
+
+
 
 Import
 
+
+
 </button>
 
-</div>
+
 
 </div>
 
+
+
 </div>
+
+
+
+</div>
+
+
 
 <!-- =======================================================
+
      LOADING
+
 ======================================================= -->
 
+
+
 <div
+
 id="loadingScreen"
+
 class="fixed inset-0
+
 bg-white/80 backdrop-blur-sm
+
 hidden items-center justify-center
+
 z-[9999]">
+
+
 
 <div class="text-center">
 
+
+
 <div
+
 class="w-16 h-16
+
 border-[6px]
+
 border-blue-600
+
 border-t-transparent
+
 rounded-full
+
 animate-spin
+
 mx-auto">
 
+
+
 </div>
+
+
 
 <p class="mt-6 text-lg font-semibold">
 
+
+
 Loading...
+
+
 
 </p>
 
-</div>
+
 
 </div>
+
+
+
+</div>
+
+
 
 <!-- =======================================================
+
      TOAST
+
 ======================================================= -->
 
+
+
 <div
+
 id="toast"
+
 class="fixed
+
 bottom-6
+
 right-6
 
+
+
 translate-y-20
+
 opacity-0
+
+
 
 transition-all
 
+
+
 duration-300
+
+
 
 bg-green-600
 
+
+
 text-white
+
+
 
 px-6
 
+
+
 py-4
+
+
 
 rounded-xl
 
+
+
 shadow-xl">
+
+
 
 Berjaya
 
+
+
 </div>
 
+
+
 <!-- =======================================================
+
      JAVASCRIPT
+
 ======================================================= -->
+
+
 
 <script type="module" src="assets/js/firebase.js"></script>
 
+
+
 <script type="module" src="assets/js/auth.js"></script>
+
+
 
 <script type="module" src="assets/js/dashboard.js"></script>
 
+
+
 <script type="module" src="assets/js/navigation.js"></script>
+
+
 
 <script type="module" src="assets/js/staff.js"></script>
 
+
+
 <script type="module" src="assets/js/movement.js"></script>
+
+
 
 <script type="module" src="assets/js/reports.js"></script>
 
+
+
 <script type="module" src="assets/js/analytics.js"></script>
+
+
 
 <script type="module" src="assets/js/settings.js"></script>
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+
+
 <script>
 
+
+
 const menuToggle =
+
 document.getElementById("menuToggle");
 
+
+
 const sidebar =
+
 document.querySelector(".sidebar");
 
+
+
 const overlay =
+
 document.getElementById("mobileOverlay");
+
+
 
 function openSidebar(){
 
+
+
     sidebar.classList.add("show");
+
+
 
     overlay.classList.add("show");
 
+
+
 }
+
+
 
 function closeSidebar(){
 
+
+
     sidebar.classList.remove("show");
+
+
 
     overlay.classList.remove("show");
 
+
+
 }
+
+
 
 menuToggle?.addEventListener("click",()=>{
 
+
+
     if(sidebar.classList.contains("show")){
 
+
+
         closeSidebar();
+
+
 
     }else{
 
+
+
         openSidebar();
+
+
 
     }
 
+
+
 });
+
+
 
 overlay?.addEventListener("click",()=>{
 
+
+
     closeSidebar();
 
+
+
 });
+
+
 
 window.addEventListener("resize",()=>{
 
+
+
     if(window.innerWidth>1024){
+
+
 
         closeSidebar();
 
+
+
     }
+
+
 
 });
 
+
+
 /* ===============================
+
    AUTO CLOSE MOBILE MENU
+
 =============================== */
 
+
+
 document
+
 .querySelectorAll(".menu button")
+
 .forEach(button=>{
+
+
 
     button.addEventListener("click",()=>{
 
+
+
         if(window.innerWidth<=1024){
+
+
 
             closeSidebar();
 
+
+
         }
 
+
+
     });
+
+
+
+});
+
+
+
+</script>
+
+
+
+<!-- ====================================================== -->
+
+<!-- PREMIUM MOVEMENT MODAL -->
+
+<!-- ====================================================== -->
+
+
+
+<div
+
+id="movementModal"
+
+class="fixed
+
+inset-0
+
+hidden
+
+items-center
+
+justify-center
+
+bg-slate-900/60
+
+backdrop-blur-sm
+
+z-50
+
+p-5">
+
+
+
+    <div
+
+    class="w-full
+
+    max-w-5xl
+
+    max-h-[92vh]
+
+    bg-white
+
+    rounded-[32px]
+
+    shadow-2xl
+
+    overflow-hidden
+
+    flex
+
+    flex-col">
+
+
+
+    <!-- ====================================================== -->
+
+<!-- HEADER -->
+
+<!-- ====================================================== -->
+
+
+
+<div
+
+class="px-8
+
+py-5
+
+bg-gradient-to-r
+
+from-blue-700
+
+via-blue-600
+
+to-cyan-500
+
+text-white
+
+flex
+
+items-center
+
+justify-between">
+
+
+
+<div>
+
+
+
+<div
+
+class="inline-flex
+
+items-center
+
+gap-2
+
+px-3
+
+py-1
+
+rounded-full
+
+bg-white/20
+
+text-sm
+
+font-semibold">
+
+
+
+E-GERAK PTIS KBB V2
+
+
+
+</div>
+
+
+
+<h2
+
+class="text-2xl
+
+font-black
+
+mt-2">
+
+
+
+📍 Kemaskini Pergerakan
+
+
+
+</h2>
+
+
+
+<p
+
+class="text-blue-100
+
+mt-2">
+
+
+
+Kemaskini status pergerakan semasa anda.
+
+
+
+</p>
+
+
+
+</div>
+
+
+
+<button
+
+id="closeModal"
+
+class="w-12
+
+h-12
+
+rounded-xl
+
+bg-white/20
+
+hover:bg-white/30
+
+transition
+
+text-xl
+
+font-bold">
+
+
+
+✕
+
+
+
+</button>
+
+
+
+</div>
+
+
+
+    <!-- BODY -->
+
+
+
+    <div
+
+class="flex-1
+
+overflow-y-auto
+
+px-8
+
+py-8
+
+bg-slate-50
+
+space-y-6">
+
+
+
+      <!-- STATUS -->
+
+
+
+      <div>
+
+
+
+        <label
+
+class="block
+
+text-slate-700
+
+font-bold
+
+mb-3
+
+text-lg">
+
+
+
+Status Pergerakan
+
+
+
+</label>
+
+
+
+       <select
+
+id="movementType"
+
+class="w-full
+
+rounded-2xl
+
+border
+
+border-slate-300
+
+bg-white
+
+px-5
+
+py-4
+
+text-slate-700
+
+font-medium
+
+outline-none
+
+focus:border-blue-500
+
+focus:ring-4
+
+focus:ring-blue-100
+
+transition">
+
+
+
+<option value="">-- Pilih Status --</option>
+
+
+
+<option value="office">🟢 Di Pejabat</option>
+
+
+
+<option value="outsideSchool">
+
+🚗 Luar Pejabat / Lawatan Sekolah
+
+</option>
+
+
+
+<option value="meeting">
+
+👥 Mesyuarat
+
+</option>
+
+
+
+<option value="course">
+
+🎓 Kursus / Bengkel
+
+</option>
+
+
+
+<option value="leave">
+
+🌴 Cuti
+
+</option>
+
+
+
+<option value="hrmis">
+
+📄 HRMIS (4 Jam)
+
+</option>
+
+
+
+</select>
+
+
+
+      </div>
+
+
+
+      <!-- DYNAMIC FORM -->
+
+
+
+      <div id="dynamicForm" class="space-y-6">
+
+
+
+        <div id="locationGroup">
+
+
+
+          <label
+
+class="block
+
+text-slate-700
+
+font-semibold
+
+mb-2">
+
+
+
+📍 Lokasi
+
+
+
+</label>
+
+
+
+          <input
+
+id="movementLocation"
+
+type="text"
+
+class="w-full
+
+rounded-2xl
+
+border
+
+border-slate-300
+
+bg-white
+
+px-5
+
+py-4
+
+text-slate-700
+
+outline-none
+
+focus:ring-4
+
+focus:ring-blue-100
+
+focus:border-blue-500"
+
+placeholder="Contoh : PPD Kulim Bandar Baharu">
+
+
+
+        </div>
+
+
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+
+
+          <div>
+
+
+
+            <label
+
+class="block
+
+text-slate-700
+
+font-semibold
+
+mb-2">
+
+
+
+📅 Tarikh
+
+
+
+</label>
+
+
+
+            <input
+
+id="movementDate"
+
+type="date"
+
+class="w-full
+
+rounded-2xl
+
+border
+
+border-slate-300
+
+bg-white
+
+px-5
+
+py-4
+
+text-slate-700
+
+outline-none
+
+focus:ring-4
+
+focus:ring-blue-100
+
+focus:border-blue-500">
+
+
+
+          </div>
+
+
+
+          <div>
+
+
+
+            <label
+
+class="block
+
+text-slate-700
+
+font-semibold
+
+mb-2">
+
+
+
+🕒 Masa
+
+
+
+</label>
+
+
+
+            <input
+
+id="movementTime"
+
+type="time"
+
+class="w-full
+
+rounded-2xl
+
+border
+
+border-slate-300
+
+bg-white
+
+px-5
+
+py-4
+
+text-slate-700
+
+outline-none
+
+focus:ring-4
+
+focus:ring-blue-100
+
+focus:border-blue-500">
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+        <div id="activityGroup">
+
+
+
+          <label
+
+class="block
+
+text-slate-700
+
+font-semibold
+
+mb-2">
+
+
+
+📝 Aktiviti
+
+
+
+</label>
+
+
+
+<input
+
+id="movementActivity"
+
+type="text"
+
+class="w-full
+
+rounded-2xl
+
+border
+
+border-slate-300
+
+bg-white
+
+px-5
+
+py-4
+
+text-slate-700
+
+outline-none
+
+focus:border-blue-500
+
+focus:ring-4
+
+focus:ring-blue-100
+
+resize-none
+
+transition"
+
+rows="4">
+
+
+
+        </div>
+
+
+
+        <div id="noteGroup">
+
+
+
+          <label
+
+class="block
+
+text-slate-700
+
+font-semibold
+
+mb-2">
+
+
+
+📌 Catatan Tambahan
+
+
+
+</label>
+
+
+
+          <textarea
+
+id="movementNote"
+
+rows="4"
+
+class="w-full
+
+rounded-2xl
+
+border
+
+border-slate-300
+
+bg-white
+
+px-5
+
+py-4
+
+text-slate-700
+
+outline-none
+
+focus:border-blue-500
+
+focus:ring-4
+
+focus:ring-blue-100
+
+resize-none
+
+transition"
+
+rows="4"></textarea>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+      <!-- Dynamic Content -->
+
+
+
+<div
+
+id="dynamicContent"
+
+class="space-y-5">
+
+
+
+</div>
+
+
+
+      <!-- ====================================================== -->
+
+<!-- GOOGLE CALENDAR -->
+
+<!-- ====================================================== -->
+
+
+
+<div
+
+class="bg-blue-50
+
+border
+
+border-blue-200
+
+rounded-2xl
+
+p-4
+
+flex
+
+items-center
+
+justify-between
+
+gap-6">
+
+
+
+  <div class="flex items-start gap-4">
+
+
+
+    <div
+
+    class="w-12
+
+    h-12
+
+    rounded-2xl
+
+    bg-blue-600
+
+    text-white
+
+    flex
+
+    items-center
+
+    justify-center
+
+    text-x1
+
+    shadow-lg">
+
+
+
+      📅
+
+
+
+    </div>
+
+
+
+    <div>
+
+
+
+      <h3
+
+      class="text-base
+
+      font-bold
+
+      text-slate-800">
+
+
+
+        Google Calendar
+
+
+
+      </h3>
+
+
+
+      <p
+
+      class="text-sm
+
+      text-slate-600
+
+      mt-1">
+
+
+
+        Tambahkan rekod pergerakan ini ke Google Calendar secara automatik selepas disimpan.
+
+
+
+      </p>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <label class="relative inline-flex items-center cursor-pointer">
+
+
+
+    <input
+
+    id="calendarToggle"
+
+    type="checkbox"
+
+    class="sr-only peer">
+
+
+
+    <div
+
+    class="relative
+
+    w-16
+
+    h-9
+
+    bg-slate-300
+
+    rounded-full
+
+    transition-all
+
+    peer-checked:bg-blue-600
+
+    after:absolute
+
+    after:top-1
+
+    after:left-1
+
+    after:w-7
+
+    after:h-7
+
+    after:bg-white
+
+    after:rounded-full
+
+    after:shadow-md
+
+    after:transition-all
+
+    peer-checked:after:translate-x-7">
+
+
+
+    </div>
+
+
+
+  </label>
+
+
+
+</div>
+
+
+
+    </div>
+
+
+
+ <!-- ======================================================
+
+     FOOTER
+
+====================================================== -->
+
+
+
+<div
+
+class="
+
+mt-8
+
+pt-6
+
+border-t
+
+border-slate-200">
+
+
+
+  <!-- INFO -->
+
+
+
+  <div
+
+  class="
+
+  mb-6
+
+  rounded-2xl
+
+  bg-blue-50
+
+  border
+
+  border-blue-200
+
+  p-5">
+
+
+
+    <div class="flex items-start gap-3">
+
+
+
+      <div
+
+      class="
+
+      w-10
+
+      h-10
+
+      rounded-xl
+
+      bg-blue-600
+
+      text-white
+
+      flex
+
+      items-center
+
+      justify-center
+
+      font-bold">
+
+
+
+        ✓
+
+
+
+      </div>
+
+
+
+      <div>
+
+
+
+        <h3
+
+        class="
+
+        font-bold
+
+        text-slate-800">
+
+
+
+          E-GERAK PTIS KBB V2
+
+
+
+        </h3>
+
+
+
+        <p
+
+        class="
+
+        text-sm
+
+        text-slate-600
+
+        mt-1">
+
+
+
+          Pastikan semua maklumat telah disemak sebelum menekan butang
+
+          <strong>Simpan Pergerakan</strong>.
+
+
+
+        </p>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <!-- BUTTON -->
+
+
+
+  <div
+
+  class="
+
+  flex
+
+  flex-col-reverse
+
+  sm:flex-row
+
+  justify-end
+
+  gap-4">
+
+
+
+    <button
+
+    id="cancelMovement"
+
+    class="
+
+    w-full
+
+    sm:w-auto
+
+    px-6
+
+    py-3
+
+    rounded-2xl
+
+    border
+
+    border-slate-300
+
+    bg-white
+
+    text-slate-700
+
+    font-semibold
+
+    hover:bg-slate-100
+
+    transition">
+
+
+
+      ❌ Batal
+
+
+
+    </button>
+
+
+
+    <button
+
+    id="saveMovement"
+
+    class="
+
+    w-full
+
+    sm:w-auto
+
+    px-8
+
+    py-3
+
+    rounded-2xl
+
+    bg-gradient-to-r
+
+    from-blue-600
+
+    to-cyan-500
+
+    text-white
+
+    font-bold
+
+    shadow-lg
+
+    hover:shadow-xl
+
+    hover:-translate-y-0.5
+
+    transition-all">
+
+
+
+      💾 Simpan Pergerakan
+
+
+
+    </button>
+
+
+
+  </div>
+
+
+
+</div>
+
+
+</div> <!-- Kad modal pergerakan -->
+</div> <!-- #movementModal -->
+
+<!-- ====================================================== -->
+
+<!-- END BODY -->
+
+<!-- ====================================================== -->
+
+
+
+<!-- ====================================================== -->
+
+<!-- PREMIUM LOADING -->
+
+<!-- ====================================================== -->
+
+
+
+<div
+
+id="loadingOverlay"
+
+class="fixed
+
+inset-0
+
+hidden
+
+items-center
+
+justify-center
+
+bg-slate-900/60
+
+backdrop-blur-md
+
+z-[9999]">
+
+
+
+    <div
+
+    class="bg-white
+
+    rounded-[32px]
+
+    shadow-2xl
+
+    px-12
+
+    py-10
+
+    text-center
+
+    w-[340px]">
+
+
+
+        <div
+
+        class="mx-auto
+
+        w-20
+
+        h-20
+
+        rounded-full
+
+        border-[6px]
+
+        border-blue-100
+
+        border-t-blue-600
+
+        animate-spin">
+
+
+
+        </div>
+
+
+
+        <h3
+
+        class="mt-8
+
+        text-xl
+
+        font-bold
+
+        text-slate-800">
+
+
+
+            Menyimpan Pergerakan
+
+
+
+        </h3>
+
+
+
+        <p
+
+        class="mt-2
+
+        text-slate-500">
+
+
+
+            Sila tunggu sebentar...
+
+
+
+        </p>
+
+
+
+        <div
+
+        class="mt-8
+
+        h-2
+
+        rounded-full
+
+        bg-slate-200
+
+        overflow-hidden">
+
+
+
+            <div
+
+            class="h-full
+
+            w-full
+
+            bg-gradient-to-r
+
+            from-blue-600
+
+            via-cyan-500
+
+            to-blue-600
+
+            animate-pulse">
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+<script type="module" src="assets/js/makluman.js"></script>
+
+
+
+<div id="feedbackAdminOverlay" hidden>
+<section id="feedbackAdminDialog" role="dialog" aria-modal="true" aria-labelledby="feedbackAdminTitle" tabindex="-1">
+<button type="button" id="feedbackAdminClose">Tutup ×</button>
+<h2 id="feedbackAdminTitle" class="text-xl font-bold">Maklum Balas eGerak</h2>
+
+<p id="feedbackAdminStatus" role="status"></p>
+
+<div id="feedbackAdminList" class="mt-4 space-y-3"></div>
+
+</section>
+</div>
+<script>
+(() => {
+ const open = document.getElementById("feedbackAdminOpen");
+ const overlay = document.getElementById("feedbackAdminOverlay");
+ const close = document.getElementById("feedbackAdminClose");
+ function hide() {
+   overlay.hidden = true;
+   if (!open.hidden) open.focus();
+ }
+ open.addEventListener("click", () => {
+   if (open.hidden) return;
+   overlay.hidden = false;
+   close.focus();
+ });
+ close.addEventListener("click", hide);
+ overlay.addEventListener("click", e => { if (e.target === overlay) hide(); });
+ document.addEventListener("keydown", e => {
+   if (e.key === "Escape" && !overlay.hidden) { e.preventDefault(); hide(); }
+ });
+})();
+</script>
+
+
+<script type="module">
+
+import {auth, db} from './assets/js/firebase.js';
+
+import {onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js';
+
+import {collection,onSnapshot,orderBy,query,updateDoc} from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js';
+
+const btn=document.getElementById('feedbackAdminOpen');
+
+const dialog=document.getElementById('feedbackAdminDialog');
+
+const list=document.getElementById('feedbackAdminList');
+
+const info=document.getElementById('feedbackAdminStatus');
+
+const states={baharu:'Baharu',dalam_semakan:'Dalam Semakan',selesai:'Selesai'};
+
+const categories={cadangan:'Cadangan',masalah:'Laporan Masalah',lain:'Lain-lain'};
+
+let stop;
+
+
+
+onAuthStateChanged(auth,user=>{
+
+    stop?.();
+
+    btn.hidden=true;
+
+    list.replaceChildren();
+
+    document.getElementById('feedbackAdminOverlay').hidden=true;
+
+    if(user?.uid!=='S0xw11oAY5bKuVkeDGwi9mQYKHG3') return;
+
+    btn.hidden=false;
+
+    info.textContent='Memuatkan maklum balas…';
+
+    stop=onSnapshot(query(collection(db,'feedback'),orderBy('createdAt','desc')),snap=>{
+
+        btn.textContent='Maklum Balas ('+snap.docs.filter(d=>d.data().status==='baharu').length+' baharu)';
+
+        info.textContent=snap.empty?'Tiada maklum balas lagi.':'';
+
+        list.replaceChildren();
+
+        for(const doc of snap.docs){
+
+            const data=doc.data();
+
+            const card=document.createElement('article');
+
+            card.className='rounded-xl border border-slate-200 p-4';
+
+            for(const [tag,value] of [['h3',data.title],['p',categories[data.category]||'Lain-lain'],['p',data.createdAt?.toDate().toLocaleString('ms-MY',{timeZone:'Asia/Kuala_Lumpur'})],['p',data.message]]){
+
+                const el=document.createElement(tag);
+
+                el.textContent=value??'';
+
+                el.className=tag==='h3'?'font-bold':'whitespace-pre-wrap break-words';
+
+                card.append(el);
+
+            }
+
+            const label=document.createElement('label');
+
+            label.textContent='Status: ';
+
+            const select=document.createElement('select');
+
+            for(const [value,name] of Object.entries(states)) select.add(new Option(name,value));
+
+            select.value=data.status;
+
+            select.addEventListener('change',async()=>{
+
+                select.disabled=true;
+
+                try{await updateDoc(doc.ref,{status:select.value});}
+
+                catch{select.value=data.status;info.textContent='Status gagal dikemas kini.';}
+
+                finally{select.disabled=false;}
+
+            });
+
+            label.append(select);
+
+            card.append(label);
+
+            list.append(card);
+
+        }
+
+    },()=>{list.replaceChildren();info.textContent='Maklum balas tidak dapat dimuatkan. Semak Firestore Rules.';});
 
 });
 
 </script>
 
-<!-- ====================================================== -->
-<!-- PREMIUM MOVEMENT MODAL -->
-<!-- ====================================================== -->
-
-<div
-id="movementModal"
-class="fixed
-inset-0
-hidden
-items-center
-justify-center
-bg-slate-900/60
-backdrop-blur-sm
-z-50
-p-5">
-
-    <div
-    class="w-full
-    max-w-5xl
-    max-h-[92vh]
-    bg-white
-    rounded-[32px]
-    shadow-2xl
-    overflow-hidden
-    flex
-    flex-col">
-
-    <!-- ====================================================== -->
-<!-- HEADER -->
-<!-- ====================================================== -->
-
-<div
-class="px-8
-py-5
-bg-gradient-to-r
-from-blue-700
-via-blue-600
-to-cyan-500
-text-white
-flex
-items-center
-justify-between">
-
-<div>
-
-<div
-class="inline-flex
-items-center
-gap-2
-px-3
-py-1
-rounded-full
-bg-white/20
-text-sm
-font-semibold">
-
-E-GERAK PTIS KBB V2
-
-</div>
-
-<h2
-class="text-2xl
-font-black
-mt-2">
-
-📍 Kemaskini Pergerakan
-
-</h2>
-
-<p
-class="text-blue-100
-mt-2">
-
-Kemaskini status pergerakan semasa anda.
-
-</p>
-
-</div>
-
-<button
-id="closeModal"
-class="w-12
-h-12
-rounded-xl
-bg-white/20
-hover:bg-white/30
-transition
-text-xl
-font-bold">
-
-✕
-
-</button>
-
-</div>
-
-    <!-- BODY -->
-
-    <div
-class="flex-1
-overflow-y-auto
-px-8
-py-8
-bg-slate-50
-space-y-6">
-
-      <!-- STATUS -->
-
-      <div>
-
-        <label
-class="block
-text-slate-700
-font-bold
-mb-3
-text-lg">
-
-Status Pergerakan
-
-</label>
-
-       <select
-id="movementType"
-class="w-full
-rounded-2xl
-border
-border-slate-300
-bg-white
-px-5
-py-4
-text-slate-700
-font-medium
-outline-none
-focus:border-blue-500
-focus:ring-4
-focus:ring-blue-100
-transition">
-
-<option value="">-- Pilih Status --</option>
-
-<option value="office">🟢 Di Pejabat</option>
-
-<option value="outsideSchool">
-🚗 Luar Pejabat / Lawatan Sekolah
-</option>
-
-<option value="meeting">
-👥 Mesyuarat
-</option>
-
-<option value="course">
-🎓 Kursus / Bengkel
-</option>
-
-<option value="leave">
-🌴 Cuti
-</option>
-
-<option value="hrmis">
-📄 HRMIS (4 Jam)
-</option>
-
-</select>
-
-      </div>
-
-      <!-- DYNAMIC FORM -->
-
-      <div id="dynamicForm" class="space-y-6">
-
-        <div id="locationGroup">
-
-          <label
-class="block
-text-slate-700
-font-semibold
-mb-2">
-
-📍 Lokasi
-
-</label>
-
-          <input
-id="movementLocation"
-type="text"
-class="w-full
-rounded-2xl
-border
-border-slate-300
-bg-white
-px-5
-py-4
-text-slate-700
-outline-none
-focus:ring-4
-focus:ring-blue-100
-focus:border-blue-500"
-placeholder="Contoh : PPD Kulim Bandar Baharu">
-
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-
-          <div>
-
-            <label
-class="block
-text-slate-700
-font-semibold
-mb-2">
-
-📅 Tarikh
-
-</label>
-
-            <input
-id="movementDate"
-type="date"
-class="w-full
-rounded-2xl
-border
-border-slate-300
-bg-white
-px-5
-py-4
-text-slate-700
-outline-none
-focus:ring-4
-focus:ring-blue-100
-focus:border-blue-500">
-
-          </div>
-
-          <div>
-
-            <label
-class="block
-text-slate-700
-font-semibold
-mb-2">
-
-🕒 Masa
-
-</label>
-
-            <input
-id="movementTime"
-type="time"
-class="w-full
-rounded-2xl
-border
-border-slate-300
-bg-white
-px-5
-py-4
-text-slate-700
-outline-none
-focus:ring-4
-focus:ring-blue-100
-focus:border-blue-500">
-
-          </div>
-
-        </div>
-
-        <div id="activityGroup">
-
-          <label
-class="block
-text-slate-700
-font-semibold
-mb-2">
-
-📝 Aktiviti
-
-</label>
-
-<input
-id="movementActivity"
-type="text"
-class="w-full
-rounded-2xl
-border
-border-slate-300
-bg-white
-px-5
-py-4
-text-slate-700
-outline-none
-focus:border-blue-500
-focus:ring-4
-focus:ring-blue-100
-resize-none
-transition"
-rows="4">
-
-        </div>
-
-        <div id="noteGroup">
-
-          <label
-class="block
-text-slate-700
-font-semibold
-mb-2">
-
-📌 Catatan Tambahan
-
-</label>
-
-          <textarea
-id="movementNote"
-rows="4"
-class="w-full
-rounded-2xl
-border
-border-slate-300
-bg-white
-px-5
-py-4
-text-slate-700
-outline-none
-focus:border-blue-500
-focus:ring-4
-focus:ring-blue-100
-resize-none
-transition"
-rows="4"></textarea>
-
-        </div>
-
-      </div>
-
-      <!-- Dynamic Content -->
-
-<div
-id="dynamicContent"
-class="space-y-5">
-
-</div>
-
-      <!-- ====================================================== -->
-<!-- GOOGLE CALENDAR -->
-<!-- ====================================================== -->
-
-<div
-class="bg-blue-50
-border
-border-blue-200
-rounded-2xl
-p-4
-flex
-items-center
-justify-between
-gap-6">
-
-  <div class="flex items-start gap-4">
-
-    <div
-    class="w-12
-    h-12
-    rounded-2xl
-    bg-blue-600
-    text-white
-    flex
-    items-center
-    justify-center
-    text-x1
-    shadow-lg">
-
-      📅
-
-    </div>
-
-    <div>
-
-      <h3
-      class="text-base
-      font-bold
-      text-slate-800">
-
-        Google Calendar
-
-      </h3>
-
-      <p
-      class="text-sm
-      text-slate-600
-      mt-1">
-
-        Tambahkan rekod pergerakan ini ke Google Calendar secara automatik selepas disimpan.
-
-      </p>
-
-    </div>
-
-  </div>
-
-  <label class="relative inline-flex items-center cursor-pointer">
-
-    <input
-    id="calendarToggle"
-    type="checkbox"
-    class="sr-only peer">
-
-    <div
-    class="relative
-    w-16
-    h-9
-    bg-slate-300
-    rounded-full
-    transition-all
-    peer-checked:bg-blue-600
-    after:absolute
-    after:top-1
-    after:left-1
-    after:w-7
-    after:h-7
-    after:bg-white
-    after:rounded-full
-    after:shadow-md
-    after:transition-all
-    peer-checked:after:translate-x-7">
-
-    </div>
-
-  </label>
-
-</div>
-
-    </div>
-
- <!-- ======================================================
-     FOOTER
-====================================================== -->
-
-<div
-class="
-mt-8
-pt-6
-border-t
-border-slate-200">
-
-  <!-- INFO -->
-
-  <div
-  class="
-  mb-6
-  rounded-2xl
-  bg-blue-50
-  border
-  border-blue-200
-  p-5">
-
-    <div class="flex items-start gap-3">
-
-      <div
-      class="
-      w-10
-      h-10
-      rounded-xl
-      bg-blue-600
-      text-white
-      flex
-      items-center
-      justify-center
-      font-bold">
-
-        ✓
-
-      </div>
-
-      <div>
-
-        <h3
-        class="
-        font-bold
-        text-slate-800">
-
-          E-GERAK PTIS KBB V2
-
-        </h3>
-
-        <p
-        class="
-        text-sm
-        text-slate-600
-        mt-1">
-
-          Pastikan semua maklumat telah disemak sebelum menekan butang
-          <strong>Simpan Pergerakan</strong>.
-
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- BUTTON -->
-
-  <div
-  class="
-  flex
-  flex-col-reverse
-  sm:flex-row
-  justify-end
-  gap-4">
-
-    <button
-    id="cancelMovement"
-    class="
-    w-full
-    sm:w-auto
-    px-6
-    py-3
-    rounded-2xl
-    border
-    border-slate-300
-    bg-white
-    text-slate-700
-    font-semibold
-    hover:bg-slate-100
-    transition">
-
-      ❌ Batal
-
-    </button>
-
-    <button
-    id="saveMovement"
-    class="
-    w-full
-    sm:w-auto
-    px-8
-    py-3
-    rounded-2xl
-    bg-gradient-to-r
-    from-blue-600
-    to-cyan-500
-    text-white
-    font-bold
-    shadow-lg
-    hover:shadow-xl
-    hover:-translate-y-0.5
-    transition-all">
-
-      💾 Simpan Pergerakan
-
-    </button>
-
-  </div>
-
-</div>
-
-<!-- ====================================================== -->
-<!-- END BODY -->
-<!-- ====================================================== -->
-
-<!-- ====================================================== -->
-<!-- PREMIUM LOADING -->
-<!-- ====================================================== -->
-
-<div
-id="loadingOverlay"
-class="fixed
-inset-0
-hidden
-items-center
-justify-center
-bg-slate-900/60
-backdrop-blur-md
-z-[9999]">
-
-    <div
-    class="bg-white
-    rounded-[32px]
-    shadow-2xl
-    px-12
-    py-10
-    text-center
-    w-[340px]">
-
-        <div
-        class="mx-auto
-        w-20
-        h-20
-        rounded-full
-        border-[6px]
-        border-blue-100
-        border-t-blue-600
-        animate-spin">
-
-        </div>
-
-        <h3
-        class="mt-8
-        text-xl
-        font-bold
-        text-slate-800">
-
-            Menyimpan Pergerakan
-
-        </h3>
-
-        <p
-        class="mt-2
-        text-slate-500">
-
-            Sila tunggu sebentar...
-
-        </p>
-
-        <div
-        class="mt-8
-        h-2
-        rounded-full
-        bg-slate-200
-        overflow-hidden">
-
-            <div
-            class="h-full
-            w-full
-            bg-gradient-to-r
-            from-blue-600
-            via-cyan-500
-            to-blue-600
-            animate-pulse">
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-<script type="module" src="assets/js/makluman.js"></script>
-
 </body>
+
+
 
 </html>

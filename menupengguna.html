@@ -706,8 +706,23 @@ overflow-hidden">
           <div class="portal-link-top"><span class="portal-num" aria-hidden="true">06</span><span class="portal-tag">Rujukan</span></div>
           <h3>Tips ICT</h3><p>Lihat infografik dan panduan ringkas untuk tugasan ICT.</p><span class="portal-action">Lihat galeri →</span>
         </a>
+<details id="feedbackPanel" style="min-width:0">        <summary class="portal-link" style="cursor:pointer;list-style:none">
+          <div class="portal-link-top"><span class="portal-num" aria-hidden="true">07</span><span class="portal-tag">Sokongan</span></div>
+          <h3>Maklum Balas eGerak</h3><p>Laporkan masalah atau cadangkan penambahbaikan.</p><span class="portal-action">Hantar maklum balas →</span>
+        </summary><div class="feedback-overlay"><section class="feedback-box"><h2>Maklum Balas eGerak</h2><p>Kongsi cadangan atau laporkan masalah kepada pentadbir.</p><form id="feedbackForm">
+    <label>Kategori<select name="category" required>
+      <option value="">Pilih kategori</option>
+      <option value="cadangan">Cadangan Penambahbaikan</option>
+      <option value="masalah">Laporan Masalah</option>
+      <option value="lain">Lain-lain</option>
+    </select></label>
+    <label>Tajuk<input name="title" required maxlength="120"></label>
+    <label>Penerangan<textarea name="message" rows="5" required maxlength="2000"></textarea></label>
+    <button type="submit" disabled>Hantar maklum balas</button>
+    <p id="feedbackResult" role="status">Jika butang Hantar kekal tidak aktif, sambungan Firebase belum tersedia.</p>
+  </form></section></div></details>
         <a class="portal-link" href="admin-password.html">
-          <div class="portal-link-top"><span class="portal-num" aria-hidden="true">07</span><span class="portal-tag">Akses peralatan</span></div>
+          <div class="portal-link-top"><span class="portal-num" aria-hidden="true">08</span><span class="portal-tag">Akses peralatan</span></div>
           <h3>Admin Password</h3><p>Rujukan akaun dan kata laluan peralatan ICT untuk tugasan PM/CM.</p><span class="portal-action">Lihat maklumat →</span>
         </a>
     </div>
@@ -990,6 +1005,66 @@ src="assets/js/movement.js?v=20261024-1"></script>
 
 <script type="module" src="assets/js/auth.js?v=20261024-1"></script>
 
+<style>
+#feedbackPanel[open] > summary{position:fixed;inset:0;z-index:10001;background:#020617c9;border:0;border-radius:0;cursor:pointer}
+#feedbackPanel[open] > summary > *{display:none}
+#feedbackPanel[open] > summary::after{content:"Tutup ×";position:absolute;top:1rem;right:1rem;color:white;font-weight:700}
+.feedback-overlay{position:fixed;inset:0;z-index:10002;display:grid;place-items:center;padding:3.5rem 1rem 1rem;pointer-events:none}
+.feedback-box{pointer-events:auto;width:min(520px,100%);max-height:100%;overflow:auto;background:#111f35;color:#f8fafc;border:1px solid #475569;border-radius:20px;padding:clamp(16px,4vw,28px);box-shadow:0 24px 70px #0008}
+.feedback-box h2{font-size:1.25rem;font-weight:800}
+.feedback-box > p{color:#cbd5e1;margin:.4rem 0 1rem}
+#feedbackForm{display:grid;gap:.75rem}
+#feedbackForm input,#feedbackForm textarea,#feedbackForm select{display:block;width:100%;margin-top:.3rem;border:1px solid #64748b;border-radius:.5rem;background:#1e293b;color:white;padding:.6rem}
+#feedbackForm button,#feedbackClose{padding:.5rem .85rem;border-radius:.5rem;border:1px solid #64748b}
+#feedbackForm button{background:#facc15;color:#0f172a;font-weight:700}
+</style>
+
+<script type="module">
+import { auth, db } from "./assets/js/firebase.js";
+import { addDoc, collection, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+const form = document.getElementById("feedbackForm");
+const result = document.getElementById("feedbackResult");
+const submit = form.querySelector('[type="submit"]');
+submit.disabled = false;
+result.textContent = "";
+form.addEventListener("submit", async event => {
+    event.preventDefault();
+    if (submit.disabled) return;
+    const user = auth.currentUser;
+    if (!user) { result.textContent = "Sila log masuk sebelum menghantar."; return; }
+    const fields = new FormData(form);
+    const title = String(fields.get("title") || "").trim();
+    const message = String(fields.get("message") || "").trim();
+    const category = fields.get("category");
+    if (!title || !message || !["cadangan", "masalah", "lain"].includes(category)) {
+        result.textContent = "Sila lengkapkan semua medan.";
+        return;
+    }
+    submit.disabled = true;
+    result.textContent = "Sedang menghantar…";
+    try {
+        await addDoc(collection(db, "feedback"), {
+            uid: user.uid, category, title, message,
+            status: "baharu", createdAt: serverTimestamp()
+        });
+        form.reset();
+        result.textContent = "Maklum balas berjaya dihantar.";
+        setTimeout(() => {
+            document.getElementById("feedbackPanel").open = false;
+            result.textContent = "";
+            submit.disabled = false;
+        }, 1500);
+    } catch (error) {
+        result.textContent = error.code === "permission-denied"
+            ? "Penghantaran belum dibenarkan. Sila hubungi pentadbir."
+            : "Maklum balas tidak dapat dihantar. Sila cuba lagi.";
+    } finally {
+        if (result.textContent !== "Maklum balas berjaya dihantar.") submit.disabled = false;
+    }
+});
+</script>
 </body>
 
 </html>
