@@ -7230,7 +7230,7 @@ import {auth, db} from './assets/js/firebase.js';
 
 import {onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js';
 
-import {collection,onSnapshot,orderBy,query,updateDoc} from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js';
+import {collection,onSnapshot,orderBy,query,updateDoc,deleteDoc} from 'https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js';
 
 const btn=document.getElementById('feedbackAdminOpen');
 
@@ -7317,6 +7317,33 @@ onAuthStateChanged(auth,user=>{
             label.append(select);
 
             card.append(label);
+
+            if (data.status === 'selesai') {
+                const padam = document.createElement('button');
+                padam.type = 'button';
+                padam.textContent = 'Padam';
+                padam.className =
+                    'ml-3 mt-2 rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 font-semibold text-red-700 hover:bg-red-100 disabled:opacity-50';
+
+                padam.addEventListener('click', async () => {
+                    if (!window.confirm('Padam maklum balas ini secara kekal?')) return;
+
+                    padam.disabled = true;
+                    select.disabled = true;
+
+                    try {
+                        info.textContent = '';
+                        await deleteDoc(doc.ref);
+                    } catch (error) {
+                        console.error('Gagal memadam maklum balas:', error);
+                        info.textContent = 'Maklum balas gagal dipadam. Cuba semula.';
+                        padam.disabled = false;
+                        select.disabled = false;
+                    }
+                });
+
+                card.append(padam);
+            }
 
             list.append(card);
 
